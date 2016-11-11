@@ -1,0 +1,41 @@
+{
+  "name": "recompact",
+  "version": "0.0.0",
+  "description": "A set of React high order components based on Rx.",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:neoziro/recompact.git",
+    "type": "git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Greg Bergé <neoziro@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^15.3.2",
+    "rxjs": "^5.0.0-rc.2"
+  },
+  "dependencies": {
+    "recompose": "^0.20.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.0",
+    "babel-jest": "^17.0.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "enzyme": "^2.6.0",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.0.0",
+    "eslint-plugin-react": "^6.6.0",
+    "jest": "^17.0.0",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "rxjs": "^5.0.0-rc.2",
+    "sinon": "^1.17.6"
+  }
+}
