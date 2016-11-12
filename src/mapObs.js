@@ -10,7 +10,7 @@ const checkObservables = (observables, displayName) => {
   if (process.env.NODE_ENV !== 'production') {
     if (observables && typeof observables !== 'object') {
       console.warn(
-        'Provide must return a plain object containing observables.',
+        'mapObs(): must return a plain object containing observables.',
         displayName,
       );
     }
@@ -19,7 +19,7 @@ const checkObservables = (observables, displayName) => {
 
     if (badNamedProps.length) {
       console.warn(
-        'Provide must only return observables suffixed by "$".',
+        'mapObs(): must only return observables suffixed by "$".',
         displayName,
         badNamedProps,
       );
@@ -29,7 +29,7 @@ const checkObservables = (observables, displayName) => {
 
     if (nonObsProps.length) {
       console.warn(
-        'Provide must return an hash of observables.',
+        'mapObs(): must return an hash of observables.',
         displayName,
         observables,
       );
@@ -39,8 +39,8 @@ const checkObservables = (observables, displayName) => {
   return observables;
 };
 
-export default createHelper(_obsMappers => (_BaseComponent) => {
-  let obsMappers = (Array.isArray(_obsMappers) ? _obsMappers : [_obsMappers]);
+export default createHelper(obsMapper => (_BaseComponent) => {
+  let obsMappers = [obsMapper];
   let BaseComponent = _BaseComponent;
 
   if (BaseComponent.obsMappers) {
@@ -75,10 +75,9 @@ export default createHelper(_obsMappers => (_BaseComponent) => {
         props$: childProps$ = this.props$,
         ...childObservables
       } = obsMappers
-        .reduce((result, provider) => ({
-          ...result,
-          ...checkObservables(provider(result), getDisplayName(this.constructor)),
-        }), {
+        .reduce((result, provider) =>
+          checkObservables(provider(result), getDisplayName(this.constructor))
+        , {
           ...observables,
           props$: this.props$,
         });
@@ -92,12 +91,7 @@ export default createHelper(_obsMappers => (_BaseComponent) => {
         },
       });
 
-      this.childContext = {
-        observables: {
-          ...observables,
-          ...childObservables,
-        },
-      };
+      this.childContext = {observables: childObservables};
     }
 
     componentWillReceiveProps(nextProps) {
@@ -112,4 +106,4 @@ export default createHelper(_obsMappers => (_BaseComponent) => {
       return factory(this.state);
     }
   };
-}, 'mapObservables');
+}, 'mapObs');
