@@ -62,7 +62,7 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     static NextComponent = BaseComponent;
 
     props$ = new BehaviorSubject(this.props);
-    state = {};
+    state = {props: {}};
 
     getChildContext() {
       return this.childContext;
@@ -83,7 +83,7 @@ export default createHelper(obsMapper => (_BaseComponent) => {
 
       this.subscription = childProps$.subscribe({
         next: (props) => {
-          this.setState(props);
+          this.setState({props});
         },
         error: (error) => {
           throw error;
@@ -102,11 +102,11 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return !shallowEqual(this.state, nextState);
+      return !shallowEqual(this.state.props, nextState.props);
     }
 
     render() {
-      return factory(this.state);
+      return factory(this.state.props);
     }
   };
 }, 'mapObs');

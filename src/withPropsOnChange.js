@@ -23,7 +23,7 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
           }
 
           props = nextProps;
-          return computedProps;
+          return {...nextProps, ...computedProps};
         }),
     };
   });

@@ -1,6 +1,7 @@
 import connectObs from './connectObs';
 import compose from './compose';
 import defaultProps from './defaultProps';
+import flattenProp from './flattenProp';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
 import pure from './pure';
@@ -15,6 +16,7 @@ export {
   connectObs,
   compose,
   defaultProps,
+  flattenProp,
   mapObs,
   mapProps,
   pure,
@@ -30,6 +32,7 @@ export default {
   connectObs,
   compose,
   defaultProps,
+  flattenProp,
   mapObs,
   mapProps,
   pure,
