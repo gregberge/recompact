@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import {PropTypes, Component} from 'react';
+import shallowEqual from 'shallowequal';
 import getDisplayName from 'recompose/getDisplayName';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {of} from 'rxjs/observable/of';
@@ -100,6 +101,10 @@ export default createHelper(obsMapper => (_BaseComponent) => {
 
     componentWillUnmount() {
       this.subscription.unsubscribe();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+      return !shallowEqual(this.state, nextState);
     }
 
     render() {

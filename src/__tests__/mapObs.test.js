@@ -1,8 +1,7 @@
 import React from 'react';
 import Rx from 'rxjs';
-import compose from 'recompose/compose';
 import {mount, shallow} from 'enzyme';
-import mapObs from '../mapObs';
+import {compose, mapObs} from '../';
 
 describe('mapObs', () => {
   it('should emit props$.next when component receive props', () => {
@@ -77,7 +76,7 @@ describe('mapObs', () => {
     mount(<Component />);
   });
 
-  it('should merge hoc', () => {
+  it('should be merged with other hoc', () => {
     const Component = compose(
       mapObs(() => ({})),
       mapObs(() => ({})),

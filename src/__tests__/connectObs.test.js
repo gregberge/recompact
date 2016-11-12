@@ -1,9 +1,7 @@
 import React from 'react';
 import Rx from 'rxjs';
-import compose from 'recompose/compose';
 import {mount, shallow} from 'enzyme';
-import withObs from '../withObs';
-import connectObs from '../connectObs';
+import {connectObs, compose, withObs} from '../';
 
 describe('connectObs', () => {
   it('should connect observables to props', () => {
@@ -39,7 +37,7 @@ describe('connectObs', () => {
     expect(changeSpy).toHaveBeenLastCalledWith('foo');
   });
 
-  it('should merge hoc', () => {
+  it('should be merged with other hoc', () => {
     const Component = compose(
       withObs({className$: Rx.Observable.of('foo')}),
       connectObs(({className$}) => ({className: className$})),

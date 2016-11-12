@@ -1,8 +1,7 @@
 import React from 'react';
 import Rx from 'rxjs';
-import compose from 'recompose/compose';
 import {mount, shallow} from 'enzyme';
-import withObs from '../withObs';
+import {compose, withObs} from '../';
 
 describe('withObs', () => {
   it('should merge observables', () => {
@@ -28,7 +27,7 @@ describe('withObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('foo');
   });
 
-  it('should merge hoc', () => {
+  it('should be merged with other hoc', () => {
     const Component = compose(
       withObs({}),
       withObs({}),

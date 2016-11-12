@@ -1,14 +1,10 @@
 import React from 'react';
-import toClass from 'recompose/toClass';
-import compose from 'recompose/compose';
 import {shallow} from 'enzyme';
-import withProps from '../withProps';
-
-const Dummy = toClass(() => <div />);
-Dummy.displayName = 'Dummy';
+import {Dummy} from './utils';
+import {compose, withProps} from '../';
 
 describe('withProps', () => {
-  it('should passes additional props to base component', () => {
+  it('should passe additional props to base component', () => {
     const DoReMi = withProps({si: 'do', la: 'fa'})(Dummy);
     expect(DoReMi.displayName).toBe('withProps(Dummy)');
 
@@ -17,7 +13,7 @@ describe('withProps', () => {
     expect(dummy.prop('la')).toBe('fa');
   });
 
-  it('should takes precedent over owner props', () => {
+  it('should take precedent over owner props', () => {
     const DoReMi = withProps({si: 'do', la: 'fa'})(Dummy);
 
     const dummy = shallow(<DoReMi la="ti" />).find(Dummy);
@@ -34,7 +30,7 @@ describe('withProps', () => {
     expect(dummy.prop('si')).toBe('la');
   });
 
-  it('should merge hoc', () => {
+  it('should be merged with other hoc', () => {
     const Component = compose(
       withProps({}),
       withProps({}),
