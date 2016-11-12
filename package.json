@@ -20,8 +20,7 @@
     "rxjs": "^5.0.0-rc.2"
   },
   "dependencies": {
-    "recompose": "^0.20.2",
-    "shallowequal": "^0.2.2"
+    "recompose": "^0.20.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.0",

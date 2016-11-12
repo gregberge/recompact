@@ -1,4 +1,4 @@
-import shallowEqual from 'shallowequal';
+import shallowEqual from 'recompose/shallowEqual';
 import {distinctUntilChanged} from 'rxjs/operator/distinctUntilChanged';
 import createHelper from 'recompose/createHelper';
 import withObs from './withObs';

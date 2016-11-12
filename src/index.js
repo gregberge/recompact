@@ -9,6 +9,7 @@ import renameProps from './renameProps';
 import toClass from './toClass';
 import withObs from './withObs';
 import withProps from './withProps';
+import withPropsOnChange from './withPropsOnChange';
 
 export {
   connectObs,
@@ -22,6 +23,7 @@ export {
   toClass,
   withObs,
   withProps,
+  withPropsOnChange,
 };
 
 export default {
@@ -36,4 +38,5 @@ export default {
   toClass,
   withObs,
   withProps,
+  withPropsOnChange,
 };

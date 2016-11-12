@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import {PropTypes, Component} from 'react';
-import shallowEqual from 'shallowequal';
+import shallowEqual from 'recompose/shallowEqual';
 import getDisplayName from 'recompose/getDisplayName';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import createEagerFactory from 'recompose/createEagerFactory';
