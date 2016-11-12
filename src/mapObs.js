@@ -3,7 +3,6 @@ import {PropTypes, Component} from 'react';
 import shallowEqual from 'shallowequal';
 import getDisplayName from 'recompose/getDisplayName';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {of} from 'rxjs/observable/of';
 import createEagerFactory from 'recompose/createEagerFactory';
 import createHelper from 'recompose/createHelper';
 
@@ -62,7 +61,6 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     static obsMappers = obsMappers;
     static NextComponent = BaseComponent;
 
-    component$ = of(BaseComponent);
     props$ = new BehaviorSubject(this.props);
     state = {};
 
