@@ -4,6 +4,7 @@ import mapObs from './mapObs';
 import mapProps from './mapProps';
 import pure from './pure';
 import renameProp from './renameProp';
+import renameProps from './renameProps';
 import withObs from './withObs';
 import withProps from './withProps';
 
@@ -14,6 +15,7 @@ export {
   mapProps,
   pure,
   renameProp,
+  renameProps,
   withObs,
   withProps,
 };
@@ -25,6 +27,7 @@ export default {
   mapProps,
   pure,
   renameProp,
+  renameProps,
   withObs,
   withProps,
 };
