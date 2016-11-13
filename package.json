@@ -8,7 +8,7 @@
     "type": "git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "eslint . && jest"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",
