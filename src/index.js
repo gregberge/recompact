@@ -12,6 +12,7 @@ import renameProp from './renameProp';
 import renameProps from './renameProps';
 import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
+import shouldUpdate from './shouldUpdate';
 import toClass from './toClass';
 import withContext from './withContext';
 import withHandlers from './withHandlers';
@@ -34,6 +35,7 @@ export {
   renameProps,
   renderComponent,
   renderNothing,
+  shouldUpdate,
   toClass,
   withContext,
   withHandlers,
@@ -57,6 +59,7 @@ export default {
   renameProps,
   renderComponent,
   renderNothing,
+  shouldUpdate,
   toClass,
   withContext,
   withHandlers,
