@@ -1,7 +1,7 @@
-import createHelper from './createHelper';
 import pick from 'recompose/utils/pick';
 import shallowEqual from 'recompose/shallowEqual';
 import {map} from 'rxjs/operator/map';
+import createHelper from './createHelper';
 import withObs from './withObs';
 
 const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {

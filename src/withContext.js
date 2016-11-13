@@ -1,9 +1,5 @@
-// import withContext from 'recompose/withContext';
-//
-// export default withContext;
-
-import createHelper from './createHelper';
 import {combineLatest} from 'rxjs/observable/combineLatest';
+import createHelper from './createHelper';
 import withObs from './withObs';
 
 const withContext = (childContextTypes, getChildContext) => withObs(({context$, props$}) => ({
