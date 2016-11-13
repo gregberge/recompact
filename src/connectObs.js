@@ -2,7 +2,7 @@ import {of} from 'rxjs/observable/of';
 import {combineLatest} from 'rxjs/observable/combineLatest';
 import {map} from 'rxjs/operator/map';
 import {startWith} from 'rxjs/operator/startWith';
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import withObs from './withObs';
 
 const checkObsMap = (obsMap) => {

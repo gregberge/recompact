@@ -3,8 +3,9 @@ import {PropTypes, Component} from 'react';
 import shallowEqual from 'recompose/shallowEqual';
 import getDisplayName from 'recompose/getDisplayName';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {of} from 'rxjs/observable/of';
 import createEagerFactory from 'recompose/createEagerFactory';
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 
 const checkObservables = (observables, displayName) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -39,7 +40,7 @@ const checkObservables = (observables, displayName) => {
   return observables;
 };
 
-export default createHelper(obsMapper => (_BaseComponent) => {
+export default createHelper((obsMapper, options = {}) => (_BaseComponent) => {
   let obsMappers = [obsMapper];
   let BaseComponent = _BaseComponent;
 
@@ -55,12 +56,14 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     };
 
     static childContextTypes = {
+      ...options.childContextTypes,
       observables: PropTypes.object.isRequired,
     };
 
     static obsMappers = obsMappers;
     static NextComponent = BaseComponent;
 
+    context$ = of(this.context);
     props$ = new BehaviorSubject(this.props);
     state = {props: {}};
 
@@ -71,17 +74,19 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     componentWillMount() {
       const {observables} = this.context;
       const {
-        props$: childProps$ = this.props$,
+        context$: nextContext$ = this.context$,
+        props$: nextProps$ = this.props$,
         ...childObservables
       } = obsMappers
         .reduce((result, provider) =>
           checkObservables(provider(result), getDisplayName(this.constructor))
         , {
           ...observables,
+          context$: this.context$,
           props$: this.props$,
         });
 
-      this.subscription = childProps$.subscribe({
+      this.propsSubscription = nextProps$.subscribe({
         next: (props) => {
           this.setState({props});
         },
@@ -90,7 +95,17 @@ export default createHelper(obsMapper => (_BaseComponent) => {
         },
       });
 
-      this.childContext = {observables: childObservables};
+      this.contextSubscription = nextContext$.subscribe({
+        next: (context) => {
+          this.childContext = {
+            ...context,
+            observables: childObservables,
+          };
+        },
+        error: (error) => {
+          throw error;
+        },
+      });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -98,7 +113,8 @@ export default createHelper(obsMapper => (_BaseComponent) => {
     }
 
     componentWillUnmount() {
-      this.subscription.unsubscribe();
+      this.propsSubscription.unsubscribe();
+      this.contextSubscription.unsubscribe();
     }
 
     shouldComponentUpdate(nextProps, nextState) {

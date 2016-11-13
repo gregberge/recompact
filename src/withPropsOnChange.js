@@ -1,4 +1,4 @@
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import pick from 'recompose/utils/pick';
 import shallowEqual from 'recompose/shallowEqual';
 import {map} from 'rxjs/operator/map';

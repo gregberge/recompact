@@ -1,6 +1,6 @@
 import omit from 'recompose/utils/omit';
 import pick from 'recompose/utils/pick';
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import mapProps from './mapProps';
 
 const {keys} = Object;

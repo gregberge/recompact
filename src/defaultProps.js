@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import withProps from './withProps';
 
 const defaultProps = defaultProps => withProps(props => ({

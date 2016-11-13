@@ -1,7 +1,7 @@
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import mapObs from './mapObs';
 
-const withObs = input =>
+const withObs = (input, options) =>
   mapObs(observables => ({
     ...observables,
     ...(
@@ -9,6 +9,6 @@ const withObs = input =>
         ? input(observables)
         : input
     ),
-  }));
+  }), options);
 
 export default createHelper(withObs, 'withObs');

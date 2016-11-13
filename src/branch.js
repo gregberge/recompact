@@ -1,7 +1,8 @@
-import createHelper from 'recompose/createHelper';
 import createEagerFactory from 'recompose/createEagerFactory';
+import createHelper from './createHelper';
+import identity from './identity';
 
-const branch = (test, left, right) => (BaseComponent) => {
+const branch = (test, left, right = identity) => (BaseComponent) => {
   let leftFactory;
   let rightFactory;
 

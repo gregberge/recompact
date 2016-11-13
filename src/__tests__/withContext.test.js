@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import getContext from 'recompose/getContext';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {withContext, compose, mapProps} from '../';
+import {compose, mapProps, withContext, withProps} from '../';
 
 describe('withContext', () => {
   it('should add context', () => {
@@ -49,5 +49,16 @@ describe('withContext', () => {
     ).find(Dummy);
 
     expect(dummy.prop('todos')).toEqual(['eat', 'drink', 'sleep']);
+  });
+
+  it('should be merged with other hoc', () => {
+    const Div = compose(
+      withContext({}, () => ({})),
+      withProps({className: 'foo'}),
+    )('div');
+
+    const wrapper = shallow(<Div />);
+    expect(wrapper.instance().constructor.displayName).toBe('withContext(withProps(div))');
+    expect(wrapper.equals(<div className="foo" />)).toBeTruthy();
   });
 });

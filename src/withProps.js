@@ -1,4 +1,4 @@
-import createHelper from 'recompose/createHelper';
+import createHelper from './createHelper';
 import mapProps from './mapProps';
 
 const withProps = input =>
