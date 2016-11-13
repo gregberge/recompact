@@ -11,6 +11,7 @@ import renameProp from './renameProp';
 import renameProps from './renameProps';
 import renderNothing from './renderNothing';
 import toClass from './toClass';
+import withContext from './withContext';
 import withObs from './withObs';
 import withProps from './withProps';
 import withPropsOnChange from './withPropsOnChange';
@@ -29,6 +30,7 @@ export {
   renameProps,
   renderNothing,
   toClass,
+  withContext,
   withObs,
   withProps,
   withPropsOnChange,
@@ -48,6 +50,7 @@ export default {
   renameProps,
   renderNothing,
   toClass,
+  withContext,
   withObs,
   withProps,
   withPropsOnChange,
