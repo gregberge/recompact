@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import getContext from 'recompose/getContext';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, mapProps, withContext, withProps} from '../';
+import {compose, getContext, mapProps, withContext, withProps} from '../';
 
 describe('withContext', () => {
   it('should add context', () => {

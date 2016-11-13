@@ -3,9 +3,7 @@ import {PropTypes, Component} from 'react';
 import shallowEqual from 'recompose/shallowEqual';
 import getDisplayName from 'recompose/getDisplayName';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {empty} from 'rxjs/observable/empty';
 import {of} from 'rxjs/observable/of';
-import {map} from 'rxjs/operator/map';
 import createEagerFactory from 'recompose/createEagerFactory';
 import createHelper from './createHelper';
 
@@ -50,7 +48,15 @@ export default createHelper((obsMapper, options = {}) => (_BaseComponent) => {
 
   if (BaseComponent.obsMappers) {
     obsMappers = [...obsMappers, ...BaseComponent.obsMappers];
-    contextTypes = {...contextTypes, ...BaseComponent.contextTypes};
+
+    contextTypes = Object.entries(BaseComponent.contextTypes).reduce((acc, [key, value]) => {
+      if (childContextTypes[key]) {
+        return acc;
+      }
+
+      return {...acc, [key]: value};
+    }, contextTypes);
+
     childContextTypes = {...childContextTypes, ...BaseComponent.childContextTypes};
     BaseComponent = BaseComponent.NextComponent;
   }
@@ -73,23 +79,19 @@ export default createHelper((obsMapper, options = {}) => (_BaseComponent) => {
     componentWillMount() {
       const {observables} = this.context;
       const {
-        context$: nextContext$ = empty(),
-        props$: nextProps$ = this.props$,
+        context$: nextContext$,
+        props$: nextProps$,
         ...childObservables
       } = obsMappers
-        .reduce((result, provider) =>
-          checkObservables(
-            provider({
-              context$: this.context$::map(context => ({
-                ...context,
-                observables: result,
-              })),
-              props$: this.props$,
-              ...result,
-            }),
-            getDisplayName(this.constructor),
-          )
-        , observables);
+        .reduce((result, provider) => ({
+          context$: result.context$ || this.context$,
+          props$: result.props$ || this.props$,
+          ...checkObservables(provider(result), getDisplayName(this.constructor)),
+        }), {
+          ...observables,
+          context$: this.context$,
+          props$: this.props$,
+        });
 
       this.propsSubscription = nextProps$.subscribe({
         next: (props) => {
@@ -102,17 +104,19 @@ export default createHelper((obsMapper, options = {}) => (_BaseComponent) => {
 
       this.childContext = {observables: childObservables};
 
-      this.contextSubscription = nextContext$.subscribe({
-        next: (context) => {
-          this.childContext = {
-            ...context,
-            observables: childObservables,
-          };
-        },
-        error: (error) => {
-          throw error;
-        },
-      });
+      if (nextContext$ !== this.context$) {
+        this.contextSubscription = nextContext$.subscribe({
+          next: (context) => {
+            this.childContext = {
+              ...context,
+              observables: childObservables,
+            };
+          },
+          error: (error) => {
+            throw error;
+          },
+        });
+      }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -121,7 +125,10 @@ export default createHelper((obsMapper, options = {}) => (_BaseComponent) => {
 
     componentWillUnmount() {
       this.propsSubscription.unsubscribe();
-      this.contextSubscription.unsubscribe();
+
+      if (this.contextSubscription) {
+        this.contextSubscription.unsubscribe();
+      }
     }
 
     shouldComponentUpdate(nextProps, nextState) {

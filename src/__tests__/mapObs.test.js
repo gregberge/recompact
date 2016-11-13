@@ -108,7 +108,6 @@ describe('mapObs', () => {
     mount(<Div className="bar" />);
 
     expect(contextSpy).toHaveBeenCalledTimes(1);
-    expect(contextSpy.mock.calls[0][0].observables.foo$).toBe(foo$);
     expect(contextSpy.mock.calls[0][0].foo).toBe('bar');
   });
 

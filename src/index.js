@@ -3,6 +3,7 @@ import connectObs from './connectObs';
 import compose from './compose';
 import defaultProps from './defaultProps';
 import flattenProp from './flattenProp';
+import getContext from './getContext';
 import identity from './identity';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
@@ -22,6 +23,7 @@ export {
   compose,
   defaultProps,
   flattenProp,
+  getContext,
   identity,
   mapObs,
   mapProps,
@@ -42,6 +44,7 @@ export default {
   compose,
   defaultProps,
   flattenProp,
+  getContext,
   identity,
   mapObs,
   mapProps,
