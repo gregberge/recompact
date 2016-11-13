@@ -9,6 +9,7 @@ import mapProps from './mapProps';
 import pure from './pure';
 import renameProp from './renameProp';
 import renameProps from './renameProps';
+import renderNothing from './renderNothing';
 import toClass from './toClass';
 import withObs from './withObs';
 import withProps from './withProps';
@@ -26,6 +27,7 @@ export {
   pure,
   renameProp,
   renameProps,
+  renderNothing,
   toClass,
   withObs,
   withProps,
@@ -44,6 +46,7 @@ export default {
   pure,
   renameProp,
   renameProps,
+  renderNothing,
   toClass,
   withObs,
   withProps,
