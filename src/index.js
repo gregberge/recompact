@@ -10,6 +10,7 @@ import mapProps from './mapProps';
 import pure from './pure';
 import renameProp from './renameProp';
 import renameProps from './renameProps';
+import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
 import toClass from './toClass';
 import withContext from './withContext';
@@ -31,6 +32,7 @@ export {
   pure,
   renameProp,
   renameProps,
+  renderComponent,
   renderNothing,
   toClass,
   withContext,
@@ -53,6 +55,7 @@ export default {
   pure,
   renameProp,
   renameProps,
+  renderComponent,
   renderNothing,
   toClass,
   withContext,
