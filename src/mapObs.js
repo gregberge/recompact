@@ -4,6 +4,10 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import createEagerFactory from 'recompose/createEagerFactory';
 import createHelper from './createHelper';
 
+const throwError = (error) => {
+  throw error;
+};
+
 const createSymbol = name => (
   typeof Symbol === 'function'
     ? Symbol(name)
@@ -45,9 +49,7 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
 
       this.subscription = nextProps$.subscribe({
         next: props => this.setState({props}),
-        error: (error) => {
-          throw error;
-        },
+        error: throwError,
       });
 
       this.childContext = {[OBSERVABLES]: childObservables};
