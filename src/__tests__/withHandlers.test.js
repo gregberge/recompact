@@ -16,6 +16,7 @@ describe('withHandlers', () => {
     const handler = wrapper.prop('handler');
 
     wrapper.setProps({foo: 'bar'});
+    expect(wrapper.prop('foo')).toBe('bar');
     expect(wrapper.prop('handler')).toBe(handler);
   });
 
