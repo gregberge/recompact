@@ -17,6 +17,7 @@ describe('shouldUpdate', () => {
 
     // Does not re-render.
     wrapper.setProps({foo: 'bar'});
+    wrapper.setProps({foo: 'bar'});
     expect(dummy.prop('foo')).toBe('bar');
     expect(dummy.prop('renderCount')).toBe(1);
 

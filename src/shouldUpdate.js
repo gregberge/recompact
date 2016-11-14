@@ -1,19 +1,20 @@
 import {filter} from 'rxjs/operator/filter';
 import createHelper from './createHelper';
-import withObs from './withObs';
+import mapProps$ from './mapProps$';
 
-const shouldUpdate = test => withObs(({props$}) => {
+const shouldUpdate = test => mapProps$((props$) => {
   let props;
-  return {
-    props$: props$::filter((nextProps) => {
-      if (!props) {
-        return true;
-      }
-      const t = test(props, nextProps);
+
+  return props$::filter((nextProps) => {
+    if (!props) {
       props = nextProps;
-      return t;
-    }),
-  };
+      return true;
+    }
+
+    const t = test(props, nextProps);
+    props = nextProps;
+    return t;
+  });
 });
 
 export default createHelper(shouldUpdate, 'shouldUpdate');
