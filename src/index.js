@@ -7,6 +7,8 @@ import getContext from './getContext';
 import identity from './identity';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
+import mapProps$ from './mapProps$';
+import onlyUpdateForKeys from './onlyUpdateForKeys';
 import pure from './pure';
 import renameProp from './renameProp';
 import renameProps from './renameProps';
@@ -30,6 +32,8 @@ export {
   identity,
   mapObs,
   mapProps,
+  mapProps$,
+  onlyUpdateForKeys,
   pure,
   renameProp,
   renameProps,
@@ -54,6 +58,8 @@ export default {
   identity,
   mapObs,
   mapProps,
+  mapProps$,
+  onlyUpdateForKeys,
   pure,
   renameProp,
   renameProps,

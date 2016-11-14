@@ -1,7 +1,8 @@
 import React from 'react';
 import 'rxjs';
 import {shallow} from 'enzyme';
-import mapProps$ from '../mapProps$';
+import {Dummy} from './utils';
+import {compose, mapProps$} from '../';
 
 describe('mapProps$', () => {
   it('should emit props$.next when component receive props', () => {
@@ -17,5 +18,16 @@ describe('mapProps$', () => {
 
     expect(propsSpy).toHaveBeenCalledTimes(2);
     expect(propsSpy).toHaveBeenLastCalledWith({className: 'foo'});
+  });
+
+  it('should be merged with other hoc', () => {
+    const Component = compose(
+      mapProps$(props$ => props$.mapTo({foo: 'bar'})),
+      mapProps$(props$ => props$),
+    )(Dummy);
+
+    const wrapper = shallow(<Component />);
+    expect(wrapper.instance().constructor.displayName).toBe('mapProps$(mapProps$(Dummy))');
+    expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
   });
 });
