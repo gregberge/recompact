@@ -35,8 +35,7 @@ const withHandlers = handlerFactories => withObs(({props$}) => {
         typeof handler !== 'function'
       ) {
         throw new Error(
-          'withHandlers(): Expected a map of higher-order functions. ' +
-          'Refer to the docs for more info.',
+          'withHandlers(): Expected a map of higher-order functions.',
         );
       }
 
