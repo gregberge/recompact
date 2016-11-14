@@ -16,6 +16,7 @@ describe('withHandlers', () => {
     const handler = wrapper.prop('handler');
 
     wrapper.setProps({foo: 'bar'});
+    expect(wrapper.prop('foo')).toBe('bar');
     expect(wrapper.prop('handler')).toBe(handler);
   });
 
@@ -70,8 +71,7 @@ describe('withHandlers', () => {
     const wrapper = shallow(<EnhancedDummy />);
 
     expect(() => wrapper.prop('foo').call()).toThrowError(
-      'withHandlers(): Expected a map of higher-order functions. Refer to ' +
-      'the docs for more info.',
+      'withHandlers(): Expected a map of higher-order functions.',
     );
   });
 });

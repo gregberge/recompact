@@ -1,4 +1,4 @@
-import {mapTo} from 'rxjs/operator/mapTo';
+import {map} from 'rxjs/operator/map';
 import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
 import withObs from './withObs';
@@ -33,8 +33,7 @@ const withHandlers = handlerFactories => withObs(({props$}) => {
         typeof handler !== 'function'
       ) {
         throw new Error(
-          'withHandlers(): Expected a map of higher-order functions. ' +
-          'Refer to the docs for more info.',
+          'withHandlers(): Expected a map of higher-order functions.',
         );
       }
 
@@ -42,7 +41,11 @@ const withHandlers = handlerFactories => withObs(({props$}) => {
     },
   );
 
-  return {props$: props$::_do(onNextProps)::mapTo(handlers)};
+  return {
+    props$: props$
+      ::_do(onNextProps)
+      ::map(nextProps => ({...nextProps, ...handlers})),
+  };
 });
 
 export default createHelper(withHandlers, 'withHandlers');
