@@ -44,20 +44,21 @@ const connectObs = mapObservables => withObs((observables) => {
   const obsMap = mapObservables(observables);
   checkObsMap(obsMap);
 
-  const combinedObs = Object.entries(obsMap).reduce((acc, [prop, observable]) => {
+  const combinedObs = Object.keys(obsMap).reduce((acc, key) => {
+    const observable = obsMap[key];
     let propsObservable;
 
-    if (prop.match(/^on[A-Z]/)) {
-      checkObserver(observable, prop);
+    if (key.match(/^on[A-Z]/)) {
+      checkObserver(observable, key);
       propsObservable = of((observable.onNext || observable.next).bind(observable));
     } else {
-      checkObservable(observable, prop);
+      checkObservable(observable, key);
       propsObservable = observable::startWith(undefined);
     }
 
     return [
       ...acc,
-      propsObservable::map(value => ({[prop]: value})),
+      propsObservable::map(value => ({[key]: value})),
     ];
   }, [observables.props$]);
 
