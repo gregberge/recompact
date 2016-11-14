@@ -3,13 +3,11 @@ import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
 import withObs from './withObs';
 
-const mapValues = (obj, fn) => {
-  const result = {};
-  Object.entries(obj).forEach(([key, value]) => {
-    result[key] = fn(value);
-  });
-  return result;
-};
+const mapValues = (obj, fn) =>
+  Object.keys(obj).reduce((result, key) => {
+    result[key] = fn(obj[key], key); // eslint-disable-line no-param-reassign
+    return result;
+  }, {});
 
 const withHandlers = handlerFactories => withObs(({props$}) => {
   let cachedHandlers;
