@@ -1,7 +1,7 @@
 import {map} from 'rxjs/operator/map';
 import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
-import withObs from './withObs';
+import mapProps$ from './mapProps$';
 
 const mapValues = (obj, fn) =>
   Object.keys(obj).reduce((result, key) => {
@@ -9,7 +9,7 @@ const mapValues = (obj, fn) =>
     return result;
   }, {});
 
-const withHandlers = handlerFactories => withObs(({props$}) => {
+const withHandlers = handlerFactories => mapProps$((props$) => {
   let cachedHandlers;
   let props;
 
@@ -41,11 +41,7 @@ const withHandlers = handlerFactories => withObs(({props$}) => {
     },
   );
 
-  return {
-    props$: props$
-      ::_do(onNextProps)
-      ::map(nextProps => ({...nextProps, ...handlers})),
-  };
+  return props$::_do(onNextProps)::map(nextProps => ({...nextProps, ...handlers}));
 });
 
 export default createHelper(withHandlers, 'withHandlers');

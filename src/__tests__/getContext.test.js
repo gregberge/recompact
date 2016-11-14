@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {mount, shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, getContext, mapProps, withContext} from '../';
+import {compose, getContext} from '../';
 
 describe('getContext', () => {
   it('should get context and put it in props', () => {
@@ -25,17 +25,5 @@ describe('getContext', () => {
     const wrapper = mount(<DummyFoo bar="foo" />);
 
     expect(wrapper.find(Dummy).props()).toEqual({bar: 'foo', foo: 'bar'});
-  });
-
-  it('should be merged with other hoc', () => {
-    const Div = compose(
-      withContext({foo: PropTypes.string.isRequired}, () => ({foo: 'bar'})),
-      getContext({foo: PropTypes.string.isRequired}),
-      mapProps(({foo}) => ({className: foo})),
-    )('div');
-
-    const wrapper = shallow(<Div />);
-    expect(wrapper.instance().constructor.displayName).toBe('withContext(getContext(mapProps(div)))');
-    expect(wrapper.equals(<div className="bar" />)).toBeTruthy();
   });
 });

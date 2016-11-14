@@ -1,7 +1,7 @@
 import {map} from 'rxjs/operator/map';
 import createHelper from './createHelper';
-import withObs from './withObs';
+import mapProps$ from './mapProps$';
 
-const mapProps = propsMapper => withObs(({props$}) => ({props$: props$::map(propsMapper)}));
+const mapProps = propsMapper => mapProps$(props$ => props$::map(propsMapper));
 
 export default createHelper(mapProps, 'mapProps');

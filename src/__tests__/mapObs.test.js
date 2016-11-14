@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
 import {compose, mapObs} from '../';
@@ -74,68 +74,6 @@ describe('mapObs', () => {
     )('div');
 
     mount(<Div />);
-  });
-
-  it('should inject context into context$', () => {
-    const contextSpy = jest.fn();
-    const foo$ = Rx.Observable.of('foo');
-    const Div = compose(
-      BaseComponent => (
-        class extends Component {
-          static childContextTypes = {
-            foo: PropTypes.string.isRequired,
-          };
-
-          getChildContext() {
-            return {foo: 'bar'};
-          }
-
-          render() {
-            return <BaseComponent {...this.props} />;
-          }
-        }
-      ),
-      mapObs(() => ({foo$})),
-      mapObs(
-        ({context$}) => {
-          context$.subscribe(contextSpy);
-          return {};
-        },
-        {contextTypes: {foo: PropTypes.string.isRequired}},
-      ),
-    )('div');
-
-    mount(<Div className="bar" />);
-
-    expect(contextSpy).toHaveBeenCalledTimes(1);
-    expect(contextSpy.mock.calls[0][0].foo).toBe('bar');
-  });
-
-  it('should provide context with context$', () => {
-    const contextSpy = jest.fn();
-    const Div = compose(
-      mapObs(
-        () => ({context$: Rx.Observable.of({foo: 'bar'})}),
-        {childContextTypes: {foo: PropTypes.string.isRequired}},
-      ),
-      (BaseComponent) => {
-        const ContextSpy = (props, context) => {
-          contextSpy(context);
-          return <BaseComponent {...props} />;
-        };
-
-        ContextSpy.contextTypes = {
-          foo: PropTypes.string.isRequired,
-        };
-
-        return ContextSpy;
-      },
-    )('div');
-
-    mount(<Div className="bar" />);
-
-    expect(contextSpy).toHaveBeenCalledTimes(1);
-    expect(contextSpy.mock.calls[0][0].foo).toBe('bar');
   });
 
   it('should be merged with other hoc', () => {
