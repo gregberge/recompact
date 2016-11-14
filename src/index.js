@@ -9,6 +9,7 @@ import mapObs from './mapObs';
 import mapProps from './mapProps';
 import mapProps$ from './mapProps$';
 import onlyUpdateForKeys from './onlyUpdateForKeys';
+import onlyUpdateForPropTypes from './onlyUpdateForPropTypes';
 import pure from './pure';
 import renameProp from './renameProp';
 import renameProps from './renameProps';
@@ -34,6 +35,7 @@ export {
   mapProps,
   mapProps$,
   onlyUpdateForKeys,
+  onlyUpdateForPropTypes,
   pure,
   renameProp,
   renameProps,
@@ -60,6 +62,7 @@ export default {
   mapProps,
   mapProps$,
   onlyUpdateForKeys,
+  onlyUpdateForPropTypes,
   pure,
   renameProp,
   renameProps,
