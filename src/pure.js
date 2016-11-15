@@ -1,4 +1,4 @@
-import shallowEqual from 'recompose/shallowEqual';
+import shallowEqual from 'shallowequal';
 import {distinctUntilChanged} from 'rxjs/operator/distinctUntilChanged';
 import createHelper from './createHelper';
 import mapPropsStream from './mapPropsStream';

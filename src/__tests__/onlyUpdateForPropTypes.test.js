@@ -1,9 +1,8 @@
 import React, {PropTypes} from 'react';
 import setPropTypes from 'recompose/setPropTypes';
-import withState from 'recompose/withState';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, onlyUpdateForPropTypes, withProps} from '../';
+import {compose, onlyUpdateForPropTypes, withProps, withState} from '../';
 
 describe('onlyUpdateForPropTypes', () => {
   it('only updates for props specified in propTypes', () => {

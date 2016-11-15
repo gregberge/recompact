@@ -1,7 +1,6 @@
 import React from 'react';
-import withState from 'recompose/withState';
 import {mount} from 'enzyme';
-import {branch, compose, identity, withProps} from '../';
+import {branch, compose, identity, withProps, withState} from '../';
 
 describe('branch', () => {
   it('should test props and applies one of two HoCs, for true and false', () => {

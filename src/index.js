@@ -4,7 +4,9 @@ import compose from './compose';
 import defaultProps from './defaultProps';
 import flattenProp from './flattenProp';
 import getContext from './getContext';
+import getDisplayName from './getDisplayName';
 import identity from './identity';
+import isClassComponent from './isClassComponent';
 import lifecycle from './lifecycle';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
@@ -16,6 +18,7 @@ import renameProp from './renameProp';
 import renameProps from './renameProps';
 import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
+import shallowEqual from './shallowEqual';
 import shouldUpdate from './shouldUpdate';
 import toClass from './toClass';
 import withContext from './withContext';
@@ -25,6 +28,7 @@ import withProps from './withProps';
 import withPropsOnChange from './withPropsOnChange';
 import withReducer from './withReducer';
 import withState from './withState';
+import wrapDisplayName from './wrapDisplayName';
 
 export {
   branch,
@@ -33,7 +37,9 @@ export {
   defaultProps,
   flattenProp,
   getContext,
+  getDisplayName,
   identity,
+  isClassComponent,
   lifecycle,
   mapObs,
   mapProps,
@@ -45,6 +51,7 @@ export {
   renameProps,
   renderComponent,
   renderNothing,
+  shallowEqual,
   shouldUpdate,
   toClass,
   withContext,
@@ -54,6 +61,7 @@ export {
   withPropsOnChange,
   withReducer,
   withState,
+  wrapDisplayName,
 };
 
 export default {
@@ -63,7 +71,9 @@ export default {
   defaultProps,
   flattenProp,
   getContext,
+  getDisplayName,
   identity,
+  isClassComponent,
   lifecycle,
   mapObs,
   mapProps,
@@ -75,6 +85,7 @@ export default {
   renameProps,
   renderComponent,
   renderNothing,
+  shallowEqual,
   shouldUpdate,
   toClass,
   withContext,
@@ -84,4 +95,5 @@ export default {
   withPropsOnChange,
   withReducer,
   withState,
+  wrapDisplayName,
 };

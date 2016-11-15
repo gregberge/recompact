@@ -1,4 +1,4 @@
-import omit from 'recompose/utils/omit';
+import omit from './utils/omit';
 import createHelper from './createHelper';
 import mapProps from './mapProps';
 

@@ -1,5 +1,5 @@
-import pick from 'recompose/utils/pick';
-import shallowEqual from 'recompose/shallowEqual';
+import pick from './utils/pick';
+import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
 import shouldUpdate from './shouldUpdate';
 

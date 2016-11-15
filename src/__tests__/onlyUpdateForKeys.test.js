@@ -1,8 +1,7 @@
 import React from 'react';
-import withState from 'recompose/withState';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, onlyUpdateForKeys, withProps} from '../';
+import {compose, onlyUpdateForKeys, withProps, withState} from '../';
 
 describe('onlyUpdateForKeys', () => {
   it('implements shouldComponentUpdate()', () => {

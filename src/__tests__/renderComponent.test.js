@@ -1,8 +1,7 @@
 import React from 'react';
 import setDisplayName from 'recompose/setDisplayName';
-import withState from 'recompose/withState';
 import {mount} from 'enzyme';
-import {compose, branch, renderComponent, toClass} from '../';
+import {compose, branch, renderComponent, toClass, withState} from '../';
 
 describe('renderComponent', () => {
   it('always renders the given component', () => {

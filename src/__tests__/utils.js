@@ -1,6 +1,6 @@
 import React from 'react';
 import setDisplayName from 'recompose/setDisplayName';
-import toClass from 'recompose/toClass';
+import {toClass} from '../';
 import createHelper from '../createHelper';
 
 export const countRenders = createHelper(BaseComponent =>

@@ -1,9 +1,7 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
-import flattenProp from 'recompose/flattenProp';
-import withState from 'recompose/withState';
 import {Dummy} from './utils';
-import {withProps, withPropsOnChange, compose} from '../';
+import {compose, flattenProp, withProps, withPropsOnChange, withState} from '../';
 
 describe('withPropsOnChange', () => {
   it('should map subset of owner props to child props', () => {

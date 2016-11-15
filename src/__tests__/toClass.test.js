@@ -1,9 +1,8 @@
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp, no-class-assign */
 import React, {PropTypes} from 'react';
 import {mount} from 'enzyme';
-import withContext from 'recompose/withContext';
 import {Dummy} from './utils';
-import {toClass, compose} from '../';
+import {compose, toClass, withContext} from '../';
 
 test('toClass returns the base component if it is already a class', () => {
   class BaseComponent extends React.Component {

@@ -1,5 +1,5 @@
-import omit from 'recompose/utils/omit';
-import pick from 'recompose/utils/pick';
+import omit from './utils/omit';
+import pick from './utils/pick';
 import createHelper from './createHelper';
 import mapProps from './mapProps';
 

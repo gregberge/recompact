@@ -1,6 +1,6 @@
-import pick from 'recompose/utils/pick';
-import shallowEqual from 'recompose/shallowEqual';
 import {map} from 'rxjs/operator/map';
+import pick from './utils/pick';
+import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
 import mapPropsStream from './mapPropsStream';
 
