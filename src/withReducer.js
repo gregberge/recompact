@@ -9,7 +9,7 @@ import mapPropsStream from './mapPropsStream';
 import createSymbol from './utils/createSymbol';
 import callOrUse from './utils/callOrUse';
 
-const INIT = createSymbol('INIT');
+export const INIT = createSymbol('INIT');
 
 const withReducer = (stateName, dispatchName, reducer, initialState) =>
   mapPropsStream((props$) => {
