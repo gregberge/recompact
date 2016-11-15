@@ -23,6 +23,7 @@ import withHandlers from './withHandlers';
 import withObs from './withObs';
 import withProps from './withProps';
 import withPropsOnChange from './withPropsOnChange';
+import withReducer from './withReducer';
 import withState from './withState';
 
 export {
@@ -51,6 +52,7 @@ export {
   withObs,
   withProps,
   withPropsOnChange,
+  withReducer,
   withState,
 };
 
@@ -80,5 +82,6 @@ export default {
   withObs,
   withProps,
   withPropsOnChange,
+  withReducer,
   withState,
 };

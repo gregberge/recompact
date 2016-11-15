@@ -6,31 +6,27 @@ import {scan} from 'rxjs/operator/scan';
 import {take} from 'rxjs/operator/take';
 import createHelper from './createHelper';
 import mapPropsStream from './mapPropsStream';
+import callOrUse from './utils/callOrUse';
 
-const callOrUse = (method, arg) => (
-  typeof method === 'function'
-    ? method(arg)
-    : method
-);
+const withState = (stateName, stateUpdaterName, initialState) =>
+  mapPropsStream((props$) => {
+    const update$ = new Subject();
+    const updateState = ::update$.next;
 
-const withState = (stateName, stateUpdaterName, initialState) => mapPropsStream((props$) => {
-  const update$ = new Subject();
-  const updateState = ::update$.next;
+    const stateValue$ = concat(
+      props$::take(1)::map(props => callOrUse(initialState, props)),
+      update$,
+    )::scan((stateValue, update) => callOrUse(update, stateValue));
 
-  const stateValue$ = concat(
-    props$::take(1)::map(props => callOrUse(initialState, props)),
-    update$,
-  )::scan((stateValue, update) => callOrUse(update, stateValue));
-
-  return combineLatest(
-    props$,
-    stateValue$,
-    (props, stateValue) => ({
-      ...props,
-      [stateName]: stateValue,
-      [stateUpdaterName]: updateState,
-    }),
-  );
-});
+    return combineLatest(
+      props$,
+      stateValue$,
+      (props, stateValue) => ({
+        ...props,
+        [stateName]: stateValue,
+        [stateUpdaterName]: updateState,
+      }),
+    );
+  });
 
 export default createHelper(withState, 'withState');

@@ -3,16 +3,11 @@ import {Component, PropTypes} from 'react';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import createEagerFactory from 'recompose/createEagerFactory';
 import createHelper from './createHelper';
+import createSymbol from './utils/createSymbol';
 
 const throwError = (error) => {
   throw error;
 };
-
-const createSymbol = name => (
-  typeof Symbol === 'function'
-    ? Symbol(name)
-    : `@@recompact/${name}`
-);
 
 const MAPPERS_INFO = createSymbol('mappersInfo');
 const OBSERVABLES = createSymbol('observables');
