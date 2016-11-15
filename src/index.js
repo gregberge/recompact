@@ -23,6 +23,7 @@ import withHandlers from './withHandlers';
 import withObs from './withObs';
 import withProps from './withProps';
 import withPropsOnChange from './withPropsOnChange';
+import withState from './withState';
 
 export {
   branch,
@@ -50,6 +51,7 @@ export {
   withObs,
   withProps,
   withPropsOnChange,
+  withState,
 };
 
 export default {
@@ -78,4 +80,5 @@ export default {
   withObs,
   withProps,
   withPropsOnChange,
+  withState,
 };
