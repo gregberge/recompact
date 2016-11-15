@@ -5,6 +5,7 @@ import defaultProps from './defaultProps';
 import flattenProp from './flattenProp';
 import getContext from './getContext';
 import identity from './identity';
+import lifecycle from './lifecycle';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
 import mapPropsStream from './mapPropsStream';
@@ -31,6 +32,7 @@ export {
   flattenProp,
   getContext,
   identity,
+  lifecycle,
   mapObs,
   mapProps,
   mapPropsStream,
@@ -58,6 +60,7 @@ export default {
   flattenProp,
   getContext,
   identity,
+  lifecycle,
   mapObs,
   mapProps,
   mapPropsStream,
