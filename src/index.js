@@ -7,7 +7,7 @@ import getContext from './getContext';
 import identity from './identity';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
-import mapProps$ from './mapProps$';
+import mapPropsStream from './mapPropsStream';
 import onlyUpdateForKeys from './onlyUpdateForKeys';
 import onlyUpdateForPropTypes from './onlyUpdateForPropTypes';
 import pure from './pure';
@@ -33,7 +33,7 @@ export {
   identity,
   mapObs,
   mapProps,
-  mapProps$,
+  mapPropsStream,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,
   pure,
@@ -60,7 +60,7 @@ export default {
   identity,
   mapObs,
   mapProps,
-  mapProps$,
+  mapPropsStream,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,
   pure,

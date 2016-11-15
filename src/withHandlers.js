@@ -1,7 +1,7 @@
 import {map} from 'rxjs/operator/map';
 import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
-import mapProps$ from './mapProps$';
+import mapPropsStream from './mapPropsStream';
 
 const mapValues = (obj, fn) =>
   Object.keys(obj).reduce((result, key) => {
@@ -9,7 +9,7 @@ const mapValues = (obj, fn) =>
     return result;
   }, {});
 
-const withHandlers = handlerFactories => mapProps$((props$) => {
+const withHandlers = handlerFactories => mapPropsStream((props$) => {
   let cachedHandlers;
   let props;
 

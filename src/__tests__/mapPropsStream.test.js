@@ -2,12 +2,12 @@ import React from 'react';
 import 'rxjs';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, mapProps$} from '../';
+import {compose, mapPropsStream} from '../';
 
-describe('mapProps$', () => {
+describe('mapPropsStream', () => {
   it('should emit props$.next when component receive props', () => {
     const propsSpy = jest.fn();
-    const Div = mapProps$(props$ => props$.do(propsSpy))('div');
+    const Div = mapPropsStream(props$ => props$.do(propsSpy))('div');
 
     const wrapper = shallow(<Div className="bar" />);
 
@@ -22,12 +22,12 @@ describe('mapProps$', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      mapProps$(props$ => props$.mapTo({foo: 'bar'})),
-      mapProps$(props$ => props$),
+      mapPropsStream(props$ => props$.mapTo({foo: 'bar'})),
+      mapPropsStream(props$ => props$),
     )(Dummy);
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('mapProps$(mapProps$(Dummy))');
+    expect(wrapper.instance().constructor.displayName).toBe('mapPropsStream(mapPropsStream(Dummy))');
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
   });
 });
