@@ -37,7 +37,7 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
           ...provider(result),
         }),
         {
-          ...this.context.observables,
+          ...this.context[OBSERVABLES],
           props$: this.props$,
         },
       );
