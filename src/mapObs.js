@@ -12,11 +12,9 @@ const throwError = (error) => {
 const MAPPERS_INFO = createSymbol('mappersInfo');
 const OBSERVABLES = createSymbol('observables');
 
-const createComponentFromMappers = (mappers, BaseComponent) => {
-  const factory = createEagerFactory(BaseComponent);
-
-  return class extends Component {
-    static [MAPPERS_INFO] = {mappers, BaseComponent};
+const createComponentFromMappers = (mappers, childFactory) =>
+  class extends Component {
+    static [MAPPERS_INFO] = {mappers, childFactory};
     static contextTypes = {[OBSERVABLES]: PropTypes.object};
     static childContextTypes = {[OBSERVABLES]: PropTypes.object};
 
@@ -66,18 +64,20 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
         return null;
       }
 
-      return factory(this.state.childProps);
+      return this.constructor[MAPPERS_INFO].childFactory(this.state.childProps);
     }
   };
-};
 
 export default createHelper(mapper => (BaseComponent) => {
   if (BaseComponent[MAPPERS_INFO]) {
     return createComponentFromMappers(
       [mapper, ...BaseComponent[MAPPERS_INFO].mappers],
-      BaseComponent[MAPPERS_INFO].BaseComponent,
+      BaseComponent[MAPPERS_INFO].childFactory,
     );
   }
 
-  return createComponentFromMappers([mapper], BaseComponent);
+  return createComponentFromMappers(
+    [mapper],
+    createEagerFactory(BaseComponent),
+  );
 }, 'mapObs');
