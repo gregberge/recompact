@@ -28,12 +28,12 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
 
     componentWillMount() {
       const {
-        props$: nextProps$,
+        props$: childProps$,
         ...childObservables
       } = mappers.reduce(
-        (result, provider) => ({
+        (observables, mapper) => ({
           props$: this.props$,
-          ...provider(result),
+          ...mapper(observables),
         }),
         {
           ...this.context[OBSERVABLES],
@@ -41,8 +41,8 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
         },
       );
 
-      this.subscription = nextProps$.subscribe({
-        next: props => this.setState({props}),
+      this.subscription = childProps$.subscribe({
+        next: childProps => this.setState({childProps}),
         error: throwError,
       });
 
@@ -58,15 +58,15 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return this.state.props !== nextState.props;
+      return this.state.childProps !== nextState.childProps;
     }
 
     render() {
-      if (!this.state.props) {
+      if (!this.state.childProps) {
         return null;
       }
 
-      return factory(this.state.props);
+      return factory(this.state.childProps);
     }
   };
 };
