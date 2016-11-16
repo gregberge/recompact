@@ -21,7 +21,6 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
     static childContextTypes = {[OBSERVABLES]: PropTypes.object};
 
     props$ = new BehaviorSubject(this.props);
-    state = {props: {}};
 
     getChildContext() {
       return this.childContext;
@@ -63,6 +62,10 @@ const createComponentFromMappers = (mappers, BaseComponent) => {
     }
 
     render() {
+      if (!this.state.props) {
+        return null;
+      }
+
       return factory(this.state.props);
     }
   };
