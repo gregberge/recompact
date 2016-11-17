@@ -1,3 +1,8 @@
-import renderNothing from 'recompose/renderNothing';
+import createHelper from './createHelper';
 
-export default renderNothing;
+const Nothing = () => null;
+Nothing.displayName = 'Nothing';
+
+const renderNothing = () => Nothing;
+
+export default createHelper(renderNothing, 'renderNothing', false, true);
