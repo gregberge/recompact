@@ -1,7 +1,9 @@
 import React from 'react';
 import Rx from 'rxjs';
-import {shallow} from 'enzyme';
-import {Dummy} from './utils';
+import {shallow, mount} from 'enzyme';
+import {Subject} from 'rxjs/Subject';
+import {combineLatest} from 'rxjs/operator/combineLatest';
+import {Dummy, countRenders} from './utils';
 import {compose, mapPropsStream} from '../';
 
 describe('mapPropsStream', () => {
@@ -49,5 +51,26 @@ describe('mapPropsStream', () => {
     const wrapper = shallow(<Component />);
     expect(wrapper.instance().constructor.displayName).toBe('mapPropsStream(mapPropsStream(Dummy))');
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
+  });
+
+  it('does not render the base component before props are emitted', () => {
+    const trigger$ = new Subject();
+    const EnhancedDummy = compose(
+      mapPropsStream(props$ => props$::combineLatest(trigger$, props => props)),
+      countRenders,
+    )(Dummy);
+
+    const wrapper = mount(<EnhancedDummy />);
+    expect(wrapper.find(Dummy).isEmpty()).toBe(true);
+
+    wrapper.setProps({foo: 'bar'});
+    expect(wrapper.find(Dummy).isEmpty()).toBe(true);
+
+    trigger$.next(true);
+
+    const dummy = wrapper.find(Dummy);
+    expect(dummy.isEmpty()).toBe(false);
+    expect(dummy.prop('renderCount')).toBe(1);
+    expect(dummy.prop('foo')).toBe('bar');
   });
 });
