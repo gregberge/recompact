@@ -1,12 +1,13 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, mapObs} from '../';
+import {compose, mapObs, mapPropsStream} from '../';
 
 describe('mapObs', () => {
   it('should emit props$.next when component receive props', () => {
+    // TODO: move this to 'mapPropsStream.test.js'.
     const propsSpy = jest.fn();
-    const Div = mapObs(({props$}) => ({props$: props$.do(propsSpy)}))('div');
+    const Div = mapPropsStream(props$ => props$.do(propsSpy))('div');
 
     const wrapper = shallow(<Div className="bar" />);
 
@@ -20,8 +21,9 @@ describe('mapObs', () => {
   });
 
   it('should take new props from props$', () => {
-    const Div = mapObs(
-      ({props$}) => ({props$: props$.map(({strings}) => ({className: strings.join('')}))}),
+    // TODO: move this to 'mapPropsStream.test.js'.
+    const Div = mapPropsStream(
+      props$ => props$.map(({strings}) => ({className: strings.join('')})),
     )('div');
 
     shallow(<Div strings={['a', 'b', 'c']} />);
@@ -30,7 +32,7 @@ describe('mapObs', () => {
   it('should unsubscribe props$ when unmount', () => {
     const props$ = new Rx.BehaviorSubject({});
     const propsSpy = jest.fn();
-    const Div = mapObs(() => ({props$: props$.do(propsSpy)}))('div');
+    const Div = mapPropsStream(() => props$.do(propsSpy))('div');
     const wrapper = shallow(<Div />);
     expect(propsSpy).toHaveBeenCalledTimes(1);
 
@@ -40,11 +42,12 @@ describe('mapObs', () => {
   });
 
   it('props$ should throw errors', () => {
+    // TODO: move this to 'mapPropsStream.test.js'.
     const props$ = new Rx.BehaviorSubject({});
 
-    const Div = mapObs(() => ({props$: props$.map(() => {
+    const Div = mapPropsStream(() => props$.map(() => {
       throw new Error('Too bad');
-    })}))('div');
+    }))('div');
 
     expect(() => {
       shallow(<Div />);
@@ -55,7 +58,7 @@ describe('mapObs', () => {
     const baseFoo$ = Rx.Observable.of({className: 'foo'});
     const Div = compose(
       mapObs(() => ({foo$: baseFoo$})),
-      mapObs(({foo$}) => ({props$: foo$})),
+      mapPropsStream((props$, {foo$}) => foo$),
     )('div');
 
     const wrapper = mount(<Div />);

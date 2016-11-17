@@ -1,7 +1,7 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, withObs} from '../';
+import {compose, withObs, mapPropsStream} from '../';
 
 describe('withObs', () => {
   it('should merge observables', () => {
@@ -9,7 +9,7 @@ describe('withObs', () => {
     const Component = compose(
       withObs(() => ({foo$: baseFoo$})),
       withObs(() => ({})),
-      withObs(({foo$}) => ({props$: foo$})),
+      mapPropsStream((props$, {foo$}) => foo$),
     )('div');
 
     const wrapper = mount(<Component />);
@@ -20,7 +20,7 @@ describe('withObs', () => {
     const baseFoo$ = Rx.Observable.of({className: 'foo'});
     const Component = compose(
       withObs({foo$: baseFoo$}),
-      withObs(({foo$}) => ({props$: foo$})),
+      mapPropsStream((props$, {foo$}) => foo$),
     )('div');
 
     const wrapper = mount(<Component />);
