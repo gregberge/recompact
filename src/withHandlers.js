@@ -1,7 +1,7 @@
-import {map} from 'rxjs/operator/map';
+import {mapTo} from 'rxjs/operator/mapTo';
 import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
-import mapPropsStream from './mapPropsStream';
+import withPropsStream from './withPropsStream';
 
 const mapValues = (obj, fn) =>
   Object.keys(obj).reduce((result, key) => {
@@ -9,7 +9,7 @@ const mapValues = (obj, fn) =>
     return result;
   }, {});
 
-const withHandlers = handlerFactories => mapPropsStream((props$) => {
+const withHandlers = handlerFactories => withPropsStream((props$) => {
   let cachedHandlers;
   let props;
 
@@ -41,7 +41,7 @@ const withHandlers = handlerFactories => mapPropsStream((props$) => {
     },
   );
 
-  return props$::_do(onNextProps)::map(nextProps => ({...nextProps, ...handlers}));
+  return props$::_do(onNextProps)::mapTo(handlers);
 });
 
 export default createHelper(withHandlers, 'withHandlers');
