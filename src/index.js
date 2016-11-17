@@ -11,8 +11,10 @@ import lifecycle from './lifecycle';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
 import mapPropsStream from './mapPropsStream';
+import omitProps from './omitProps';
 import onlyUpdateForKeys from './onlyUpdateForKeys';
 import onlyUpdateForPropTypes from './onlyUpdateForPropTypes';
+import pickProps from './pickProps';
 import pure from './pure';
 import renameProp from './renameProp';
 import renameProps from './renameProps';
@@ -44,8 +46,10 @@ export {
   mapObs,
   mapProps,
   mapPropsStream,
+  omitProps,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,
+  pickProps,
   pure,
   renameProp,
   renameProps,
@@ -78,8 +82,10 @@ export default {
   mapObs,
   mapProps,
   mapPropsStream,
+  omitProps,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,
+  pickProps,
   pure,
   renameProp,
   renameProps,
