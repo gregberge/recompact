@@ -40,9 +40,8 @@ const checkObservable = (observable, name) => {
 
 const aggregateProps = values => values.reduce((acc, value) => ({...acc, ...value}));
 
-const connectObs = obsMapper => withPropsStream((props$, obs) => {
-  // TODO: change the interface of obsMapper. Should be `obsMapper(obs, props$)`.
-  const obsMap = obsMapper({...obs, ...props$});
+const connectObs = obsMapper => withPropsStream((props$, observables) => {
+  const obsMap = obsMapper(observables, props$);
   checkObsMap(obsMap);
 
   const combinedObs = Object.keys(obsMap).reduce((acc, key) => {

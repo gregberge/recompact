@@ -1,6 +1,7 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
+import {Dummy} from './utils';
 import {connectObs, compose, withObs} from '../';
 
 describe('connectObs', () => {
@@ -35,6 +36,19 @@ describe('connectObs', () => {
     wrapper.find('input').prop('onChange')('foo');
     expect(changeSpy).toHaveBeenCalledTimes(1);
     expect(changeSpy).toHaveBeenLastCalledWith('foo');
+  });
+
+  it('should receive props$', () => {
+    const Component = compose(
+      connectObs((_, props$) => ({className: props$.pluck('foo')})),
+    )(Dummy);
+
+    const wrapper = mount(<Component foo="bar" />);
+    expect(wrapper.find(Dummy).prop('className')).toBe('bar');
+
+    wrapper.setProps({foo: 'foo'});
+
+    expect(wrapper.find(Dummy).prop('className')).toBe('foo');
   });
 
   it('should be merged with other hoc', () => {

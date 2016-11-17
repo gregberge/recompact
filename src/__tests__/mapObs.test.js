@@ -4,31 +4,6 @@ import {mount, shallow} from 'enzyme';
 import {compose, mapObs, mapPropsStream} from '../';
 
 describe('mapObs', () => {
-  it('should emit props$.next when component receive props', () => {
-    // TODO: move this to 'mapPropsStream.test.js'.
-    const propsSpy = jest.fn();
-    const Div = mapPropsStream(props$ => props$.do(propsSpy))('div');
-
-    const wrapper = shallow(<Div className="bar" />);
-
-    expect(propsSpy).toHaveBeenCalledTimes(1);
-    expect(propsSpy).toHaveBeenLastCalledWith({className: 'bar'});
-
-    wrapper.setProps({className: 'foo'});
-
-    expect(propsSpy).toHaveBeenCalledTimes(2);
-    expect(propsSpy).toHaveBeenLastCalledWith({className: 'foo'});
-  });
-
-  it('should take new props from props$', () => {
-    // TODO: move this to 'mapPropsStream.test.js'.
-    const Div = mapPropsStream(
-      props$ => props$.map(({strings}) => ({className: strings.join('')})),
-    )('div');
-
-    shallow(<Div strings={['a', 'b', 'c']} />);
-  });
-
   it('should unsubscribe props$ when unmount', () => {
     const props$ = new Rx.BehaviorSubject({});
     const propsSpy = jest.fn();
@@ -39,19 +14,6 @@ describe('mapObs', () => {
     wrapper.unmount();
     props$.next({foo: 'bar'});
     expect(propsSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it('props$ should throw errors', () => {
-    // TODO: move this to 'mapPropsStream.test.js'.
-    const props$ = new Rx.BehaviorSubject({});
-
-    const Div = mapPropsStream(() => props$.map(() => {
-      throw new Error('Too bad');
-    }))('div');
-
-    expect(() => {
-      shallow(<Div />);
-    }).toThrow();
   });
 
   it('should provide observables', () => {

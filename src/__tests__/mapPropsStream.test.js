@@ -1,5 +1,5 @@
 import React from 'react';
-import 'rxjs';
+import Rx from 'rxjs';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
 import {compose, mapPropsStream} from '../';
@@ -18,6 +18,26 @@ describe('mapPropsStream', () => {
 
     expect(propsSpy).toHaveBeenCalledTimes(2);
     expect(propsSpy).toHaveBeenLastCalledWith({className: 'foo'});
+  });
+
+  it('should take new props from props$', () => {
+    const Div = mapPropsStream(
+      props$ => props$.map(({strings}) => ({className: strings.join('')})),
+    )('div');
+
+    shallow(<Div strings={['a', 'b', 'c']} />);
+  });
+
+  it('props$ should throw errors', () => {
+    const props$ = new Rx.BehaviorSubject({});
+
+    const Div = mapPropsStream(() => props$.map(() => {
+      throw new Error('Too bad');
+    }))('div');
+
+    expect(() => {
+      shallow(<Div />);
+    }).toThrow();
   });
 
   it('should be merged with other hoc', () => {
