@@ -48,7 +48,9 @@ const createComponentFromMappers = (mappers, childFactory) =>
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return !nextState || this.state.childProps !== nextState.childProps;
+      return nextState && (
+        !this.state || this.state.childProps !== nextState.childProps
+      );
     }
 
     render() {
