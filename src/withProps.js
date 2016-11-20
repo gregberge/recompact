@@ -1,8 +1,8 @@
 import {map} from 'rxjs/operator/map';
 import createHelper from './createHelper';
 import withProps$ from './withProps$';
-import wrap from './utils/wrap';
+import callOrUse from './utils/callOrUse';
 
-const withProps = propsMapper => withProps$(props$ => props$::map(wrap(propsMapper)));
+const withProps = propsMapper => withProps$(props$ => props$::map(callOrUse(propsMapper)));
 
 export default createHelper(withProps, 'withProps');

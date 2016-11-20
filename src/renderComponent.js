@@ -1,4 +1,4 @@
-import createEagerFactory from 'recompose/createEagerFactory';
+import createEagerFactory from './createEagerFactory';
 import createHelper from './createHelper';
 
 const renderComponent = Component => () => {
@@ -6,7 +6,7 @@ const renderComponent = Component => () => {
   const RenderComponent = props => factory(props);
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const wrapDisplayName = require('recompose/wrapDisplayName').default;
+    const wrapDisplayName = require('./wrapDisplayName').default;
     /* eslint-enable global-require */
     RenderComponent.displayName =
       wrapDisplayName(Component, 'renderComponent');

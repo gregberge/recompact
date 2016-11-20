@@ -6,7 +6,7 @@ const onlyUpdateForPropTypes = (BaseComponent) => {
 
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const getDisplayName = require('recompose/getDisplayName').default;
+    const getDisplayName = require('./getDisplayName').default;
     /* eslint-enable global-require */
     if (!propTypes) {
       /* eslint-disable */

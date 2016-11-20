@@ -19,7 +19,7 @@ const withReducer = (stateName, dispatchName, reducer, initialState) =>
     const stateValue$ = concat(
       props$::take(1)::map((props) => {
         if (initialState !== undefined) {
-          return callOrUse(initialState, props);
+          return callOrUse(initialState)(props);
         }
 
         return reducer(undefined, {type: INIT});
