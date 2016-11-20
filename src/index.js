@@ -20,6 +20,9 @@ import renameProp from './renameProp';
 import renameProps from './renameProps';
 import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
+import setDisplayName from './setDisplayName';
+import setPropTypes from './setPropTypes';
+import setStatic from './setStatic';
 import shallowEqual from './shallowEqual';
 import shouldUpdate from './shouldUpdate';
 import toClass from './toClass';
@@ -55,6 +58,9 @@ export {
   renameProps,
   renderComponent,
   renderNothing,
+  setDisplayName,
+  setPropTypes,
+  setStatic,
   shallowEqual,
   shouldUpdate,
   toClass,
@@ -91,6 +97,9 @@ export default {
   renameProps,
   renderComponent,
   renderNothing,
+  setDisplayName,
+  setPropTypes,
+  setStatic,
   shallowEqual,
   shouldUpdate,
   toClass,
