@@ -4,12 +4,24 @@ import {shallow, mount} from 'enzyme';
 import {Subject} from 'rxjs/Subject';
 import {combineLatest} from 'rxjs/operator/combineLatest';
 import {Dummy, countRenders} from './utils';
-import {compose, mapPropsStream} from '../';
+import {compose, mapProps$} from '../';
 
-describe('mapPropsStream', () => {
+describe('mapProps$', () => {
+  it('should unsubscribe props$ when unmount', () => {
+    const props$ = new Rx.BehaviorSubject({});
+    const propsSpy = jest.fn();
+    const Div = mapProps$(() => props$.do(propsSpy))('div');
+    const wrapper = shallow(<Div />);
+    expect(propsSpy).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    props$.next({foo: 'bar'});
+    expect(propsSpy).toHaveBeenCalledTimes(1);
+  });
+
   it('should emit props$.next when component receive props', () => {
     const propsSpy = jest.fn();
-    const Div = mapPropsStream(props$ => props$.do(propsSpy))('div');
+    const Div = mapProps$(props$ => props$.do(propsSpy))('div');
 
     const wrapper = shallow(<Div className="bar" />);
 
@@ -23,7 +35,7 @@ describe('mapPropsStream', () => {
   });
 
   it('should take new props from props$', () => {
-    const Div = mapPropsStream(
+    const Div = mapProps$(
       props$ => props$.map(({strings}) => ({className: strings.join('')})),
     )('div');
 
@@ -33,7 +45,7 @@ describe('mapPropsStream', () => {
   it('props$ should throw errors', () => {
     const props$ = new Rx.BehaviorSubject({});
 
-    const Div = mapPropsStream(() => props$.map(() => {
+    const Div = mapProps$(() => props$.map(() => {
       throw new Error('Too bad');
     }))('div');
 
@@ -44,19 +56,19 @@ describe('mapPropsStream', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      mapPropsStream(props$ => props$.mapTo({foo: 'bar'})),
-      mapPropsStream(props$ => props$),
+      mapProps$(props$ => props$.mapTo({foo: 'bar'})),
+      mapProps$(props$ => props$),
     )(Dummy);
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('mapPropsStream(mapPropsStream(Dummy))');
+    expect(wrapper.instance().constructor.displayName).toBe('mapProps$(mapProps$(Dummy))');
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
   });
 
   it('does not render the base component before props are emitted', () => {
     const trigger$ = new Subject();
     const EnhancedDummy = compose(
-      mapPropsStream(props$ => props$::combineLatest(trigger$, props => props)),
+      mapProps$(props$ => props$::combineLatest(trigger$, props => props)),
       countRenders,
     )(Dummy);
 

@@ -1,26 +1,17 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, withObs, mapPropsStream} from '../';
+import {compose, withObs} from '../';
 
 describe('withObs', () => {
-  it('should merge observables', () => {
-    const baseFoo$ = Rx.Observable.of({className: 'foo'});
+  it('should merge observables and map props$', () => {
+    const baseFoo$ = Rx.Observable.of('foo');
     const Component = compose(
       withObs(() => ({foo$: baseFoo$})),
       withObs(() => ({})),
-      mapPropsStream((props$, {foo$}) => foo$),
-    )('div');
-
-    const wrapper = mount(<Component />);
-    expect(wrapper.find('div').prop('className')).toBe('foo');
-  });
-
-  it('should support plain object', () => {
-    const baseFoo$ = Rx.Observable.of({className: 'foo'});
-    const Component = compose(
-      withObs({foo$: baseFoo$}),
-      mapPropsStream((props$, {foo$}) => foo$),
+      withObs(({props$, foo$}) => ({
+        props$: props$.combineLatest(foo$, (_, foo) => ({className: foo})),
+      })),
     )('div');
 
     const wrapper = mount(<Component />);
@@ -29,9 +20,9 @@ describe('withObs', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withObs({}),
-      withObs({}),
-      withObs({}),
+      withObs(() => ({})),
+      withObs(() => ({})),
+      withObs(() => ({})),
     )('div');
 
     const wrapper = shallow(<Component />);

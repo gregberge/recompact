@@ -2,13 +2,13 @@ import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {connectObs, compose, withObs} from '../';
+import {connectObs, compose, withContextObs} from '../';
 
 describe('connectObs', () => {
   it('should connect observables to props', () => {
     const baseClassName$ = new Rx.BehaviorSubject('foo');
     const Component = compose(
-      withObs({className$: baseClassName$}),
+      withContextObs({className$: baseClassName$}),
       connectObs(({className$}) => ({className: className$})),
     )('div');
 
@@ -26,7 +26,7 @@ describe('connectObs', () => {
     baseChange$.subscribe(changeSpy);
 
     const Component = compose(
-      withObs({change$: baseChange$}),
+      withContextObs({change$: baseChange$}),
       connectObs(({change$}) => ({onChange: change$})),
     )('input');
 
@@ -53,12 +53,12 @@ describe('connectObs', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withObs({className$: Rx.Observable.of('foo')}),
+      withContextObs({className$: Rx.Observable.of('foo')}),
       connectObs(({className$}) => ({className: className$})),
     )('div');
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withObs(connectObs(div))');
+    expect(wrapper.instance().constructor.displayName).toBe('withContextObs(connectObs(div))');
     expect(wrapper.equals(<div className="foo" />)).toBeTruthy();
   });
 });
