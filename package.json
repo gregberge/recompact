@@ -23,7 +23,6 @@
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
     "object.pick": "^1.2.0",
-    "recompose": "^0.20.2",
     "shallowequal": "^0.2.2"
   },
   "devDependencies": {

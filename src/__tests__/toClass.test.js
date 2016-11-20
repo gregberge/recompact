@@ -85,7 +85,7 @@ test('toClass passes context and props correctly', () => {
 });
 
 test('toClass works with strings (DOM components)', () => {
-  const Div = toClass('div');
-  const div = mount(<Div>Hello</Div>).find('div');
-  expect(div.text()).toBe('Hello');
+  const Component = toClass('h3');
+  const element = mount(<Component>Hello</Component>);
+  expect(element.text()).toBe('Hello');
 });
