@@ -1,10 +1,9 @@
-import wrap from './utils/wrap';
+import createHOCFromMapper from './utils/createHOCFromMapper';
 import createHelper from './createHelper';
-import mapObs from './mapObs';
 
-const withObs = obsMapper => mapObs((obs, props$) => ({
-  ...obs,
-  ...wrap(obsMapper)(obs, props$),
-}));
+const withObs = obsMapper => createHOCFromMapper((props$, obs) => {
+  const {props$: nextProps$ = props$, ...nextObs} = obsMapper({...obs, props$});
+  return [nextProps$, {...obs, ...nextObs}];
+});
 
 export default createHelper(withObs, 'withObs');

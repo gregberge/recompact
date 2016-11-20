@@ -3,7 +3,7 @@ import {combineLatest} from 'rxjs/observable/combineLatest';
 import {map} from 'rxjs/operator/map';
 import {startWith} from 'rxjs/operator/startWith';
 import createHelper from './createHelper';
-import withPropsStream from './withPropsStream';
+import withProps$ from './withProps$';
 
 const checkObsMap = (obsMap) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -40,7 +40,7 @@ const checkObservable = (observable, name) => {
 
 const aggregateProps = values => values.reduce((acc, value) => ({...acc, ...value}));
 
-const connectObs = obsMapper => withPropsStream((props$, observables) => {
+const connectObs = obsMapper => withProps$((props$, observables) => {
   const obsMap = obsMapper(observables, props$);
   checkObsMap(obsMap);
 

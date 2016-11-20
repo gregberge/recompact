@@ -4,6 +4,16 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import createEagerFactory from 'recompose/createEagerFactory';
 import createSymbol from './createSymbol';
 
+const checkObservables = (observables) => {
+  if (process.env.NODE_ENV !== 'production') {
+    if ('props$' in observables) {
+      throw new Error('"props$" is a reserved named for observables.');
+    }
+  }
+
+  return observables;
+};
+
 const throwError = (error) => {
   throw error;
 };
@@ -27,7 +37,7 @@ const createComponentFromMappers = (mappers, childFactory) =>
     componentWillMount() {
       const [childProps$, childObservables] =
         mappers.reduce(
-          ([props$, obs], mapper) => mapper(props$, obs),
+          ([props$, obs], mapper) => checkObservables(mapper(props$, obs)),
           [this.props$, this.context[OBSERVABLES]],
         );
 

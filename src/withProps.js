@@ -1,8 +1,8 @@
 import {map} from 'rxjs/operator/map';
 import createHelper from './createHelper';
-import withPropsStream from './withPropsStream';
+import withProps$ from './withProps$';
 import wrap from './utils/wrap';
 
-const withProps = propsMapper => withPropsStream(props$ => props$::map(wrap(propsMapper)));
+const withProps = propsMapper => withProps$(props$ => props$::map(wrap(propsMapper)));
 
 export default createHelper(withProps, 'withProps');

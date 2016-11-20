@@ -1,16 +1,14 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, mapObs} from '../';
+import {compose, mapContextObs, mapProps$} from '../';
 
-describe('mapObs', () => {
-  it('should provide observables and map props', () => {
-    const baseFoo$ = Rx.Observable.of('foo');
+describe('mapContextObs', () => {
+  it('should provide observables', () => {
+    const baseFoo$ = Rx.Observable.of({className: 'foo'});
     const Div = compose(
-      mapObs(() => ({foo$: baseFoo$})),
-      mapObs(({foo$, props$}) => ({
-        props$: props$.combineLatest(foo$, (_, foo) => ({className: foo})),
-      })),
+      mapContextObs(() => ({foo$: baseFoo$})),
+      mapProps$((props$, {foo$}) => foo$),
     )('div');
 
     const wrapper = mount(<Div />);
@@ -20,9 +18,9 @@ describe('mapObs', () => {
   it('should not merge observables', () => {
     const baseFoo$ = Rx.Observable.of({className: 'foo'});
     const Div = compose(
-      mapObs(() => ({foo$: baseFoo$})),
-      mapObs(() => ({})),
-      mapObs(({foo$}) => {
+      mapContextObs(() => ({foo$: baseFoo$})),
+      mapContextObs(() => ({})),
+      mapContextObs(({foo$}) => {
         expect(foo$).toBe(undefined);
         return {};
       }),
@@ -33,13 +31,13 @@ describe('mapObs', () => {
 
   it('should be merged with other hoc', () => {
     const Div = compose(
-      mapObs(() => ({})),
-      mapObs(() => ({})),
-      mapObs(() => ({})),
+      mapContextObs(() => ({})),
+      mapContextObs(() => ({})),
+      mapContextObs(() => ({})),
     )('div');
 
     const wrapper = shallow(<Div />);
-    expect(wrapper.instance().constructor.displayName).toBe('mapObs(mapObs(mapObs(div)))');
+    expect(wrapper.instance().constructor.displayName).toBe('mapContextObs(mapContextObs(mapContextObs(div)))');
     expect(wrapper.equals(<div />)).toBeTruthy();
   });
 });

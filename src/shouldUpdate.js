@@ -1,8 +1,8 @@
 import {filter} from 'rxjs/operator/filter';
 import createHelper from './createHelper';
-import mapPropsStream from './mapPropsStream';
+import mapProps$ from './mapProps$';
 
-const shouldUpdate = test => mapPropsStream((props$) => {
+const shouldUpdate = test => mapProps$((props$) => {
   let props;
 
   return props$::filter((nextProps) => {

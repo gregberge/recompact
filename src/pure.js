@@ -1,8 +1,8 @@
 import shallowEqual from 'shallowequal';
 import {distinctUntilChanged} from 'rxjs/operator/distinctUntilChanged';
 import createHelper from './createHelper';
-import mapPropsStream from './mapPropsStream';
+import mapProps$ from './mapProps$';
 
-const pure = mapPropsStream(props$ => props$::distinctUntilChanged(shallowEqual));
+const pure = mapProps$(props$ => props$::distinctUntilChanged(shallowEqual));
 
 export default createHelper(pure, 'pure', true, true);

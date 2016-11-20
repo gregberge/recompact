@@ -2,7 +2,7 @@ import {map} from 'rxjs/operator/map';
 import pick from './utils/pick';
 import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
-import mapPropsStream from './mapPropsStream';
+import mapProps$ from './mapProps$';
 
 const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
   const shouldMap = typeof shouldMapOrKeys === 'function'
@@ -12,7 +12,7 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
         pick(nextProps, shouldMapOrKeys),
       );
 
-  return mapPropsStream((props$) => {
+  return mapProps$((props$) => {
     let props = {};
     let computedProps;
     return props$
