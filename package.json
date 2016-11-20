@@ -20,6 +20,7 @@
     "rxjs": "^5.0.0-rc.2"
   },
   "dependencies": {
+    "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
     "object.pick": "^1.2.0",
     "recompose": "^0.20.2",

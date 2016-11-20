@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import {Component, PropTypes} from 'react';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import createEagerFactory from 'recompose/createEagerFactory';
+import createEagerFactory from '../createEagerFactory';
 import createSymbol from './createSymbol';
 
 const checkObservables = (observables) => {

@@ -1,5 +1,5 @@
-export default (method, arg) => (
-  typeof method === 'function'
-    ? method(arg)
-    : method
+export default fn => (...args) => (
+  typeof fn === 'function'
+    ? fn(...args)
+    : fn
 );

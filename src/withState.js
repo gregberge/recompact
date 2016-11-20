@@ -14,9 +14,9 @@ const withState = (stateName, stateUpdaterName, initialState) =>
     const updateState = ::update$.next;
 
     const stateValue$ = concat(
-      props$::take(1)::map(props => callOrUse(initialState, props)),
+      props$::take(1)::map(props => callOrUse(initialState)(props)),
       update$,
-    )::scan((stateValue, update) => callOrUse(update, stateValue));
+    )::scan((stateValue, update) => callOrUse(update)(stateValue));
 
     return combineLatest(
       props$,

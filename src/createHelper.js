@@ -6,7 +6,7 @@ const createHelper = (
 ) => {
   if (process.env.NODE_ENV !== 'production' && setDisplayName) {
     /* eslint-disable global-require */
-    const wrapDisplayName = require('recompose/wrapDisplayName').default;
+    const wrapDisplayName = require('./wrapDisplayName').default;
     /* eslint-enable global-require */
 
     if (noArgs) {

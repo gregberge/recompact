@@ -1,17 +1,25 @@
 import branch from './branch';
 import connectObs from './connectObs';
+import componentFromProp from './componentFromProp';
 import compose from './compose';
+import createEagerElement from './createEagerElement';
+import createEagerFactory from './createEagerFactory';
+import createSink from './createSink';
 import defaultProps from './defaultProps';
 import flattenProp from './flattenProp';
 import getContext from './getContext';
 import getDisplayName from './getDisplayName';
+import hoistStatics from './hoistStatics';
 import identity from './identity';
 import isClassComponent from './isClassComponent';
+import isReferentiallyTransparentFunctionComponent
+  from './isReferentiallyTransparentFunctionComponent';
 import lifecycle from './lifecycle';
 import mapContextObs from './mapContextObs';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
 import mapProps$ from './mapProps$';
+import nest from './nest';
 import omitProps from './omitProps';
 import onlyUpdateForKeys from './onlyUpdateForKeys';
 import onlyUpdateForPropTypes from './onlyUpdateForPropTypes';
@@ -41,18 +49,25 @@ import wrapDisplayName from './wrapDisplayName';
 export {
   branch,
   connectObs,
+  componentFromProp,
   compose,
+  createEagerElement,
+  createEagerFactory,
+  createSink,
   defaultProps,
   flattenProp,
   getContext,
   getDisplayName,
+  hoistStatics,
   identity,
   isClassComponent,
+  isReferentiallyTransparentFunctionComponent,
   lifecycle,
   mapContextObs,
   mapObs,
   mapProps,
   mapProps$,
+  nest,
   omitProps,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,
@@ -83,18 +98,25 @@ export {
 export default {
   branch,
   connectObs,
+  componentFromProp,
   compose,
+  createEagerElement,
+  createEagerFactory,
+  createSink,
   defaultProps,
   flattenProp,
   getContext,
   getDisplayName,
+  hoistStatics,
   identity,
   isClassComponent,
+  isReferentiallyTransparentFunctionComponent,
   lifecycle,
   mapContextObs,
   mapObs,
   mapProps,
   mapProps$,
+  nest,
   omitProps,
   onlyUpdateForKeys,
   onlyUpdateForPropTypes,

@@ -1,4 +1,4 @@
-import createEagerFactory from 'recompose/createEagerFactory';
+import createEagerFactory from './createEagerFactory';
 import createHelper from './createHelper';
 import identity from './identity';
 
