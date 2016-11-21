@@ -41,7 +41,7 @@ const checkObservable = (observable, name) => {
 const aggregateProps = values => values.reduce((acc, value) => ({...acc, ...value}));
 
 const connectObs = obsMapper => withProps$((props$, observables) => {
-  const obsMap = obsMapper(observables, props$);
+  const obsMap = obsMapper({...observables, props$});
   checkObsMap(obsMap);
 
   const combinedObs = Object.keys(obsMap).reduce((acc, key) => {

@@ -40,7 +40,7 @@ describe('connectObs', () => {
 
   it('should receive props$', () => {
     const Component = compose(
-      connectObs((_, props$) => ({className: props$.pluck('foo')})),
+      connectObs(({props$}) => ({className: props$.pluck('foo')})),
     )(Dummy);
 
     const wrapper = mount(<Component foo="bar" />);
