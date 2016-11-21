@@ -1,7 +1,7 @@
 import {of} from 'rxjs/observable/of';
 import {combineLatest} from 'rxjs/observable/combineLatest';
 import {map} from 'rxjs/operator/map';
-import {startWith} from 'rxjs/operator/startWith';
+import {Observable} from 'rxjs/Observable';
 import createHelper from './createHelper';
 import withProps$ from './withProps$';
 
@@ -38,7 +38,10 @@ const checkObservable = (observable, name) => {
   }
 };
 
-const aggregateProps = values => values.reduce((acc, value) => ({...acc, ...value}));
+const aggregateProps = values => values.reduce((acc, [key, value]) => {
+  acc[key] = value; // eslint-disable-line no-param-reassign
+  return acc;
+}, {});
 
 const connectObs = obsMapper => withProps$((props$, observables) => {
   const obsMap = obsMapper({...observables, props$});
@@ -50,16 +53,30 @@ const connectObs = obsMapper => withProps$((props$, observables) => {
 
     if (key.match(/^on[A-Z]/)) {
       checkObserver(observable, key);
-      propsObservable = of((observable.onNext || observable.next).bind(observable));
+      propsObservable = of(::observable.next);
     } else {
       checkObservable(observable, key);
-      propsObservable = observable::startWith(undefined);
+      propsObservable = new Observable((observer) => {
+        let emitted;
+
+        const subscription = observable.subscribe({
+          ...observer,
+          next(value) {
+            emitted = true;
+            observer.next(value);
+          },
+        });
+
+        if (!emitted) {
+          observer.next(undefined);
+        }
+
+        return ::subscription.unsubscribe;
+      });
     }
 
-    return [
-      ...acc,
-      propsObservable::map(value => ({[key]: value})),
-    ];
+    acc.push(propsObservable::map(value => [key, value]));
+    return acc;
   }, []);
 
   return combineLatest(combinedObs)::map(aggregateProps);

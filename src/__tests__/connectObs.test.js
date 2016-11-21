@@ -2,7 +2,7 @@ import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {connectObs, compose, withContextObs} from '../';
+import {connectObs, compose, mapProps, withContextObs} from '../';
 
 describe('connectObs', () => {
   it('should connect observables to props', () => {
@@ -49,6 +49,32 @@ describe('connectObs', () => {
     wrapper.setProps({foo: 'foo'});
 
     expect(wrapper.find(Dummy).prop('className')).toBe('foo');
+  });
+
+  it('should not start by undefined if there is a value', () => {
+    const spy = jest.fn();
+    const Component = compose(
+      withContextObs({
+        foo$: Rx.Observable.of('foo'),
+        bar$: Rx.Observable.never(),
+        dar$: Rx.Observable.of('dar'),
+      }),
+      connectObs(({foo$, bar$, dar$}) => ({
+        foo: foo$,
+        bar: bar$,
+        dar: dar$,
+      })),
+      mapProps((props) => {
+        spy(props);
+        return props;
+      }),
+    )(Dummy);
+
+    mount(<Component />);
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0].foo).toBe('foo');
+    expect(spy.mock.calls[0][0].dar).toBe('dar');
+    expect(spy.mock.calls[0][0].bar).toBe(undefined);
   });
 
   it('should be merged with other hoc', () => {
