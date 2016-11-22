@@ -29,6 +29,7 @@ import renameProp from './renameProp';
 import renameProps from './renameProps';
 import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
+import setConfig from './setConfig';
 import setDisplayName from './setDisplayName';
 import setPropTypes from './setPropTypes';
 import setStatic from './setStatic';
@@ -77,6 +78,7 @@ export {
   renameProps,
   renderComponent,
   renderNothing,
+  setConfig,
   setDisplayName,
   setPropTypes,
   setStatic,
@@ -126,6 +128,7 @@ export default {
   renameProps,
   renderComponent,
   renderNothing,
+  setConfig,
   setDisplayName,
   setPropTypes,
   setStatic,

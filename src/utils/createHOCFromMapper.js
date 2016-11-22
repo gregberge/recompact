@@ -2,6 +2,7 @@
 import {Component, PropTypes} from 'react';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import createEagerFactory from '../createEagerFactory';
+import {getConfig} from '../setConfig';
 import createSymbol from './createSymbol';
 
 const checkObservables = (observables) => {
@@ -19,11 +20,12 @@ const throwError = (error) => {
 };
 
 const MAPPERS_INFO = createSymbol('mappersInfo');
-const OBSERVABLES = createSymbol('observables');
-const CONTEXT_TYPES = {[OBSERVABLES]: PropTypes.object};
 
-const createComponentFromMappers = (mappers, childFactory) =>
-  class extends Component {
+const createComponentFromMappers = (mappers, childFactory) => {
+  const {observablesKey: OBSERVABLES} = getConfig();
+  const CONTEXT_TYPES = {[OBSERVABLES]: PropTypes.object};
+
+  return class extends Component {
     static [MAPPERS_INFO] = {mappers, childFactory};
     static contextTypes = CONTEXT_TYPES;
     static childContextTypes = CONTEXT_TYPES;
@@ -71,6 +73,7 @@ const createComponentFromMappers = (mappers, childFactory) =>
       return this.constructor[MAPPERS_INFO].childFactory(this.state.childProps);
     }
   };
+};
 
 export default mapper => (BaseComponent) => {
   if (BaseComponent[MAPPERS_INFO]) {
