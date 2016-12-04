@@ -33,6 +33,7 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "benchmark": "^2.1.2",
     "enzyme": "^2.6.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
@@ -40,9 +41,12 @@
     "eslint-plugin-jsx-a11y": "^2.0.0",
     "eslint-plugin-react": "^6.6.0",
     "jest": "^17.0.0",
+    "jsdom": "^9.8.3",
+    "microtime": "^2.1.2",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
+    "recompose": "^0.20.2",
     "rxjs": "^5.0.0-rc.2",
     "sinon": "^1.17.6"
   }

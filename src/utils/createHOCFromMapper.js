@@ -6,13 +6,9 @@ import {getConfig} from '../setConfig';
 import createSymbol from './createSymbol';
 
 const checkObservables = (observables) => {
-  if (process.env.NODE_ENV !== 'production') {
-    if ('props$' in observables) {
-      throw new Error('"props$" is a reserved named for observables.');
-    }
+  if ('props$' in observables) {
+    throw new Error('"props$" is a reserved named for observables.');
   }
-
-  return observables;
 };
 
 const throwError = (error) => {
@@ -39,7 +35,13 @@ const createComponentFromMappers = (mappers, childFactory) => {
     componentWillMount() {
       const [childProps$, childObservables] =
         mappers.reduce(
-          ([props$, obs], mapper) => checkObservables(mapper(props$, obs)),
+          ([props$, obs], mapper) => {
+            const observables = mapper(props$, obs);
+            if (process.env.NODE_ENV !== 'production') {
+              checkObservables(observables);
+            }
+            return observables;
+          },
           [this.props$, this.context[OBSERVABLES]],
         );
 
