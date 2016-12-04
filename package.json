@@ -8,6 +8,7 @@
     "type": "git"
   },
   "scripts": {
+    "release": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json",
     "test": "eslint . && jest"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
@@ -26,6 +27,7 @@
     "shallowequal": "^0.2.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^17.0.0",
     "babel-preset-latest": "^6.16.0",
