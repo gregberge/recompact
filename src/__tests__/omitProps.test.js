@@ -1,33 +1,34 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {compose, omitProps} from '../';
+import {Dummy} from './utils';
+import {compose, omitProps, pure} from '../';
 
 describe('omitProps', () => {
   it('should take a string', () => {
-    const Component = omitProps('foo')('div');
+    const Component = omitProps('foo')(Dummy);
 
     const wrapper = shallow(<Component foo="foo" className="bar" />);
-    expect(wrapper.find('div').prop('className')).toBe('bar');
-    expect(wrapper.find('div').prop('foo')).toBeUndefined();
+    expect(wrapper.find(Dummy).prop('className')).toBe('bar');
+    expect(wrapper.find(Dummy).prop('foo')).toBeUndefined();
   });
 
   it('should take an array', () => {
-    const Component = omitProps(['foo', 'bar'])('div');
+    const Component = omitProps(['foo', 'bar'])(Dummy);
 
     const wrapper = shallow(<Component foo="foo" bar="bar" className="bar" />);
-    expect(wrapper.find('div').prop('className')).toBe('bar');
-    expect(wrapper.find('div').prop('foo')).toBeUndefined();
-    expect(wrapper.find('div').prop('bar')).toBeUndefined();
+    expect(wrapper.find(Dummy).prop('className')).toBe('bar');
+    expect(wrapper.find(Dummy).prop('foo')).toBeUndefined();
+    expect(wrapper.find(Dummy).prop('bar')).toBeUndefined();
   });
 
   it('should be merged with other hoc', () => {
     const Component = compose(
       omitProps('foo'),
-      omitProps('bar'),
-    )('div');
+      pure,
+    )(Dummy);
 
-    const wrapper = shallow(<Component foo="bar" bar="foo" />);
-    expect(wrapper.instance().constructor.displayName).toBe('omitProps(omitProps(div))');
-    expect(wrapper.equals(<div />)).toBeTruthy();
+    const wrapper = shallow(<Component />);
+    expect(wrapper.instance().constructor.displayName).toBe('omitProps(pure(Dummy))');
+    expect(wrapper.equals(<Dummy />)).toBeTruthy();
   });
 });

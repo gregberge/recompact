@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import {compose, mapProps} from '../';
+import {compose, mapProps, pure} from '../';
 
 describe('mapProps', () => {
   it('should map owner props to child props', () => {
@@ -13,12 +13,11 @@ describe('mapProps', () => {
   it('should be merged with other hoc', () => {
     const Component = compose(
       mapProps(() => ({})),
-      mapProps(() => ({})),
-      mapProps(() => ({})),
+      pure,
     )('div');
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('mapProps(mapProps(mapProps(div)))');
+    expect(wrapper.instance().constructor.displayName).toBe('mapProps(pure(div))');
     expect(wrapper.equals(<div />)).toBeTruthy();
   });
 });

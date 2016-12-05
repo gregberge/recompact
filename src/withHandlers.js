@@ -1,7 +1,5 @@
-import {mapTo} from 'rxjs/operator/mapTo';
-import {_do} from 'rxjs/operator/do';
 import createHelper from './createHelper';
-import withProps$ from './withProps$';
+import updateProps from './utils/updateProps';
 
 const mapValues = (obj, fn) =>
   Object.keys(obj).reduce((result, key) => {
@@ -9,14 +7,9 @@ const mapValues = (obj, fn) =>
     return result;
   }, {});
 
-const withHandlers = handlerFactories => withProps$((props$) => {
+const withHandlers = handlerFactories => updateProps((next) => {
   let cachedHandlers;
   let props;
-
-  const onNextProps = (nextProps) => {
-    cachedHandlers = {};
-    props = nextProps;
-  };
 
   const handlers = mapValues(handlerFactories,
     (createHandler, handlerName) => (...args) => {
@@ -41,7 +34,11 @@ const withHandlers = handlerFactories => withProps$((props$) => {
     },
   );
 
-  return props$::_do(onNextProps)::mapTo(handlers);
+  return (nextProps) => {
+    cachedHandlers = {};
+    props = nextProps;
+    next({...nextProps, ...handlers});
+  };
 });
 
 export default createHelper(withHandlers, 'withHandlers');

@@ -1,5 +1,5 @@
-export default fn => (...args) => (
+export default fn => (a, b, c) => (
   typeof fn === 'function'
-    ? fn(...args)
+    ? fn(a, b, c)
     : fn
 );

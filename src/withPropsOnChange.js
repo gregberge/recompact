@@ -1,8 +1,7 @@
-import {map} from 'rxjs/operator/map';
 import pick from './utils/pick';
 import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
-import mapProps$ from './mapProps$';
+import updateProps from './utils/updateProps';
 
 const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
   const shouldMap = typeof shouldMapOrKeys === 'function'
@@ -12,18 +11,18 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
         pick(nextProps, shouldMapOrKeys),
       );
 
-  return mapProps$((props$) => {
+  return updateProps((next) => {
     let props = {};
     let computedProps;
-    return props$
-      ::map((nextProps) => {
-        if (shouldMap(props, nextProps)) {
-          computedProps = propsMapper(nextProps);
-        }
 
-        props = nextProps;
-        return {...nextProps, ...computedProps};
-      });
+    return (nextProps) => {
+      if (shouldMap(props, nextProps)) {
+        computedProps = propsMapper(nextProps);
+      }
+
+      props = nextProps;
+      next({...nextProps, ...computedProps});
+    };
   });
 };
 

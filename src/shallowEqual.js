@@ -1,3 +1,3 @@
-import shallowEqual from 'shallowequal';
+import shallowEqual from 'fbjs/lib/shallowEqual';
 
 export default shallowEqual;

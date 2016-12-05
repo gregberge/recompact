@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, pickProps} from '../';
+import {compose, pickProps, pure} from '../';
 
 describe('pickProps', () => {
   it('should take a string', () => {
@@ -24,11 +24,11 @@ describe('pickProps', () => {
   it('should be merged with other hoc', () => {
     const Component = compose(
       pickProps('foo'),
-      pickProps('foo'),
+      pure,
     )(Dummy);
 
     const wrapper = shallow(<Component foo="bar" bar="foo" x="y" />);
-    expect(wrapper.instance().constructor.displayName).toBe('pickProps(pickProps(Dummy))');
+    expect(wrapper.instance().constructor.displayName).toBe('pickProps(pure(Dummy))');
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
   });
 });

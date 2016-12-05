@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {withProps, renameProps, compose} from '../';
+import {compose, renameProps, pure, withProps} from '../';
 
 describe('renameProps', () => {
   it('should rename props', () => {
@@ -17,12 +17,12 @@ describe('renameProps', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withProps({foo: 'bar'}),
-      renameProps({foo: 'className'}),
-    )('div');
+      renameProps({foo: 'bar'}),
+      pure,
+    )(Dummy);
 
-    const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(renameProps(div))');
-    expect(wrapper.equals(<div className="bar" />)).toBeTruthy();
+    const wrapper = shallow(<Component foo="bar" />);
+    expect(wrapper.instance().constructor.displayName).toBe('renameProps(pure(Dummy))');
+    expect(wrapper.equals(<Dummy bar="bar" />)).toBeTruthy();
   });
 });

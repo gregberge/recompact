@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, defaultProps, withProps} from '../';
+import {compose, defaultProps, pure} from '../';
 
 describe('defaultProps', () => {
   it('should pass additional props to base component', () => {
@@ -38,12 +38,12 @@ describe('defaultProps', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withProps({foo: 'bar'}),
       defaultProps({bar: 'xi'}),
+      pure,
     )(Dummy);
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(defaultProps(Dummy))');
-    expect(wrapper.equals(<Dummy bar="xi" foo="bar" />)).toBeTruthy();
+    expect(wrapper.instance().constructor.displayName).toBe('defaultProps(pure(Dummy))');
+    expect(wrapper.equals(<Dummy bar="xi" />)).toBeTruthy();
   });
 });

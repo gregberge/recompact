@@ -1,32 +1,36 @@
-import {Subject} from 'rxjs/Subject';
-import {concat} from 'rxjs/observable/concat';
-import {combineLatest} from 'rxjs/observable/combineLatest';
-import {map} from 'rxjs/operator/map';
-import {scan} from 'rxjs/operator/scan';
-import {take} from 'rxjs/operator/take';
+/* eslint-disable no-use-before-define */
 import createHelper from './createHelper';
-import mapProps$ from './mapProps$';
 import callOrUse from './utils/callOrUse';
+import updateProps from './utils/updateProps';
 
 const withState = (stateName, stateUpdaterName, initialState) =>
-  mapProps$((props$) => {
-    const update$ = new Subject();
-    const updateState = ::update$.next;
+  updateProps((next) => {
+    let previousProps;
+    let previousStateValue;
 
-    const stateValue$ = concat(
-      props$::take(1)::map(props => callOrUse(initialState)(props)),
-      update$,
-    )::scan((stateValue, update) => callOrUse(update)(stateValue));
+    const updateState = (nextState) => {
+      update(previousProps, callOrUse(nextState)(previousStateValue));
+    };
 
-    return combineLatest(
-      props$,
-      stateValue$,
-      (props, stateValue) => ({
+    const update = (props, stateValue) => {
+      next({
         ...props,
         [stateName]: stateValue,
         [stateUpdaterName]: updateState,
-      }),
-    );
+      });
+
+      previousStateValue = stateValue;
+      previousProps = props;
+    };
+
+    return (props) => {
+      update(
+        props,
+        !previousProps
+          ? callOrUse(initialState)(props)
+          : previousStateValue,
+      );
+    };
   });
 
 export default createHelper(withState, 'withState');

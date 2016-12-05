@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {compose, withProps} from '../';
+import {compose, pure, withProps} from '../';
 
 describe('withProps', () => {
   it('should passe additional props to base component', () => {
@@ -33,12 +33,11 @@ describe('withProps', () => {
   it('should be merged with other hoc', () => {
     const Component = compose(
       withProps({}),
-      withProps({}),
-      withProps({}),
+      pure,
     )('div');
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(withProps(withProps(div)))');
+    expect(wrapper.instance().constructor.displayName).toBe('withProps(pure(div))');
     expect(wrapper.equals(<div />)).toBeTruthy();
   });
 });

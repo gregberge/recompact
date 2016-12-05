@@ -4,7 +4,11 @@ import createEagerElement from './createEagerElement';
 const componentFromProp = (propName) => {
   const Component = props =>
     createEagerElement(props[propName], omit(props, [propName]));
-  Component.displayName = `componentFromProp(${propName})`;
+
+  if (process.env.NODE_ENV !== 'production') {
+    Component.displayName = `componentFromProp(${propName})`;
+  }
+
   return Component;
 };
 

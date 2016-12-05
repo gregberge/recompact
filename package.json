@@ -18,13 +18,13 @@
   },
   "peerDependencies": {
     "react": "^15.3.2",
-    "rxjs": "^5.0.0-rc.2"
+    "rxjs": "^5.0.0-rc.4"
   },
   "dependencies": {
+    "fbjs": "^0.8.6",
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
-    "object.pick": "^1.2.0",
-    "shallowequal": "^0.2.2"
+    "object.pick": "^1.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -47,7 +47,7 @@
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
     "recompose": "^0.20.2",
-    "rxjs": "^5.0.0-rc.2",
+    "rxjs": "^5.0.0-rc.4",
     "sinon": "^1.17.6"
   }
 }

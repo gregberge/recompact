@@ -5,12 +5,6 @@ import createEagerFactory from '../createEagerFactory';
 import {getConfig} from '../setConfig';
 import createSymbol from './createSymbol';
 
-const checkObservables = (observables) => {
-  if ('props$' in observables) {
-    throw new Error('"props$" is a reserved named for observables.');
-  }
-};
-
 const throwError = (error) => {
   throw error;
 };
@@ -28,29 +22,25 @@ const createComponentFromMappers = (mappers, childFactory) => {
 
     props$ = new BehaviorSubject(this.props);
 
-    getChildContext() {
-      return this.childContext;
-    }
-
     componentWillMount() {
       const [childProps$, childObservables] =
         mappers.reduce(
-          ([props$, obs], mapper) => {
-            const observables = mapper(props$, obs);
-            if (process.env.NODE_ENV !== 'production') {
-              checkObservables(observables);
-            }
-            return observables;
-          },
+          ([props$, obs], mapper) => mapper(props$, obs),
           [this.props$, this.context[OBSERVABLES]],
         );
 
       this.childPropsSubscription = childProps$.subscribe({
-        next: childProps => this.setState({childProps}),
+        next: (childProps) => {
+          this.setState({childProps});
+        },
         error: throwError,
       });
 
       this.childContext = {[OBSERVABLES]: childObservables};
+    }
+
+    getChildContext() {
+      return this.childContext;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -77,8 +67,11 @@ const createComponentFromMappers = (mappers, childFactory) => {
   };
 };
 
+export const isMapperComponent = BaseComponent =>
+  typeof BaseComponent === 'function' && MAPPERS_INFO in BaseComponent;
+
 export default mapper => (BaseComponent) => {
-  if (BaseComponent[MAPPERS_INFO]) {
+  if (isMapperComponent(BaseComponent)) {
     return createComponentFromMappers(
       [mapper, ...BaseComponent[MAPPERS_INFO].mappers],
       BaseComponent[MAPPERS_INFO].childFactory,
