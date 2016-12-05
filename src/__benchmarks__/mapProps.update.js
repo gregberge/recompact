@@ -1,9 +1,8 @@
-import './setup';
 import React from 'react';
-import Benchmark from 'benchmark';
 import {mount} from 'enzyme';
 import recomposeMapProps from 'recompose/mapProps';
 import recompactMapProps from '../mapProps';
+import {runBenchmark} from './utils';
 
 const RecompactComponent = recompactMapProps(({foo}) => ({foo: foo + 1}))(() => <div />);
 const RecomposeComponent = recomposeMapProps(({foo}) => ({foo: foo + 1}))(() => <div />);
@@ -11,17 +10,17 @@ const RecomposeComponent = recomposeMapProps(({foo}) => ({foo: foo + 1}))(() => 
 const recompactWrapper = mount(<RecompactComponent />);
 const recomposeWrapper = mount(<RecomposeComponent />);
 
-const setPropsSuite = new Benchmark.Suite();
-setPropsSuite.add('setProps - recompact.mapProps', () => {
-  recompactWrapper.setProps({foo: Math.random()});
-})
-.add('setProps - recompose.mapProps', function() {
-  recomposeWrapper.setProps({foo: Math.random()});
-})
-.on('cycle', event => {
-  console.log(String(event.target));
-})
-.on('complete', function () {
-  console.log('Fastest is ' + this.filter('fastest').map('name'));
-})
-.run({async: true});
+runBenchmark([
+  {
+    description: 'update - recompact.mapProps',
+    run() {
+      recompactWrapper.setProps({foo: Math.random()});
+    },
+  },
+  {
+    description: 'update - recompose.mapProps',
+    run() {
+      recomposeWrapper.setProps({foo: Math.random()});
+    },
+  },
+]);
