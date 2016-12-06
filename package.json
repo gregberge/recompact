@@ -35,7 +35,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "benchmark": "^2.1.2",
     "enzyme": "^2.6.0",
-    "eslint": "^3.9.1",
+    "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.0.0",
