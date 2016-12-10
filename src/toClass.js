@@ -2,6 +2,21 @@ import React, {Component} from 'react';
 import getDisplayName from './getDisplayName';
 import isClassComponent from './isClassComponent';
 
+/**
+ * Takes a function component and wraps it in a class. This can be used as a
+ * fallback for libraries that need to add a ref to a component, like Relay.
+ *
+ * If the base component is already a class, it returns the given component.
+ *
+ * @static
+ * @category High-order-components
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * const Component = toClass(() => <div />);
+ * <Component ref="foo" /> // A ref can be used because Component is a class
+ */
+
 const toClass = (BaseComponent) => {
   if (isClassComponent(BaseComponent)) {
     return BaseComponent;

@@ -2,13 +2,13 @@ import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {connectObs, compose, mapProps, withContextObs} from '../';
+import {connectObs, compose, mapProps, withObs} from '../';
 
 describe('connectObs', () => {
   it('should connect observables to props', () => {
     const baseClassName$ = new Rx.BehaviorSubject('foo');
     const Component = compose(
-      withContextObs({className$: baseClassName$}),
+      withObs({className$: baseClassName$}),
       connectObs(({className$}) => ({className: className$})),
     )('div');
 
@@ -26,7 +26,7 @@ describe('connectObs', () => {
     baseChange$.subscribe(changeSpy);
 
     const Component = compose(
-      withContextObs({change$: baseChange$}),
+      withObs({change$: baseChange$}),
       connectObs(({change$}) => ({onChange: change$})),
     )('input');
 
@@ -54,7 +54,7 @@ describe('connectObs', () => {
   it('should not start by undefined if there is a value', () => {
     const spy = jest.fn();
     const Component = compose(
-      withContextObs({
+      withObs({
         foo$: Rx.Observable.of('foo'),
         bar$: Rx.Observable.never(),
         dar$: Rx.Observable.of('dar'),
@@ -79,12 +79,12 @@ describe('connectObs', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withContextObs({className$: Rx.Observable.of('foo')}),
+      withObs({className$: Rx.Observable.of('foo')}),
       connectObs(({className$}) => ({className: className$})),
     )('div');
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withContextObs(connectObs(div))');
+    expect(wrapper.instance().constructor.displayName).toBe('withObs(connectObs(div))');
     expect(wrapper.equals(<div className="foo" />)).toBeTruthy();
   });
 });

@@ -1,9 +1,10 @@
 import {of} from 'rxjs/observable/of';
 import {combineLatest} from 'rxjs/observable/combineLatest';
 import {map} from 'rxjs/operator/map';
+import {withLatestFrom} from 'rxjs/operator/withLatestFrom';
 import {Observable} from 'rxjs/Observable';
 import createHelper from './createHelper';
-import withProps$ from './withProps$';
+import withObs from './withObs';
 
 const checkObsMap = (obsMap) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -43,7 +44,28 @@ const aggregateProps = values => values.reduce((acc, [key, value]) => {
   return acc;
 }, {});
 
-const connectObs = obsMapper => withProps$((props$, observables) => {
+/**
+ * Connect observables to props using a map.
+ *
+ * - The function take one argument, an object containing context observables
+ * and a special observable `props$` that emits owner props.
+ * - The property is updated at each emission of a new value by the associated
+ * Observable.
+ * - Properties matching `/^on[A-Z]/` are mapped to the `next` method of
+ * the associated Observer.
+ *
+ * @static
+ * @category High-order-components
+ * @param {Function} obsMapper The function that takes observables and returns map.
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * connectObs(({change$, value$}) => ({
+ *   onChange: change$,
+ *   value: value$,
+ * }))('input');
+ */
+const connectObs = obsMapper => withObs(({props$, ...observables}) => {
   const obsMap = obsMapper({...observables, props$});
   checkObsMap(obsMap);
 
@@ -79,7 +101,14 @@ const connectObs = obsMapper => withProps$((props$, observables) => {
     return acc;
   }, []);
 
-  return combineLatest(combinedObs)::map(aggregateProps);
+  return {
+    props$: combineLatest(combinedObs)
+      ::map(aggregateProps)
+      ::withLatestFrom(props$, (nextProps, props) => ({
+        ...props,
+        ...nextProps,
+      })),
+  };
 });
 
 export default createHelper(connectObs, 'connectObs');

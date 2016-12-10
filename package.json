@@ -8,6 +8,7 @@
     "type": "git"
   },
   "scripts": {
+    "build:doc": "babel-node ./scripts/build-doc",
     "release": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json",
     "test": "eslint . && jest"
   },
@@ -34,12 +35,14 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "benchmark": "^2.1.2",
+    "docdown": "neoziro/docdown#multiple-files-support",
     "enzyme": "^2.6.0",
     "eslint": "^3.11.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.0.0",
     "eslint-plugin-react": "^6.6.0",
+    "fs-extra": "^1.0.0",
     "jest": "^17.0.0",
     "jsdom": "^9.8.3",
     "microtime": "^2.1.2",

@@ -1,6 +1,21 @@
 import createEagerFactory from './createEagerFactory';
-import createHelper from './createHelper';
 
+/**
+ * Takes a component and returns a higher-order component version of that component.
+ * This is useful in combination with another helper that expects a higher-order
+ * component, like `branch`.
+ *
+ * @static
+ * @category High-order-components
+ * @param {ReactClass|ReactFunctionalComponent|String} Component
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * const renderLoaderIfLoading = branch(
+ *   ({loading} => loading),
+ *   renderComponent(Loader),
+ * )
+ */
 const renderComponent = Component => () => {
   const factory = createEagerFactory(Component);
   const RenderComponent = props => factory(props);
@@ -14,4 +29,4 @@ const renderComponent = Component => () => {
   return RenderComponent;
 };
 
-export default createHelper(renderComponent, 'renderComponent', false);
+export default renderComponent;

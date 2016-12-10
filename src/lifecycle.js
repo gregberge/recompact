@@ -2,6 +2,23 @@ import {createClass} from 'react';
 import createEagerFactory from './createEagerFactory';
 import createHelper from './createHelper';
 
+/**
+ * A higher-order component version of
+ * [`React.createClass()`](https://facebook.github.io/react/docs/react-api.html#createclass).
+ * It supports the entire `createClass()` API, except the `render()` method,
+ * which is implemented by default (and overridden if specified; an error will
+ * be logged to the console). You should use this helper as an escape hatch, in
+ * case you need to access component lifecycle methods.
+ *
+ * @static
+ * @category High-order-components
+ * @param {Object} spec Lifecycle spec
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * // Create a hoc that will log when a component will mount
+ * const logWhenMount = lifecycle({componentWillMount: () => console.log('will mount')});
+ */
 const lifecycle = spec => (BaseComponent) => {
   const factory = createEagerFactory(BaseComponent);
 

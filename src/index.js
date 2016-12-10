@@ -15,7 +15,6 @@ import isClassComponent from './isClassComponent';
 import isReferentiallyTransparentFunctionComponent
   from './isReferentiallyTransparentFunctionComponent';
 import lifecycle from './lifecycle';
-import mapContextObs from './mapContextObs';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
 import mapProps$ from './mapProps$';
@@ -38,10 +37,8 @@ import shouldUpdate from './shouldUpdate';
 import toClass from './toClass';
 import withContext from './withContext';
 import withHandlers from './withHandlers';
-import withContextObs from './withContextObs';
 import withObs from './withObs';
 import withProps from './withProps';
-import withProps$ from './withProps$';
 import withPropsOnChange from './withPropsOnChange';
 import withReducer from './withReducer';
 import withState from './withState';
@@ -64,7 +61,6 @@ export {
   isClassComponent,
   isReferentiallyTransparentFunctionComponent,
   lifecycle,
-  mapContextObs,
   mapObs,
   mapProps,
   mapProps$,
@@ -87,10 +83,8 @@ export {
   toClass,
   withContext,
   withHandlers,
-  withContextObs,
   withObs,
   withProps,
-  withProps$,
   withPropsOnChange,
   withReducer,
   withState,
@@ -114,7 +108,6 @@ export default {
   isClassComponent,
   isReferentiallyTransparentFunctionComponent,
   lifecycle,
-  mapContextObs,
   mapObs,
   mapProps,
   mapProps$,
@@ -137,10 +130,8 @@ export default {
   toClass,
   withContext,
   withHandlers,
-  withContextObs,
   withObs,
   withProps,
-  withProps$,
   withPropsOnChange,
   withReducer,
   withState,

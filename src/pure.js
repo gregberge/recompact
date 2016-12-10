@@ -2,6 +2,17 @@ import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
 import shouldUpdate from './shouldUpdate';
 
+/**
+ * Prevents the component from updating unless a prop has changed.
+ * Uses `shallowEqual()` to test for changes.
+ *
+ * @static
+ * @category High-order-components
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * pure('button')
+ */
 const pure = shouldUpdate((props, nextProps) => !shallowEqual(props, nextProps));
 
-export default createHelper(pure, 'pure', true, true);
+export default createHelper(pure, 'pure', true);

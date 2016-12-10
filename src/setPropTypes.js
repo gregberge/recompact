@@ -1,6 +1,16 @@
 import setStatic from './setStatic';
-import createHelper from './createHelper';
 
+/**
+ * Assigns to the `propTypes` property on the base component.
+ *
+ * @static
+ * @category High-order-components
+ * @param {Object} propTypes
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * setPropTypes({children: PropTypes.node})(MyComponent);
+ */
 const setPropTypes = propTypes => setStatic('propTypes', propTypes);
 
-export default createHelper(setPropTypes, 'setPropTypes', false);
+export default setPropTypes;

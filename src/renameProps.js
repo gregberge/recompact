@@ -14,6 +14,17 @@ const mapKeys = (obj, func) =>
     return result;
   }, {});
 
+/**
+ * Renames multiple props, using a map of old prop names to new prop names.
+ *
+ * @static
+ * @category High-order-components
+ * @param {Object} nameMap A map with old prop as key and new prop as value.
+ * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @example
+ *
+ * renameProps({data: 'value'})
+ */
 const renameProps = nameMap =>
   mapProps(props => ({
     ...omit(props, keys(nameMap)),

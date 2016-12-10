@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {mount} from 'enzyme';
 import Rx from 'rxjs';
-import {setConfig, withContextObs} from '../';
+import {setConfig, withObs} from '../';
 
 describe('setConfig', () => {
   it('should be possible to specify an observablesKey', () => {
@@ -10,7 +10,7 @@ describe('setConfig', () => {
 
     const observables = {foo$: Rx.Observable.of('foo')};
 
-    const ContextComponent = withContextObs(observables)(
+    const ContextComponent = withObs(observables)(
       class extends Component {
         static contextTypes = {
           myObsKey: PropTypes.object,

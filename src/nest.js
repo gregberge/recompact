@@ -1,7 +1,21 @@
 import createEagerFactory from './createEagerFactory';
 
-const nest = (...Components) => {
-  const factories = Components.map(createEagerFactory);
+/**
+ * Composes components by nesting each one inside the previous.
+ *
+ * @static
+ * @category High-order-components
+ * @param {...(ReactClass|ReactFunctionalComponent)} components
+ * @returns {ReactFunctionalComponent}
+ * @example
+ *
+ * // Delay rendering of 1s
+ * const DivButton = nest('div', 'button');
+ * // will render <div className="foo"><button className="foo" /></div>
+ * <DivButton className="foo" />
+ */
+const nest = (...components) => {
+  const factories = components.map(createEagerFactory);
   const Nest = ({...props, children}) =>
     factories.reduceRight(
       (child, factory) => factory(props, child),
@@ -12,7 +26,7 @@ const nest = (...Components) => {
     /* eslint-disable global-require */
     const getDisplayName = require('./getDisplayName').default;
     /* eslint-enable global-require */
-    const displayNames = Components.map(getDisplayName);
+    const displayNames = components.map(getDisplayName);
     Nest.displayName = `nest(${displayNames.join(', ')})`;
   }
 
