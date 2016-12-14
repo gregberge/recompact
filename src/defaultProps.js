@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow, no-restricted-syntax, no-param-reassign */
 import createHelper from './createHelper';
+import createEagerFactory from './createEagerFactory';
 import withProps from './withProps';
+import createCompactableHOC from './utils/createCompactableHOC';
 
 /**
  * Specify props values that will be used if the prop is `undefined`.
@@ -14,14 +16,22 @@ import withProps from './withProps';
  * const Button = defaultProps({type: 'button'})('button');
  * <Button /> // will render <button type="button" />
  */
-const defaultProps = defaultProps => withProps((props) => {
-  const newProps = {...props};
-  for (const propName in defaultProps) {
-    if (props[propName] === undefined) {
-      newProps[propName] = defaultProps[propName];
+const defaultProps = defaultProps => createCompactableHOC(
+  withProps((props) => {
+    const newProps = {...props};
+    for (const propName in defaultProps) {
+      if (props[propName] === undefined) {
+        newProps[propName] = defaultProps[propName];
+      }
     }
-  }
-  return newProps;
-});
+    return newProps;
+  }),
+  (BaseComponent) => {
+    const factory = createEagerFactory(BaseComponent);
+    const DefaultProps = ownerProps => factory(ownerProps);
+    DefaultProps.defaultProps = defaultProps;
+    return DefaultProps;
+  },
+);
 
 export default createHelper(defaultProps, 'defaultProps');

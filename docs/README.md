@@ -161,7 +161,7 @@ connectObs(({change$, value$}) => ({
 <!-- div -->
 
 <h3 id="defaultpropsdefaultprops"><code>defaultProps(defaultProps)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/defaultProps.js#L17 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/defaultProps.js#L19 "View in source") [&#x24C9;][1]
 
 Specify props values that will be used if the prop is `undefined`.
 
@@ -625,7 +625,7 @@ setStatic({defaultProps: {type: 'button'}})('button');
 <!-- div -->
 
 <h3 id="shouldupdatetest"><code>shouldUpdate(test)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/shouldUpdate.js#L18 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/shouldUpdate.js#L21 "View in source") [&#x24C9;][1]
 
 Higher-order component version of
 [`shouldComponentUpdate()`](https://facebook.github.io/react/docs/react-component.html#shouldcomponentupdate).
@@ -803,7 +803,7 @@ const XButton = withProps(({type}) => {type: `x${type}`})('button');
 <!-- div -->
 
 <h3 id="withpropsonchangeshouldmaporkeys-createprops"><code>withPropsOnChange(shouldMapOrKeys, createProps)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/withPropsOnChange.js#L24 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/withPropsOnChange.js#L27 "View in source") [&#x24C9;][1]
 
 Like `withProps()`, except the new props are only created when one of the owner
 props specified by `shouldMapOrKeys` changes. This helps ensure that expensive

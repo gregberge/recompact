@@ -1,5 +1,8 @@
+import {Component} from 'react';
 import createHelper from './createHelper';
+import createCompactableHOC from './utils/createCompactableHOC';
 import updateProps from './utils/updateProps';
+import createEagerFactory from './createEagerFactory';
 
 /**
  * Higher-order component version of
@@ -15,16 +18,30 @@ import updateProps from './utils/updateProps';
  * // Pure
  * shouldUpdate((props, nextProps) => shallowEqual(props, nextProps))
  */
-const shouldUpdate = test => updateProps((next) => {
-  let props;
+const shouldUpdate = test => createCompactableHOC(
+  updateProps((next) => {
+    let props;
 
-  return (nextProps) => {
-    if (!props || test(props, nextProps)) {
-      next(nextProps);
-    }
+    return (nextProps) => {
+      if (!props || test(props, nextProps)) {
+        next(nextProps);
+      }
 
-    props = nextProps;
-  };
-});
+      props = nextProps;
+    };
+  }),
+  (BaseComponent) => {
+    const factory = createEagerFactory(BaseComponent);
+    return class extends Component {
+      shouldComponentUpdate(nextProps) {
+        return test(this.props, nextProps);
+      }
+
+      render() {
+        return factory(this.props);
+      }
+    };
+  },
+);
 
 export default createHelper(shouldUpdate, 'shouldUpdate');

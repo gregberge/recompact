@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import {compose, shouldUpdate} from '../';
 import {countRenders, Dummy} from './utils';
 
@@ -25,5 +25,16 @@ describe('shouldUpdate', () => {
     wrapper.setProps({foo: 'baz'});
     expect(dummy.prop('foo')).toBe('baz');
     expect(dummy.prop('renderCount')).toBe(2);
+  });
+
+  it('should be mergeable', () => {
+    const Component = compose(
+      shouldUpdate(() => true),
+      shouldUpdate(() => true),
+    )(Dummy);
+
+    const wrapper = shallow(<Component />);
+    expect(wrapper.instance().constructor.displayName).toBe('shouldUpdate(shouldUpdate(Dummy))');
+    expect(wrapper.equals(<Dummy />)).toBeTruthy();
   });
 });

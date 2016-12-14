@@ -1,6 +1,6 @@
 import createHelper from './createHelper';
 import createEagerFactory from './createEagerFactory';
-import {isMapperComponent} from './utils/createHOCFromMapper';
+import createCompactableHOC from './utils/createCompactableHOC';
 import updateProps from './utils/updateProps';
 
 /**
@@ -16,15 +16,14 @@ import updateProps from './utils/updateProps';
  * // Add a new prop computed from owner props
  * mapProps(({count}) => ({moreThanFive: count > 5}))(MyComponent);
  */
-const mapProps = propsMapper => (BaseComponent) => {
-  if (isMapperComponent(BaseComponent)) {
-    return updateProps(next => (props) => {
-      next(propsMapper(props));
-    })(BaseComponent);
-  }
-
-  const factory = createEagerFactory(BaseComponent);
-  return props => factory(propsMapper(props));
-};
+const mapProps = propsMapper => createCompactableHOC(
+  updateProps(next => (props) => {
+    next(propsMapper(props));
+  }),
+  (BaseComponent) => {
+    const factory = createEagerFactory(BaseComponent);
+    return props => factory(propsMapper(props));
+  },
+);
 
 export default createHelper(mapProps, 'mapProps');

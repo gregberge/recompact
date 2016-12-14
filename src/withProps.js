@@ -1,7 +1,7 @@
 import createHelper from './createHelper';
 import callOrUse from './utils/callOrUse';
 import createEagerFactory from './createEagerFactory';
-import {isMapperComponent} from './utils/createHOCFromMapper';
+import createCompactableHOC from './utils/createCompactableHOC';
 import updateProps from './utils/updateProps';
 
 /**
@@ -20,17 +20,17 @@ import updateProps from './utils/updateProps';
  * const Button = withProps({type: 'button'})('button');
  * const XButton = withProps(({type}) => {type: `x${type}`})('button');
  */
-const withProps = propsMapper => (BaseComponent) => {
+const withProps = (propsMapper) => {
   const propsOrMapper = callOrUse(propsMapper);
-
-  if (isMapperComponent(BaseComponent)) {
-    return updateProps(next => (props) => {
+  return createCompactableHOC(
+    updateProps(next => (props) => {
       next({...props, ...propsOrMapper(props)});
-    })(BaseComponent);
-  }
-
-  const factory = createEagerFactory(BaseComponent);
-  return props => factory({...props, ...propsOrMapper(props)});
+    }),
+    (BaseComponent) => {
+      const factory = createEagerFactory(BaseComponent);
+      return props => factory({...props, ...propsOrMapper(props)});
+    },
+  );
 };
 
 export default createHelper(withProps, 'withProps');

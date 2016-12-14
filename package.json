@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build:doc": "babel-node ./scripts/build-doc",
-    "release": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json",
+    "build:lib": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json",
     "test": "eslint . && jest"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",

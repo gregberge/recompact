@@ -1,6 +1,9 @@
+import {Component} from 'react';
 import pick from './utils/pick';
 import shallowEqual from './shallowEqual';
 import createHelper from './createHelper';
+import createEagerFactory from './createEagerFactory';
+import createCompactableHOC from './utils/createCompactableHOC';
 import updateProps from './utils/updateProps';
 
 /**
@@ -29,19 +32,41 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
         pick(nextProps, shouldMapOrKeys),
       );
 
-  return updateProps((next) => {
-    let props = {};
-    let computedProps;
+  return createCompactableHOC(
+    updateProps((next) => {
+      let props = {};
+      let computedProps;
 
-    return (nextProps) => {
-      if (shouldMap(props, nextProps)) {
-        computedProps = propsMapper(nextProps);
-      }
+      return (nextProps) => {
+        if (shouldMap(props, nextProps)) {
+          computedProps = propsMapper(nextProps);
+        }
 
-      props = nextProps;
-      next({...nextProps, ...computedProps});
-    };
-  });
+        props = nextProps;
+        next({...nextProps, ...computedProps});
+      };
+    }),
+    (BaseComponent) => {
+      const factory = createEagerFactory(BaseComponent);
+
+      return class extends Component {
+        computedProps = propsMapper(this.props);
+
+        componentWillReceiveProps(nextProps) {
+          if (shouldMap(this.props, nextProps)) {
+            this.computedProps = propsMapper(nextProps);
+          }
+        }
+
+        render() {
+          return factory({
+            ...this.props,
+            ...this.computedProps,
+          });
+        }
+      };
+    },
+  );
 };
 
 export default createHelper(withPropsOnChange, 'withPropsOnChange');

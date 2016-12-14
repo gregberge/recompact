@@ -30,12 +30,13 @@ describe('pure', () => {
 
   it('should be merged with other hoc', () => {
     const Component = compose(
-      withProps({}),
       pure,
-    )('div');
+      withProps({foo: 'bar'}),
+    )(Dummy);
+
 
     const wrapper = shallow(<Component />);
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(pure(div))');
-    expect(wrapper.equals(<div />)).toBeTruthy();
+    expect(wrapper.instance().constructor.displayName).toBe('pure(withProps(Dummy))');
+    expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy();
   });
 });
