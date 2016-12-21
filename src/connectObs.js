@@ -1,7 +1,6 @@
 import {of} from 'rxjs/observable/of';
 import {combineLatest} from 'rxjs/observable/combineLatest';
 import {map} from 'rxjs/operator/map';
-import {withLatestFrom} from 'rxjs/operator/withLatestFrom';
 import {Observable} from 'rxjs/Observable';
 import createHelper from './createHelper';
 import withObs from './withObs';
@@ -102,12 +101,14 @@ const connectObs = obsMapper => withObs(({props$, ...observables}) => {
   }, []);
 
   return {
-    props$: combineLatest(combinedObs)
-      ::map(aggregateProps)
-      ::withLatestFrom(props$, (nextProps, props) => ({
+    props$: combineLatest(
+      combineLatest(combinedObs)::map(aggregateProps),
+      props$,
+      (obsProps, props) => ({
         ...props,
-        ...nextProps,
-      })),
+        ...obsProps,
+      }),
+    ),
   };
 });
 

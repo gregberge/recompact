@@ -22,10 +22,12 @@
     "rxjs": "^5.0.0-rc.4"
   },
   "dependencies": {
+    "change-emitter": "^0.1.2",
     "fbjs": "^0.8.6",
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
-    "object.pick": "^1.2.0"
+    "object.pick": "^1.2.0",
+    "symbol-observable": "^1.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

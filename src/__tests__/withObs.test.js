@@ -1,9 +1,21 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, withObs} from '../';
+import {compose, setObservableConfig, withObs} from '../';
+import rxjsObservableConfig from '../rxjsObservableConfig';
 
 describe('withObs', () => {
+  beforeEach(() => {
+    setObservableConfig(rxjsObservableConfig);
+  });
+
+  afterEach(() => {
+    setObservableConfig({
+      toESObservable: undefined,
+      fromESObservable: undefined,
+    });
+  });
+
   it('should merge observables and map props$', () => {
     const baseFoo$ = Rx.Observable.of('foo');
     const Component = compose(

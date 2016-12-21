@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import './setup';
 import React from 'react';
 import {mount} from 'enzyme';
@@ -34,14 +35,22 @@ const RecomposeComponent = compose(
   recomposeRenameProp('updateCounter', 'up'),
 )(() => <div />);
 
+const Nothing = () => null;
+const nothingWrapper = mount(<Nothing />);
 const recompactWrapper = mount(<RecompactComponent bar="x" />);
 const recomposeWrapper = mount(<RecomposeComponent bar="x" />);
 
-const rand = n => Math.round(Math.random() * n);
+let count;
 
 series([
   () => new Promise(resolve => setTimeout(resolve, 1000)),
   () => runBenchmark([
+    {
+      description: 'nothing',
+      run() {
+        mount(<Nothing />);
+      },
+    },
     {
       description: '❤️  recompact',
       run() {
@@ -57,15 +66,30 @@ series([
   ], '[mount]'),
   () => runBenchmark([
     {
-      description: '❤️  recompact',
+      description: 'nothing',
+      onStart() {
+        count = 0;
+      },
       run() {
-        recompactWrapper.setProps({foo: rand(2)});
+        nothingWrapper.setProps({foo: count++});
+      },
+    },
+    {
+      description: '❤️  recompact',
+      onStart() {
+        count = 0;
+      },
+      run() {
+        recompactWrapper.setProps({foo: count++});
       },
     },
     {
       description: '💙  recompose',
+      onStart() {
+        count = 0;
+      },
       run() {
-        recomposeWrapper.setProps({foo: rand(2)});
+        recomposeWrapper.setProps({foo: count++});
       },
     },
   ], '[setProps]'),

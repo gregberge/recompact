@@ -23,16 +23,7 @@ function compose(...funcs) {
     return funcs[0];
   }
 
-  const last = funcs[funcs.length - 1];
-
-  return (...args) => {
-    let result = last(...args);
-    for (let i = funcs.length - 2; i >= 0; i -= 1) {
-      const f = funcs[i];
-      result = f(result);
-    }
-    return result;
-  };
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
 
 export default compose;

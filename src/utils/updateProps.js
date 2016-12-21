@@ -1,16 +1,20 @@
-import {Observable} from 'rxjs/Observable';
+import $$observable from 'symbol-observable';
 import createHOCFromMapper from './createHOCFromMapper';
+import {config as obsConfig} from '../setObservableConfig';
 
 const updateProps = subscriber =>
   createHOCFromMapper((props$, obs) => [
-    new Observable((observer) => {
-      const subscription = props$.subscribe({
-        next: subscriber(::observer.next),
-        error: ::observer.error,
-        complete: ::observer.complete,
-      });
-
-      return ::subscription.unsubscribe;
+    obsConfig.fromESObservable({
+      subscribe(observer) {
+        return obsConfig.toESObservable(props$).subscribe({
+          next: subscriber(::observer.next),
+          error: observer.error ? ::observer.error : undefined,
+          complete: observer.complete ? ::observer.complete : undefined,
+        });
+      },
+      [$$observable]() {
+        return this;
+      },
     }),
     obs,
   ]);

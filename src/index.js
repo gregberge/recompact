@@ -30,6 +30,7 @@ import renderComponent from './renderComponent';
 import renderNothing from './renderNothing';
 import setConfig from './setConfig';
 import setDisplayName from './setDisplayName';
+import setObservableConfig from './setObservableConfig';
 import setPropTypes from './setPropTypes';
 import setStatic from './setStatic';
 import shallowEqual from './shallowEqual';
@@ -76,6 +77,7 @@ export {
   renderNothing,
   setConfig,
   setDisplayName,
+  setObservableConfig,
   setPropTypes,
   setStatic,
   shallowEqual,
@@ -124,6 +126,7 @@ export default {
   setConfig,
   setDisplayName,
   setPropTypes,
+  setObservableConfig,
   setStatic,
   shallowEqual,
   shouldUpdate,

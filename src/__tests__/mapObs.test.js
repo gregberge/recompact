@@ -1,9 +1,21 @@
 import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
-import {compose, mapObs} from '../';
+import {compose, mapObs, setObservableConfig} from '../';
+import rxjsObservableConfig from '../rxjsObservableConfig';
 
 describe('mapObs', () => {
+  beforeEach(() => {
+    setObservableConfig(rxjsObservableConfig);
+  });
+
+  afterEach(() => {
+    setObservableConfig({
+      toESObservable: undefined,
+      fromESObservable: undefined,
+    });
+  });
+
   it('should provide observables and map props', () => {
     const baseFoo$ = Rx.Observable.of('foo');
     const Div = compose(
