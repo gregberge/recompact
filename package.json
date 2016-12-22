@@ -22,35 +22,37 @@
     "rxjs": "^5.0.0-rc.4"
   },
   "dependencies": {
-    "fbjs": "^0.8.6",
+    "change-emitter": "^0.1.2",
+    "fbjs": "^0.8.8",
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
-    "object.pick": "^1.2.0"
+    "object.pick": "^1.2.0",
+    "symbol-observable": "^1.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
-    "babel-jest": "^17.0.0",
+    "babel-jest": "^18.0.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "benchmark": "^2.1.2",
     "docdown": "neoziro/docdown#multiple-files-support",
-    "enzyme": "^2.6.0",
-    "eslint": "^3.11.1",
+    "enzyme": "^2.7.0",
+    "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.0.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "fs-extra": "^1.0.0",
-    "jest": "^17.0.0",
-    "jsdom": "^9.8.3",
+    "jest": "^18.0.0",
+    "jsdom": "^9.9.1",
     "microtime": "^2.1.2",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
-    "recompose": "^0.20.2",
-    "rxjs": "^5.0.0-rc.4",
+    "recompose": "^0.21.1",
+    "rxjs": "^5.0.1",
     "sinon": "^1.17.6"
   }
 }

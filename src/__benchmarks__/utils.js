@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import React from 'react';
 import Benchmark from 'benchmark';
 import {mount} from 'enzyme';
@@ -19,8 +20,8 @@ export const runBenchmark = (benchs, name) =>
   new Promise((resolve) => {
     const mountSuite = new Benchmark.Suite();
 
-    benchs.forEach(({description, run}) => {
-      mountSuite.add(description, run);
+    benchs.forEach(({description, run, onStart}) => {
+      mountSuite.add(description, run, {onStart});
     });
 
     mountSuite
@@ -34,11 +35,13 @@ export const runBenchmark = (benchs, name) =>
     })
     .on('complete', function () {
       console.log('-------------------------------');
-      const fastest = this.filter('fastest').map('name');
-      if (fastest.length === benchs.length) {
+      const exceptNothing = this.filter(({name}) => !name.match(/nothing/));
+      const fastest = exceptNothing.filter('fastest');
+
+      if (fastest.length === exceptNothing.length) {
         console.log('TIED');
       } else {
-        console.log(`Winner: ${this.filter('fastest').map('name')}`);
+        console.log(`Winner: ${fastest.map('name').join(', ')}`);
       }
       console.log('');
       setTimeout(resolve, TIME_BETWEEN);
@@ -46,13 +49,14 @@ export const runBenchmark = (benchs, name) =>
     .run();
   });
 
-const fill = i => (new Array(10)).fill(i);
+const fill = i => (new Array(100)).fill(i);
 
 export const benchOperator = (operator, ...args) => {
   const recompactOperator = require(`../${operator}`).default;
   const recomposeOperator = require(`recompose/${operator}`).default;
   const Component = () => <div />;
 
+  const Nothing = () => null;
   let RecompactComponent;
   let RecomposeComponent;
   let RecompactComposedComponent;
@@ -69,15 +73,24 @@ export const benchOperator = (operator, ...args) => {
     RecomposeComposedComponent = compose(...fill(recomposeOperator(...args)))(Component);
   }
 
+  const nothingWrapper = mount(<Nothing />);
   const recompactWrapper = mount(<RecompactComponent n={0} />);
   const recomposeWrapper = mount(<RecomposeComponent n={0} />);
   const recompactComposedWrapper = mount(<RecompactComposedComponent n={0} />);
   const recomposeComposedWrapper = mount(<RecomposeComposedComponent n={0} />);
 
-  const rand = n => Math.round(Math.random() * n);
+  let count = 0;
+
+  const resetCount = () => { count = 0; };
 
   return series([
     () => runBenchmark([
+      {
+        description: '-- nothing',
+        run() {
+          mount(<Nothing />);
+        },
+      },
       {
         description: '❤️  recompact',
         run() {
@@ -93,6 +106,12 @@ export const benchOperator = (operator, ...args) => {
     ], `[mount][single] ${operator}`),
     () => runBenchmark([
       {
+        description: '-- nothing',
+        run() {
+          mount(<Nothing />);
+        },
+      },
+      {
         description: '❤️  recompact',
         run() {
           mount(<RecompactComposedComponent n={0} />);
@@ -107,29 +126,47 @@ export const benchOperator = (operator, ...args) => {
     ], `[mount][composed] ${operator}`),
     () => runBenchmark([
       {
-        description: '❤️  recompact',
+        description: '-- nothing',
+        onStart: resetCount,
         run() {
-          recompactWrapper.setProps({n: rand(1)});
+          nothingWrapper.setProps({n: count++});
+        },
+      },
+      {
+        description: '❤️  recompact',
+        onStart: resetCount,
+        run() {
+          recompactWrapper.setProps({n: count++});
         },
       },
       {
         description: '💙  recompose',
+        onStart: resetCount,
         run() {
-          recomposeWrapper.setProps({n: rand(1)});
+          recomposeWrapper.setProps({n: count++});
         },
       },
     ], `[setProps] ${operator}`),
     () => runBenchmark([
       {
-        description: '❤️  recompact',
+        description: '-- nothing',
+        onStart: resetCount,
         run() {
-          recompactComposedWrapper.setProps({n: rand(1)});
+          nothingWrapper.setProps({n: count++});
+        },
+      },
+      {
+        description: '❤️  recompact',
+        onStart: resetCount,
+        run() {
+          recompactComposedWrapper.setProps({n: count++});
         },
       },
       {
         description: '💙  recompose',
+        onStart: resetCount,
         run() {
-          recomposeComposedWrapper.setProps({n: rand(1)});
+          recomposeComposedWrapper.setProps({n: count++});
         },
       },
     ], `[setProps][composed] ${operator}`),

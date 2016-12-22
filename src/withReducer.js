@@ -1,13 +1,8 @@
-import {Subject} from 'rxjs/Subject';
-import {concat} from 'rxjs/observable/concat';
-import {combineLatest} from 'rxjs/observable/combineLatest';
-import {map} from 'rxjs/operator/map';
-import {scan} from 'rxjs/operator/scan';
-import {take} from 'rxjs/operator/take';
+/* eslint-disable no-use-before-define */
 import createHelper from './createHelper';
-import mapProps$ from './mapProps$';
 import createSymbol from './utils/createSymbol';
 import callOrUse from './utils/callOrUse';
+import updateProps from './utils/updateProps';
 
 export const INIT = createSymbol('INIT');
 
@@ -49,30 +44,39 @@ export const INIT = createSymbol('INIT');
  * )
  */
 const withReducer = (stateName, dispatchName, reducer, initialState) =>
-  mapProps$((props$) => {
-    const action$ = new Subject();
-    const dispatch = ::action$.next;
+  updateProps((next) => {
+    let initialized;
+    let state;
+    let props;
 
-    const stateValue$ = concat(
-      props$::take(1)::map((props) => {
-        if (initialState !== undefined) {
-          return callOrUse(initialState)(props);
-        }
+    function dispatch(action) {
+      updateState(reducer(state, action));
+    }
 
-        return reducer(undefined, {type: INIT});
-      }),
-      action$::map(action => stateValue => reducer(stateValue, action)),
-    )::scan((stateValue, fn) => fn(stateValue));
-
-    return combineLatest(
-      props$,
-      stateValue$,
-      (props, stateValue) => ({
+    function updateState(nextState) {
+      state = nextState;
+      next({
         ...props,
-        [stateName]: stateValue,
+        [stateName]: state,
         [dispatchName]: dispatch,
-      }),
-    );
+      });
+    }
+
+    return (nextProps) => {
+      props = nextProps;
+
+      if (!initialized) {
+        initialized = true;
+
+        if (initialState !== undefined) {
+          updateState(callOrUse(initialState)(props));
+        } else {
+          updateState(reducer(undefined, {type: INIT}));
+        }
+      } else {
+        updateState(state);
+      }
+    };
   });
 
 export default createHelper(withReducer, 'withReducer');

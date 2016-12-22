@@ -44,6 +44,6 @@ describe('branch', () => {
     )('div');
 
     const wrapper = mount(<Nothing />);
-    expect(wrapper.find('div').isEmpty()).toBeTruthy();
+    expect(wrapper.find('div').exists()).toBeFalsy();
   });
 });

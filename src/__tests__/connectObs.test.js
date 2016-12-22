@@ -2,9 +2,21 @@ import React from 'react';
 import Rx from 'rxjs';
 import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
-import {connectObs, compose, mapProps, withObs} from '../';
+import {connectObs, compose, mapProps, setObservableConfig, withObs} from '../';
+import rxjsObservableConfig from '../rxjsObservableConfig';
 
 describe('connectObs', () => {
+  beforeEach(() => {
+    setObservableConfig(rxjsObservableConfig);
+  });
+
+  afterEach(() => {
+    setObservableConfig({
+      toESObservable: undefined,
+      fromESObservable: undefined,
+    });
+  });
+
   it('should connect observables to props', () => {
     const baseClassName$ = new Rx.BehaviorSubject('foo');
     const Component = compose(
