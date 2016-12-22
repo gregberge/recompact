@@ -85,15 +85,15 @@ describe('mapProps$', () => {
     )(Dummy);
 
     const wrapper = mount(<EnhancedDummy />);
-    expect(wrapper.find(Dummy).isEmpty()).toBe(true);
+    expect(wrapper.find(Dummy).exists()).toBeFalsy();
 
     wrapper.setProps({foo: 'bar'});
-    expect(wrapper.find(Dummy).isEmpty()).toBe(true);
+    expect(wrapper.find(Dummy).exists()).toBeFalsy();
 
     trigger$.next(true);
 
     const dummy = wrapper.find(Dummy);
-    expect(dummy.isEmpty()).toBe(false);
+    expect(dummy.exists()).toBeTruthy();
     expect(dummy.prop('renderCount')).toBe(1);
     expect(dummy.prop('foo')).toBe('bar');
   });
