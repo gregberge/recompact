@@ -37,7 +37,7 @@ import updateProps from './utils/updateProps';
  * or a function that returns an initial state given the initial props.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} stateName
  * @param {String} stateUpdaterName
  * @param {Function} reducer

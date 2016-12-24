@@ -8,7 +8,7 @@ import updateProps from './utils/updateProps';
  * are passed to the base component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function} propsMapper The function that returns new props.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

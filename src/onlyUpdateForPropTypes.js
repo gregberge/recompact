@@ -10,7 +10,7 @@ import createHelper from './createHelper';
  * is printed to the console.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @see onlyUpdateForKeys
  * @example

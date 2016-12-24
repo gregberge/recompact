@@ -18,7 +18,7 @@ const mapKeys = (obj, func) =>
  * Renames multiple props, using a map of old prop names to new prop names.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} nameMap A map with old prop as key and new prop as value.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

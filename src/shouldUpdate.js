@@ -10,7 +10,7 @@ import createEagerFactory from './createEagerFactory';
  * The test function accepts both the current props and the next props.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function} test Receive two arguments, props and nextProps
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

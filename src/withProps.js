@@ -12,7 +12,7 @@ import updateProps from './utils/updateProps';
  * props from the owner.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function|Object} propsMapper
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

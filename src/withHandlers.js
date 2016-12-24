@@ -21,7 +21,7 @@ const mapValues = (obj, fn) =>
  * optimizations that rely on prop equality.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} handlerFactories
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

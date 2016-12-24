@@ -15,7 +15,7 @@ export const INIT = createSymbol('INIT');
  * the new state is applied.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} stateName
  * @param {String} dispatchName
  * @param {Function} reducer

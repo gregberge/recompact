@@ -16,7 +16,7 @@ import updateProps from './utils/updateProps';
  * you to customize when `createProps()` should be called.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function|String|String[]} shouldMapOrKeys
  * @param {Function} createProps
  * @returns {HighOrderComponent} Returns a function that take a Component.

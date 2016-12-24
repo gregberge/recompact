@@ -7,7 +7,7 @@ import getDisplayName from './getDisplayName';
  * use `wrapDisplayName()`.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {ReactClass|ReactFunctionalComponent} component Component
  * @param {String} wrapperName Wrapper name
  * @returns {String} Returns a wrapped displayName of the component.

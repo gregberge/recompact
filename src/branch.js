@@ -9,11 +9,11 @@ import identity from './identity';
  * component is applied (defaults to identity).
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function} test The test to apply.
- * @param {HighOrderComponent} left The high-order component applied if the result
+ * @param {HighOrderComponent} left The higher-order component applied if the result
  *  of the test is true.
- * @param {HighOrderComponent} [right=identity] The high-order component applied if the result
+ * @param {HighOrderComponent} [right=identity] The higher-order component applied if the result
  *  of the test is false.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

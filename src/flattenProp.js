@@ -5,7 +5,7 @@ import mapProps from './mapProps';
  * Flattens a prop so that its fields are spread out into the props object.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} propName Name of the prop to flatten.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

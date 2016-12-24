@@ -4,7 +4,7 @@ import setStatic from './setStatic';
  * Assigns to the `displayName` property on the base component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} displayName
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

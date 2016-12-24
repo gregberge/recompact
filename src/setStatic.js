@@ -2,7 +2,7 @@
  * Assigns a value to a static property on the base component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} key
  * @param {String} value
  * @returns {HighOrderComponent} Returns a function that take a Component.

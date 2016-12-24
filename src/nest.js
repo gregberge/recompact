@@ -4,7 +4,7 @@ import createEagerFactory from './createEagerFactory';
  * Composes components by nesting each one inside the previous.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {...(ReactClass|ReactFunctionalComponent)} components
  * @returns {ReactFunctionalComponent}
  * @example

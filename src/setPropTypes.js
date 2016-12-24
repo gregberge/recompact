@@ -4,7 +4,7 @@ import setStatic from './setStatic';
  * Assigns to the `propTypes` property on the base component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} propTypes
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

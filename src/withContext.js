@@ -8,7 +8,7 @@ import createEagerFactory from './createEagerFactory';
  * the child context. Use along with `getContext()`.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} childContextTypes
  * @param {Function} getChildContext
  * @returns {HighOrderComponent} Returns a function that take a Component.

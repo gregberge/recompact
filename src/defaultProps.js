@@ -8,7 +8,7 @@ import createCompactableHOC from './utils/createCompactableHOC';
  * Specify props values that will be used if the prop is `undefined`.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} defaultProps Default props.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

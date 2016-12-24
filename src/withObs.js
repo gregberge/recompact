@@ -6,7 +6,7 @@ import createHelper from './createHelper';
  * Similar to `mapObs` except that observables will be merged to the previous ones.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function} obsMapper The function that take previous observables and returns new ones.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

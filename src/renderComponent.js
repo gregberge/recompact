@@ -6,7 +6,7 @@ import createEagerFactory from './createEagerFactory';
  * component, like `branch`.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {ReactClass|ReactFunctionalComponent|String} Component
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

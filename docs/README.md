@@ -11,7 +11,7 @@
 
 <!-- div -->
 
-## `High-order-components`
+## `Higher-order-components`
 * <a href="#branchtest-left-rightidentity">`branch`</a>
 * <a href="#connectobsobsmapper">`connectObs`</a>
 * <a href="#defaultpropsdefaultprops">`defaultProps`</a>
@@ -94,7 +94,7 @@ setConfig({observablesKey: 'observables'});
 
 <!-- div -->
 
-## `“High-order-components” Methods`
+## `“Higher-order-components” Methods`
 
 <!-- div -->
 
@@ -108,8 +108,8 @@ component is applied *(defaults to identity)*.
 
 #### Arguments
 1. `test` *(Function)*: The test to apply.
-2. `left` *(HighOrderComponent)*: The high-order component applied if the result of the test is true.
-3. `[right=identity]` *(HighOrderComponent)*: The high-order component applied if the result of the test is false.
+2. `left` *(HighOrderComponent)*: The higher-order component applied if the result of the test is true.
+3. `[right=identity]` *(HighOrderComponent)*: The higher-order component applied if the result of the test is false.
 
 #### Returns
 *(HighOrderComponent)*: Returns a function that take a Component.
@@ -126,7 +126,7 @@ branch(({count}) => count === 0, renderNothing)(MyComponent);
 <!-- div -->
 
 <h3 id="connectobsobsmapper"><code>connectObs(obsMapper)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/connectObs.js#L68 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/connectObs.js#L60 "View in source") [&#x24C9;][1]
 
 Connect observables to props using a map.
 <br>
@@ -832,7 +832,7 @@ const withEmptyProp = withPropsOnChange('count', ({count}) => ({empty: count ===
 <!-- div -->
 
 <h3 id="withreducerstatename-dispatchname-reducer-initialstate"><code>withReducer(stateName, dispatchName, reducer, initialState)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/withReducer.js#L51 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/withReducer.js#L46 "View in source") [&#x24C9;][1]
 
 Similar to `withState()`, but state updates are applied using a reducer function.
 A reducer is a function that receives a state and an action, and returns a new state.
@@ -1066,12 +1066,12 @@ div({className: 'foo'});
 <h3 id="createhelperhoc-helpername-noargsfalse"><code>createHelper(hoc, helperName, [noArgs=false])</code></h3>
 [&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/createHelper.js#L22 "View in source") [&#x24C9;][1]
 
-Utility method that gives to high-order components a comprehensive display name.
+Utility method that gives to higher-order components a comprehensive display name.
 
 #### Arguments
-1. `hoc` *(HighOrderComponent)*: High-order component to wrap.
+1. `hoc` *(HighOrderComponent)*: Higher-order component to wrap.
 2. `helperName` *(String)*: Name used to create displayName.
-3. `[noArgs=false]` *(Boolean)*: Indicate if the high-order component has some arguments.
+3. `[noArgs=false]` *(Boolean)*: Indicate if the higher-order component has some arguments.
 
 #### Returns
 *(HighOrderComponent)*: Returns a wrapped hoc.

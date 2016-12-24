@@ -7,7 +7,7 @@ import createHelper from './createHelper';
  * The child props are then passed to a base component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Function} propsStreamMapper
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

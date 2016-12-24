@@ -7,7 +7,7 @@ import shouldUpdate from './shouldUpdate';
  * Uses `shallowEqual()` to test for changes.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example
  *

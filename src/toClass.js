@@ -9,7 +9,7 @@ import isClassComponent from './isClassComponent';
  * If the base component is already a class, it returns the given component.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example
  *

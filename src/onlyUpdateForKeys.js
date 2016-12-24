@@ -13,7 +13,7 @@ import shouldUpdate from './shouldUpdate';
  * props that you specify.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String[]} propKeys The property keys that will induce a re-render.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @see shouldUpdate

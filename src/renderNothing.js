@@ -5,7 +5,7 @@ Nothing.displayName = 'Nothing';
  * A higher-order component that always renders `null`.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example
  *

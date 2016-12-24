@@ -5,7 +5,7 @@ import createEagerFactory from './createEagerFactory';
  * Gets values from context and passes them along as props.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} contextTypes Context types to inject as props.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example

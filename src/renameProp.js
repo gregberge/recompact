@@ -6,7 +6,7 @@ import mapProps from './mapProps';
  * Renames a single prop.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String} oldName
  * @param {String} newName
  * @returns {HighOrderComponent} Returns a function that take a Component.

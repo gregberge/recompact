@@ -6,7 +6,7 @@ import mapProps from './mapProps';
  * Same as lodash `omit` but for props.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {String|String[]} paths The property paths to omit.
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @see https://lodash.com/docs/master#omit

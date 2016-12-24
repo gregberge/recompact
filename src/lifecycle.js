@@ -11,7 +11,7 @@ import createHelper from './createHelper';
  * case you need to access component lifecycle methods.
  *
  * @static
- * @category High-order-components
+ * @category Higher-order-components
  * @param {Object} spec Lifecycle spec
  * @returns {HighOrderComponent} Returns a function that take a Component.
  * @example
