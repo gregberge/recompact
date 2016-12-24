@@ -51,8 +51,8 @@
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
-    "recompose": "^0.21.1",
-    "rxjs": "^5.0.1",
+    "recompose": "^0.21.2",
+    "rxjs": "^5.0.2",
     "sinon": "^1.17.6"
   }
 }
