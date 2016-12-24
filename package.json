@@ -15,7 +15,10 @@
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",
   "jest": {
-    "testRegex": "\\.test\\.js$"
+    "testRegex": "\\.test\\.js$",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
   },
   "peerDependencies": {
     "react": "^15.3.2",
