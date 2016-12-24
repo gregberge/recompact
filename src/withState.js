@@ -42,7 +42,7 @@ import updateProps from './utils/updateProps';
  * @param {String} stateUpdaterName
  * @param {Function} reducer
  * @param {*|Function} initialState
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  */
 const withState = (stateName, stateUpdaterName, initialState) =>
   updateProps((next) => {

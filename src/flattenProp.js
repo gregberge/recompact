@@ -7,7 +7,7 @@ import mapProps from './mapProps';
  * @static
  * @category Higher-order-components
  * @param {String} propName Name of the prop to flatten.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const Button = flattenProp('props')('button');

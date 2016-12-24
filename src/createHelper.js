@@ -3,10 +3,10 @@
  *
  * @static
  * @category Utilities
- * @param {HighOrderComponent} hoc Higher-order component to wrap.
+ * @param {HigherOrderComponent} hoc Higher-order component to wrap.
  * @param {String} helperName Name used to create displayName.
  * @param {Boolean} [noArgs=false] Indicate if the higher-order component has some arguments.
- * @returns {HighOrderComponent} Returns a wrapped hoc.
+ * @returns {HigherOrderComponent} Returns a wrapped hoc.
  * @example
  *
  * const pluckOnChangeTargetValue = createHelper(

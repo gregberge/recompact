@@ -20,7 +20,7 @@ const mapKeys = (obj, func) =>
  * @static
  * @category Higher-order-components
  * @param {Object} nameMap A map with old prop as key and new prop as value.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * renameProps({data: 'value'})

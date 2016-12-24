@@ -6,7 +6,7 @@ import setStatic from './setStatic';
  * @static
  * @category Higher-order-components
  * @param {String} displayName
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * setDisplayName('AnotherDisplayName')(MyComponent);

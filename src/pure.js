@@ -8,7 +8,7 @@ import shouldUpdate from './shouldUpdate';
  *
  * @static
  * @category Higher-order-components
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * pure('button')

@@ -12,7 +12,7 @@ import createEagerFactory from './createEagerFactory';
  * @static
  * @category Higher-order-components
  * @param {Function} test Receive two arguments, props and nextProps
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * // Pure

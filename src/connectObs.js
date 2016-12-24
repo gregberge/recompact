@@ -49,7 +49,7 @@ const checkObservable = (observable, name) => {
  * @static
  * @category Higher-order-components
  * @param {Function} obsMapper The function that takes observables and returns map.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * connectObs(({change$, value$}) => ({

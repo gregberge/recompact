@@ -10,7 +10,7 @@ import createCompactableHOC from './utils/createCompactableHOC';
  * @static
  * @category Higher-order-components
  * @param {Object} defaultProps Default props.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const Button = defaultProps({type: 'button'})('button');

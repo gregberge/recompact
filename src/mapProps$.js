@@ -9,7 +9,7 @@ import createHelper from './createHelper';
  * @static
  * @category Higher-order-components
  * @param {Function} propsStreamMapper
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * // Delay rendering of 1s

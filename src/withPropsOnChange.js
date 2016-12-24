@@ -19,7 +19,7 @@ import updateProps from './utils/updateProps';
  * @category Higher-order-components
  * @param {Function|String|String[]} shouldMapOrKeys
  * @param {Function} createProps
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const withEmptyProp = withPropsOnChange('count', ({count}) => ({empty: count === 0}));

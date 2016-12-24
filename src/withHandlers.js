@@ -23,7 +23,7 @@ const mapValues = (obj, fn) =>
  * @static
  * @category Higher-order-components
  * @param {Object} handlerFactories
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const enhance = compose(

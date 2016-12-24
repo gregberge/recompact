@@ -8,7 +8,7 @@ import createHelper from './createHelper';
  * @static
  * @category Higher-order-components
  * @param {Function} obsMapper The function that take previous observables and returns new ones.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const firstName$ToFullName$ = mapObs(({firstName$, props$}) => ({

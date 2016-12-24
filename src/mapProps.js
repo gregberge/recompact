@@ -10,7 +10,7 @@ import updateProps from './utils/updateProps';
  * @static
  * @category Higher-order-components
  * @param {Function} propsMapper The function that returns new props.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * // Add a new prop computed from owner props

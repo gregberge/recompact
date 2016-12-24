@@ -10,7 +10,7 @@ import isClassComponent from './isClassComponent';
  *
  * @static
  * @category Higher-order-components
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const Component = toClass(() => <div />);

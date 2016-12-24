@@ -13,7 +13,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
  * @static
  * @category Utilities
  * @param {HigherOrderComponent} hoc
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * hoistStatics(withProps({foo: 'bar'}));

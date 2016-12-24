@@ -11,7 +11,7 @@ import createEagerFactory from './createEagerFactory';
  * @category Higher-order-components
  * @param {Object} childContextTypes
  * @param {Function} getChildContext
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * // Provide window in the context, useful for testing

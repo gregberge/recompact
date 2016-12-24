@@ -8,7 +8,7 @@ import createEagerFactory from './createEagerFactory';
  * @static
  * @category Higher-order-components
  * @param {ReactClass|ReactFunctionalComponent|String} Component
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * const renderLoaderIfLoading = branch(

@@ -11,11 +11,11 @@ import identity from './identity';
  * @static
  * @category Higher-order-components
  * @param {Function} test The test to apply.
- * @param {HighOrderComponent} left The higher-order component applied if the result
+ * @param {HigherOrderComponent} left The higher-order component applied if the result
  *  of the test is true.
- * @param {HighOrderComponent} [right=identity] The higher-order component applied if the result
+ * @param {HigherOrderComponent} [right=identity] The higher-order component applied if the result
  *  of the test is false.
- * @returns {HighOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
  * // Add the logic or rendering nothing if the prop `count` equals to `0`.
