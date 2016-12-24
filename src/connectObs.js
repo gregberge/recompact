@@ -1,9 +1,7 @@
-import {of} from 'rxjs/observable/of';
-import {combineLatest} from 'rxjs/observable/combineLatest';
-import {map} from 'rxjs/operator/map';
-import {Observable} from 'rxjs/Observable';
+import createObservable from './utils/createObservable';
 import createHelper from './createHelper';
 import withObs from './withObs';
+import {config as obsConfig} from './setObservableConfig';
 
 const checkObsMap = (obsMap) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -38,11 +36,6 @@ const checkObservable = (observable, name) => {
   }
 };
 
-const aggregateProps = values => values.reduce((acc, [key, value]) => {
-  acc[key] = value; // eslint-disable-line no-param-reassign
-  return acc;
-}, {});
-
 /**
  * Connect observables to props using a map.
  *
@@ -65,51 +58,50 @@ const aggregateProps = values => values.reduce((acc, [key, value]) => {
  * }))('input');
  */
 const connectObs = obsMapper => withObs(({props$, ...observables}) => {
-  const obsMap = obsMapper({...observables, props$});
-  checkObsMap(obsMap);
+  const nextProps$ = createObservable((observer) => {
+    const obsMap = obsMapper({...observables, props$});
+    checkObsMap(obsMap);
+    let props;
+    const obsProps = Object.keys(obsMap).reduce((acc, key) => {
+      acc[key] = undefined; // eslint-disable-line no-param-reassign
+      return acc;
+    }, {});
 
-  const combinedObs = Object.keys(obsMap).reduce((acc, key) => {
-    const observable = obsMap[key];
-    let propsObservable;
+    const update = () => {
+      if (props) {
+        observer.next({
+          ...props,
+          ...obsProps,
+        });
+      }
+    };
 
-    if (key.match(/^on[A-Z]/)) {
-      checkObserver(observable, key);
-      propsObservable = of(::observable.next);
-    } else {
-      checkObservable(observable, key);
-      propsObservable = new Observable((observer) => {
-        let emitted;
-
-        const subscription = observable.subscribe({
-          ...observer,
+    Object.keys(obsMap).forEach((key) => {
+      if (key.match(/^on[A-Z]/)) {
+        const observable = obsMap[key];
+        checkObserver(observable, key);
+        obsProps[key] = ::observable.next;
+      } else {
+        const observable = obsConfig.toESObservable(obsMap[key]);
+        checkObservable(observable, key);
+        observable.subscribe({
           next(value) {
-            emitted = true;
-            observer.next(value);
+            obsProps[key] = value;
+            update();
           },
         });
+      }
+    });
 
-        if (!emitted) {
-          observer.next(undefined);
-        }
+    obsConfig.toESObservable(props$).subscribe({
+      next(nextProps) {
+        props = nextProps;
+        update();
+      },
+    });
+  });
 
-        return ::subscription.unsubscribe;
-      });
-    }
-
-    acc.push(propsObservable::map(value => [key, value]));
-    return acc;
-  }, []);
-
-  return {
-    props$: combineLatest(
-      combineLatest(combinedObs)::map(aggregateProps),
-      props$,
-      (obsProps, props) => ({
-        ...props,
-        ...obsProps,
-      }),
-    ),
-  };
+  return {props$: nextProps$};
 });
 
 export default createHelper(connectObs, 'connectObs');

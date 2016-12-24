@@ -1,11 +1,10 @@
 /* eslint-disable no-console */
 import {Component, PropTypes} from 'react';
-import $$observable from 'symbol-observable';
-import {createChangeEmitter} from 'change-emitter';
+import createSubject from './createSubject';
+import createSymbol from './createSymbol';
 import createEagerFactory from '../createEagerFactory';
 import {getConfig} from '../setConfig';
 import {config as obsConfig} from '../setObservableConfig';
-import createSymbol from './createSymbol';
 
 const throwError = (error) => {
   throw error;
@@ -22,20 +21,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
     static contextTypes = CONTEXT_TYPES;
     static childContextTypes = CONTEXT_TYPES;
 
-    propsEmitter = createChangeEmitter();
-
-    // Stream of props
-    props$ = obsConfig.fromESObservable({
-      subscribe: (observer) => {
-        const unsubscribe = this.propsEmitter.listen(
-          props => observer.next(props),
-        );
-        return {unsubscribe};
-      },
-      [$$observable]() {
-        return this;
-      },
-    });
+    props$ = createSubject();
 
     componentWillMount() {
       const [childProps$, childObservables] =
@@ -50,7 +36,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
       });
 
       this.childContext = {[OBSERVABLES]: childObservables};
-      this.propsEmitter.emit(this.props);
+      this.props$.next(this.props);
     }
 
     getChildContext() {
@@ -58,7 +44,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
     }
 
     componentWillReceiveProps(nextProps) {
-      this.propsEmitter.emit(nextProps);
+      this.props$.next(nextProps);
     }
 
     componentWillUnmount() {
