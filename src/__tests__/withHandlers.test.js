@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import {shallow} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import {Dummy} from './utils';
 import {withHandlers} from '../';
 
@@ -73,5 +73,45 @@ describe('withHandlers', () => {
     expect(() => wrapper.prop('foo').call()).toThrowError(
       'withHandlers(): Expected a map of higher-order functions.',
     );
+  });
+
+  it('allows handers to be a factory', () => {
+    const enhance = withHandlers((initialProps) => {
+      let cache;
+
+      return {
+        handler: () => () => {
+          if (cache) {
+            return cache;
+          }
+
+          cache = {...initialProps};
+
+          return cache;
+        },
+      };
+    });
+
+    const componentHandlers = [];
+    const componentHandlers2 = [];
+
+    const Component = enhance(({handler}) => {
+      componentHandlers.push(handler());
+      return null;
+    });
+
+    const Component2 = enhance(({handler}) => {
+      componentHandlers2.push(handler());
+      return null;
+    });
+
+    const wrapper = mount(<Component hello={'foo'} />);
+    wrapper.setProps({hello: 'bar'});
+    expect(componentHandlers[0]).toBe(componentHandlers[1]);
+
+    // check that cache is not shared
+    mount(<Component2 hello={'foo'} />);
+    expect(componentHandlers[0]).toEqual(componentHandlers2[0]);
+    expect(componentHandlers[0]).not.toBe(componentHandlers2[0]);
   });
 });

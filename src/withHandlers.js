@@ -8,8 +8,8 @@ const mapValues = (obj, fn) =>
   }, {});
 
 /**
- * Takes an object map of handler creators. These are higher-order functions that
- * accept a set of props and return a function handler:
+ * Takes an object map of handler creators or a factory function. These are
+ * higher-order functions that accept a set of props and return a function handler:
  *
  * This allows the handler to access the current props via closure, without needing
  * to change its signature.
@@ -22,7 +22,7 @@ const mapValues = (obj, fn) =>
  *
  * @static
  * @category Higher-order-components
- * @param {Object} handlerFactories
+ * @param {Object|Function} handlerFactories
  * @returns {HigherOrderComponent} Returns a function that take a Component.
  * @example
  *
@@ -49,32 +49,37 @@ const mapValues = (obj, fn) =>
  */
 const withHandlers = handlerFactories => updateProps((next) => {
   let cachedHandlers;
+  let handlers;
   let props;
 
-  const handlers = mapValues(handlerFactories,
-    (createHandler, handlerName) => (...args) => {
-      const cachedHandler = cachedHandlers[handlerName];
-      if (cachedHandler) {
-        return cachedHandler(...args);
-      }
+  const createHandlers = initialProps =>
+    mapValues(
+      typeof handlerFactories === 'function' ? handlerFactories(initialProps) : handlerFactories,
+      (createHandler, handlerName) => (...args) => {
+        const cachedHandler = cachedHandlers[handlerName];
+        if (cachedHandler) {
+          return cachedHandler(...args);
+        }
 
-      const handler = createHandler(props);
-      cachedHandlers[handlerName] = handler;
+        const handler = createHandler(props);
+        cachedHandlers[handlerName] = handler;
 
-      if (
-        process.env.NODE_ENV !== 'production' &&
-        typeof handler !== 'function'
-      ) {
-        throw new Error(
-          'withHandlers(): Expected a map of higher-order functions.',
-        );
-      }
+        if (
+          process.env.NODE_ENV !== 'production' &&
+          typeof handler !== 'function'
+        ) {
+          console.error( // eslint-disable-line no-console
+            'withHandlers(): Expected a map of higher-order functions. ' +
+            'Refer to the docs for more info.',
+          );
+        }
 
-      return handler(...args);
-    },
-  );
+        return handler(...args);
+      },
+    );
 
   return (nextProps) => {
+    handlers = handlers || createHandlers(nextProps);
     cachedHandlers = {};
     props = nextProps;
     next({...nextProps, ...handlers});
