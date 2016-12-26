@@ -2,21 +2,23 @@
 
 [![build status](https://img.shields.io/travis/neoziro/recompact/master.svg?style=flat-square)](https://travis-ci.org/neoziro/recompact)
 
-A set of React higher-order components for reactive programming. It's a tiny framework inspired by recompose to unleash the power of streams inside your React application.
+Recompact is a set of React higher-order components for reactive programming. It's a tiny framework inspired by [Recompose](https://github.com/acdlite/recompose) to unleash the power of streams inside your React application.
+
+## Installation and Usage
+
+To install the stable version:
 
 ```sh
 yarn add recompact
 ```
 
-## Installation and Usage
-
-### Import entire recompact
+To import the entire core set of functionality:
 
 ```js
 import recompact from 'recompact';
 ```
 
-### Import only what you need (useful for size-sensitive building)
+To import only what you need (this is useful for size-sensitive bundling):
 
 ```js
 import mapProps from 'recompact/mapProps';
@@ -24,19 +26,20 @@ import mapProps from 'recompact/mapProps';
 
 ## [Documentation](https://github.com/neoziro/recompact/tree/master/docs)
 
-## Recompact VS Recompose
+## Recompact vs. Recompose
 
-Recompact provides the same API as recompose with better performances. You may have noticed the
-"compact" keyword in "recompact". It's the main differences between Recompose and Recompact.
-Recompact compacts all high order components into a single one, it results in a smallest React
-tree. A smallest React tree has several advantages: performance improvement, better debugging (especially in React devtools).
+Recompact is a drop-in replacement for [Recompose](https://github.com/acdlite/recompose) with better performance. You may have noticed the
+"compact" keyword in "Recompact". It's the main differences between Recompose and Recompact.
+Recompact compacts all higher-order components into a single one. It results in a flatter React
+tree. A flatter React tree has several advantages: performance improvement, better debugging (especially in React Developer Tools)
+and easier testing.
 
-Recompact also includes some higher-order components not included in Recompose:
+Recompact also features higher-order components that are not included in Recompose:
 
 - [omitProps](https://github.com/neoziro/recompact/tree/master/docs#omitpropspaths)
 - [pickProps](https://github.com/neoziro/recompact/tree/master/docs#pickpropspaths)
 
-And some very specific higher-order components that gives you a lot of power:
+And some very specific higher-order components that give you a lot of power:
 
 - [connectObs](https://github.com/neoziro/recompact/tree/master/docs#connectobsobsmapper)
 - [mapObs](https://github.com/neoziro/recompact/tree/master/docs#mapobsobsmapper)
