@@ -62,10 +62,7 @@ const connectObs = obsMapper => withObs(({props$, ...observables}) => {
     const obsMap = obsMapper({...observables, props$});
     checkObsMap(obsMap);
     let props;
-    const obsProps = Object.keys(obsMap).reduce((acc, key) => {
-      acc[key] = undefined; // eslint-disable-line no-param-reassign
-      return acc;
-    }, {});
+    const obsProps = {};
 
     const update = () => {
       if (props) {
@@ -84,6 +81,7 @@ const connectObs = obsMapper => withObs(({props$, ...observables}) => {
       } else {
         const observable = obsConfig.toESObservable(obsMap[key]);
         checkObservable(observable, key);
+        obsProps[key] = undefined;
         observable.subscribe({
           next(value) {
             obsProps[key] = value;
