@@ -10,7 +10,7 @@
   "scripts": {
     "build:doc": "babel-node ./scripts/build-doc",
     "build:lib": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json",
-    "test": "eslint . && jest"
+    "test": "eslint . && jest -i"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",

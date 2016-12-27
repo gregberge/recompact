@@ -63,18 +63,6 @@ describe('withHandlers', () => {
     expect(handlerCallSpy.args[2]).toEqual([3]);
   });
 
-  it('throws if handler is not a higher-order function', () => {
-    const EnhancedDummy = withHandlers({
-      foo: () => {},
-    })(Dummy);
-
-    const wrapper = shallow(<EnhancedDummy />);
-
-    expect(() => wrapper.prop('foo').call()).toThrowError(
-      'withHandlers(): Expected a map of higher-order functions.',
-    );
-  });
-
   it('allows handers to be a factory', () => {
     const enhance = withHandlers((initialProps) => {
       let cache;
