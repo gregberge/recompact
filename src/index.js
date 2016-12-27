@@ -4,6 +4,7 @@ import componentFromProp from './componentFromProp'
 import compose from './compose'
 import createEagerElement from './createEagerElement'
 import createEagerFactory from './createEagerFactory'
+import createEventHandler from './createEventHandler'
 import createSink from './createSink'
 import defaultProps from './defaultProps'
 import flattenProp from './flattenProp'
@@ -52,6 +53,7 @@ export {
   compose,
   createEagerElement,
   createEagerFactory,
+  createEventHandler,
   createSink,
   defaultProps,
   flattenProp,
@@ -100,6 +102,7 @@ export default {
   compose,
   createEagerElement,
   createEagerFactory,
+  createEventHandler,
   createSink,
   defaultProps,
   flattenProp,
