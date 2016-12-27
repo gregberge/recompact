@@ -1,14 +1,14 @@
-import React, {Component, PropTypes} from 'react';
-import {mount} from 'enzyme';
-import Rx from 'rxjs';
-import {setConfig, withObs} from '../';
+import React, { Component, PropTypes } from 'react'
+import { mount } from 'enzyme'
+import Rx from 'rxjs'
+import { setConfig, withObs } from '../'
 
 describe('setConfig', () => {
   it('should be possible to specify an observablesKey', () => {
-    const spy = jest.fn();
-    setConfig({observablesKey: 'myObsKey'});
+    const spy = jest.fn()
+    setConfig({ observablesKey: 'myObsKey' })
 
-    const observables = {foo$: Rx.Observable.of('foo')};
+    const observables = { foo$: Rx.Observable.of('foo') }
 
     const ContextComponent = withObs(observables)(
       class extends Component {
@@ -17,16 +17,16 @@ describe('setConfig', () => {
         };
 
         render() {
-          spy(this.context);
-          return null;
+          spy(this.context)
+          return null
         }
       },
-    );
+    )
 
-    mount(<ContextComponent />);
+    mount(<ContextComponent />)
 
     expect(spy.mock.calls[0][0]).toEqual({
       myObsKey: observables,
-    });
-  });
-});
+    })
+  })
+})

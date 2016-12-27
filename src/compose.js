@@ -1,4 +1,4 @@
-import identity from './identity';
+import identity from './identity'
 
 /**
  * This method is similar to lodash `flowRight`. It permits to easily compose
@@ -16,14 +16,14 @@ import identity from './identity';
  */
 function compose(...funcs) {
   if (funcs.length === 0) {
-    return identity;
+    return identity
   }
 
   if (funcs.length === 1) {
-    return funcs[0];
+    return funcs[0]
   }
 
-  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+  return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
-export default compose;
+export default compose

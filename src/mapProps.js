@@ -1,7 +1,7 @@
-import createHelper from './createHelper';
-import createEagerFactory from './createEagerFactory';
-import createCompactableHOC from './utils/createCompactableHOC';
-import updateProps from './utils/updateProps';
+import createHelper from './createHelper'
+import createEagerFactory from './createEagerFactory'
+import createCompactableHOC from './utils/createCompactableHOC'
+import updateProps from './utils/updateProps'
 
 /**
  * Accepts a function that maps owner props to a new collection of props that
@@ -18,12 +18,12 @@ import updateProps from './utils/updateProps';
  */
 const mapProps = propsMapper => createCompactableHOC(
   updateProps(next => (props) => {
-    next(propsMapper(props));
+    next(propsMapper(props))
   }),
   (BaseComponent) => {
-    const factory = createEagerFactory(BaseComponent);
-    return props => factory(propsMapper(props));
+    const factory = createEagerFactory(BaseComponent)
+    return props => factory(propsMapper(props))
   },
-);
+)
 
-export default createHelper(mapProps, 'mapProps');
+export default createHelper(mapProps, 'mapProps')

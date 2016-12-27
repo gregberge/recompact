@@ -1,53 +1,53 @@
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp, no-class-assign */
-import React, {PropTypes} from 'react';
-import {mount} from 'enzyme';
-import {Dummy} from './utils';
-import {compose, toClass, withContext} from '../';
+import React, { PropTypes } from 'react'
+import { mount } from 'enzyme'
+import { Dummy } from './utils'
+import { compose, toClass, withContext } from '../'
 
 test('toClass returns the base component if it is already a class', () => {
   class BaseComponent extends React.Component {
     render() {
-      return <div />;
+      return <div />
     }
   }
 
-  const TestComponent = toClass(BaseComponent);
-  expect(TestComponent).toBe(BaseComponent);
-});
+  const TestComponent = toClass(BaseComponent)
+  expect(TestComponent).toBe(BaseComponent)
+})
 
 test('toClass copies propTypes, displayName, contextTypes and defaultProps from base component', () => {
-  const StatelessComponent = props => <div {...props} />;
+  const StatelessComponent = props => <div {...props} />
 
-  StatelessComponent.displayName = 'Stateless';
-  StatelessComponent.propTypes = {foo: PropTypes.string};
-  StatelessComponent.contextTypes = {bar: PropTypes.object};
-  StatelessComponent.defaultProps = {foo: 'bar', fizz: 'buzz'};
+  StatelessComponent.displayName = 'Stateless'
+  StatelessComponent.propTypes = { foo: PropTypes.string }
+  StatelessComponent.contextTypes = { bar: PropTypes.object }
+  StatelessComponent.defaultProps = { foo: 'bar', fizz: 'buzz' }
 
-  const TestComponent = toClass(StatelessComponent);
+  const TestComponent = toClass(StatelessComponent)
 
-  expect(TestComponent.displayName).toBe('Stateless');
-  expect(TestComponent.propTypes).toEqual({foo: PropTypes.string});
-  expect(TestComponent.contextTypes).toEqual({bar: PropTypes.object});
-  expect(TestComponent.defaultProps).toEqual({foo: 'bar', fizz: 'buzz'});
-});
+  expect(TestComponent.displayName).toBe('Stateless')
+  expect(TestComponent.propTypes).toEqual({ foo: PropTypes.string })
+  expect(TestComponent.contextTypes).toEqual({ bar: PropTypes.object })
+  expect(TestComponent.defaultProps).toEqual({ foo: 'bar', fizz: 'buzz' })
+})
 
 test('toClass passes defaultProps correctly', () => {
-  const StatelessComponent = props => <Dummy {...props} />;
+  const StatelessComponent = props => <Dummy {...props} />
 
-  StatelessComponent.displayName = 'Stateless';
-  StatelessComponent.propTypes = {foo: PropTypes.string};
-  StatelessComponent.contextTypes = {bar: PropTypes.object};
-  StatelessComponent.defaultProps = {foo: 'bar', fizz: 'buzz'};
+  StatelessComponent.displayName = 'Stateless'
+  StatelessComponent.propTypes = { foo: PropTypes.string }
+  StatelessComponent.contextTypes = { bar: PropTypes.object }
+  StatelessComponent.defaultProps = { foo: 'bar', fizz: 'buzz' }
 
-  const TestComponent = toClass(StatelessComponent);
+  const TestComponent = toClass(StatelessComponent)
 
-  const dummy = mount(<TestComponent />).find(Dummy);
-  expect(dummy.prop('foo')).toBe('bar');
-  expect(dummy.prop('fizz')).toBe('buzz');
-});
+  const dummy = mount(<TestComponent />).find(Dummy)
+  expect(dummy.prop('foo')).toBe('bar')
+  expect(dummy.prop('fizz')).toBe('buzz')
+})
 
 test('toClass passes context and props correctly', () => {
-  const store = {};
+  const store = {}
 
   class Provider extends React.Component {
     static propTypes = {
@@ -55,37 +55,37 @@ test('toClass passes context and props correctly', () => {
     };
 
     render() {
-      return this.props.children;
+      return this.props.children
     }
   }
 
   Provider = compose(
     withContext(
-      {store: PropTypes.object},
-      props => ({store: props.store}),
+      { store: PropTypes.object },
+      props => ({ store: props.store }),
     ),
-  )(Provider);
+  )(Provider)
 
 
   const StatelessComponent = (props, context) =>
-    <Dummy props={props} context={context} />;
+    <Dummy props={props} context={context} />
 
-  StatelessComponent.contextTypes = {store: PropTypes.object};
+  StatelessComponent.contextTypes = { store: PropTypes.object }
 
-  const TestComponent = toClass(StatelessComponent);
+  const TestComponent = toClass(StatelessComponent)
 
   const dummy = mount(
     <Provider store={store}>
       <TestComponent fizz="fizzbuzz" />
     </Provider>,
-  ).find(Dummy);
+  ).find(Dummy)
 
-  expect(dummy.prop('props').fizz).toBe('fizzbuzz');
-  expect(dummy.prop('context').store).toBe(store);
-});
+  expect(dummy.prop('props').fizz).toBe('fizzbuzz')
+  expect(dummy.prop('context').store).toBe(store)
+})
 
 test('toClass works with strings (DOM components)', () => {
-  const Component = toClass('h3');
-  const element = mount(<Component>Hello</Component>);
-  expect(element.text()).toBe('Hello');
-});
+  const Component = toClass('h3')
+  const element = mount(<Component>Hello</Component>)
+  expect(element.text()).toBe('Hello')
+})

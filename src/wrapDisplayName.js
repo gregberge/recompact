@@ -1,4 +1,4 @@
-import getDisplayName from './getDisplayName';
+import getDisplayName from './getDisplayName'
 
 /**
  * Returns a wrapped version of a React component's display name. For instance,
@@ -17,6 +17,6 @@ import getDisplayName from './getDisplayName';
  * wrapDisplayName(Button, 'wrap'); // will return wrap(Button)
  */
 const wrapDisplayName = (BaseComponent, wrapperName) =>
-  `${wrapperName}(${getDisplayName(BaseComponent)})`;
+  `${wrapperName}(${getDisplayName(BaseComponent)})`
 
-export default wrapDisplayName;
+export default wrapDisplayName

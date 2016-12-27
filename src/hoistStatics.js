@@ -1,4 +1,4 @@
-import hoistNonReactStatics from 'hoist-non-react-statics';
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 /**
  * Augments a higher-order component so that when used, it copies non-react
@@ -19,9 +19,9 @@ import hoistNonReactStatics from 'hoist-non-react-statics';
  * hoistStatics(withProps({foo: 'bar'}));
  */
 const hoistStatics = hoc => (BaseComponent) => {
-  const NewComponent = hoc(BaseComponent);
-  hoistNonReactStatics(NewComponent, BaseComponent);
-  return NewComponent;
-};
+  const NewComponent = hoc(BaseComponent)
+  hoistNonReactStatics(NewComponent, BaseComponent)
+  return NewComponent
+}
 
-export default hoistStatics;
+export default hoistStatics

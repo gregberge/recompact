@@ -1,4 +1,4 @@
-import shallowEqual from 'fbjs/lib/shallowEqual';
+import shallowEqual from 'fbjs/lib/shallowEqual'
 
 /**
  * Returns true if objects are shallowly equal.
@@ -13,4 +13,4 @@ import shallowEqual from 'fbjs/lib/shallowEqual';
  * shallowEqual({foo: 'bar'}, {foo: 'bar'}); // true
  * shallowEqual({foo: 'bar'}, {foo: 'x'}); // false
  */
-export default shallowEqual;
+export default shallowEqual

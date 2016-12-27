@@ -1,5 +1,5 @@
-import onlyUpdateForKeys from './onlyUpdateForKeys';
-import createHelper from './createHelper';
+import onlyUpdateForKeys from './onlyUpdateForKeys'
+import createHelper from './createHelper'
 
 /**
  * Works like `onlyUpdateForKeys()`, but prop keys are inferred from the `propTypes`
@@ -20,11 +20,11 @@ import createHelper from './createHelper';
  * const EnhancedButton = onlyUpdateForPropTypes(Button);
  */
 const onlyUpdateForPropTypes = (BaseComponent) => {
-  const {propTypes} = BaseComponent;
+  const { propTypes } = BaseComponent
 
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const getDisplayName = require('./getDisplayName').default;
+    const getDisplayName = require('./getDisplayName').default
     /* eslint-enable global-require */
     if (!propTypes) {
       /* eslint-disable */
@@ -37,7 +37,7 @@ const onlyUpdateForPropTypes = (BaseComponent) => {
     }
   }
 
-  return onlyUpdateForKeys(Object.keys(propTypes || {}))(BaseComponent);
-};
+  return onlyUpdateForKeys(Object.keys(propTypes || {}))(BaseComponent)
+}
 
-export default createHelper(onlyUpdateForPropTypes, 'onlyUpdateForPropTypes', true);
+export default createHelper(onlyUpdateForPropTypes, 'onlyUpdateForPropTypes', true)

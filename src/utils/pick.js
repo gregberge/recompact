@@ -1,3 +1,3 @@
-import pick from 'object.pick';
+import pick from 'object.pick'
 
-export default pick;
+export default pick

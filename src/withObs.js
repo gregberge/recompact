@@ -1,6 +1,6 @@
-import callOrUse from './utils/callOrUse';
-import createHOCFromMapper from './utils/createHOCFromMapper';
-import createHelper from './createHelper';
+import callOrUse from './utils/callOrUse'
+import createHOCFromMapper from './utils/createHOCFromMapper'
+import createHelper from './createHelper'
 
 /**
  * Similar to `mapObs` except that observables will be merged to the previous ones.
@@ -20,8 +20,8 @@ import createHelper from './createHelper';
  * }))
  */
 const withObs = obsMapper => createHOCFromMapper((props$, obs) => {
-  const {props$: nextProps$ = props$, ...nextObs} = callOrUse(obsMapper)({...obs, props$});
-  return [nextProps$, {...obs, ...nextObs}];
-});
+  const { props$: nextProps$ = props$, ...nextObs } = callOrUse(obsMapper)({ ...obs, props$ })
+  return [nextProps$, { ...obs, ...nextObs }]
+})
 
-export default createHelper(withObs, 'withObs');
+export default createHelper(withObs, 'withObs')

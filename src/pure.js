@@ -1,6 +1,6 @@
-import shallowEqual from './shallowEqual';
-import createHelper from './createHelper';
-import shouldUpdate from './shouldUpdate';
+import shallowEqual from './shallowEqual'
+import createHelper from './createHelper'
+import shouldUpdate from './shouldUpdate'
 
 /**
  * Prevents the component from updating unless a prop has changed.
@@ -13,6 +13,6 @@ import shouldUpdate from './shouldUpdate';
  *
  * pure('button')
  */
-const pure = shouldUpdate((props, nextProps) => !shallowEqual(props, nextProps));
+const pure = shouldUpdate((props, nextProps) => !shallowEqual(props, nextProps))
 
-export default createHelper(pure, 'pure', true);
+export default createHelper(pure, 'pure', true)

@@ -1,8 +1,8 @@
-import {Component} from 'react';
-import createHelper from './createHelper';
-import createCompactableHOC from './utils/createCompactableHOC';
-import updateProps from './utils/updateProps';
-import createEagerFactory from './createEagerFactory';
+import { Component } from 'react'
+import createHelper from './createHelper'
+import createCompactableHOC from './utils/createCompactableHOC'
+import updateProps from './utils/updateProps'
+import createEagerFactory from './createEagerFactory'
 
 /**
  * Higher-order component version of
@@ -20,28 +20,28 @@ import createEagerFactory from './createEagerFactory';
  */
 const shouldUpdate = test => createCompactableHOC(
   updateProps((next) => {
-    let props;
+    let props
 
     return (nextProps) => {
       if (!props || test(props, nextProps)) {
-        next(nextProps);
+        next(nextProps)
       }
 
-      props = nextProps;
-    };
+      props = nextProps
+    }
   }),
   (BaseComponent) => {
-    const factory = createEagerFactory(BaseComponent);
+    const factory = createEagerFactory(BaseComponent)
     return class extends Component {
       shouldComponentUpdate(nextProps) {
-        return test(this.props, nextProps);
+        return test(this.props, nextProps)
       }
 
       render() {
-        return factory(this.props);
+        return factory(this.props)
       }
-    };
+    }
   },
-);
+)
 
-export default createHelper(shouldUpdate, 'shouldUpdate');
+export default createHelper(shouldUpdate, 'shouldUpdate')

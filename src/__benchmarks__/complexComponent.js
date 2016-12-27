@@ -1,46 +1,46 @@
 /* eslint-disable no-plusplus */
-import './setup';
-import React from 'react';
-import {mount} from 'enzyme';
-import recomposeSetDisplayName from 'recompose/setDisplayName';
-import recomposeDefaultProps from 'recompose/defaultProps';
-import recomposeWithProps from 'recompose/withProps';
-import recomposeRenameProp from 'recompose/renameProp';
-import recomposeWithState from 'recompose/withState';
-import recomposePure from 'recompose/pure';
-import compose from '../compose';
-import recompactSetDisplayName from '../setDisplayName';
-import recompactDefaultProps from '../defaultProps';
-import recompactWithProps from '../withProps';
-import recompactWithState from '../withState';
-import recompactRenameProp from '../renameProp';
-import recompactPure from '../pure';
-import {runBenchmark, series} from './utils';
+import './setup'
+import React from 'react'
+import { mount } from 'enzyme'
+import recomposeSetDisplayName from 'recompose/setDisplayName'
+import recomposeDefaultProps from 'recompose/defaultProps'
+import recomposeWithProps from 'recompose/withProps'
+import recomposeRenameProp from 'recompose/renameProp'
+import recomposeWithState from 'recompose/withState'
+import recomposePure from 'recompose/pure'
+import compose from '../compose'
+import recompactSetDisplayName from '../setDisplayName'
+import recompactDefaultProps from '../defaultProps'
+import recompactWithProps from '../withProps'
+import recompactWithState from '../withState'
+import recompactRenameProp from '../renameProp'
+import recompactPure from '../pure'
+import { runBenchmark, series } from './utils'
 
 const RecompactComponent = compose(
   recompactSetDisplayName('foo'),
   recompactPure,
-  recompactDefaultProps({foo: 'bar'}),
+  recompactDefaultProps({ foo: 'bar' }),
   recompactWithState('counter', 'updateCounter', 0),
-  recompactWithProps(({counter}) => ({counter: counter + 1})),
+  recompactWithProps(({ counter }) => ({ counter: counter + 1 })),
   recompactRenameProp('updateCounter', 'up'),
-)(() => <div />);
+)(() => <div />)
 
 const RecomposeComponent = compose(
   recomposeSetDisplayName('foo'),
   recomposePure,
-  recomposeDefaultProps({foo: 'bar'}),
+  recomposeDefaultProps({ foo: 'bar' }),
   recomposeWithState('counter', 'updateCounter', 0),
-  recomposeWithProps(({counter}) => ({counter: counter + 1})),
+  recomposeWithProps(({ counter }) => ({ counter: counter + 1 })),
   recomposeRenameProp('updateCounter', 'up'),
-)(() => <div />);
+)(() => <div />)
 
-const Nothing = () => null;
-const nothingWrapper = mount(<Nothing />);
-const recompactWrapper = mount(<RecompactComponent bar="x" />);
-const recomposeWrapper = mount(<RecomposeComponent bar="x" />);
+const Nothing = () => null
+const nothingWrapper = mount(<Nothing />)
+const recompactWrapper = mount(<RecompactComponent bar="x" />)
+const recomposeWrapper = mount(<RecomposeComponent bar="x" />)
 
-let count;
+let count
 
 series([
   () => new Promise(resolve => setTimeout(resolve, 1000)),
@@ -48,19 +48,19 @@ series([
     {
       description: 'nothing',
       run() {
-        mount(<Nothing />);
+        mount(<Nothing />)
       },
     },
     {
       description: '❤️  recompact',
       run() {
-        mount(<RecompactComponent />);
+        mount(<RecompactComponent />)
       },
     },
     {
       description: '💙  recompose',
       run() {
-        mount(<RecomposeComponent />);
+        mount(<RecomposeComponent />)
       },
     },
   ], '[mount]'),
@@ -68,29 +68,29 @@ series([
     {
       description: 'nothing',
       onStart() {
-        count = 0;
+        count = 0
       },
       run() {
-        nothingWrapper.setProps({foo: count++});
+        nothingWrapper.setProps({ foo: count++ })
       },
     },
     {
       description: '❤️  recompact',
       onStart() {
-        count = 0;
+        count = 0
       },
       run() {
-        recompactWrapper.setProps({foo: count++});
+        recompactWrapper.setProps({ foo: count++ })
       },
     },
     {
       description: '💙  recompose',
       onStart() {
-        count = 0;
+        count = 0
       },
       run() {
-        recomposeWrapper.setProps({foo: count++});
+        recomposeWrapper.setProps({ foo: count++ })
       },
     },
   ], '[setProps]'),
-]);
+])

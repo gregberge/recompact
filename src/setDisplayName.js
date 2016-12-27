@@ -1,4 +1,4 @@
-import setStatic from './setStatic';
+import setStatic from './setStatic'
 
 /**
  * Assigns to the `displayName` property on the base component.
@@ -11,6 +11,6 @@ import setStatic from './setStatic';
  *
  * setDisplayName('AnotherDisplayName')(MyComponent);
  */
-const setDisplayName = displayName => setStatic('displayName', displayName);
+const setDisplayName = displayName => setStatic('displayName', displayName)
 
-export default setDisplayName;
+export default setDisplayName

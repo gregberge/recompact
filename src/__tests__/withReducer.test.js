@@ -1,18 +1,18 @@
-import React from 'react';
-import {mount} from 'enzyme';
-import {Dummy} from './utils';
-import {withReducer, compose, flattenProp} from '../';
+import React from 'react'
+import { mount } from 'enzyme'
+import { Dummy } from './utils'
+import { withReducer, compose, flattenProp } from '../'
 
-const SET_COUNTER = 'SET_COUNTER';
+const SET_COUNTER = 'SET_COUNTER'
 
 test('adds a stateful value and a function for updating it', () => {
-  const initialState = {counter: 0};
+  const initialState = { counter: 0 }
 
   const reducer = (state, action) => (
     action.type === SET_COUNTER
-      ? {counter: action.payload}
+      ? { counter: action.payload }
       : state
-  );
+  )
 
   const Counter = compose(
     withReducer(
@@ -22,25 +22,25 @@ test('adds a stateful value and a function for updating it', () => {
       initialState,
     ),
     flattenProp('state'),
-  )(Dummy);
+  )(Dummy)
 
-  const dummy = mount(<Counter />).find(Dummy);
-  const {dispatch} = dummy.props();
+  const dummy = mount(<Counter />).find(Dummy)
+  const { dispatch } = dummy.props()
 
-  expect(dummy.prop('counter')).toBe(0);
+  expect(dummy.prop('counter')).toBe(0)
 
-  dispatch({type: SET_COUNTER, payload: 18});
-  expect(dummy.prop('counter')).toBe(18);
-});
+  dispatch({ type: SET_COUNTER, payload: 18 })
+  expect(dummy.prop('counter')).toBe(18)
+})
 
 test('calls initialState when it is a function', () => {
-  const initialState = ({initialCount}) => ({counter: initialCount});
+  const initialState = ({ initialCount }) => ({ counter: initialCount })
 
   const reducer = (state, action) => (
     action.type === SET_COUNTER
-      ? {counter: action.payload}
+      ? { counter: action.payload }
       : state
-  );
+  )
 
   const Counter = compose(
     withReducer(
@@ -50,21 +50,21 @@ test('calls initialState when it is a function', () => {
       initialState,
     ),
     flattenProp('state'),
-  )(Dummy);
+  )(Dummy)
 
-  const dummy = mount(<Counter initialCount={10} />).find(Dummy);
+  const dummy = mount(<Counter initialCount={10} />).find(Dummy)
 
-  expect(dummy.prop('counter')).toBe(10);
-});
+  expect(dummy.prop('counter')).toBe(10)
+})
 
 test('receives state from reducer when initialState is not provided', () => {
-  const initialState = {counter: 0};
+  const initialState = { counter: 0 }
 
   const reducer = (state = initialState, action) => (
     action.type === SET_COUNTER
-      ? {counter: action.payload}
+      ? { counter: action.payload }
       : state
-  );
+  )
 
   const Counter = compose(
     withReducer(
@@ -73,8 +73,8 @@ test('receives state from reducer when initialState is not provided', () => {
       reducer,
     ),
     flattenProp('state'),
-  )(Dummy);
+  )(Dummy)
 
-  const dummy = mount(<Counter />).find(Dummy);
-  expect(dummy.prop('counter')).toBe(0);
-});
+  const dummy = mount(<Counter />).find(Dummy)
+  expect(dummy.prop('counter')).toBe(0)
+})

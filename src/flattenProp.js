@@ -1,5 +1,5 @@
-import createHelper from './createHelper';
-import mapProps from './mapProps';
+import createHelper from './createHelper'
+import mapProps from './mapProps'
 
 /**
  * Flattens a prop so that its fields are spread out into the props object.
@@ -16,6 +16,6 @@ import mapProps from './mapProps';
 const flattenProp = propName => mapProps(props => ({
   ...props,
   ...props[propName],
-}));
+}))
 
-export default createHelper(flattenProp, 'flattenProp');
+export default createHelper(flattenProp, 'flattenProp')

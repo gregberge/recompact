@@ -1,18 +1,18 @@
-import React from 'react';
-import {mount} from 'enzyme';
-import {Dummy} from './utils';
-import {lifecycle} from '../';
+import React from 'react'
+import { mount } from 'enzyme'
+import { Dummy } from './utils'
+import { lifecycle } from '../'
 
 describe('lifecycle', () => {
   it('should be possible to specify componentWillMount', () => {
     const Custom = lifecycle({
       componentWillMount() {
-        this.setState({bar: 'baz'});
+        this.setState({ bar: 'baz' })
       },
-    })(Dummy);
+    })(Dummy)
 
-    const dummy = mount(<Custom foo="bar" />).find(Dummy);
-    expect(dummy.prop('foo')).toBe('bar');
-    expect(dummy.prop('bar')).toBe('baz');
-  });
-});
+    const dummy = mount(<Custom foo="bar" />).find(Dummy)
+    expect(dummy.prop('foo')).toBe('bar')
+    expect(dummy.prop('bar')).toBe('baz')
+  })
+})

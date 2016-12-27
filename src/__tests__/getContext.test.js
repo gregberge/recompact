@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {mount} from 'enzyme';
-import {Dummy} from './utils';
-import {compose, getContext} from '../';
+import React, { Component, PropTypes } from 'react'
+import { mount } from 'enzyme'
+import { Dummy } from './utils'
+import { compose, getContext } from '../'
 
 describe('getContext', () => {
   it('should get context and put it in props', () => {
@@ -12,18 +12,18 @@ describe('getContext', () => {
         };
 
         getChildContext() {
-          return {foo: 'bar'};
+          return { foo: 'bar' }
         }
 
         render() {
-          return <BaseComponent {...this.props} />;
+          return <BaseComponent {...this.props} />
         }
       },
-      getContext({foo: PropTypes.string.isRequired}),
-    )(Dummy);
+      getContext({ foo: PropTypes.string.isRequired }),
+    )(Dummy)
 
-    const wrapper = mount(<DummyFoo bar="foo" />);
+    const wrapper = mount(<DummyFoo bar="foo" />)
 
-    expect(wrapper.find(Dummy).props()).toEqual({bar: 'foo', foo: 'bar'});
-  });
-});
+    expect(wrapper.find(Dummy).props()).toEqual({ bar: 'foo', foo: 'bar' })
+  })
+})

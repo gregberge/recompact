@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import getDisplayName from './getDisplayName';
-import isClassComponent from './isClassComponent';
+import React, { Component } from 'react'
+import getDisplayName from './getDisplayName'
+import isClassComponent from './isClassComponent'
 
 /**
  * Takes a function component and wraps it in a class. This can be used as a
@@ -19,25 +19,25 @@ import isClassComponent from './isClassComponent';
 
 const toClass = (BaseComponent) => {
   if (isClassComponent(BaseComponent)) {
-    return BaseComponent;
+    return BaseComponent
   }
 
   class ToClass extends Component {
     render() {
       if (typeof BaseComponent === 'string') {
-        return <BaseComponent {...this.props} />;
+        return <BaseComponent {...this.props} />
       }
 
-      return BaseComponent(this.props, this.context);
+      return BaseComponent(this.props, this.context)
     }
   }
 
-  ToClass.displayName = getDisplayName(BaseComponent);
-  ToClass.propTypes = BaseComponent.propTypes;
-  ToClass.contextTypes = BaseComponent.contextTypes;
-  ToClass.defaultProps = BaseComponent.defaultProps;
+  ToClass.displayName = getDisplayName(BaseComponent)
+  ToClass.propTypes = BaseComponent.propTypes
+  ToClass.contextTypes = BaseComponent.contextTypes
+  ToClass.defaultProps = BaseComponent.defaultProps
 
-  return ToClass;
-};
+  return ToClass
+}
 
-export default toClass;
+export default toClass

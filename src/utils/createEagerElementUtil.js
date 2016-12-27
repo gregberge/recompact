@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const createEagerElementUtil = (
   hasKey,
@@ -9,18 +9,18 @@ const createEagerElementUtil = (
 ) => {
   if (!hasKey && isReferentiallyTransparent) {
     if (children) {
-      return type({...props, children});
+      return type({ ...props, children })
     }
-    return type(props);
+    return type(props)
   }
 
-  const Component = type;
+  const Component = type
 
   if (children) {
-    return <Component {...props}>{children}</Component>;
+    return <Component {...props}>{children}</Component>
   }
 
-  return <Component {...props} />;
-};
+  return <Component {...props} />
+}
 
-export default createEagerElementUtil;
+export default createEagerElementUtil

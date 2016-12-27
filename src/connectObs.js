@@ -1,7 +1,7 @@
-import createObservable from './utils/createObservable';
-import createHelper from './createHelper';
-import withObs from './withObs';
-import {config as obsConfig} from './setObservableConfig';
+import createObservable from './utils/createObservable'
+import createHelper from './createHelper'
+import withObs from './withObs'
+import { config as obsConfig } from './setObservableConfig'
 
 const checkObsMap = (obsMap) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -9,10 +9,10 @@ const checkObsMap = (obsMap) => {
       throw new Error(
         'connectObs(): The observable mapper must return a plain object, got '
         + `'${obsMap}' instead`,
-      );
+      )
     }
   }
-};
+}
 
 const checkObserver = (observer, name) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -20,10 +20,10 @@ const checkObserver = (observer, name) => {
       throw new Error(
         `connectObs(): Expected '${name}' to be an Observer, got `
         + `'${observer}' instead.`,
-      );
+      )
     }
   }
-};
+}
 
 const checkObservable = (observable, name) => {
   if (process.env.NODE_ENV !== 'production') {
@@ -31,10 +31,10 @@ const checkObservable = (observable, name) => {
       throw new Error(
         `connectObs(): Expected '${name}' to be an Observable, got `
         + `'${observable}' instead.`,
-      );
+      )
     }
   }
-};
+}
 
 /**
  * Connect observables to props using a map.
@@ -57,49 +57,49 @@ const checkObservable = (observable, name) => {
  *   value: value$,
  * }))('input');
  */
-const connectObs = obsMapper => withObs(({props$, ...observables}) => {
+const connectObs = obsMapper => withObs(({ props$, ...observables }) => {
   const nextProps$ = createObservable((observer) => {
-    const obsMap = obsMapper({...observables, props$});
-    checkObsMap(obsMap);
-    let props;
-    const obsProps = {};
+    const obsMap = obsMapper({ ...observables, props$ })
+    checkObsMap(obsMap)
+    let props
+    const obsProps = {}
 
     const update = () => {
       if (props) {
         observer.next({
           ...props,
           ...obsProps,
-        });
+        })
       }
-    };
+    }
 
     Object.keys(obsMap).forEach((key) => {
       if (key.match(/^on[A-Z]/)) {
-        const observable = obsMap[key];
-        checkObserver(observable, key);
-        obsProps[key] = ::observable.next;
+        const observable = obsMap[key]
+        checkObserver(observable, key)
+        obsProps[key] = ::observable.next
       } else {
-        const observable = obsConfig.toESObservable(obsMap[key]);
-        checkObservable(observable, key);
-        obsProps[key] = undefined;
+        const observable = obsConfig.toESObservable(obsMap[key])
+        checkObservable(observable, key)
+        obsProps[key] = undefined
         observable.subscribe({
           next(value) {
-            obsProps[key] = value;
-            update();
+            obsProps[key] = value
+            update()
           },
-        });
+        })
       }
-    });
+    })
 
     obsConfig.toESObservable(props$).subscribe({
       next(nextProps) {
-        props = nextProps;
-        update();
+        props = nextProps
+        update()
       },
-    });
-  });
+    })
+  })
 
-  return {props$: nextProps$};
-});
+  return { props$: nextProps$ }
+})
 
-export default createHelper(connectObs, 'connectObs');
+export default createHelper(connectObs, 'connectObs')

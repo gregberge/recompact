@@ -1,8 +1,8 @@
-import createHelper from './createHelper';
-import callOrUse from './utils/callOrUse';
-import createEagerFactory from './createEagerFactory';
-import createCompactableHOC from './utils/createCompactableHOC';
-import updateProps from './utils/updateProps';
+import createHelper from './createHelper'
+import callOrUse from './utils/callOrUse'
+import createEagerFactory from './createEagerFactory'
+import createCompactableHOC from './utils/createCompactableHOC'
+import updateProps from './utils/updateProps'
 
 /**
  * Like `mapProps()`, except the newly created props are merged with the owner props.
@@ -21,16 +21,16 @@ import updateProps from './utils/updateProps';
  * const XButton = withProps(({type}) => {type: `x${type}`})('button');
  */
 const withProps = (propsMapper) => {
-  const propsOrMapper = callOrUse(propsMapper);
+  const propsOrMapper = callOrUse(propsMapper)
   return createCompactableHOC(
     updateProps(next => (props) => {
-      next({...props, ...propsOrMapper(props)});
+      next({ ...props, ...propsOrMapper(props) })
     }),
     (BaseComponent) => {
-      const factory = createEagerFactory(BaseComponent);
-      return props => factory({...props, ...propsOrMapper(props)});
+      const factory = createEagerFactory(BaseComponent)
+      return props => factory({ ...props, ...propsOrMapper(props) })
     },
-  );
-};
+  )
+}
 
-export default createHelper(withProps, 'withProps');
+export default createHelper(withProps, 'withProps')

@@ -1,4 +1,4 @@
-import createEagerFactory from './createEagerFactory';
+import createEagerFactory from './createEagerFactory'
 
 /**
  * Takes a component and returns a higher-order component version of that component.
@@ -17,16 +17,16 @@ import createEagerFactory from './createEagerFactory';
  * )
  */
 const renderComponent = Component => () => {
-  const factory = createEagerFactory(Component);
-  const RenderComponent = props => factory(props);
+  const factory = createEagerFactory(Component)
+  const RenderComponent = props => factory(props)
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const wrapDisplayName = require('./wrapDisplayName').default;
+    const wrapDisplayName = require('./wrapDisplayName').default
     /* eslint-enable global-require */
     RenderComponent.displayName =
-      wrapDisplayName(Component, 'renderComponent');
+      wrapDisplayName(Component, 'renderComponent')
   }
-  return RenderComponent;
-};
+  return RenderComponent
+}
 
-export default renderComponent;
+export default renderComponent

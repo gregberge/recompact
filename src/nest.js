@@ -1,4 +1,4 @@
-import createEagerFactory from './createEagerFactory';
+import createEagerFactory from './createEagerFactory'
 
 /**
  * Composes components by nesting each one inside the previous.
@@ -15,22 +15,22 @@ import createEagerFactory from './createEagerFactory';
  * <DivButton className="foo" />
  */
 const nest = (...components) => {
-  const factories = components.map(createEagerFactory);
-  const Nest = ({...props, children}) =>
+  const factories = components.map(createEagerFactory)
+  const Nest = ({ ...props, children }) =>
     factories.reduceRight(
       (child, factory) => factory(props, child),
       children,
-    );
+    )
 
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const getDisplayName = require('./getDisplayName').default;
+    const getDisplayName = require('./getDisplayName').default
     /* eslint-enable global-require */
-    const displayNames = components.map(getDisplayName);
-    Nest.displayName = `nest(${displayNames.join(', ')})`;
+    const displayNames = components.map(getDisplayName)
+    Nest.displayName = `nest(${displayNames.join(', ')})`
   }
 
-  return Nest;
-};
+  return Nest
+}
 
-export default nest;
+export default nest

@@ -1,10 +1,10 @@
-import {Component} from 'react';
-import pick from './utils/pick';
-import shallowEqual from './shallowEqual';
-import createHelper from './createHelper';
-import createEagerFactory from './createEagerFactory';
-import createCompactableHOC from './utils/createCompactableHOC';
-import updateProps from './utils/updateProps';
+import { Component } from 'react'
+import pick from './utils/pick'
+import shallowEqual from './shallowEqual'
+import createHelper from './createHelper'
+import createEagerFactory from './createEagerFactory'
+import createCompactableHOC from './utils/createCompactableHOC'
+import updateProps from './utils/updateProps'
 
 /**
  * Like `withProps()`, except the new props are only created when one of the owner
@@ -30,31 +30,31 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
     : (props, nextProps) => !shallowEqual(
         pick(props, shouldMapOrKeys),
         pick(nextProps, shouldMapOrKeys),
-      );
+      )
 
   return createCompactableHOC(
     updateProps((next) => {
-      let props = {};
-      let computedProps;
+      let props = {}
+      let computedProps
 
       return (nextProps) => {
         if (shouldMap(props, nextProps)) {
-          computedProps = propsMapper(nextProps);
+          computedProps = propsMapper(nextProps)
         }
 
-        props = nextProps;
-        next({...nextProps, ...computedProps});
-      };
+        props = nextProps
+        next({ ...nextProps, ...computedProps })
+      }
     }),
     (BaseComponent) => {
-      const factory = createEagerFactory(BaseComponent);
+      const factory = createEagerFactory(BaseComponent)
 
       return class extends Component {
         computedProps = propsMapper(this.props);
 
         componentWillReceiveProps(nextProps) {
           if (shouldMap(this.props, nextProps)) {
-            this.computedProps = propsMapper(nextProps);
+            this.computedProps = propsMapper(nextProps)
           }
         }
 
@@ -62,11 +62,11 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
           return factory({
             ...this.props,
             ...this.computedProps,
-          });
+          })
         }
-      };
+      }
     },
-  );
-};
+  )
+}
 
-export default createHelper(withPropsOnChange, 'withPropsOnChange');
+export default createHelper(withPropsOnChange, 'withPropsOnChange')

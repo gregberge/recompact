@@ -1,6 +1,6 @@
-import {createClass} from 'react';
-import createEagerFactory from './createEagerFactory';
-import createHelper from './createHelper';
+import { createClass } from 'react'
+import createEagerFactory from './createEagerFactory'
+import createHelper from './createHelper'
 
 /**
  * A higher-order component version of
@@ -20,7 +20,7 @@ import createHelper from './createHelper';
  * const logWhenMount = lifecycle({componentWillMount: () => console.log('will mount')});
  */
 const lifecycle = spec => (BaseComponent) => {
-  const factory = createEagerFactory(BaseComponent);
+  const factory = createEagerFactory(BaseComponent)
 
   if (
     process.env.NODE_ENV !== 'production' &&
@@ -30,7 +30,7 @@ const lifecycle = spec => (BaseComponent) => {
     console.error(
       'lifecycle() does not support the render method; its behavior is to ' +
       'pass all props and state to the base component.',
-    );
+    )
     /* eslint-enable no-console */
   }
 
@@ -40,11 +40,11 @@ const lifecycle = spec => (BaseComponent) => {
       return factory({
         ...this.props,
         ...this.state,
-      });
+      })
     },
-  };
+  }
 
-  return createClass(implementation);
-};
+  return createClass(implementation)
+}
 
-export default createHelper(lifecycle, 'lifecycle');
+export default createHelper(lifecycle, 'lifecycle')

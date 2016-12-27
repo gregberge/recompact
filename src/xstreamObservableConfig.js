@@ -1,17 +1,17 @@
 /* eslint-disable import/no-unresolved, import/extensions, import/no-extraneous-dependencies */
-import $$observable from 'symbol-observable';
-import xstream from 'xstream';
+import $$observable from 'symbol-observable'
+import xstream from 'xstream'
 
-const noop = () => {};
+const noop = () => {}
 
 const config = {
   fromESObservable: observable => xstream.create({
     subscription: null,
     start(listener) {
-      this.subscription = observable.subscribe(listener);
+      this.subscription = observable.subscribe(listener)
     },
     stop() {
-      this.subscription.unsubscribe();
+      this.subscription.unsubscribe()
     },
   }),
   toESObservable: stream => ({
@@ -20,16 +20,16 @@ const config = {
         next: observer.next || noop,
         error: observer.error || noop,
         complete: observer.complete || noop,
-      };
-      stream.addListener(listener);
+      }
+      stream.addListener(listener)
       return {
         unsubscribe: () => stream.removeListener(listener),
-      };
+      }
     },
     [$$observable]() {
-      return this;
+      return this
     },
   }),
-};
+}
 
-export default config;
+export default config

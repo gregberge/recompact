@@ -1,5 +1,5 @@
-const Nothing = () => null;
-Nothing.displayName = 'Nothing';
+const Nothing = () => null
+Nothing.displayName = 'Nothing'
 
 /**
  * A higher-order component that always renders `null`.
@@ -14,6 +14,6 @@ Nothing.displayName = 'Nothing';
  *   renderNothing,
  * )
  */
-const renderNothing = () => Nothing;
+const renderNothing = () => Nothing
 
-export default renderNothing;
+export default renderNothing

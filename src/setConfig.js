@@ -1,8 +1,8 @@
-import createSymbol from './utils/createSymbol';
+import createSymbol from './utils/createSymbol'
 
 let config = {
   observablesKey: createSymbol('observables'),
-};
+}
 
 /**
  * Set the config of Recompact.
@@ -15,9 +15,9 @@ let config = {
  * setConfig({observablesKey: 'observables'});
  */
 const setConfig = (_config) => {
-  config = _config;
-};
+  config = _config
+}
 
-export const getConfig = () => config;
+export const getConfig = () => config
 
-export default setConfig;
+export default setConfig

@@ -1,5 +1,5 @@
-import createHOCFromMapper from './utils/createHOCFromMapper';
-import createHelper from './createHelper';
+import createHOCFromMapper from './utils/createHOCFromMapper'
+import createHelper from './createHelper'
 
 /**
  * Accepts a function that maps an observable stream of owner props to a stream
@@ -16,12 +16,12 @@ import createHelper from './createHelper';
  * const delayRendering = mapPropsStream(props$ => props$.delay(1000));
  */
 const mapPropsStream = propsStreamMapper => createHOCFromMapper((props$, obs) => {
-  const nextProps$ = propsStreamMapper(props$);
+  const nextProps$ = propsStreamMapper(props$)
   if (process.env.NODE_ENV !== 'production') {
-    const invariant = require('./utils/invariant').default; // eslint-disable-line global-require
-    invariant(typeof nextProps$.subscribe === 'function', 'Expected a props Observable.');
+    const invariant = require('./utils/invariant').default // eslint-disable-line global-require
+    invariant(typeof nextProps$.subscribe === 'function', 'Expected a props Observable.')
   }
-  return [nextProps$, obs];
-});
+  return [nextProps$, obs]
+})
 
-export default createHelper(mapPropsStream, 'mapPropsStream');
+export default createHelper(mapPropsStream, 'mapPropsStream')

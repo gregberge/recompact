@@ -1,5 +1,5 @@
-import createHOCFromMapper from './utils/createHOCFromMapper';
-import createHelper from './createHelper';
+import createHOCFromMapper from './utils/createHOCFromMapper'
+import createHelper from './createHelper'
 
 /**
  * Takes observables from the context and special observable `props$` an map them
@@ -20,8 +20,8 @@ import createHelper from './createHelper';
  * }))
  */
 const mapObs = obsMapper => createHOCFromMapper((props$, obs) => {
-  const {props$: nextProps$ = props$, ...nextObs} = obsMapper({...obs, props$});
-  return [nextProps$, nextObs];
-});
+  const { props$: nextProps$ = props$, ...nextObs } = obsMapper({ ...obs, props$ })
+  return [nextProps$, nextObs]
+})
 
-export default createHelper(mapObs, 'mapObs');
+export default createHelper(mapObs, 'mapObs')

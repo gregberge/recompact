@@ -1,33 +1,33 @@
 /* eslint-disable import/no-unresolved, import/extensions, import/no-extraneous-dependencies */
-import $$observable from 'symbol-observable';
-import Bacon from 'baconjs';
+import $$observable from 'symbol-observable'
+import Bacon from 'baconjs'
 
 const config = {
   fromESObservable: observable => Bacon.fromBinder((sink) => {
-    const {unsubscribe} = observable.subscribe({
+    const { unsubscribe } = observable.subscribe({
       next: val => sink(new Bacon.Next(val)),
       error: err => sink(new Bacon.Error(err)),
       complete: () => sink(new Bacon.End()),
-    });
-    return unsubscribe;
+    })
+    return unsubscribe
   }),
   toESObservable: stream => ({
     subscribe: (observer) => {
       const unsubscribe = stream.subscribe((event) => {
         if (event.hasValue()) {
-          observer.next(event.value());
+          observer.next(event.value())
         } else if (event.isError()) {
-          observer.error(event.error);
+          observer.error(event.error)
         } else if (event.isEnd()) {
-          observer.complete();
+          observer.complete()
         }
-      });
-      return {unsubscribe};
+      })
+      return { unsubscribe }
     },
     [$$observable]() {
-      return this;
+      return this
     },
   }),
-};
+}
 
-export default config;
+export default config

@@ -1,18 +1,18 @@
-import omit from './utils/omit';
-import pick from './utils/pick';
-import createHelper from './createHelper';
-import mapProps from './mapProps';
+import omit from './utils/omit'
+import pick from './utils/pick'
+import createHelper from './createHelper'
+import mapProps from './mapProps'
 
-const {keys} = Object;
+const { keys } = Object
 
 const mapKeys = (obj, func) =>
   keys(obj).reduce((result, key) => {
-    const val = obj[key];
+    const val = obj[key]
     /* eslint-disable no-param-reassign */
-    result[func(val, key)] = val;
+    result[func(val, key)] = val
     /* eslint-enable no-param-reassign */
-    return result;
-  }, {});
+    return result
+  }, {})
 
 /**
  * Renames multiple props, using a map of old prop names to new prop names.
@@ -32,6 +32,6 @@ const renameProps = nameMap =>
       pick(props, keys(nameMap)),
       (_, oldName) => nameMap[oldName],
     ),
-  }));
+  }))
 
-export default createHelper(renameProps, 'renameProps');
+export default createHelper(renameProps, 'renameProps')

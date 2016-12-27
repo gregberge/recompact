@@ -1,3 +1,3 @@
-import omit from 'object.omit';
+import omit from 'object.omit'
 
-export default omit;
+export default omit

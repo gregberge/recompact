@@ -2,7 +2,7 @@
   "parser": "babel-eslint",
   "extends": ["airbnb"],
   "rules": {
-    "object-curly-spacing": ["error", "never"],
+    "semi": ["error", "never"],
     "react/jsx-filename-extension": ["error", {"extensions": [".js"]}]
   }
 }

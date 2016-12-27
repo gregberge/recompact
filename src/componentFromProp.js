@@ -1,5 +1,5 @@
-import omit from './utils/omit';
-import createEagerElement from './createEagerElement';
+import omit from './utils/omit'
+import createEagerElement from './createEagerElement'
 
 /**
  * Creates a component that accepts a component as a prop and renders it
@@ -20,13 +20,13 @@ import createEagerElement from './createEagerElement';
  */
 const componentFromProp = (propName) => {
   const Component = props =>
-    createEagerElement(props[propName], omit(props, [propName]));
+    createEagerElement(props[propName], omit(props, [propName]))
 
   if (process.env.NODE_ENV !== 'production') {
-    Component.displayName = `componentFromProp(${propName})`;
+    Component.displayName = `componentFromProp(${propName})`
   }
 
-  return Component;
-};
+  return Component
+}
 
-export default componentFromProp;
+export default componentFromProp

@@ -10,6 +10,6 @@
  *
  * identity(Component) === Component
  */
-const identity = x => x;
+const identity = x => x
 
-export default identity;
+export default identity

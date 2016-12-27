@@ -1,6 +1,6 @@
-import omit from './utils/omit';
-import createHelper from './createHelper';
-import mapProps from './mapProps';
+import omit from './utils/omit'
+import createHelper from './createHelper'
+import mapProps from './mapProps'
 
 /**
  * Renames a single prop.
@@ -18,6 +18,6 @@ const renameProp = (oldName, newName) =>
   mapProps(props => ({
     ...omit(props, [oldName]),
     [newName]: props[oldName],
-  }));
+  }))
 
-export default createHelper(renameProp, 'renameProp');
+export default createHelper(renameProp, 'renameProp')

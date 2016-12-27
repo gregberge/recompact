@@ -1,4 +1,4 @@
-import setStatic from './setStatic';
+import setStatic from './setStatic'
 
 /**
  * Assigns to the `propTypes` property on the base component.
@@ -11,6 +11,6 @@ import setStatic from './setStatic';
  *
  * setPropTypes({children: PropTypes.node})(MyComponent);
  */
-const setPropTypes = propTypes => setStatic('propTypes', propTypes);
+const setPropTypes = propTypes => setStatic('propTypes', propTypes)
 
-export default setPropTypes;
+export default setPropTypes

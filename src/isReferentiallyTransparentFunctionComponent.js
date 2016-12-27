@@ -1,4 +1,4 @@
-import isClassComponent from './isClassComponent';
+import isClassComponent from './isClassComponent'
 
 /**
  * Returns true if the given value is a referentially transparent function component.
@@ -23,6 +23,6 @@ const isReferentiallyTransparentFunctionComponent = Component => Boolean(
   !Component.defaultProps &&
   !Component.contextTypes &&
   (process.env.NODE_ENV === 'production' || !Component.propTypes),
-);
+)
 
-export default isReferentiallyTransparentFunctionComponent;
+export default isReferentiallyTransparentFunctionComponent

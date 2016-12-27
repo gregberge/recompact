@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import { Component } from 'react'
 
 /**
  * Creates a component that renders nothing (null) but calls a callback when
@@ -18,16 +18,16 @@ import {Component} from 'react';
 const createSink = callback =>
   class Sink extends Component {
     componentWillMount() {
-      callback(this.props);
+      callback(this.props)
     }
 
     componentWillReceiveProps(nextProps) {
-      callback(nextProps);
+      callback(nextProps)
     }
 
     render() {
-      return null;
+      return null
     }
-  };
+  }
 
-export default createSink;
+export default createSink

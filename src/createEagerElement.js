@@ -1,6 +1,6 @@
-import createEagerElementUtil from './utils/createEagerElementUtil';
+import createEagerElementUtil from './utils/createEagerElementUtil'
 import isReferentiallyTransparentFunctionComponent
-  from './isReferentiallyTransparentFunctionComponent';
+  from './isReferentiallyTransparentFunctionComponent'
 
 /**
  * React elements are lazily evaluated. But when a higher-order component
@@ -21,15 +21,15 @@ import isReferentiallyTransparentFunctionComponent
  * createEagerElement('div', {className: 'foo'});
  */
 const createEagerElement = (type, props, children) => {
-  const isReferentiallyTransparent = isReferentiallyTransparentFunctionComponent(type);
-  const hasKey = props && Object.prototype.hasOwnProperty.call(props, 'key');
+  const isReferentiallyTransparent = isReferentiallyTransparentFunctionComponent(type)
+  const hasKey = props && Object.prototype.hasOwnProperty.call(props, 'key')
   return createEagerElementUtil(
     hasKey,
     isReferentiallyTransparent,
     type,
     props,
     children,
-  );
-};
+  )
+}
 
-export default createEagerElement;
+export default createEagerElement

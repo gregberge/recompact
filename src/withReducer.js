@@ -1,10 +1,10 @@
 /* eslint-disable no-use-before-define */
-import createHelper from './createHelper';
-import createSymbol from './utils/createSymbol';
-import callOrUse from './utils/callOrUse';
-import updateProps from './utils/updateProps';
+import createHelper from './createHelper'
+import createSymbol from './utils/createSymbol'
+import callOrUse from './utils/callOrUse'
+import updateProps from './utils/updateProps'
 
-export const INIT = createSymbol('INIT');
+export const INIT = createSymbol('INIT')
 
 /**
  * Similar to `withState()`, but state updates are applied using a reducer function.
@@ -45,38 +45,38 @@ export const INIT = createSymbol('INIT');
  */
 const withReducer = (stateName, dispatchName, reducer, initialState) =>
   updateProps((next) => {
-    let initialized;
-    let state;
-    let props;
+    let initialized
+    let state
+    let props
 
     function dispatch(action) {
-      updateState(reducer(state, action));
+      updateState(reducer(state, action))
     }
 
     function updateState(nextState) {
-      state = nextState;
+      state = nextState
       next({
         ...props,
         [stateName]: state,
         [dispatchName]: dispatch,
-      });
+      })
     }
 
     return (nextProps) => {
-      props = nextProps;
+      props = nextProps
 
       if (!initialized) {
-        initialized = true;
+        initialized = true
 
         if (initialState !== undefined) {
-          updateState(callOrUse(initialState)(props));
+          updateState(callOrUse(initialState)(props))
         } else {
-          updateState(reducer(undefined, {type: INIT}));
+          updateState(reducer(undefined, { type: INIT }))
         }
       } else {
-        updateState(state);
+        updateState(state)
       }
-    };
-  });
+    }
+  })
 
-export default createHelper(withReducer, 'withReducer');
+export default createHelper(withReducer, 'withReducer')

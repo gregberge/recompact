@@ -1,6 +1,6 @@
-import createObservable from './createObservable';
-import createHOCFromMapper from './createHOCFromMapper';
-import {config as obsConfig} from '../setObservableConfig';
+import createObservable from './createObservable'
+import createHOCFromMapper from './createHOCFromMapper'
+import { config as obsConfig } from '../setObservableConfig'
 
 const updateProps = subscriber =>
   createHOCFromMapper((props$, obs) => [
@@ -12,6 +12,6 @@ const updateProps = subscriber =>
       }),
     ),
     obs,
-  ]);
+  ])
 
-export default updateProps;
+export default updateProps

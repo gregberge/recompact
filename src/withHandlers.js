@@ -1,11 +1,11 @@
-import createHelper from './createHelper';
-import updateProps from './utils/updateProps';
+import createHelper from './createHelper'
+import updateProps from './utils/updateProps'
 
 const mapValues = (obj, fn) =>
   Object.keys(obj).reduce((result, key) => {
-    result[key] = fn(obj[key], key); // eslint-disable-line no-param-reassign
-    return result;
-  }, {});
+    result[key] = fn(obj[key], key) // eslint-disable-line no-param-reassign
+    return result
+  }, {})
 
 /**
  * Takes an object map of handler creators or a factory function. These are
@@ -48,21 +48,21 @@ const mapValues = (obj, fn) =>
  * )
  */
 const withHandlers = handlerFactories => updateProps((next) => {
-  let cachedHandlers;
-  let handlers;
-  let props;
+  let cachedHandlers
+  let handlers
+  let props
 
   const createHandlers = initialProps =>
     mapValues(
       typeof handlerFactories === 'function' ? handlerFactories(initialProps) : handlerFactories,
       (createHandler, handlerName) => (...args) => {
-        const cachedHandler = cachedHandlers[handlerName];
+        const cachedHandler = cachedHandlers[handlerName]
         if (cachedHandler) {
-          return cachedHandler(...args);
+          return cachedHandler(...args)
         }
 
-        const handler = createHandler(props);
-        cachedHandlers[handlerName] = handler;
+        const handler = createHandler(props)
+        cachedHandlers[handlerName] = handler
 
         if (
           process.env.NODE_ENV !== 'production' &&
@@ -71,19 +71,19 @@ const withHandlers = handlerFactories => updateProps((next) => {
           console.error( // eslint-disable-line no-console
             'withHandlers(): Expected a map of higher-order functions. ' +
             'Refer to the docs for more info.',
-          );
+          )
         }
 
-        return handler(...args);
+        return handler(...args)
       },
-    );
+    )
 
   return (nextProps) => {
-    handlers = handlers || createHandlers(nextProps);
-    cachedHandlers = {};
-    props = nextProps;
-    next({...nextProps, ...handlers});
-  };
-});
+    handlers = handlers || createHandlers(nextProps)
+    cachedHandlers = {}
+    props = nextProps
+    next({ ...nextProps, ...handlers })
+  }
+})
 
-export default createHelper(withHandlers, 'withHandlers');
+export default createHelper(withHandlers, 'withHandlers')

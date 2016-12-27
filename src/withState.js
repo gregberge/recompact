@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
-import createHelper from './createHelper';
-import callOrUse from './utils/callOrUse';
-import updateProps from './utils/updateProps';
+import createHelper from './createHelper'
+import callOrUse from './utils/callOrUse'
+import updateProps from './utils/updateProps'
 
 /**
  * Passes two additional props to the base component: a state value, and a function
@@ -46,23 +46,23 @@ import updateProps from './utils/updateProps';
  */
 const withState = (stateName, stateUpdaterName, initialState) =>
   updateProps((next) => {
-    let previousProps;
-    let previousStateValue;
+    let previousProps
+    let previousStateValue
 
     const updateState = (nextState) => {
-      update(previousProps, callOrUse(nextState)(previousStateValue));
-    };
+      update(previousProps, callOrUse(nextState)(previousStateValue))
+    }
 
     const update = (props, stateValue) => {
       next({
         ...props,
         [stateName]: stateValue,
         [stateUpdaterName]: updateState,
-      });
+      })
 
-      previousStateValue = stateValue;
-      previousProps = props;
-    };
+      previousStateValue = stateValue
+      previousProps = props
+    }
 
     return (props) => {
       update(
@@ -70,8 +70,8 @@ const withState = (stateName, stateUpdaterName, initialState) =>
         !previousProps
           ? callOrUse(initialState)(props)
           : previousStateValue,
-      );
-    };
-  });
+      )
+    }
+  })
 
-export default createHelper(withState, 'withState');
+export default createHelper(withState, 'withState')

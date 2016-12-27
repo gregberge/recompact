@@ -1,6 +1,6 @@
-import createEagerFactory from './createEagerFactory';
-import createHelper from './createHelper';
-import identity from './identity';
+import createEagerFactory from './createEagerFactory'
+import createHelper from './createHelper'
+import identity from './identity'
 
 /**
  * Accepts a test function and two higher-order components. The test function
@@ -22,18 +22,18 @@ import identity from './identity';
  * branch(({count}) => count === 0, renderNothing)(MyComponent);
  */
 const branch = (test, left, right = identity) => (BaseComponent) => {
-  let leftFactory;
-  let rightFactory;
+  let leftFactory
+  let rightFactory
 
   return (props) => {
     if (test(props)) {
-      leftFactory = leftFactory || createEagerFactory(left(BaseComponent));
-      return leftFactory(props);
+      leftFactory = leftFactory || createEagerFactory(left(BaseComponent))
+      return leftFactory(props)
     }
 
-    rightFactory = rightFactory || createEagerFactory(right(BaseComponent));
-    return rightFactory(props);
-  };
-};
+    rightFactory = rightFactory || createEagerFactory(right(BaseComponent))
+    return rightFactory(props)
+  }
+}
 
-export default createHelper(branch, 'branch');
+export default createHelper(branch, 'branch')

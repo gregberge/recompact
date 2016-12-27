@@ -1,6 +1,6 @@
-import {Component} from 'react';
-import createHelper from './createHelper';
-import createEagerFactory from './createEagerFactory';
+import { Component } from 'react'
+import createHelper from './createHelper'
+import createEagerFactory from './createEagerFactory'
 
 /**
  * Provides context to the component's children. `childContextTypes` is an object
@@ -18,18 +18,18 @@ import createEagerFactory from './createEagerFactory';
  * const withWindow = withContext({window: PropTypes.object.isRequired}, () => {window})
  */
 const withContext = (childContextTypes, getChildContext) => (BaseComponent) => {
-  const factory = createEagerFactory(BaseComponent);
+  const factory = createEagerFactory(BaseComponent)
   class WithContext extends Component {
     getChildContext = () => getChildContext(this.props);
 
     render() {
-      return factory(this.props);
+      return factory(this.props)
     }
   }
 
-  WithContext.childContextTypes = childContextTypes;
+  WithContext.childContextTypes = childContextTypes
 
-  return WithContext;
-};
+  return WithContext
+}
 
-export default createHelper(withContext, 'withContext');
+export default createHelper(withContext, 'withContext')

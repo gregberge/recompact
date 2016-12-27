@@ -26,26 +26,26 @@ const createHelper = (
 ) => {
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */
-    const wrapDisplayName = require('./wrapDisplayName').default;
+    const wrapDisplayName = require('./wrapDisplayName').default
     /* eslint-enable global-require */
 
     if (noArgs) {
       return (BaseComponent) => {
-        const Component = hoc(BaseComponent);
-        Component.displayName = wrapDisplayName(BaseComponent, helperName);
-        return Component;
-      };
+        const Component = hoc(BaseComponent)
+        Component.displayName = wrapDisplayName(BaseComponent, helperName)
+        return Component
+      }
     }
 
     return (...args) =>
       (BaseComponent) => {
-        const Component = hoc(...args)(BaseComponent);
-        Component.displayName = wrapDisplayName(BaseComponent, helperName);
-        return Component;
-      };
+        const Component = hoc(...args)(BaseComponent)
+        Component.displayName = wrapDisplayName(BaseComponent, helperName)
+        return Component
+      }
   }
 
-  return hoc;
-};
+  return hoc
+}
 
-export default createHelper;
+export default createHelper

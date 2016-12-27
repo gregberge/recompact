@@ -1,5 +1,5 @@
-import createHelper from './createHelper';
-import createEagerFactory from './createEagerFactory';
+import createHelper from './createHelper'
+import createEagerFactory from './createEagerFactory'
 
 /**
  * Gets values from context and passes them along as props.
@@ -17,17 +17,17 @@ import createEagerFactory from './createEagerFactory';
  * )('button');
  */
 const getContext = contextTypes => (BaseComponent) => {
-  const factory = createEagerFactory(BaseComponent);
+  const factory = createEagerFactory(BaseComponent)
   const GetContext = (ownerProps, context) => (
     factory({
       ...ownerProps,
       ...context,
     })
-  );
+  )
 
-  GetContext.contextTypes = contextTypes;
+  GetContext.contextTypes = contextTypes
 
-  return GetContext;
-};
+  return GetContext
+}
 
-export default createHelper(getContext, 'getContext');
+export default createHelper(getContext, 'getContext')

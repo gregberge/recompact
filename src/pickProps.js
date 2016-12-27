@@ -1,6 +1,6 @@
-import pick from './utils/pick';
-import createHelper from './createHelper';
-import mapProps from './mapProps';
+import pick from './utils/pick'
+import createHelper from './createHelper'
+import mapProps from './mapProps'
 
 /**
  * Same as lodash `pick` but for props.
@@ -14,6 +14,6 @@ import mapProps from './mapProps';
  *
  * const onlyWithValue = pickProps('value');
  */
-const pickProps = paths => mapProps(props => pick(props, paths));
+const pickProps = paths => mapProps(props => pick(props, paths))
 
-export default createHelper(pickProps, 'pickProps');
+export default createHelper(pickProps, 'pickProps')

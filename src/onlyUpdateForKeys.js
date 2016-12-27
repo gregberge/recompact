@@ -1,7 +1,7 @@
-import pick from './utils/pick';
-import shallowEqual from './shallowEqual';
-import createHelper from './createHelper';
-import shouldUpdate from './shouldUpdate';
+import pick from './utils/pick'
+import shallowEqual from './shallowEqual'
+import createHelper from './createHelper'
+import shouldUpdate from './shouldUpdate'
 
 /**
  * Prevents the component from updating unless a prop corresponding to one of the
@@ -27,6 +27,6 @@ const onlyUpdateForKeys = propKeys =>
       pick(nextProps, propKeys),
       pick(props, propKeys),
     ),
-  );
+  )
 
-export default createHelper(onlyUpdateForKeys, 'onlyUpdateForKeys');
+export default createHelper(onlyUpdateForKeys, 'onlyUpdateForKeys')

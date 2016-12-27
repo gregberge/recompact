@@ -1,17 +1,17 @@
-import {benchOperator, series} from './utils';
+import { benchOperator, series } from './utils'
 
 series([
   () => new Promise(resolve => setTimeout(resolve, 1000)),
-  () => benchOperator('defaultProps', {foo: 'bar'}),
+  () => benchOperator('defaultProps', { foo: 'bar' }),
   () => benchOperator('flattenProp', 'foo'),
-  () => benchOperator('mapProps', ({n}) => n + 1),
+  () => benchOperator('mapProps', ({ n }) => n + 1),
   () => benchOperator('onlyUpdateForKeys', ['n']),
   () => benchOperator('pure'),
   () => benchOperator('renameProp', 'n', 'x'),
-  () => benchOperator('renameProps', {n: 'x'}),
+  () => benchOperator('renameProps', { n: 'x' }),
   () => benchOperator('shouldUpdate', (a, b) => a === b),
-  () => benchOperator('withProps', {foo: 'bar'}),
-  () => benchOperator('withPropsOnChange', ['n'], ({n}) => ({x: n})),
+  () => benchOperator('withProps', { foo: 'bar' }),
+  () => benchOperator('withPropsOnChange', ['n'], ({ n }) => ({ x: n })),
   () => benchOperator('withReducer', 'state', 'dispatch', () => ({})),
   () => benchOperator('withState', 'counter', 'updateCounter', 0),
-]);
+])
