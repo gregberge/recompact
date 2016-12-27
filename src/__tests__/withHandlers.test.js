@@ -64,15 +64,24 @@ describe('withHandlers', () => {
   });
 
   it('throws if handler is not a higher-order function', () => {
+    /* eslint-disable no-console */
+    const error = console.error;
+    console.error = jest.fn();
+
     const EnhancedDummy = withHandlers({
       foo: () => {},
     })(Dummy);
 
     const wrapper = shallow(<EnhancedDummy />);
+    expect(() => wrapper.prop('foo').call()).toThrowError();
 
-    expect(() => wrapper.prop('foo').call()).toThrowError(
-      'withHandlers(): Expected a map of higher-order functions.',
+    expect(console.error).toBeCalledWith( // eslint-disable-line no-console
+      'withHandlers(): Expected a map of higher-order functions. ' +
+      'Refer to the docs for more info.',
     );
+
+    console.error = error;
+    /* eslint-enable no-console */
   });
 
   it('allows handers to be a factory', () => {
