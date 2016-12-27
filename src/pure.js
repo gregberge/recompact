@@ -15,4 +15,4 @@ import shouldUpdate from './shouldUpdate'
  */
 const pure = shouldUpdate((props, nextProps) => !shallowEqual(props, nextProps))
 
-export default createHelper(pure, 'pure', true)
+export default createHelper(pure, 'pure', true, true)

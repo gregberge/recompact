@@ -15,13 +15,8 @@ import createHelper from './createHelper'
  * // Delay rendering of 1s
  * const delayRendering = mapPropsStream(props$ => props$.delay(1000));
  */
-const mapPropsStream = propsStreamMapper => createHOCFromMapper((props$, obs) => {
-  const nextProps$ = propsStreamMapper(props$)
-  if (process.env.NODE_ENV !== 'production') {
-    const invariant = require('./utils/invariant').default // eslint-disable-line global-require
-    invariant(typeof nextProps$.subscribe === 'function', 'Expected a props Observable.')
-  }
-  return [nextProps$, obs]
-})
+const mapPropsStream = propsStreamMapper => createHOCFromMapper((props$, obs) =>
+  [propsStreamMapper(props$), obs],
+)
 
 export default createHelper(mapPropsStream, 'mapPropsStream')

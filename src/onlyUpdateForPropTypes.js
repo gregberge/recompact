@@ -40,4 +40,4 @@ const onlyUpdateForPropTypes = (BaseComponent) => {
   return onlyUpdateForKeys(Object.keys(propTypes || {}))(BaseComponent)
 }
 
-export default createHelper(onlyUpdateForPropTypes, 'onlyUpdateForPropTypes', true)
+export default createHelper(onlyUpdateForPropTypes, 'onlyUpdateForPropTypes', true, true)

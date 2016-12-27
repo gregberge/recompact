@@ -1,10 +1,12 @@
 import branch from './branch'
 import connectObs from './connectObs'
 import componentFromProp from './componentFromProp'
+import componentFromStream from './componentFromStream'
 import compose from './compose'
 import createEagerElement from './createEagerElement'
 import createEagerFactory from './createEagerFactory'
 import createEventHandler from './createEventHandler'
+import createHelper from './createHelper'
 import createSink from './createSink'
 import defaultProps from './defaultProps'
 import flattenProp from './flattenProp'
@@ -50,10 +52,12 @@ export {
   branch,
   connectObs,
   componentFromProp,
+  componentFromStream,
   compose,
   createEagerElement,
   createEagerFactory,
   createEventHandler,
+  createHelper,
   createSink,
   defaultProps,
   flattenProp,
@@ -99,10 +103,12 @@ export default {
   branch,
   connectObs,
   componentFromProp,
+  componentFromStream,
   compose,
   createEagerElement,
   createEagerFactory,
   createEventHandler,
+  createHelper,
   createSink,
   defaultProps,
   flattenProp,
