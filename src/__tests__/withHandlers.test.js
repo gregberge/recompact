@@ -63,6 +63,27 @@ describe('withHandlers', () => {
     expect(handlerCallSpy.args[2]).toEqual([3]);
   });
 
+  it('throws if handler is not a higher-order function', () => {
+    /* eslint-disable no-console */
+    const error = console.error;
+    console.error = jest.fn();
+
+    const EnhancedDummy = withHandlers({
+      foo: () => {},
+    })(Dummy);
+
+    const wrapper = shallow(<EnhancedDummy />);
+    expect(() => wrapper.prop('foo').call()).toThrowError();
+
+    expect(console.error).toBeCalledWith( // eslint-disable-line no-console
+      'withHandlers(): Expected a map of higher-order functions. ' +
+      'Refer to the docs for more info.',
+    );
+
+    console.error = error;
+    /* eslint-enable no-console */
+  });
+
   it('allows handers to be a factory', () => {
     const enhance = withHandlers((initialProps) => {
       let cache;
