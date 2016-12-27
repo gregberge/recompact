@@ -20,7 +20,7 @@
 * <a href="#lifecyclespec">`lifecycle`</a>
 * <a href="#mapobsobsmapper">`mapObs`</a>
 * <a href="#mappropspropsmapper">`mapProps`</a>
-* <a href="#mapprops$propsstreammapper">`mapProps$`</a>
+* <a href="#mappropsstreampropsstreammapper">`mapPropsStream`</a>
 * <a href="#nestcomponents">`nest`</a>
 * <a href="#omitpropspaths">`omitProps`</a>
 * <a href="#onlyupdateforkeyspropkeys">`onlyUpdateForKeys`</a>
@@ -307,8 +307,8 @@ mapProps(({count}) => ({moreThanFive: count > 5}))(MyComponent);
 
 <!-- div -->
 
-<h3 id="mapprops$propsstreammapper"><code>mapProps$(propsStreamMapper)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/mapProps$.js#L18 "View in source") [&#x24C9;][1]
+<h3 id="mappropsstreampropsstreammapper"><code>mapPropsStream(propsStreamMapper)</code></h3>
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/mapPropsStream.js#L18 "View in source") [&#x24C9;][1]
 
 Accepts a function that maps an observable stream of owner props to a stream
 of child props, rather than directly to a stream of React nodes.
@@ -323,7 +323,7 @@ The child props are then passed to a base component.
 #### Example
 ```js
 // Delay rendering of 1s
-const delayRendering = mapProps$(props$ => props$.delay(1000));
+const delayRendering = mapPropsStream(props$ => props$.delay(1000));
 ```
 ---
 
@@ -699,8 +699,8 @@ const withWindow = withContext({window: PropTypes.object.isRequired}, () => {win
 <h3 id="withhandlershandlerfactories"><code>withHandlers(handlerFactories)</code></h3>
 [&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/withHandlers.js#L50 "View in source") [&#x24C9;][1]
 
-Takes an object map of handler creators. These are higher-order functions that
-accept a set of props and return a function handler:
+Takes an object map of handler creators or a factory function. These are
+higher-order functions that accept a set of props and return a function handler:
 <br>
 <br>
 This allows the handler to access the current props via closure, without needing
@@ -714,7 +714,7 @@ new handler on every render and breaks downstream `shouldComponentUpdate()`
 optimizations that rely on prop equality.
 
 #### Arguments
-1. `handlerFactories` *(Object)*:
+1. `handlerFactories` *(Function|Object)*:
 
 #### Returns
 *(HigherOrderComponent)*: Returns a function that take a Component.

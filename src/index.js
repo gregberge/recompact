@@ -17,7 +17,7 @@ import isReferentiallyTransparentFunctionComponent
 import lifecycle from './lifecycle';
 import mapObs from './mapObs';
 import mapProps from './mapProps';
-import mapProps$ from './mapProps$';
+import mapPropsStream from './mapPropsStream';
 import nest from './nest';
 import omitProps from './omitProps';
 import onlyUpdateForKeys from './onlyUpdateForKeys';
@@ -64,7 +64,7 @@ export {
   lifecycle,
   mapObs,
   mapProps,
-  mapProps$,
+  mapPropsStream,
   nest,
   omitProps,
   onlyUpdateForKeys,
@@ -112,7 +112,7 @@ export default {
   lifecycle,
   mapObs,
   mapProps,
-  mapProps$,
+  mapPropsStream,
   nest,
   omitProps,
   onlyUpdateForKeys,
