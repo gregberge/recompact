@@ -2,16 +2,19 @@
 import { createChangeEmitter } from 'change-emitter'
 import createObservable from './createObservable'
 
-const createSubject = () => {
+const createBehaviorSubject = (initial) => {
+  let last = initial
   const emitter = createChangeEmitter()
   const observable = createObservable((observer) => {
-    const unsubscribe = emitter.listen(
-      props => observer.next(props),
-    )
+    const unsubscribe = emitter.listen((value) => {
+      last = value
+      observer.next(value)
+    })
+    observer.next(last)
     return { unsubscribe }
   })
   observable.next = ::emitter.emit
   return observable
 }
 
-export default createSubject
+export default createBehaviorSubject

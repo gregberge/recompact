@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import createSubject from './utils/createSubject'
+import createBehaviorSubject from './utils/createBehaviorSubject'
 import { config as globalConfig } from './setObservableConfig'
 
 export const componentFromStreamWithConfig = config => propsToVdom =>
@@ -7,7 +7,7 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
     state = { vdom: null };
 
     // Stream of props
-    props$ = createSubject()
+    props$ = createBehaviorSubject(this.props)
 
     // Stream of vdom
     vdom$ = config.toESObservable(propsToVdom(this.props$));
@@ -19,7 +19,6 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
           this.setState({ vdom })
         },
       })
-      this.props$.next(this.props)
     }
 
     componentWillReceiveProps(nextProps) {

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Component, PropTypes } from 'react'
-import createSubject from './createSubject'
+import createBehaviorSubject from './createBehaviorSubject'
 import createSymbol from './createSymbol'
 import createEagerFactory from '../createEagerFactory'
 import { getConfig } from '../setConfig'
@@ -21,7 +21,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
     static contextTypes = CONTEXT_TYPES;
     static childContextTypes = CONTEXT_TYPES;
 
-    props$ = createSubject();
+    props$ = createBehaviorSubject(this.props);
 
     componentWillMount() {
       const [childProps$, childObservables] =
@@ -36,7 +36,6 @@ const createComponentFromMappers = (mappers, childFactory) => {
       })
 
       this.childContext = { [OBSERVABLES]: childObservables }
-      this.props$.next(this.props)
     }
 
     getChildContext() {
