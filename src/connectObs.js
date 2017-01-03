@@ -57,9 +57,9 @@ const checkObservable = (observable, name) => {
  *   value: value$,
  * }))('input');
  */
-const connectObs = obsMapper => withObs(({ props$, ...observables }) => {
+const connectObs = obsMapper => withObs((observables) => {
   const nextProps$ = createObservable((observer) => {
-    const obsMap = obsMapper({ ...observables, props$ })
+    const obsMap = obsMapper(observables)
     checkObsMap(obsMap)
     let props
     const obsProps = {}
@@ -91,7 +91,7 @@ const connectObs = obsMapper => withObs(({ props$, ...observables }) => {
       }
     })
 
-    obsConfig.toESObservable(props$).subscribe({
+    obsConfig.toESObservable(observables.props$).subscribe({
       next(nextProps) {
         props = nextProps
         update()

@@ -32,6 +32,22 @@ describe('connectObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('bar')
   })
 
+  it('should connect symbols', () => {
+    const CLASSNAME$ = Symbol('className$')
+    const baseClassName$ = new Rx.BehaviorSubject('foo')
+    const Component = compose(
+      withObs({ [CLASSNAME$]: baseClassName$ }),
+      connectObs(({ [CLASSNAME$]: className$ }) => ({ className: className$ })),
+    )('div')
+
+    const wrapper = mount(<Component />)
+    expect(wrapper.find('div').prop('className')).toBe('foo')
+
+    baseClassName$.next('bar')
+
+    expect(wrapper.find('div').prop('className')).toBe('bar')
+  })
+
   it('should connect observer to props', () => {
     const baseChange$ = new Rx.Subject()
     const changeSpy = jest.fn()
