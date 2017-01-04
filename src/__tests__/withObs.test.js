@@ -30,6 +30,21 @@ describe('withObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('foo')
   })
 
+  it('should be possible to provide some symbols', () => {
+    const FOO$ = Symbol('foo$')
+    const baseFoo$ = Rx.Observable.of('foo')
+    const Component = compose(
+      withObs(() => ({ [FOO$]: baseFoo$ })),
+      withObs(() => ({})),
+      withObs(({ props$, [FOO$]: foo$ }) => ({
+        props$: props$.combineLatest(foo$, (_, foo) => ({ className: foo })),
+      })),
+    )('div')
+
+    const wrapper = mount(<Component />)
+    expect(wrapper.find('div').prop('className')).toBe('foo')
+  })
+
   it('should be merged with other hoc', () => {
     const Component = compose(
       withObs(() => ({})),
