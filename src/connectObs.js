@@ -36,6 +36,16 @@ const checkObservable = (observable, name) => {
   }
 }
 
+function handleError(error) {
+  try {
+    throw error
+  } catch (e) {
+    setTimeout(() => {
+      throw e
+    })
+  }
+}
+
 /**
  * Connect observables to props using a map.
  *
@@ -87,6 +97,7 @@ const connectObs = obsMapper => withObs((observables) => {
             obsProps[key] = value
             update()
           },
+          error: handleError,
         })
       }
     })
@@ -96,6 +107,7 @@ const connectObs = obsMapper => withObs((observables) => {
         props = nextProps
         update()
       },
+      error: handleError,
     })
   })
 

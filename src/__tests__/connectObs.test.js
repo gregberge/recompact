@@ -105,6 +105,26 @@ describe('connectObs', () => {
     expect(spy.mock.calls[0][0].bar).toBe(undefined)
   })
 
+  it('should not block rendering if there is an error', () => {
+    const spy = jest.fn()
+    const Component = compose(
+      withObs({
+        foo$: Rx.Observable.throw(new Error('too bad')),
+      }),
+      connectObs(({ foo$ }) => ({
+        foo: foo$,
+      })),
+      mapProps((props) => {
+        spy(props)
+        return props
+      }),
+    )(Dummy)
+
+    mount(<Component />)
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy.mock.calls[0][0].foo).toBe(undefined)
+  })
+
   it('should be merged with other hoc', () => {
     const Component = compose(
       withObs({ className$: Rx.Observable.of('foo') }),
