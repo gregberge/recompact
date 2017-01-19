@@ -28,6 +28,12 @@ describe('pure', () => {
     expect(dummy.prop('renderCount')).toBe(2)
   })
 
+  it('should add correct display name', () => {
+    const Component = pure(Dummy)
+    const wrapper = shallow(<Component />)
+    expect(wrapper.instance().constructor.displayName).toBe('pure(Dummy)')
+  })
+
   it('should be merged with other hoc', () => {
     const Component = compose(
       pure,
