@@ -1,4 +1,5 @@
 import createObservable from './utils/createObservable'
+import asyncThrow from './utils/asyncThrow'
 import createHelper from './createHelper'
 import withObs from './withObs'
 import { config as obsConfig } from './setObservableConfig'
@@ -33,16 +34,6 @@ const checkObservable = (observable, name) => {
         + `'${observable}' instead.`,
       )
     }
-  }
-}
-
-function handleError(error) {
-  try {
-    throw error
-  } catch (e) {
-    setTimeout(() => {
-      throw e
-    })
   }
 }
 
@@ -97,7 +88,7 @@ const connectObs = obsMapper => withObs((observables) => {
             obsProps[key] = value
             update()
           },
-          error: handleError,
+          error: asyncThrow,
         })
       }
     })
@@ -107,7 +98,7 @@ const connectObs = obsMapper => withObs((observables) => {
         props = nextProps
         update()
       },
-      error: handleError,
+      error: asyncThrow,
     })
   })
 
