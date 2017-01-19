@@ -54,6 +54,7 @@
 * <a href="#composefuncs">`compose`</a>
 * <a href="#createeagerelementtype-props-children">`createEagerElement`</a>
 * <a href="#createeagerfactorytype">`createEagerFactory`</a>
+* <a href="#createeventhandler">`createEventHandler`</a>
 * <a href="#createhelperhoc-helpername-noargsfalse">`createHelper`</a>
 * <a href="#createsinkcallback">`createSink`</a>
 * <a href="#getdisplaynamecomponent">`getDisplayName`</a>
@@ -126,7 +127,7 @@ branch(({count}) => count === 0, renderNothing)(MyComponent);
 <!-- div -->
 
 <h3 id="connectobsobsmapper"><code>connectObs(obsMapper)</code></h3>
-[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/connectObs.js#L60 "View in source") [&#x24C9;][1]
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/connectObs.js#L70 "View in source") [&#x24C9;][1]
 
 Connect observables to props using a map.
 <br>
@@ -1056,6 +1057,26 @@ an element of the given type.
 ```js
 const div = createFactory('div');
 div({className: 'foo'});
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="createeventhandler"><code>createEventHandler()</code></h3>
+[&#x24C8;](https://github.com/neoziro/recompact/blob/0.0.0/src/createEventHandler.js#L36 "View in source") [&#x24C9;][1]
+
+Returns an object with properties handler and stream. stream is an observable
+sequence, and handler is a function that pushes new values onto the sequence.
+Useful for creating event handlers like onClick.
+
+#### Returns
+*(Object)*: eventHandler
+
+#### Example
+```js
+const {handler, stream} = createEventHandler();
 ```
 ---
 
