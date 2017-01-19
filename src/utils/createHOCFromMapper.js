@@ -2,19 +2,10 @@
 import { Component, PropTypes } from 'react'
 import createBehaviorSubject from './createBehaviorSubject'
 import createSymbol from './createSymbol'
+import asyncThrow from './asyncThrow'
 import createEagerFactory from '../createEagerFactory'
 import { getConfig } from '../setConfig'
 import { config as obsConfig } from '../setObservableConfig'
-
-function handleError(error) {
-  try {
-    throw error
-  } catch (e) {
-    setTimeout(() => {
-      throw e
-    })
-  }
-}
 
 const MAPPERS_INFO = createSymbol('mappersInfo')
 
@@ -39,7 +30,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
       this.childPropsSubscription = obsConfig.toESObservable(childProps$).subscribe({
         next: childProps => this.setState({ childProps }),
         error: (error) => {
-          handleError(error)
+          asyncThrow(error)
           this.setState({ childProps: this.state ? this.state.childProps : {} })
         },
       })
