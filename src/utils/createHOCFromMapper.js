@@ -76,7 +76,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
 }
 
 export const isMapperComponent = BaseComponent =>
-  typeof BaseComponent === 'function' && MAPPERS_INFO in BaseComponent
+  typeof BaseComponent === 'function' && BaseComponent[MAPPERS_INFO]
 
 export default mapper => (BaseComponent) => {
   if (isMapperComponent(BaseComponent)) {
