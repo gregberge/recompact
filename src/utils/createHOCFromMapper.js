@@ -6,8 +6,14 @@ import createEagerFactory from '../createEagerFactory'
 import { getConfig } from '../setConfig'
 import { config as obsConfig } from '../setObservableConfig'
 
-const throwError = (error) => {
-  throw error
+function handleError(error) {
+  try {
+    throw error
+  } catch (e) {
+    setTimeout(() => {
+      throw e
+    })
+  }
 }
 
 const MAPPERS_INFO = createSymbol('mappersInfo')
@@ -32,7 +38,10 @@ const createComponentFromMappers = (mappers, childFactory) => {
 
       this.childPropsSubscription = obsConfig.toESObservable(childProps$).subscribe({
         next: childProps => this.setState({ childProps }),
-        error: throwError,
+        error: (error) => {
+          handleError(error)
+          this.setState({ childProps: this.state ? this.state.childProps : {} })
+        },
       })
 
       this.childContext = { [OBSERVABLES]: childObservables }

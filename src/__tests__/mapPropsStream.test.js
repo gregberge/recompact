@@ -54,16 +54,15 @@ describe('mapPropsStream', () => {
     shallow(<Div strings={['a', 'b', 'c']} />)
   })
 
-  it('props$ should throw errors', () => {
-    const props$ = new Rx.BehaviorSubject({})
+  it('props$ should not throw errors', () => {
+    const props$ = Rx.Observable.of({})
 
-    const Div = mapPropsStream(() => props$.map(() => {
+    const Component = mapPropsStream(() => props$.map(() => {
       throw new Error('Too bad')
-    }))('div')
+    }))(Dummy)
 
-    expect(() => {
-      shallow(<Div />)
-    }).toThrow()
+    const wrapper = shallow(<Component />)
+    expect(wrapper.equals(<Dummy />)).toBeTruthy()
   })
 
   it('should be merged with other hoc', () => {
