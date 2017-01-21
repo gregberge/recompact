@@ -28,11 +28,23 @@ import mapProps from 'recompact/mapProps';
 
 ## Recompact vs. Recompose
 
-Recompact is a drop-in replacement for [Recompose](https://github.com/acdlite/recompose) with better performance. You may have noticed the
+Recompact is a drop-in replacement for [Recompose](https://github.com/acdlite/recompose) with better performance.
+
+### Flattened React components tree
+
+You may have noticed the
 "compact" keyword in "Recompact". It's the main differences between Recompose and Recompact.
 Recompact compacts all higher-order components into a single one. It results in a flatter React
 tree. A flatter React tree has several advantages: performance improvement, better debugging (especially in React Developer Tools)
 and easier testing.
+
+Let's take two components using composition, [one using recompose](https://github.com/neoziro/recompact/blob/master/examples/RecomposeCounter.js) and [one using recompact](https://github.com/neoziro/recompact/blob/master/examples/RecompactCounter.js).
+
+The two components are similar, but if you take a look at the React component tree (using React Developer Tool), you can see that the component using recompact is flat:
+
+<img width="401" alt="recompact-vs-recompose" src="https://cloud.githubusercontent.com/assets/266302/22173590/aff1866a-dfc8-11e6-983f-78dd3f84db56.png">
+
+### New methods
 
 Recompact also features higher-order components that are not included in Recompose:
 
@@ -42,10 +54,9 @@ Recompact also features higher-order components that are not included in Recompo
 And some very specific higher-order components that give you a lot of power:
 
 - [connectObs](https://github.com/neoziro/recompact/tree/master/docs#connectobsobsmapper)
-- [mapObs](https://github.com/neoziro/recompact/tree/master/docs#mapobsobsmapper)
 - [withObs](https://github.com/neoziro/recompact/tree/master/docs#withobsobsmapper)
 
-## Build your app using streams
+## Using connectObs and withObs to build your application
 
 One of the biggest challenge in an application is the communication between components, imagine that your counter has to be displayed in the header and that you have some buttons in the UI, in other components that increments it.
 
