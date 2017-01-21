@@ -10,7 +10,8 @@
   "scripts": {
     "build:doc": "babel-node ./scripts/build-doc",
     "build:lib": "rm -rf lib/ && babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json && rm -rf lib/__benchmarks__",
-    "test": "eslint . && jest -i"
+    "test": "eslint . && jest -i",
+    "examples": "webpack-dev-server"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",
@@ -36,6 +37,7 @@
     "babel-cli": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^18.0.0",
+    "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
@@ -48,6 +50,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "fs-extra": "^1.0.0",
+    "html-webpack-plugin": "^2.26.0",
     "jest": "^18.0.0",
     "jsdom": "^9.9.1",
     "microtime": "^2.1.2",
@@ -56,6 +59,8 @@
     "react-dom": "^15.3.2",
     "recompose": "^0.21.2",
     "rxjs": "^5.0.2",
-    "sinon": "^1.17.6"
+    "sinon": "^1.17.6",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
   }
 }

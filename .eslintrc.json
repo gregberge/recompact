@@ -3,6 +3,7 @@
   "extends": ["airbnb"],
   "rules": {
     "semi": ["error", "never"],
-    "react/jsx-filename-extension": ["error", {"extensions": [".js"]}]
+    "react/jsx-filename-extension": ["error", {"extensions": [".js"]}],
+    "import/no-extraneous-dependencies": "off"
   }
 }
