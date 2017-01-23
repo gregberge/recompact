@@ -2,7 +2,7 @@
 
 [![build status](https://img.shields.io/travis/neoziro/recompact/master.svg?style=flat-square)](https://travis-ci.org/neoziro/recompact)
 
-Recompact is a set of React higher-order components for reactive programming. It's a tiny framework inspired by [Recompose](https://github.com/acdlite/recompose) to unleash the power of streams inside your React application.
+Recompact is a set of React higher-order components for reactive programming. It's a tiny framework inspired by [Recompose](https://github.com/acdlite/recompose) to unleash the power of observables inside your React application.
 
 ## Installation and Usage
 
@@ -56,15 +56,13 @@ And some very specific higher-order components that give you a lot of power:
 - [connectObs](https://github.com/neoziro/recompact/tree/master/docs#connectobsobsmapper)
 - [withObs](https://github.com/neoziro/recompact/tree/master/docs#withobsobsmapper)
 
-## Using connectObs and withObs to build your application
+## Using `connectObs` and `withObs` to build your application
 
-One of the biggest challenge in an application is the communication between components, imagine that your counter has to be displayed in the header and that you have some buttons in the UI, in other components that increments it.
+One of the biggest challenges in applications is communication between components. Imagine that you are building a complex app with a counter and a button to increment this counter, spread across completely different parts of the UI.
 
-We will have to introduce another concept: the context, the context is a global object that a component can make it accessible to its children. In our stack, we put some observables in the context in order to make them accessible across the entire application.
+Recompact makes it is easy to deal with this kind of problem. Here is what we need to do:
 
-So it's simple, we have three things to do:
-
-- Provide the counter at the point of sharing (all children that need to access to it must be in the subtree of this component). For us, it will be the root component of our application.
+- Provide a counter observable at the point of sharing (all children that need to access it must be in the subtree of this component).
 - Connect the `counter` prop where we need to display it.
 - Connect the `onIncrementCounter` function where we need to interact with it.
 
@@ -87,18 +85,18 @@ export const connectCounterControls = connectObs(({incrementCounter$}) => ({
 }))
 ```
 
-> We have created three functions for each concern: providing, connecting value, connecting controls.
+> We have created three functions for each concern: providing the counter observables, connecting the counter value and connecting the counter controls.
 
 ### Collisions of observables
 
-Observables are stored under a symbolize key in the context, like you know, context is global in the application. When you provide some observables into the context at the root point, a provide can override your key and you can have an unpredictable behaviour.
+Observables are stored under a symbolize key in the context (like you know, context is global in the application). When you provide observables into the context at the root point, a provide can override your key and you can have an unpredictable behaviour.
 
 To avoid this problem, you have two solutions:
 
 - Naming observables with a specific name (`counter$` VS `globalApplicationCounter$`)
 - Using [ES6 Symbols](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Symbol) as key
 
-Symbols are immutable and unique object that can be used as an object key, if you use a symbol as an object key you are 100% sure that it could not be overrided. *Warning: properties using Symbol as key are not enumerable by default, if you log the observables object you will not see them.*
+Symbols are immutable and unique object that can be used as an object key, if you use a symbol as an object key you are 100% sure that it could not be overridden. *Warning: properties using Symbol as key are not enumerable by default, if you log the observables object you will not see them.*
 
 ```js
 // counterLogic.js
