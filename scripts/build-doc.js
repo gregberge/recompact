@@ -22,7 +22,7 @@ const config = {
   style: 'github',
   files: modules.map(name => ({
     path: path.join(basePath, 'src', `${name}.js`),
-    url: `https://github.com/neoziro/recompact/blob/${version}/src/${name}.js`,
+    url: `https://github.com/neoziro/recompact/blob/v${version}/src/${name}.js`,
   })),
 }
 
