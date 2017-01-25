@@ -8,6 +8,7 @@ import createEagerFactory from './createEagerFactory'
 import createEventHandler from './createEventHandler'
 import createHelper from './createHelper'
 import createSink from './createSink'
+import debug from './debug'
 import defaultProps from './defaultProps'
 import flattenProp from './flattenProp'
 import getContext from './getContext'
@@ -59,6 +60,7 @@ export {
   createEventHandler,
   createHelper,
   createSink,
+  debug,
   defaultProps,
   flattenProp,
   getContext,
@@ -110,6 +112,7 @@ export default {
   createEventHandler,
   createHelper,
   createSink,
+  debug,
   defaultProps,
   flattenProp,
   getContext,

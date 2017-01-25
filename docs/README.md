@@ -14,6 +14,7 @@
 ## `Higher-order-components`
 * <a href="#branchtest-left-rightidentity">`branch`</a>
 * <a href="#connectobsobsmapper">`connectObs`</a>
+* <a href="#debuglabel-selector">`debug`</a>
 * <a href="#defaultpropsdefaultprops">`defaultProps`</a>
 * <a href="#flattenproppropname">`flattenProp`</a>
 * <a href="#getcontextcontexttypes">`getContext`</a>
@@ -154,6 +155,34 @@ connectObs(({change$, value$}) => ({
   onChange: change$,
   value: value$,
 }))('input');
+```
+---
+
+<!-- /div -->
+
+<!-- div -->
+
+<h3 id="debuglabel-selector"><code>debug(label, selector)</code></h3>
+[&#x24C8;](https://github.com/neoziro/recompact/blob/1.0.2/src/debug.js#L23 "View in source") [&#x24C9;][1]
+
+Display the flow of props.
+Very useful for debugging higher-order component stack.
+
+#### Arguments
+1. `label` *(&#42;)*: A label displayed in console.
+2. `selector` *(Function)*: A props selector.
+
+#### Returns
+*(HigherOrderComponent)*: Returns a function that take a Component.
+
+#### Example
+```js
+recompact.compose(
+  recompact.withProps({ foo: 'bar' }),
+  recompact.debug(),
+  recompact.renameProp('foo', 'className'),
+  recompact.debug(),
+)('input')
 ```
 ---
 
