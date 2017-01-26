@@ -14,7 +14,7 @@ import updateProps from './utils/updateProps'
  * @static
  * @category Higher-order-components
  * @param {Function|Object} propsMapper
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * const Button = withProps({type: 'button'})('button');

@@ -9,7 +9,7 @@ import mapProps from './mapProps'
  * @category Higher-order-components
  * @param {String} oldName
  * @param {String} newName
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * renameProp('data', 'value')

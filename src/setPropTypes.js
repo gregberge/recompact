@@ -6,7 +6,7 @@ import setStatic from './setStatic'
  * @static
  * @category Higher-order-components
  * @param {Object} propTypes
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * setPropTypes({children: PropTypes.node})(MyComponent);

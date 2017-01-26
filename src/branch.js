@@ -15,7 +15,7 @@ import identity from './identity'
  *  of the test is true.
  * @param {HigherOrderComponent} [right=identity] The higher-order component applied if the result
  *  of the test is false.
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * // Add the logic or rendering nothing if the prop `count` equals to `0`.
