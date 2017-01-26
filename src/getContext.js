@@ -7,7 +7,7 @@ import createEagerFactory from './createEagerFactory'
  * @static
  * @category Higher-order-components
  * @param {Object} contextTypes Context types to inject as props.
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * // Create a component that will bring back to home when clicked

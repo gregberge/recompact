@@ -13,7 +13,7 @@ import createHelper from './createHelper'
  * @static
  * @category Higher-order-components
  * @param {Object} spec Lifecycle spec
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * // Create a hoc that will log when a component will mount

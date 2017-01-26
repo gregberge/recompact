@@ -114,7 +114,7 @@ component is applied *(defaults to identity)*.
 3. `[right=identity]` *(HigherOrderComponent)*: The higher-order component applied if the result of the test is false.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -147,7 +147,7 @@ the associated Observer.
 1. `obsMapper` *(Function)*: The function that takes observables and returns map.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -173,7 +173,7 @@ Very useful for debugging higher-order component stack.
 2. `selector` *(Function)*: A props selector.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -199,7 +199,7 @@ Specify props values that will be used if the prop is `undefined`.
 1. `defaultProps` *(Object)*: Default props.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -221,7 +221,7 @@ Flattens a prop so that its fields are spread out into the props object.
 1. `propName` *(String)*: Name of the prop to flatten.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -243,7 +243,7 @@ Gets values from context and passes them along as props.
 1. `contextTypes` *(Object)*: Context types to inject as props.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -273,7 +273,7 @@ case you need to access component lifecycle methods.
 1. `spec` *(Object)*: Lifecycle spec
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -296,7 +296,7 @@ to a new set of observables.
 1. `obsMapper` *(Function)*: The function that take previous observables and returns new ones.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -324,7 +324,7 @@ are passed to the base component.
 1. `propsMapper` *(Function)*: The function that returns new props.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -348,7 +348,7 @@ The child props are then passed to a base component.
 1. `propsStreamMapper` *(Function)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -394,7 +394,7 @@ Same as lodash `omit` but for props.
 1. `paths` *(String|String&#91;&#93;)*: The property paths to omit.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -422,7 +422,7 @@ props that you specify.
 1. `propKeys` *(String&#91;&#93;)*: The property keys that will induce a re-render.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -446,7 +446,7 @@ receive any updates. This probably isn't the expected behavior, so a warning
 is printed to the console.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -469,7 +469,7 @@ Same as lodash `pick` but for props.
 1. `paths` *(String|String&#91;&#93;)*: The property paths to pick.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -488,7 +488,7 @@ Prevents the component from updating unless a prop has changed.
 Uses `shallowEqual()` to test for changes.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -510,7 +510,7 @@ Renames a single prop.
 2. `newName` *(String)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -531,7 +531,7 @@ Renames multiple props, using a map of old prop names to new prop names.
 1. `nameMap` *(Object)*: A map with old prop as key and new prop as value.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -554,7 +554,7 @@ component, like `branch`.
 1. `Component` *(ReactClass|ReactFunctionalComponent|String)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -575,7 +575,7 @@ const renderLoaderIfLoading = branch(
 A higher-order component that always renders `null`.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -599,7 +599,7 @@ Assigns to the `displayName` property on the base component.
 1. `displayName` *(String)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -620,7 +620,7 @@ Assigns to the `propTypes` property on the base component.
 1. `propTypes` *(Object)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -642,7 +642,7 @@ Assigns a value to a static property on the base component.
 2. `value` *(String)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -665,7 +665,7 @@ The test function accepts both the current props and the next props.
 1. `test` *(Function)*: Receive two arguments, props and nextProps
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -688,7 +688,7 @@ fallback for libraries that need to add a ref to a component, like Relay.
 If the base component is already a class, it returns the given component.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -713,7 +713,7 @@ the child context. Use along with `getContext()`.
 2. `getChildContext` *(Function)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -747,7 +747,7 @@ optimizations that rely on prop equality.
 1. `handlerFactories` *(Function|Object)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -787,7 +787,7 @@ Similar to `mapObs` except that observables will be merged to the previous ones.
 1. `obsMapper` *(Function)*: The function that take previous observables and returns new ones.
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -819,7 +819,7 @@ props from the owner.
 1. `propsMapper` *(Function|Object)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -849,7 +849,7 @@ you to customize when `createProps()` should be called.
 2. `createProps` *(Function)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -879,7 +879,7 @@ the new state is applied.
 4. `initialState` *(&#42;)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js
@@ -951,7 +951,7 @@ or a function that returns an initial state given the initial props.
 4. `initialState` *(&#42;|Function)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 ---
 
@@ -1210,7 +1210,7 @@ will also be ignored: name, length, prototype, caller, arguments, and arity
 1. `hoc` *(HigherOrderComponent)*:
 
 #### Returns
-*(HigherOrderComponent)*: Returns a function that take a Component.
+*(HigherOrderComponent)*: A function that takes a component and returns a new component.
 
 #### Example
 ```js

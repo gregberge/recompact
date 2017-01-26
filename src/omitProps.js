@@ -8,7 +8,7 @@ import mapProps from './mapProps'
  * @static
  * @category Higher-order-components
  * @param {String|String[]} paths The property paths to omit.
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @see https://lodash.com/docs/master#omit
  * @example
  *

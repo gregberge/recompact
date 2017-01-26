@@ -10,7 +10,7 @@ import getDisplayName from './getDisplayName'
  * @category Higher-order-components
  * @param {*} label A label displayed in console.
  * @param {Function} selector A props selector.
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * recompact.compose(

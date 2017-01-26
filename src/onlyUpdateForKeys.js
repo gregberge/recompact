@@ -15,7 +15,7 @@ import shouldUpdate from './shouldUpdate'
  * @static
  * @category Higher-order-components
  * @param {String[]} propKeys The property keys that will induce a re-render.
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @see shouldUpdate
  * @example
  *

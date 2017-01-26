@@ -20,7 +20,7 @@ export const INIT = createSymbol('INIT')
  * @param {String} dispatchName
  * @param {Function} reducer
  * @param {*} initialState
- * @returns {HigherOrderComponent} Returns a function that take a Component.
+ * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  * @example
  *
  * const counterReducer = (count, action) => {
