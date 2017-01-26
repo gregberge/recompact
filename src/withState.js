@@ -50,7 +50,7 @@ const withState = (stateName, stateUpdaterName, initialState) =>
     let previousStateValue
 
     const updateState = (nextState) => {
-      update(previousProps, callOrUse(nextState)(previousStateValue))
+      update(previousProps, callOrUse(nextState, previousStateValue))
     }
 
     const update = (props, stateValue) => {
@@ -68,7 +68,7 @@ const withState = (stateName, stateUpdaterName, initialState) =>
       update(
         props,
         !previousProps
-          ? callOrUse(initialState)(props)
+          ? callOrUse(initialState, props)
           : previousStateValue,
       )
     }

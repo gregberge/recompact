@@ -20,17 +20,16 @@ import updateProps from './utils/updateProps'
  * const Button = withProps({type: 'button'})('button');
  * const XButton = withProps(({type}) => {type: `x${type}`})('button');
  */
-const withProps = (propsMapper) => {
-  const propsOrMapper = callOrUse(propsMapper)
-  return createCompactableHOC(
+const withProps = propsMapper => (
+  createCompactableHOC(
     updateProps(next => (props) => {
-      next({ ...props, ...propsOrMapper(props) })
+      next({ ...props, ...callOrUse(propsMapper, props) })
     }),
     (BaseComponent) => {
       const factory = createEagerFactory(BaseComponent)
-      return props => factory({ ...props, ...propsOrMapper(props) })
+      return props => factory({ ...props, ...callOrUse(propsMapper, props) })
     },
   )
-}
+)
 
 export default createHelper(withProps, 'withProps')

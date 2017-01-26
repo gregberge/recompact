@@ -1,5 +1,5 @@
-export default fn => (a, b, c) => (
-  typeof fn === 'function'
-    ? fn(a, b, c)
-    : fn
+export default (fnOrObject, a, b, c) => (
+  typeof fnOrObject === 'function'
+    ? fnOrObject(a, b, c)
+    : fnOrObject
 )

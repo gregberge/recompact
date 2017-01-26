@@ -69,7 +69,7 @@ const withReducer = (stateName, dispatchName, reducer, initialState) =>
         initialized = true
 
         if (initialState !== undefined) {
-          updateState(callOrUse(initialState)(props))
+          updateState(callOrUse(initialState, props))
         } else {
           updateState(reducer(undefined, { type: INIT }))
         }

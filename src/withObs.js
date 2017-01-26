@@ -20,7 +20,7 @@ import createHelper from './createHelper'
  * }))
  */
 const withObs = obsMapper => createHOCFromMapper((props$, obs) => {
-  const nextObs = callOrUse(obsMapper)({ ...obs, props$ })
+  const nextObs = callOrUse(obsMapper, { ...obs, props$ })
   const { props$: nextProps$ = props$ } = nextObs
   delete nextObs.props$
   return [nextProps$, { ...obs, ...nextObs }]
