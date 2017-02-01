@@ -26,6 +26,8 @@ import mapProps from 'recompact/mapProps';
 
 ## [Documentation](https://github.com/neoziro/recompact/tree/master/docs)
 
+## [Benchmarks](https://github.com/neoziro/recompact/tree/master/src/__benchmarks__)
+
 ## Recompact vs. Recompose
 
 Recompact is a drop-in replacement for [Recompose](https://github.com/acdlite/recompose) with better performance.

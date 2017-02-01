@@ -1,4 +1,7 @@
 {
+  "env": {
+    "browser": true
+  },
   "rules": {
     "func-names": "off",
     "global-require": "off",

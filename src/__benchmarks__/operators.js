@@ -14,4 +14,6 @@ series([
   () => benchOperator('withPropsOnChange', ['n'], ({ n }) => ({ x: n })),
   () => benchOperator('withReducer', 'state', 'dispatch', () => ({})),
   () => benchOperator('withState', 'counter', 'updateCounter', 0),
-])
+]).catch((err) => {
+  console.error(err)
+})

@@ -1,44 +1,62 @@
 /* eslint-disable no-plusplus */
 import './setup'
 import React from 'react'
-import { mount } from 'enzyme'
-import recomposeSetDisplayName from 'recompose/setDisplayName'
-import recomposeDefaultProps from 'recompose/defaultProps'
-import recomposeWithProps from 'recompose/withProps'
-import recomposeRenameProp from 'recompose/renameProp'
-import recomposeWithState from 'recompose/withState'
-import recomposePure from 'recompose/pure'
-import compose from '../compose'
-import recompactSetDisplayName from '../setDisplayName'
-import recompactDefaultProps from '../defaultProps'
-import recompactWithProps from '../withProps'
-import recompactWithState from '../withState'
-import recompactRenameProp from '../renameProp'
-import recompactPure from '../pure'
+import ReactDOM from 'react-dom'
+import * as recompose from 'recompose'
+import * as reassemble from 'reassemble'
+import * as recompact from '../'
 import { runBenchmark, series } from './utils'
 
-const RecompactComponent = compose(
-  recompactSetDisplayName('foo'),
-  recompactPure,
-  recompactDefaultProps({ foo: 'bar' }),
-  recompactWithState('counter', 'updateCounter', 0),
-  recompactWithProps(({ counter }) => ({ counter: counter + 1 })),
-  recompactRenameProp('updateCounter', 'up'),
-)(() => <div />)
+const createComponent = ({
+  compose,
+  setDisplayName,
+  pure,
+  defaultProps,
+  withState,
+  withProps,
+  renameProp,
+}) => {
+  const LibComponent = compose(
+    setDisplayName('foo'),
+    pure,
+    defaultProps({ foo: 'bar' }),
+    withState('counter', 'updateCounter', 0),
+    withProps(({ counter }) => ({ counter: counter + 1 })),
+    renameProp('updateCounter', 'up'),
+  )(() => <div />)
 
-const RecomposeComponent = compose(
-  recomposeSetDisplayName('foo'),
-  recomposePure,
-  recomposeDefaultProps({ foo: 'bar' }),
-  recomposeWithState('counter', 'updateCounter', 0),
-  recomposeWithProps(({ counter }) => ({ counter: counter + 1 })),
-  recomposeRenameProp('updateCounter', 'up'),
-)(() => <div />)
+  const ComponentWrapper = class extends React.Component {
+    state = {}
+
+    constructor(props) {
+      super(props)
+      ComponentWrapper.setProps = this.setState.bind(this)
+    }
+
+    render() {
+      return <LibComponent {...this.state} />
+    }
+  }
+
+  return ComponentWrapper
+}
+
+const container = document.createElement('div')
+document.body.appendChild(container)
+
+function render(node) {
+  ReactDOM.render(node, container)
+}
+
+function cleanup() {
+  ReactDOM.unmountComponentAtNode(container)
+}
+
 
 const Nothing = () => null
-const nothingWrapper = mount(<Nothing />)
-const recompactWrapper = mount(<RecompactComponent bar="x" />)
-const recomposeWrapper = mount(<RecomposeComponent bar="x" />)
+const Recompacted = createComponent(recompact)
+const Recomposed = createComponent(recompose)
+const Reassembled = createComponent(reassemble)
 
 let count
 
@@ -47,20 +65,38 @@ series([
   () => runBenchmark([
     {
       description: 'nothing',
+      onComplete() {
+        cleanup()
+      },
       run() {
-        mount(<Nothing />)
+        render(<Nothing />)
       },
     },
     {
       description: '❤️  recompact',
+      onComplete() {
+        cleanup()
+      },
       run() {
-        mount(<RecompactComponent />)
+        render(<Recompacted />)
       },
     },
     {
       description: '💙  recompose',
+      onComplete() {
+        cleanup()
+      },
       run() {
-        mount(<RecomposeComponent />)
+        render(<Recomposed />)
+      },
+    },
+    {
+      description: '💚  reassemble',
+      onComplete() {
+        cleanup()
+      },
+      run() {
+        render(<Reassembled />)
       },
     },
   ], '[mount]'),
@@ -68,28 +104,50 @@ series([
     {
       description: 'nothing',
       onStart() {
+        render(<Nothing />)
         count = 0
       },
       run() {
-        nothingWrapper.setProps({ foo: count++ })
+        Nothing.setProps({ foo: count++ })
       },
     },
     {
       description: '❤️  recompact',
       onStart() {
+        render(<Recompacted />)
         count = 0
       },
+      onComplete() {
+        cleanup()
+      },
       run() {
-        recompactWrapper.setProps({ foo: count++ })
+        Recompacted.setProps({ foo: count++ })
       },
     },
     {
       description: '💙  recompose',
       onStart() {
+        render(<Recomposed />)
         count = 0
       },
+      onComplete() {
+        cleanup()
+      },
       run() {
-        recomposeWrapper.setProps({ foo: count++ })
+        Recomposed.setProps({ foo: count++ })
+      },
+    },
+    {
+      description: '💚  reassembled',
+      onStart() {
+        render(<Reassembled />)
+        count = 0
+      },
+      onComplete() {
+        cleanup()
+      },
+      run() {
+        Reassembled.setProps({ foo: count++ })
       },
     },
   ], '[setProps]'),
