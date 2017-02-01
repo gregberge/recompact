@@ -1,8 +1,10 @@
-/* eslint-disable no-plusplus */
+/* eslint-disable no-plusplus, max-len */
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Benchmark from 'benchmark'
-import { mount } from 'enzyme'
-import compose from '../compose'
+import * as recompose from 'recompose'
+import * as reassemble from 'reassemble'
+import * as recompact from '../'
 import './setup'
 
 const TIME_BETWEEN = 1000
@@ -51,33 +53,70 @@ export const runBenchmark = (benchs, name) =>
 
 const fill = i => (new Array(100)).fill(i)
 
+const wrap = (node) => {
+  const ComponentWrapper = class extends React.Component {
+    state = {}
+
+    constructor(props) {
+      super(props)
+      ComponentWrapper.setProps = this.setState.bind(this)
+    }
+
+    render() {
+      return React.cloneElement(node, { ...this.props, ...this.state })
+    }
+  }
+
+  return ComponentWrapper
+}
+
+const container = document.createElement('div')
+document.body.appendChild(container)
+
+function render(node) {
+  ReactDOM.render(node, container)
+}
+
+function cleanup() {
+  ReactDOM.unmountComponentAtNode(container)
+}
+
 export const benchOperator = (operator, ...args) => {
-  const recompactOperator = require(`../${operator}`).default
-  const recomposeOperator = require(`recompose/${operator}`).default
+  const recompactOperator = recompact[operator]
+  const recomposeOperator = recompose[operator]
+  const reassembleOperator = reassemble[operator]
   const Component = () => <div />
 
   const Nothing = () => null
   let RecompactComponent
   let RecomposeComponent
+  let ReassembleComponent
   let RecompactComposedComponent
   let RecomposeComposedComponent
+  let ReassembleComposedComponent
   if (args.length === 0) {
     RecompactComponent = recompactOperator(Component)
     RecomposeComponent = recomposeOperator(Component)
-    RecompactComposedComponent = compose(...fill(recompactOperator))(Component)
-    RecomposeComposedComponent = compose(...fill(recomposeOperator))(Component)
+    ReassembleComponent = reassemble.compose(reassembleOperator)(Component)
+    RecompactComposedComponent = recompact.compose(...fill(recompactOperator))(Component)
+    RecomposeComposedComponent = recompose.compose(...fill(recomposeOperator))(Component)
+    ReassembleComposedComponent = reassemble.compose(...fill(reassembleOperator))(Component)
   } else {
     RecompactComponent = recompactOperator(...args)(Component)
     RecomposeComponent = recomposeOperator(...args)(Component)
-    RecompactComposedComponent = compose(...fill(recompactOperator(...args)))(Component)
-    RecomposeComposedComponent = compose(...fill(recomposeOperator(...args)))(Component)
+    ReassembleComponent = reassemble.compose(reassembleOperator(...args))(Component)
+    RecompactComposedComponent = recompact.compose(...fill(recompactOperator(...args)))(Component)
+    RecomposeComposedComponent = recompose.compose(...fill(recomposeOperator(...args)))(Component)
+    ReassembleComposedComponent = reassemble.compose(...fill(reassembleOperator(...args)))(Component)
   }
 
-  const nothingWrapper = mount(<Nothing />)
-  const recompactWrapper = mount(<RecompactComponent n={0} />)
-  const recomposeWrapper = mount(<RecomposeComponent n={0} />)
-  const recompactComposedWrapper = mount(<RecompactComposedComponent n={0} />)
-  const recomposeComposedWrapper = mount(<RecomposeComposedComponent n={0} />)
+  const NothingWrapper = wrap(<Nothing />)
+  const RecompactWrapper = wrap(<RecompactComponent n={0} />)
+  const RecomposeWrapper = wrap(<RecomposeComponent n={0} />)
+  const ReassembleWrapper = wrap(<ReassembleComponent n={0} />)
+  const RecompactComposedWrapper = wrap(<RecompactComposedComponent n={0} />)
+  const RecomposeComposedWrapper = wrap(<RecomposeComposedComponent n={0} />)
+  const ReassembleComposedWrapper = wrap(<ReassembleComposedComponent n={0} />)
 
   let count = 0
 
@@ -87,86 +126,184 @@ export const benchOperator = (operator, ...args) => {
     () => runBenchmark([
       {
         description: '-- nothing',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<Nothing />)
+          render(<Nothing />)
         },
       },
       {
         description: '❤️  recompact',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<RecompactComponent n={0} />)
+          render(<RecompactComponent n={0} />)
         },
       },
       {
         description: '💙  recompose',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<RecomposeComponent n={0} />)
+          render(<RecomposeComponent n={0} />)
+        },
+      },
+      {
+        description: '💚  reassemble',
+        onComplete() {
+          cleanup()
+        },
+        run() {
+          render(<ReassembleComponent n={0} />)
         },
       },
     ], `[mount][single] ${operator}`),
     () => runBenchmark([
       {
         description: '-- nothing',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<Nothing />)
+          render(<Nothing />)
         },
       },
       {
         description: '❤️  recompact',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<RecompactComposedComponent n={0} />)
+          render(<RecompactComposedComponent n={0} />)
         },
       },
       {
         description: '💙  recompose',
+        onComplete() {
+          cleanup()
+        },
         run() {
-          mount(<RecomposeComposedComponent n={0} />)
+          render(<RecomposeComposedComponent n={0} />)
+        },
+      },
+      {
+        description: '💚  reassemble',
+        onComplete() {
+          cleanup()
+        },
+        run() {
+          render(<ReassembleComposedComponent n={0} />)
         },
       },
     ], `[mount][composed] ${operator}`),
     () => runBenchmark([
       {
         description: '-- nothing',
-        onStart: resetCount,
+        onStart: () => {
+          render(<NothingWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          nothingWrapper.setProps({ n: count++ })
+          NothingWrapper.setProps({ n: count++ })
         },
       },
       {
         description: '❤️  recompact',
-        onStart: resetCount,
+        onStart: () => {
+          render(<RecompactWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          recompactWrapper.setProps({ n: count++ })
+          RecompactWrapper.setProps({ n: count++ })
         },
       },
       {
         description: '💙  recompose',
-        onStart: resetCount,
+        onStart: () => {
+          render(<RecomposeWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          recomposeWrapper.setProps({ n: count++ })
+          RecomposeWrapper.setProps({ n: count++ })
+        },
+      },
+      {
+        description: '💚  reassemble',
+        onStart: () => {
+          render(<ReassembleWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
+        run() {
+          ReassembleWrapper.setProps({ n: count++ })
         },
       },
     ], `[setProps] ${operator}`),
     () => runBenchmark([
       {
         description: '-- nothing',
-        onStart: resetCount,
+        onStart: () => {
+          render(<NothingWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          nothingWrapper.setProps({ n: count++ })
+          NothingWrapper.setProps({ n: count++ })
         },
       },
       {
         description: '❤️  recompact',
-        onStart: resetCount,
+        onStart: () => {
+          render(<RecompactComposedWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          recompactComposedWrapper.setProps({ n: count++ })
+          RecompactComposedWrapper.setProps({ n: count++ })
         },
       },
       {
         description: '💙  recompose',
-        onStart: resetCount,
+        onStart: () => {
+          render(<RecomposeComposedWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
         run() {
-          recomposeComposedWrapper.setProps({ n: count++ })
+          RecomposeComposedWrapper.setProps({ n: count++ })
+        },
+      },
+      {
+        description: '💚  reassemble',
+        onStart: () => {
+          render(<ReassembleComposedWrapper />)
+          resetCount()
+        },
+        onComplete() {
+          cleanup()
+        },
+        run() {
+          ReassembleComposedWrapper.setProps({ n: count++ })
         },
       },
     ], `[setProps][composed] ${operator}`),

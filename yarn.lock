@@ -4106,6 +4106,10 @@ readline2@^1.0.1:
     is-fullwidth-code-point "^1.0.0"
     mute-stream "0.0.5"
 
+reassemble@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/reassemble/-/reassemble-0.5.2.tgz#5a2bce4e2db140518b1b4379155e26385f9b0e55"
+
 rechoir@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
