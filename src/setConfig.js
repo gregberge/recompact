@@ -1,7 +1,5 @@
-import createSymbol from './utils/createSymbol'
-
 let config = {
-  observablesKey: createSymbol('observables'),
+  observablesKey: 'observables',
 }
 
 /**

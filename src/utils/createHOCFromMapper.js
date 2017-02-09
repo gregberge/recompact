@@ -21,14 +21,20 @@ const createComponentFromMappers = (mappers, childFactory) => {
     props$ = createBehaviorSubject(this.props);
 
     componentWillMount() {
-      const [childProps$, childObservables] =
-        mappers.reduce(
-          ([props$, obs], mapper) => mapper(props$, obs),
-          [this.props$, this.context[OBSERVABLES]],
-        )
+      let childProps$ = this.props$
+      let childObservables = this.context[OBSERVABLES]
+      for (let i = 0; i < mappers.length; i += 1) {
+        ([childProps$, childObservables] = mappers[i](childProps$, childObservables))
+      }
 
       this.childPropsSubscription = obsConfig.toESObservable(childProps$).subscribe({
-        next: childProps => this.setState({ childProps }),
+        next: (childProps) => {
+          if (!this.state && !this.mounted) {
+            this.state = { childProps }
+          } else {
+            this.setState({ childProps })
+          }
+        },
         error: (error) => {
           asyncThrow(error)
           this.setState({ childProps: this.state ? this.state.childProps : {} })
@@ -36,6 +42,10 @@ const createComponentFromMappers = (mappers, childFactory) => {
       })
 
       this.childContext = { [OBSERVABLES]: childObservables }
+    }
+
+    componentDidMount() {
+      this.mounted = true
     }
 
     getChildContext() {

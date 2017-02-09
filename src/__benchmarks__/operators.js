@@ -1,7 +1,6 @@
 import { benchOperator, series } from './utils'
 
 series([
-  () => new Promise(resolve => setTimeout(resolve, 1000)),
   () => benchOperator('defaultProps', { foo: 'bar' }),
   () => benchOperator('flattenProp', 'foo'),
   () => benchOperator('mapProps', ({ n }) => n + 1),

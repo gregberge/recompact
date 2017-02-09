@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { createChangeEmitter } from 'change-emitter'
+import createChangeEmitter from './createChangeEmitter'
 import createObservable from './createObservable'
 
 const createBehaviorSubject = (initial) => {
@@ -13,7 +13,7 @@ const createBehaviorSubject = (initial) => {
     observer.next(last)
     return { unsubscribe }
   })
-  observable.next = ::emitter.emit
+  observable.next = emitter.emit
   return observable
 }
 

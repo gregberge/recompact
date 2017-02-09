@@ -36,7 +36,6 @@
     "rxjs": "^5.0.0-rc.4"
   },
   "dependencies": {
-    "change-emitter": "^0.1.2",
     "fbjs": "^0.8.8",
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",

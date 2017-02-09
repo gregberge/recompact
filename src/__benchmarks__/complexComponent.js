@@ -14,15 +14,15 @@ const createComponent = ({
   defaultProps,
   withState,
   withProps,
-  renameProp,
 }) => {
   const LibComponent = compose(
     setDisplayName('foo'),
     pure,
     defaultProps({ foo: 'bar' }),
     withState('counter', 'updateCounter', 0),
+    pure,
     withProps(({ counter }) => ({ counter: counter + 1 })),
-    renameProp('updateCounter', 'up'),
+    pure,
   )(() => <div />)
 
   const ComponentWrapper = class extends React.Component {
@@ -53,7 +53,6 @@ function cleanup() {
 }
 
 
-const Nothing = () => null
 const Recompacted = createComponent(recompact)
 const Recomposed = createComponent(recompose)
 const Reassembled = createComponent(reassemble)
@@ -64,61 +63,34 @@ series([
   () => new Promise(resolve => setTimeout(resolve, 1000)),
   () => runBenchmark([
     {
-      description: 'nothing',
-      onComplete() {
-        cleanup()
-      },
-      run() {
-        render(<Nothing />)
-      },
-    },
-    {
       description: '❤️  recompact',
-      onComplete() {
-        cleanup()
-      },
       run() {
         render(<Recompacted />)
+        cleanup()
       },
     },
     {
       description: '💙  recompose',
-      onComplete() {
-        cleanup()
-      },
       run() {
         render(<Recomposed />)
+        cleanup()
       },
     },
     {
       description: '💚  reassemble',
-      onComplete() {
-        cleanup()
-      },
       run() {
         render(<Reassembled />)
+        cleanup()
       },
     },
   ], '[mount]'),
   () => runBenchmark([
     {
-      description: 'nothing',
-      onStart() {
-        render(<Nothing />)
-        count = 0
-      },
-      run() {
-        Nothing.setProps({ foo: count++ })
-      },
-    },
-    {
       description: '❤️  recompact',
       onStart() {
+        cleanup()
         render(<Recompacted />)
         count = 0
-      },
-      onComplete() {
-        cleanup()
       },
       run() {
         Recompacted.setProps({ foo: count++ })
@@ -127,11 +99,9 @@ series([
     {
       description: '💙  recompose',
       onStart() {
+        cleanup()
         render(<Recomposed />)
         count = 0
-      },
-      onComplete() {
-        cleanup()
       },
       run() {
         Recomposed.setProps({ foo: count++ })
@@ -140,11 +110,9 @@ series([
     {
       description: '💚  reassembled',
       onStart() {
+        cleanup()
         render(<Reassembled />)
         count = 0
-      },
-      onComplete() {
-        cleanup()
       },
       run() {
         Reassembled.setProps({ foo: count++ })

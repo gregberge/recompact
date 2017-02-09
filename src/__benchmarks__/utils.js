@@ -12,11 +12,10 @@ const TIME_BETWEEN = 1000
 export const series = promises =>
   promises.reduce((current, next) => current.then(next), Promise.resolve())
 
-Benchmark.options.initCount = 10
-Benchmark.options.queued = true
-Benchmark.options.async = true
-Benchmark.options.minSamples = 1
-Benchmark.options.maxTime = 1
+// Benchmark.options.queued = true
+// Benchmark.options.async = true
+// Benchmark.options.minSamples = 1
+// Benchmark.options.maxTime = 0.3
 
 export const runBenchmark = (benchs, name) =>
   new Promise((resolve) => {
@@ -126,76 +125,60 @@ export const benchOperator = (operator, ...args) => {
     () => runBenchmark([
       {
         description: '-- nothing',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<Nothing />)
+          cleanup()
         },
       },
       {
         description: '❤️  recompact',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<RecompactComponent n={0} />)
+          cleanup()
         },
       },
       {
         description: '💙  recompose',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<RecomposeComponent n={0} />)
+          cleanup()
         },
       },
       {
         description: '💚  reassemble',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<ReassembleComponent n={0} />)
+          cleanup()
         },
       },
     ], `[mount][single] ${operator}`),
     () => runBenchmark([
       {
         description: '-- nothing',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<Nothing />)
+          cleanup()
         },
       },
       {
         description: '❤️  recompact',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<RecompactComposedComponent n={0} />)
+          cleanup()
         },
       },
       {
         description: '💙  recompose',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<RecomposeComposedComponent n={0} />)
+          cleanup()
         },
       },
       {
         description: '💚  reassemble',
-        onComplete() {
-          cleanup()
-        },
         run() {
           render(<ReassembleComposedComponent n={0} />)
+          cleanup()
         },
       },
     ], `[mount][composed] ${operator}`),
@@ -203,11 +186,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '-- nothing',
         onStart: () => {
+          cleanup()
           render(<NothingWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           NothingWrapper.setProps({ n: count++ })
@@ -216,11 +197,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '❤️  recompact',
         onStart: () => {
+          cleanup()
           render(<RecompactWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           RecompactWrapper.setProps({ n: count++ })
@@ -229,11 +208,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '💙  recompose',
         onStart: () => {
+          cleanup()
           render(<RecomposeWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           RecomposeWrapper.setProps({ n: count++ })
@@ -242,11 +219,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '💚  reassemble',
         onStart: () => {
+          cleanup()
           render(<ReassembleWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           ReassembleWrapper.setProps({ n: count++ })
@@ -257,11 +232,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '-- nothing',
         onStart: () => {
+          cleanup()
           render(<NothingWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           NothingWrapper.setProps({ n: count++ })
@@ -270,11 +243,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '❤️  recompact',
         onStart: () => {
+          cleanup()
           render(<RecompactComposedWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           RecompactComposedWrapper.setProps({ n: count++ })
@@ -283,11 +254,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '💙  recompose',
         onStart: () => {
+          cleanup()
           render(<RecomposeComposedWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           RecomposeComposedWrapper.setProps({ n: count++ })
@@ -296,11 +265,9 @@ export const benchOperator = (operator, ...args) => {
       {
         description: '💚  reassemble',
         onStart: () => {
+          cleanup()
           render(<ReassembleComposedWrapper />)
           resetCount()
-        },
-        onComplete() {
-          cleanup()
         },
         run() {
           ReassembleComposedWrapper.setProps({ n: count++ })
