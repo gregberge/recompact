@@ -7,8 +7,8 @@ const updateProps = subscriber =>
     createObservable(observer =>
       obsConfig.toESObservable(props$).subscribe({
         next: subscriber(observer.next),
-        error: typeof observer.error === 'function' ? observer.error : undefined,
-        complete: typeof observer.complete === 'function' ? observer.complete : undefined,
+        error: typeof observer.error === 'function' ? error => observer.error(error) : undefined,
+        complete: typeof observer.complete === 'function' ? value => observer.complete(value) : undefined,
       }),
     ),
     obs,
