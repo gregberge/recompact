@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow, no-restricted-syntax, no-param-reassign */
 import createHelper from './createHelper'
 import createEagerFactory from './createEagerFactory'
-import withProps from './withProps'
+import mapProps from './mapProps'
 import createCompactableHOC from './utils/createCompactableHOC'
 
 /**
@@ -17,14 +17,16 @@ import createCompactableHOC from './utils/createCompactableHOC'
  * <Button /> // will render <button type="button" />
  */
 const defaultProps = defaultProps => createCompactableHOC(
-  withProps((props) => {
-    const newProps = { ...props }
-    for (const propName in defaultProps) {
-      if (props[propName] === undefined) {
-        newProps[propName] = defaultProps[propName]
+  mapProps((props) => {
+    const newProps = {}
+    const propKeys = Object.keys(defaultProps)
+    for (let i = 0; i < propKeys.length; i += 1) {
+      const propKey = propKeys[i]
+      if (props[propKey] === undefined) {
+        newProps[propKey] = defaultProps[propKey]
       }
     }
-    return newProps
+    return { ...props, ...newProps }
   }),
   (BaseComponent) => {
     const factory = createEagerFactory(BaseComponent)
