@@ -1,5 +1,5 @@
 import $$observable from 'symbol-observable'
-import { createChangeEmitter } from 'change-emitter'
+import createChangeEmitter from './utils/createChangeEmitter'
 import { config as globalConfig } from './setObservableConfig'
 
 export const createEventHandlerWithConfig = config => () => {
