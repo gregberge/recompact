@@ -19,7 +19,7 @@ describe('withState', () => {
     expect(dummy.prop('pass')).toBe('through')
   })
 
-  it('also accepts a non-function, which is passed directly to setState()', () => {
+  it('accepts a non-function, which is passed directly to setState()', () => {
     const Counter = withState('counter', 'updateCounter', 0)(Dummy)
     const dummy = mount(<Counter />).find(Dummy)
     const { updateCounter } = dummy.props()
@@ -28,7 +28,7 @@ describe('withState', () => {
     expect(dummy.prop('counter')).toBe(18)
   })
 
-  it('also accepts initialState as function of props', () => {
+  it('accepts initialState as function of props', () => {
     const Counter = withState(
       'counter',
       'updateCounter',
@@ -43,7 +43,7 @@ describe('withState', () => {
     expect(dummy.prop('counter')).toBe(3)
   })
 
-  it('should be merged with other hoc', () => {
+  it('is merged with other HOCs', () => {
     const Component = compose(
       withProps({ initialCounter: 1 }),
       withState(

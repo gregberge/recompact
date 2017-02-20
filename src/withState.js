@@ -45,31 +45,26 @@ import updateProps from './utils/updateProps'
  */
 const withState = (stateName, stateUpdaterName, initialState) =>
   updateProps((next) => {
-    let previousProps
-    let previousStateValue
+    let props
+    let state
 
-    const updateState = (nextState) => {
-      update(previousProps, callOrUse(nextState, previousStateValue))
-    }
-
-    const update = (props, stateValue) => {
+    const stateUpdater = (nextState) => {
+      state = callOrUse(nextState, state)
       next({
         ...props,
-        [stateName]: stateValue,
-        [stateUpdaterName]: updateState,
+        [stateName]: state,
+        [stateUpdaterName]: stateUpdater,
       })
-
-      previousStateValue = stateValue
-      previousProps = props
     }
 
-    return (props) => {
-      update(
-        props,
-        !previousProps
-          ? callOrUse(initialState, props)
-          : previousStateValue,
-      )
+    return (nextProps) => {
+      if (!props) state = callOrUse(initialState, nextProps)
+      props = nextProps
+      next({
+        ...props,
+        [stateName]: state,
+        [stateUpdaterName]: stateUpdater,
+      })
     }
   })
 
