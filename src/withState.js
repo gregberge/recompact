@@ -40,7 +40,6 @@ import updateProps from './utils/updateProps'
  * @category Higher-order-components
  * @param {String} stateName
  * @param {String} stateUpdaterName
- * @param {Function} reducer
  * @param {*|Function} initialState
  * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  */
