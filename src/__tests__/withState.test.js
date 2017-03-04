@@ -58,4 +58,21 @@ describe('withState', () => {
     expect(wrapper.prop('counter')).toBe(1)
     expect(wrapper.prop('initialCounter')).toBe(1)
   })
+
+  it('warns if a callback is passed to the state updater', () => {
+    const Counter = withState('counter', 'updateCounter', 0)(Dummy)
+    const dummy = mount(<Counter />).find(Dummy)
+    const { updateCounter } = dummy.props()
+
+    /* eslint-disable no-console */
+    const error = console.error
+    try {
+      console.error = jest.fn()
+      updateCounter(1, () => {})
+      expect(console.error).toBeCalled()
+    } finally {
+      console.error = error
+    }
+    /* eslint-enable no-console */
+  })
 })

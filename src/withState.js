@@ -8,8 +8,8 @@ import updateProps from './utils/updateProps'
  * to update that state value. The state updater has the following signature:
  *
  * ```js
- * stateUpdater<T>((prevValue: T) => T, ?callback: Function): void
- * stateUpdater(newValue: any, ?callback: Function): void
+ * stateUpdater<T>((prevValue: T) => T): void
+ * stateUpdater(newValue: any): void
  * ```
  *
  * The first form accepts a function which maps the previous state value to a new
@@ -30,9 +30,6 @@ import updateProps from './utils/updateProps'
  *
  * The second form accepts a single value, which is used as the new state.
  *
- * Both forms accept an optional second parameter, a callback function that will
- * be executed once `setState()` is completed and the component is re-rendered.
- *
  * An initial state value is required. It can be either the state value itself,
  * or a function that returns an initial state given the initial props.
  *
@@ -48,7 +45,15 @@ const withState = (stateName, stateUpdaterName, initialState) =>
     let props
     let state
 
-    const stateUpdater = (nextState) => {
+    const stateUpdater = (nextState, callback) => {
+      if (process.env.NODE_ENV !== 'production' && callback) {
+        /* eslint-disable no-console */
+        console.error(
+          "Warning: withState(): the state updater's callback is not supported." +
+          'See https://github.com/neoziro/recompact/issues/59 for more details.',
+        )
+        /* eslint-enable no-console */
+      }
       state = callOrUse(nextState, state)
       next({
         ...props,
