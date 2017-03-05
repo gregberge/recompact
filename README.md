@@ -30,7 +30,9 @@ import mapProps from 'recompact/mapProps';
 
 ## Recompact vs. Recompose
 
-Recompact is a drop-in replacement for [Recompose](https://github.com/acdlite/recompose) with better performance.
+Recompact is a drop-in replacement* for [Recompose](https://github.com/acdlite/recompose) with better performance.
+
+<small>\* Except for the [callback](https://github.com/neoziro/recompact/issues/59) of `withState`'s state updater.</small>
 
 ### Flattened React components tree
 
