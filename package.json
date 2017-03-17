@@ -33,8 +33,7 @@
     "recompose"
   ],
   "peerDependencies": {
-    "react": "^15.3.2",
-    "rxjs": "^5.2.0"
+    "react": "^15.3.2"
   },
   "dependencies": {
     "fbjs": "^0.8.9",
@@ -44,25 +43,25 @@
     "symbol-observable": "^1.0.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.23.0",
+    "babel-cli": "^6.24.0",
     "babel-eslint": "^7.1.0",
     "babel-jest": "^19.0.0",
-    "babel-loader": "^6.3.2",
-    "babel-preset-latest": "^6.22.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-latest": "^6.24.0",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "benchmark": "^2.1.2",
     "docdown": "neoziro/docdown#multiple-files-support",
     "enzyme": "^2.7.1",
-    "eslint": "^3.17.0",
+    "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
-    "fs-extra": "^2.0.0",
+    "fs-extra": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^19.0.2",
-    "jsdom": "^9.11.0",
+    "jsdom": "^9.12.0",
     "microtime": "^2.1.2",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
@@ -70,8 +69,8 @@
     "reassemble": "^0.5.6",
     "recompose": "^0.22.0",
     "rxjs": "^5.2.0",
-    "sinon": "^1.17.6",
+    "sinon": "^2.0.0",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.2"
   }
 }
