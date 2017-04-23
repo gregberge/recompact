@@ -31,6 +31,9 @@ export const componentFromStreamWithConfig = config => propsToVdom =>
     }
 
     componentWillUnmount() {
+      // Complete stream
+      this.props$.complete()
+
       // Clean-up subscription before un-mounting
       this.subscription.unsubscribe()
     }
