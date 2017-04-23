@@ -1,6 +1,6 @@
 {
   "name": "recompact",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A set of React high order components based on Rx.",
   "main": "index.js",
   "repository": {
