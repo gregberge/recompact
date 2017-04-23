@@ -1,13 +1,27 @@
-import { createClass } from 'react'
+import { Component } from 'react'
 import createEagerFactory from './createEagerFactory'
 import createHelper from './createHelper'
 
+const LIFECYCLE_METHODS = [
+  'componentWillMount',
+  'componentDidMount',
+  'componentWillReceiveProps',
+  'shouldComponentUpdate',
+  'componentWillUpdate',
+  'componentDidUpdate',
+  'componentWillUnmount',
+]
+
 /**
- * A higher-order component version of
- * [`React.createClass()`](https://facebook.github.io/react/docs/react-api.html#createclass).
- * It supports the entire `createClass()` API, except the `render()` method,
- * which is implemented by default (and overridden if specified; an error will
- * be logged to the console). You should use this helper as an escape hatch, in
+ * A higher-order component that permits to hook a lifecycle method. Available methods are:
+ * - componentWillMount
+ * - componentDidMount
+ * - componentWillReceiveProps
+ * - shouldComponentUpdate
+ * - componentWillUpdate
+ * - componentDidUpdate
+ * - componentWillUnmount
+ * You should use this helper as an escape hatch, in
  * case you need to access component lifecycle methods.
  *
  * @static
@@ -34,17 +48,27 @@ const lifecycle = spec => (BaseComponent) => {
     /* eslint-enable no-console */
   }
 
-  const implementation = {
-    ...spec,
+
+  class Lifecycle extends Component {
     render() {
       return factory({
         ...this.props,
         ...this.state,
       })
-    },
+    }
   }
 
-  return createClass(implementation)
+  Object.entries(spec).forEach(([name, impl]) => {
+    if (!LIFECYCLE_METHODS.includes(name)) {
+      /* eslint-disable no-console */
+      console.error(`lifecycle() does not support "${name}" method, only lifecycle methods are supported.`)
+      /* eslint-enable no-console */
+    } else {
+      Lifecycle.prototype[name] = impl
+    }
+  })
+
+  return Lifecycle
 }
 
 export default createHelper(lifecycle, 'lifecycle')

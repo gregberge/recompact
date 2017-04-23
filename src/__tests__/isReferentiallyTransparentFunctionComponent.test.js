@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types'
 /* eslint-disable react/no-multi-comp, react/prefer-stateless-function,
   react/prefer-es6-class, react/forbid-prop-types */
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import createReactClass from 'create-react-class'
 import isReferentiallyTransparentFunctionComponent
   from '../isReferentiallyTransparentFunctionComponent'
 
@@ -16,7 +18,7 @@ describe('isReferentiallyTransparentFunctionComponent', () => {
       }
     }
 
-    const Bar = React.createClass({
+    const Bar = createReactClass({
       render() {
         return <div />
       },
