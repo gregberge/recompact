@@ -7,7 +7,7 @@ import { componentFromStream, setObservableConfig } from '../'
 setObservableConfig(rxjsConfig)
 
 describe('componentFromStream', () => {
-  it('componentFromStream creates a component from a prop stream transformation', () => {
+  it('should create a component from a prop stream transformation', () => {
     const Double = componentFromStream(props$ =>
       props$.map(({ n }) => <div>{n * 2}</div>),
     )
@@ -18,7 +18,7 @@ describe('componentFromStream', () => {
     expect(div.text()).toBe('716')
   })
 
-  it('componentFromStream unsubscribes from stream before unmounting', () => {
+  it('should unsubscribe from stream before unmounting', () => {
     let subscriptions = 0
     const vdom$ = new Observable((observer) => {
       subscriptions += 1
@@ -36,7 +36,7 @@ describe('componentFromStream', () => {
     expect(subscriptions).toBe(0)
   })
 
-  it('componentFromStream renders nothing until the stream emits a value', () => {
+  it('should render nothing until the stream emits a value', () => {
     const vdom$ = new Subject()
     const Div = componentFromStream(() => vdom$.mapTo(<div />))
     const wrapper = mount(<Div />)
@@ -45,7 +45,7 @@ describe('componentFromStream', () => {
     expect(wrapper.find('div').length).toBe(1)
   })
 
-  it('handler multiple observers of props stream', () => {
+  it('should handle multiple observers of props stream', () => {
     const Div = componentFromStream(props$ =>
       // Adds three observers to props stream
       props$.combineLatest(
@@ -60,5 +60,33 @@ describe('componentFromStream', () => {
     expect(div.prop('value')).toBe(1)
     wrapper.setProps({ value: 2 })
     expect(div.prop('value')).toBe(2)
+  })
+
+  it('should complete props stream before unmounting', () => {
+    let counter = 0
+
+    const Div = componentFromStream((props$) => {
+      const first$ = props$
+        .first()
+        .do(() => { counter += 1 })
+
+      const last$ = props$
+        .last()
+        .do(() => { counter -= 1 })
+        .startWith(null)
+
+      return props$.combineLatest(
+        first$, last$,
+        props => <div {...props} />,
+      )
+    })
+
+    const wrapper = mount(<Div />)
+
+    expect(counter).toBe(1)
+    expect(wrapper.find('div').length).toBe(1)
+
+    wrapper.unmount()
+    expect(counter).toBe(0)
   })
 })
