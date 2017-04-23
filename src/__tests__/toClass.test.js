@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types'
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp, no-class-assign */
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { mount } from 'enzyme'
 import { Dummy } from './utils'
 import { compose, toClass, withContext } from '../'

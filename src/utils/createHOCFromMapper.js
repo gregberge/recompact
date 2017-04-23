@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { Component, PropTypes } from 'react'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 import createBehaviorSubject from './createBehaviorSubject'
 import createSymbol from './createSymbol'
 import asyncThrow from './asyncThrow'

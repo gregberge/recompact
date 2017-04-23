@@ -1,5 +1,6 @@
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp, react/prefer-es6-class */
 import React, { Component } from 'react'
+import createReactClass from 'create-react-class'
 import { isClassComponent } from '../'
 
 describe('isClassComponent', () => {
@@ -16,7 +17,7 @@ describe('isClassComponent', () => {
       }
     }
 
-    const Bar = React.createClass({
+    const Bar = createReactClass({
       render() {
         return <div />
       },
