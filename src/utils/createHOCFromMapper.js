@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { Component } from 'react'
-import PropTypes from 'prop-types'
 import createBehaviorSubject from './createBehaviorSubject'
 import createSymbol from './createSymbol'
 import asyncThrow from './asyncThrow'
@@ -9,10 +8,11 @@ import { getConfig } from '../setConfig'
 import { config as obsConfig } from '../setObservableConfig'
 
 const MAPPERS_INFO = createSymbol('mappersInfo')
+const observablePropType = () => {}
 
 const createComponentFromMappers = (mappers, childFactory) => {
   const { observablesKey: OBSERVABLES } = getConfig()
-  const CONTEXT_TYPES = { [OBSERVABLES]: PropTypes.object }
+  const CONTEXT_TYPES = { [OBSERVABLES]: observablePropType }
 
   return class extends Component {
     static [MAPPERS_INFO] = { mappers, childFactory };
