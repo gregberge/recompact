@@ -8,8 +8,6 @@ const shareObservable = (observable) => {
   let subscription = null
 
   return createObservable((observer) => {
-    observers.push(observer)
-
     if (!subscription) {
       subscription = observable.subscribe({
         next: (value) => {
@@ -20,8 +18,12 @@ const shareObservable = (observable) => {
         complete: value => observers.forEach(o => o.complete(value)),
         error: error => observers.forEach(o => o.error(error)),
       })
-    } else if (emitted) {
-      observers.forEach(o => o.next(lastValue))
+    }
+
+    observers.push(observer)
+
+    if (emitted) {
+      observer.next(lastValue)
     }
 
     return {
