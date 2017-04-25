@@ -19,7 +19,6 @@ import isClassComponent from './isClassComponent'
 import isReferentiallyTransparentFunctionComponent
   from './isReferentiallyTransparentFunctionComponent'
 import lifecycle from './lifecycle'
-import mapObs from './mapObs'
 import mapProps from './mapProps'
 import mapPropsStream from './mapPropsStream'
 import nest from './nest'
@@ -70,7 +69,6 @@ export {
   isClassComponent,
   isReferentiallyTransparentFunctionComponent,
   lifecycle,
-  mapObs,
   mapProps,
   mapPropsStream,
   nest,
@@ -122,7 +120,6 @@ export default {
   isClassComponent,
   isReferentiallyTransparentFunctionComponent,
   lifecycle,
-  mapObs,
   mapProps,
   mapPropsStream,
   nest,

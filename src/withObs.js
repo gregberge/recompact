@@ -4,7 +4,8 @@ import shareObservable from './utils/shareObservable'
 import createHelper from './createHelper'
 
 /**
- * Similar to `mapObs` except that observables will be merged to the previous ones.
+ * Takes observables from the context and special observable `props$` an map them
+ * to a new set of observables.
  *
  * @static
  * @category Higher-order-components
