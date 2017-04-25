@@ -11,7 +11,7 @@
     "build": "yarn build:doc && yarn build:lib",
     "build:doc": "NODE_ENV=production babel-node ./scripts/build-doc",
     "build:lib": "rm -rf lib/ && NODE_ENV=production babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json && rm -rf lib/__benchmarks__",
-    "test": "eslint . && jest -i && codecov",
+    "test": "eslint . && jest --runInBand --coverage && codecov",
     "examples": "webpack-dev-server"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
@@ -21,8 +21,7 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "coverageDirectory": "./coverage/"
   },
   "keywords": [
     "composition",
