@@ -1,6 +1,7 @@
 # Recompact
 
 [![Build Status](https://travis-ci.org/neoziro/recompact.svg?branch=master)](https://travis-ci.org/neoziro/recompact)
+[![codecov](https://codecov.io/gh/neoziro/recompact/branch/master/graph/badge.svg)](https://codecov.io/gh/neoziro/recompact)
 
 Recompact is a set of React higher-order components for reactive programming. It's a drop-in replacement of [Recompose](https://github.com/acdlite/recompose) with several enhancements.
 
