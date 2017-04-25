@@ -45,6 +45,27 @@ describe('withObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('foo')
   })
 
+  it('should share props$', () => {
+    let count = 0
+
+    const Component = compose(
+      withObs(() => ({
+        props$: Rx.Observable.create((observer) => {
+          count += 1
+          observer.next({})
+        }),
+      })),
+      withObs(({ props$ }) => {
+        props$.subscribe()
+        props$.subscribe()
+        return { props$ }
+      }),
+    )('div')
+
+    mount(<Component />)
+    expect(count).toBe(1)
+  })
+
   it('should be merged with other hoc', () => {
     const Component = compose(
       withObs(() => ({})),
