@@ -24,6 +24,8 @@ const config = {
     path: path.join(basePath, 'src', `${name}.js`),
     url: `https://github.com/neoziro/recompact/blob/v${version}/src/${name}.js`,
   })),
+  sourceLink: '[&#x24C8;](${sourceHref})',
+  tocLink: '',
 }
 
 /**
@@ -34,8 +36,12 @@ const config = {
  * @returns {string} Returns the processed markdown.
  */
 function postprocess(markdown) {
-  // Wrap symbol property identifiers in brackets.
-  return markdown.replace(/\.(Symbol\.(?:[a-z]+[A-Z]?)+)/g, '[$1]')
+  return markdown
+    // Wrap symbol property identifiers in brackets.
+    .replace(/\.(Symbol\.(?:[a-z]+[A-Z]?)+)/g, '[$1]')
+    // Remove br
+    .replace(/\n<br>/g, '')
+    .replace(/(<\/h3>)/g, '$1\n')
 }
 
 /*----------------------------------------------------------------------------*/
