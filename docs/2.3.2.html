@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" class="docs">
+  <head>
+    <meta charset="utf-8">
+    <title>Recompact documentation</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-section logo-section">
+          <div class="logo"><a href="/" title="Recompact">Recompact</a></div>
+        </div>
+        <div class="header-section mobile-menu">
+          <a href="#">Menu</a>
+        </div>
+      </div>
+    </header>
+    <div class="doc-main">
+      <div class="toc-container">
+<div>
+<h2><code>Config</code></h2>
+<ul>
+<li><a href="#setconfigoptions"><code>setConfig</code></a></li>
+</ul>
+</div>
+<div>
+<h2><code>Higher-order-components</code></h2>
+<ul>
+<li><a href="#branchtest-left-rightidentity"><code>branch</code></a></li>
+<li><a href="#connectobsobsmapper"><code>connectObs</code></a></li>
+<li><a href="#debuglabel-selector"><code>debug</code></a></li>
+<li><a href="#defaultpropsdefaultprops"><code>defaultProps</code></a></li>
+<li><a href="#flattenproppropname"><code>flattenProp</code></a></li>
+<li><a href="#getcontextcontexttypes"><code>getContext</code></a></li>
+<li><a href="#lifecyclespec"><code>lifecycle</code></a></li>
+<li><a href="#mappropspropsmapper"><code>mapProps</code></a></li>
+<li><a href="#mappropsstreampropsstreammapper"><code>mapPropsStream</code></a></li>
+<li><a href="#nestcomponents"><code>nest</code></a></li>
+<li><a href="#omitpropspaths"><code>omitProps</code></a></li>
+<li><a href="#onlyupdateforkeyspropkeys"><code>onlyUpdateForKeys</code></a></li>
+<li><a href="#onlyupdateforproptypes"><code>onlyUpdateForPropTypes</code></a></li>
+<li><a href="#pickpropspaths"><code>pickProps</code></a></li>
+<li><a href="#pure"><code>pure</code></a></li>
+<li><a href="#renamepropoldname-newname"><code>renameProp</code></a></li>
+<li><a href="#renamepropsnamemap"><code>renameProps</code></a></li>
+<li><a href="#rendercomponentcomponent"><code>renderComponent</code></a></li>
+<li><a href="#rendernothing"><code>renderNothing</code></a></li>
+<li><a href="#setdisplaynamedisplayname"><code>setDisplayName</code></a></li>
+<li><a href="#setproptypesproptypes"><code>setPropTypes</code></a></li>
+<li><a href="#setstatickey-value"><code>setStatic</code></a></li>
+<li><a href="#shouldupdatetest"><code>shouldUpdate</code></a></li>
+<li><a href="#toclass"><code>toClass</code></a></li>
+<li><a href="#withcontextchildcontexttypes-getchildcontext"><code>withContext</code></a></li>
+<li><a href="#withhandlershandlerfactories"><code>withHandlers</code></a></li>
+<li><a href="#withobsobsmapper"><code>withObs</code></a></li>
+<li><a href="#withpropspropsmapper"><code>withProps</code></a></li>
+<li><a href="#withpropsonchangeshouldmaporkeys-createprops"><code>withPropsOnChange</code></a></li>
+<li><a href="#withreducerstatename-dispatchname-reducer-initialstate"><code>withReducer</code></a></li>
+<li><a href="#withstatestatename-stateupdatername-initialstate"><code>withState</code></a></li>
+<li><a href="#wrapdisplaynamecomponent-wrappername"><code>wrapDisplayName</code></a></li>
+</ul>
+</div>
+<div>
+<h2><code>Utilities</code></h2>
+<ul>
+<li><a href="#componentfrompropprop"><code>componentFromProp</code></a></li>
+<li><a href="#composefuncs"><code>compose</code></a></li>
+<li><a href="#createeagerelementtype-props-children"><code>createEagerElement</code></a></li>
+<li><a href="#createeagerfactorytype"><code>createEagerFactory</code></a></li>
+<li><a href="#createeventhandler"><code>createEventHandler</code></a></li>
+<li><a href="#createhelperhoc-helpername-noargsfalse"><code>createHelper</code></a></li>
+<li><a href="#createsinkcallback"><code>createSink</code></a></li>
+<li><a href="#getdisplaynamecomponent"><code>getDisplayName</code></a></li>
+<li><a href="#hoiststaticshoc"><code>hoistStatics</code></a></li>
+<li><a href="#identityvalue"><code>identity</code></a></li>
+<li><a href="#isclasscomponentvalue"><code>isClassComponent</code></a></li>
+<li><a href="#isreferentiallytransparentfunctioncomponentvalue"><code>isReferentiallyTransparentFunctionComponent</code></a></li>
+</ul>
+</div>
+</div>
+<div class="doc-container">
+<div>
+<h2><code>&#x201C;Config&#x201D; Methods</code></h2>
+<div>
+<h3 id="setconfigoptions"><code>setConfig(options)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/setConfig.js#L15">&#x24C8;</a></p>
+<p>Set the config of Recompact.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>options</code> <em>(Object)</em>:</li>
+</ol>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">setConfig</span>({observablesKey:&#xA0;<span class="string">&apos;observables&apos;</span>});</pre></div>
+
+</div>
+</div>
+<div>
+<h2><code>&#x201C;Higher-order-components&#x201D; Methods</code></h2>
+<div>
+<h3 id="branchtest-left-rightidentity"><code>branch(test, left, [right=identity])</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/branch.js#L24">&#x24C8;</a></p>
+<p>Accepts a test function and two higher-order components. The test function
+is passed the props from the owner. If it returns true, the left higher-order
+component is applied to BaseComponent; otherwise, the right higher-order
+component is applied <em>(defaults to identity)</em>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>test</code> <em>(Function)</em>: The test to apply.</li>
+<li><code>left</code> <em>(HigherOrderComponent)</em>: The higher-order component applied if the result of the test is true.</li>
+<li><code>[right=identity]</code> <em>(HigherOrderComponent)</em>: The higher-order component applied if the result of the test is false.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Add&#xA0;the&#xA0;logic&#xA0;or&#xA0;rendering&#xA0;nothing&#xA0;if&#xA0;the&#xA0;prop&#xA0;`count`&#xA0;equals&#xA0;to&#xA0;`0`.</span></div><div><span class="name">branch</span>(({count})&#xA0;<span class="type">=&gt;</span>&#xA0;count&#xA0;===&#xA0;<span class="numeric">0</span><span class="delimiter">,</span>&#xA0;renderNothing)(MyComponent);</div></pre></div>
+
+</div>
+<div>
+<h3 id="connectobsobsmapper"><code>connectObs(obsMapper)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/connectObs.js#L61">&#x24C8;</a></p>
+<p>Connect observables to props using a map.</p>
+<ul>
+<li>The function take one argument, an object containing context observables
+and a special observable <code>props$</code> that emits owner props.</li>
+<li>The property is updated at each emission of a new value by the associated
+Observable.</li>
+<li>Properties matching <code>/^on[A-Z]/</code> are mapped to the <code>next</code> method of
+the associated Observer.</li>
+</ul>
+<h4>Arguments</h4>
+<ol>
+<li><code>obsMapper</code> <em>(Function)</em>: The function that takes observables and returns map.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="name">connectObs</span>(({change$<span class="delimiter">,</span>&#xA0;value$})&#xA0;<span class="type">=&gt;</span>&#xA0;({</div><div>&#xA0;&#xA0;onChange:&#xA0;change$<span class="delimiter">,</span></div><div>&#xA0;&#xA0;value:&#xA0;value$<span class="delimiter">,</span></div><div>}))(<span class="string">&apos;input&apos;</span>);</div></pre></div>
+
+</div>
+<div>
+<h3 id="debuglabel-selector"><code>debug(label, selector)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/debug.js#L23">&#x24C8;</a></p>
+<p>Display the flow of props.
+Very useful for debugging higher-order component stack.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>label</code> <em>(*)</em>: A label displayed in console.</li>
+<li><code>selector</code> <em>(Function)</em>: A props selector.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div>recompact<span class="delimiter method">.</span><span class="name">compose</span>(</div><div>&#xA0;&#xA0;recompact<span class="delimiter method">.</span><span class="name">withProps</span>({&#xA0;foo:&#xA0;<span class="string">&apos;bar&apos;</span>&#xA0;})<span class="delimiter">,</span></div><div>&#xA0;&#xA0;recompact<span class="delimiter method">.</span><span class="name">debug</span>()<span class="delimiter">,</span></div><div>&#xA0;&#xA0;recompact<span class="delimiter method">.</span><span class="name">renameProp</span>(<span class="string">&apos;foo&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;className&apos;</span>)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;recompact<span class="delimiter method">.</span><span class="name">debug</span>()<span class="delimiter">,</span></div><div>)(<span class="string">&apos;input&apos;</span>)</div></pre></div>
+
+</div>
+<div>
+<h3 id="defaultpropsdefaultprops"><code>defaultProps(defaultProps)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/defaultProps.js#L19">&#x24C8;</a></p>
+<p>Specify props values that will be used if the prop is <code>undefined</code>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>defaultProps</code> <em>(Object)</em>: Default props.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;<span class="name">defaultProps</span>({type:&#xA0;<span class="string">&apos;button&apos;</span>})(<span class="string">&apos;button&apos;</span>);</div><div>&lt;<span class="support">Button</span>&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;will&#xA0;render&#xA0;&lt;button&#xA0;type=&quot;button&quot;&#xA0;/&gt;</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="flattenproppropname"><code>flattenProp(propName)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/flattenProp.js#L16">&#x24C8;</a></p>
+<p>Flattens a prop so that its fields are spread out into the props object.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propName</code> <em>(String)</em>: Name of the prop to flatten.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;<span class="name">flattenProp</span>(<span class="string">&apos;props&apos;</span>)(<span class="string">&apos;button&apos;</span>);</div><div>&lt;<span class="support">Button</span>&#xA0;props={{type:&#xA0;<span class="string">&apos;submit&apos;</span>}}&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;will&#xA0;render&#xA0;&lt;button&#xA0;type=&quot;submit&quot;&#xA0;/&gt;</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="getcontextcontexttypes"><code>getContext(contextTypes)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/getContext.js#L19">&#x24C8;</a></p>
+<p>Gets values from context and passes them along as props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>contextTypes</code> <em>(Object)</em>: Context types to inject as props.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Create&#xA0;a&#xA0;component&#xA0;that&#xA0;will&#xA0;bring&#xA0;back&#xA0;to&#xA0;home&#xA0;when&#xA0;clicked</span></div><div><span class="modifier">const</span>&#xA0;HomeButton&#xA0;=&#xA0;<span class="name">compose</span>(</div><div>&#xA0;&#xA0;<span class="name">withContext</span>({router:&#xA0;PropTypes<span class="delimiter">.</span><span class="support">object</span><span class="delimiter">.</span>isRequired})<span class="delimiter">,</span></div><div>&#xA0;&#xA0;<span class="name">withHandlers</span>({<span class="name">onClick</span>:&#xA0;({router})&#xA0;<span class="type">=&gt;</span>&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;router<span class="delimiter method">.</span><span class="support">push</span>(<span class="string">&apos;/&apos;</span>)})<span class="delimiter">,</span></div><div>)(<span class="string">&apos;button&apos;</span>);</div></pre></div>
+
+</div>
+<div>
+<h3 id="lifecyclespec"><code>lifecycle(spec)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/lifecycle.js#L36">&#x24C8;</a></p>
+<p>A higher-order component that permits to hook a lifecycle method. Available methods are:<br></p>
+<ul>
+<li>componentWillMount</li>
+<li>componentDidMount</li>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount
+You should use this helper as an escape hatch, in
+case you need to access component lifecycle methods.</li>
+</ul>
+<h4>Arguments</h4>
+<ol>
+<li><code>spec</code> <em>(Object)</em>: Lifecycle spec</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Create&#xA0;a&#xA0;hoc&#xA0;that&#xA0;will&#xA0;log&#xA0;when&#xA0;a&#xA0;component&#xA0;will&#xA0;mount</span></div><div><span class="modifier">const</span>&#xA0;logWhenMount&#xA0;=&#xA0;<span class="name">lifecycle</span>({<span class="name">componentWillMount</span>:&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name type console">console</span><span class="delimiter method">.</span><span class="support console">log</span>(<span class="string">&apos;will&#xA0;mount&apos;</span>)});</div></pre></div>
+
+</div>
+<div>
+<h3 id="mappropspropsmapper"><code>mapProps(propsMapper)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/mapProps.js#L19">&#x24C8;</a></p>
+<p>Accepts a function that maps owner props to a new collection of props that
+are passed to the base component.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propsMapper</code> <em>(Function)</em>: The function that returns new props.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Add&#xA0;a&#xA0;new&#xA0;prop&#xA0;computed&#xA0;from&#xA0;owner&#xA0;props</span></div><div><span class="name">mapProps</span>(({count})&#xA0;<span class="type">=&gt;</span>&#xA0;({moreThanFive:&#xA0;count&#xA0;&gt;&#xA0;<span class="numeric">5</span>}))(MyComponent);</div></pre></div>
+
+</div>
+<div>
+<h3 id="mappropsstreampropsstreammapper"><code>mapPropsStream(propsStreamMapper)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/mapPropsStream.js#L18">&#x24C8;</a></p>
+<p>Accepts a function that maps an observable stream of owner props to a stream
+of child props, rather than directly to a stream of React nodes.
+The child props are then passed to a base component.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propsStreamMapper</code> <em>(Function)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Delay&#xA0;rendering&#xA0;of&#xA0;1s</span></div><div><span class="modifier">const</span>&#xA0;delayRendering&#xA0;=&#xA0;<span class="name">mapPropsStream</span>(props$&#xA0;<span class="type">=&gt;</span>&#xA0;props$<span class="delimiter method">.</span><span class="name">delay</span>(<span class="numeric">1000</span>));</div></pre></div>
+
+</div>
+<div>
+<h3 id="nestcomponents"><code>nest(components)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/nest.js#L17">&#x24C8;</a></p>
+<p>Composes components by nesting each one inside the previous.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>components</code> <em>(...(ReactClass|ReactFunctionalComponent))</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(ReactFunctionalComponent)</em>:</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Delay&#xA0;rendering&#xA0;of&#xA0;1s</span></div><div><span class="modifier">const</span>&#xA0;DivButton&#xA0;=&#xA0;<span class="name">nest</span>(<span class="string">&apos;div&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;button&apos;</span>);</div><div><span class="comment">//&#xA0;will&#xA0;render&#xA0;&lt;div&#xA0;className=&quot;foo&quot;&gt;&lt;button&#xA0;className=&quot;foo&quot;&#xA0;/&gt;&lt;/div&gt;</span></div><div>&lt;DivButton&#xA0;className=<span class="string">&quot;foo&quot;</span>&#xA0;/&gt;</div></pre></div>
+
+</div>
+<div>
+<h3 id="omitpropspaths"><code>omitProps(paths)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/omitProps.js#L17">&#x24C8;</a></p>
+<p>Same as lodash <code>omit</code> but for props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>paths</code> <em>(String|String[])</em>: The property paths to omit.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="modifier">const</span>&#xA0;withoutValue&#xA0;=&#xA0;<span class="name">omitProps</span>(<span class="string">&apos;value&apos;</span>);</pre></div>
+
+</div>
+<div>
+<h3 id="onlyupdateforkeyspropkeys"><code>onlyUpdateForKeys(propKeys)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/onlyUpdateForKeys.js#L24">&#x24C8;</a></p>
+<p>Prevents the component from updating unless a prop corresponding to one of the
+given keys has updated. Uses <code>shallowEqual()</code> to test for changes.
+This is a much better optimization than the popular approach of using PureRenderMixin,
+<code>shouldPureComponentUpdate()</code>, or <code>pure()</code> helper, because those
+tools compare <em>every</em> prop, whereas <code>onlyUpdateForKeys()</code> only cares about the
+props that you specify.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propKeys</code> <em>(String[])</em>: The property keys that will induce a re-render.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">onlyUpdateForKeys</span>([<span class="string">&apos;value&apos;</span>])</pre></div>
+
+</div>
+<div>
+<h3 id="onlyupdateforproptypes"><code>onlyUpdateForPropTypes()</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/onlyUpdateForPropTypes.js#L22">&#x24C8;</a></p>
+<p>Works like <code>onlyUpdateForKeys()</code>, but prop keys are inferred from the <code>propTypes</code>
+of the base component. Useful in conjunction with <code>setPropTypes()</code>.
+If the base component does not have any <code>propTypes</code>, the component will never
+receive any updates. This probably isn&apos;t the expected behavior, so a warning
+is printed to the console.</p>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;({className})&#xA0;<span class="type">=&gt;</span>&#xA0;&lt;button&#xA0;className={className}&#xA0;/&gt;;</div><div><span class="support">Button</span><span class="delimiter">.</span>propTypes&#xA0;=&#xA0;{className:&#xA0;PropTypes<span class="delimiter">.</span>string};</div><div><span class="modifier">const</span>&#xA0;EnhancedButton&#xA0;=&#xA0;<span class="name">onlyUpdateForPropTypes</span>(<span class="support">Button</span>);</div></pre></div>
+
+</div>
+<div>
+<h3 id="pickpropspaths"><code>pickProps(paths)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/pickProps.js#L17">&#x24C8;</a></p>
+<p>Same as lodash <code>pick</code> but for props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>paths</code> <em>(String|String[])</em>: The property paths to pick.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="modifier">const</span>&#xA0;onlyWithValue&#xA0;=&#xA0;<span class="name">pickProps</span>(<span class="string">&apos;value&apos;</span>);</pre></div>
+
+</div>
+<div>
+<h3 id="pure"><code>pure()</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/pure.js#L16">&#x24C8;</a></p>
+<p>Prevents the component from updating unless a prop has changed.
+Uses <code>shallowEqual()</code> to test for changes.</p>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">pure</span>(<span class="string">&apos;button&apos;</span>)</pre></div>
+
+</div>
+<div>
+<h3 id="renamepropoldname-newname"><code>renameProp(oldName, newName)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/renameProp.js#L17">&#x24C8;</a></p>
+<p>Renames a single prop.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>oldName</code> <em>(String)</em>:</li>
+<li><code>newName</code> <em>(String)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">renameProp</span>(<span class="string">&apos;data&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;value&apos;</span>)</pre></div>
+
+</div>
+<div>
+<h3 id="renamepropsnamemap"><code>renameProps(nameMap)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/renameProps.js#L28">&#x24C8;</a></p>
+<p>Renames multiple props, using a map of old prop names to new prop names.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>nameMap</code> <em>(Object)</em>: A map with old prop as key and new prop as value.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">renameProps</span>({data:&#xA0;<span class="string">&apos;value&apos;</span>})</pre></div>
+
+</div>
+<div>
+<h3 id="rendercomponentcomponent"><code>renderComponent(Component)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/renderComponent.js#L19">&#x24C8;</a></p>
+<p>Takes a component and returns a higher-order component version of that component.
+This is useful in combination with another helper that expects a higher-order
+component, like <code>branch</code>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>Component</code> <em>(ReactClass|ReactFunctionalComponent|String)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;renderLoaderIfLoading&#xA0;=&#xA0;<span class="name">branch</span>(</div><div>&#xA0;&#xA0;({loading}&#xA0;<span class="type">=&gt;</span>&#xA0;loading)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;<span class="name">renderComponent</span>(Loader)<span class="delimiter">,</span></div><div>)</div></pre></div>
+
+</div>
+<div>
+<h3 id="rendernothing"><code>renderNothing()</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/renderNothing.js#L17">&#x24C8;</a></p>
+<p>A higher-order component that always renders <code>null</code>.</p>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;renderNothingIfNoRules&#xA0;=&#xA0;<span class="name">branch</span>(</div><div>&#xA0;&#xA0;({rules}&#xA0;<span class="type">=&gt;</span>&#xA0;rules<span class="delimiter">.</span><span class="support">length</span>&#xA0;===&#xA0;<span class="numeric">0</span>)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;renderNothing<span class="delimiter">,</span></div><div>)</div></pre></div>
+
+</div>
+<div>
+<h3 id="setdisplaynamedisplayname"><code>setDisplayName(displayName)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/setDisplayName.js#L14">&#x24C8;</a></p>
+<p>Assigns to the <code>displayName</code> property on the base component.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>displayName</code> <em>(String)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">setDisplayName</span>(<span class="string">&apos;AnotherDisplayName&apos;</span>)(MyComponent);</pre></div>
+
+</div>
+<div>
+<h3 id="setproptypesproptypes"><code>setPropTypes(propTypes)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/setPropTypes.js#L14">&#x24C8;</a></p>
+<p>Assigns to the <code>propTypes</code> property on the base component.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propTypes</code> <em>(Object)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">setPropTypes</span>({children:&#xA0;PropTypes<span class="delimiter">.</span>node})(MyComponent);</pre></div>
+
+</div>
+<div>
+<h3 id="setstatickey-value"><code>setStatic(key, value)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/setStatic.js#L13">&#x24C8;</a></p>
+<p>Assigns a value to a static property on the base component.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>key</code> <em>(String)</em>:</li>
+<li><code>value</code> <em>(String)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">setStatic</span>({defaultProps:&#xA0;{type:&#xA0;<span class="string">&apos;button&apos;</span>}})(<span class="string">&apos;button&apos;</span>);</pre></div>
+
+</div>
+<div>
+<h3 id="shouldupdatetest"><code>shouldUpdate(test)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/shouldUpdate.js#L21">&#x24C8;</a></p>
+<p>Higher-order component version of
+<a href="https://facebook.github.io/react/docs/react-component.html#shouldcomponentupdate"><code>shouldComponentUpdate()</code></a>.
+The test function accepts both the current props and the next props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>test</code> <em>(Function)</em>: Receive two arguments, props and nextProps</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Pure</span></div><div><span class="name">shouldUpdate</span>((props<span class="delimiter">,</span>&#xA0;nextProps)&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">shallowEqual</span>(props<span class="delimiter">,</span>&#xA0;nextProps))</div></pre></div>
+
+</div>
+<div>
+<h3 id="toclass"><code>toClass()</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/toClass.js#L20">&#x24C8;</a></p>
+<p>Takes a function component and wraps it in a class. This can be used as a
+fallback for libraries that need to add a ref to a component, like Relay.
+If the base component is already a class, it returns the given component.</p>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Component&#xA0;=&#xA0;<span class="name">toClass</span>(()&#xA0;<span class="type">=&gt;</span>&#xA0;&lt;div&#xA0;/&gt;);</div><div>&lt;Component&#xA0;ref=<span class="string">&quot;foo&quot;</span>&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;A&#xA0;ref&#xA0;can&#xA0;be&#xA0;used&#xA0;because&#xA0;Component&#xA0;is&#xA0;a&#xA0;class</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="withcontextchildcontexttypes-getchildcontext"><code>withContext(childContextTypes, getChildContext)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withContext.js#L20">&#x24C8;</a></p>
+<p>Provides context to the component&apos;s children. <code>childContextTypes</code> is an object
+of React prop types. <code>getChildContext()</code> is a function that returns
+the child context. Use along with <code>getContext()</code>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>childContextTypes</code> <em>(Object)</em>:</li>
+<li><code>getChildContext</code> <em>(Function)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Provide&#xA0;window&#xA0;in&#xA0;the&#xA0;context,&#xA0;useful&#xA0;for&#xA0;testing</span></div><div><span class="modifier">const</span>&#xA0;withWindow&#xA0;=&#xA0;<span class="name">withContext</span>({<span class="support">window</span>:&#xA0;PropTypes<span class="delimiter">.</span><span class="support">object</span><span class="delimiter">.</span>isRequired}<span class="delimiter">,</span>&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;{<span class="support">window</span>})</div></pre></div>
+
+</div>
+<div>
+<h3 id="withhandlershandlerfactories"><code>withHandlers(handlerFactories)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withHandlers.js#L50">&#x24C8;</a></p>
+<p>Takes an object map of handler creators or a factory function. These are
+higher-order functions that accept a set of props and return a function handler:
+This allows the handler to access the current props via closure, without needing
+to change its signature.
+Handlers are passed to the base component as immutable props, whose identities
+are preserved across renders. This avoids a common pitfall where functional
+components create handlers inside the body of the function, which results in a
+new handler on every render and breaks downstream <code>shouldComponentUpdate()</code>
+optimizations that rely on prop equality.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>handlerFactories</code> <em>(Function|Object)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;enhance&#xA0;=&#xA0;<span class="name">compose</span>(</div><div>&#xA0;&#xA0;<span class="name">withState</span>(<span class="string">&apos;value&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;updateValue&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;&apos;</span>)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;<span class="name">withHandlers</span>({</div><div>&#xA0;&#xA0;&#xA0;&#xA0;<span class="name">onChange</span>:&#xA0;props&#xA0;<span class="type">=&gt;</span>&#xA0;event&#xA0;<span class="type">=&gt;</span>&#xA0;{</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;props<span class="delimiter method">.</span><span class="name">updateValue</span>(<span class="support">event</span><span class="delimiter">.</span><span class="support">target</span><span class="delimiter">.</span><span class="support">value</span>)</div><div>&#xA0;&#xA0;&#xA0;&#xA0;}<span class="delimiter">,</span></div><div>&#xA0;&#xA0;&#xA0;&#xA0;<span class="name">onSubmit</span>:&#xA0;props&#xA0;<span class="type">=&gt;</span>&#xA0;event&#xA0;<span class="type">=&gt;</span>&#xA0;{</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="support">event</span><span class="delimiter method">.</span><span class="name">preventDefault</span>()</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;<span class="name">submitForm</span>(props<span class="delimiter">.</span><span class="support">value</span>)</div><div>&#xA0;&#xA0;&#xA0;&#xA0;}</div><div>&#xA0;&#xA0;})</div><div>)</div><div>&#xA0;</div><div><span class="modifier">const</span>&#xA0;Form&#xA0;=&#xA0;<span class="name">enhance</span>(({&#xA0;value<span class="delimiter">,</span>&#xA0;onChange<span class="delimiter">,</span>&#xA0;onSubmit&#xA0;})&#xA0;<span class="type">=&gt;</span></div><div>&#xA0;&#xA0;&lt;form&#xA0;onSubmit={onSubmit}&gt;</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&lt;label&gt;Value</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&lt;input&#xA0;type=<span class="string">&quot;text&quot;</span>&#xA0;value={value}&#xA0;onChange={onChange}&#xA0;/&gt;</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&lt;/label&gt;</div><div>&#xA0;&#xA0;&lt;/form&gt;</div><div>)</div></pre></div>
+
+</div>
+<div>
+<h3 id="withobsobsmapper"><code>withObs(obsMapper)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withObs.js#L24">&#x24C8;</a></p>
+<p>Takes observables from the context and special observable <code>props$</code> an map them
+to a new set of observables.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>obsMapper</code> <em>(Function)</em>: The function that take previous observables and returns new ones.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;withFullName$&#xA0;=&#xA0;<span class="name">mapObs</span>(({firstName$<span class="delimiter">,</span>&#xA0;props$})&#xA0;<span class="type">=&gt;</span>&#xA0;({</div><div>&#xA0;fullName$:&#xA0;Observable<span class="delimiter method">.</span><span class="name">combineLatest</span>(</div><div>&#xA0;&#xA0;&#xA0;firstName$<span class="delimiter">,</span></div><div>&#xA0;&#xA0;&#xA0;props$<span class="delimiter method">.</span><span class="name">pluck</span>(<span class="string">&apos;lastName&apos;</span>)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;&#xA0;(firstName<span class="delimiter">,</span>&#xA0;lastName)&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="string">`${firstName}&#xA0;${lastName}`</span></div><div>&#xA0;&#xA0;)</div><div>}))</div></pre></div>
+
+</div>
+<div>
+<h3 id="withpropspropsmapper"><code>withProps(propsMapper)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withProps.js#L23">&#x24C8;</a></p>
+<p>Like <code>mapProps()</code>, except the newly created props are merged with the owner props.
+Instead of a function, you can also pass a props object directly. In this form,
+it is similar to <code>defaultProps()</code>, except the provided props take precedence over
+props from the owner.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>propsMapper</code> <em>(Function|Object)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;<span class="name">withProps</span>({type:&#xA0;<span class="string">&apos;button&apos;</span>})(<span class="string">&apos;button&apos;</span>);</div><div><span class="modifier">const</span>&#xA0;XButton&#xA0;=&#xA0;<span class="name">withProps</span>(({type})&#xA0;<span class="type">=&gt;</span>&#xA0;{type:&#xA0;<span class="string">`x${type}`</span>})(<span class="string">&apos;button&apos;</span>);</div></pre></div>
+
+</div>
+<div>
+<h3 id="withpropsonchangeshouldmaporkeys-createprops"><code>withPropsOnChange(shouldMapOrKeys, createProps)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withPropsOnChange.js#L27">&#x24C8;</a></p>
+<p>Like <code>withProps()</code>, except the new props are only created when one of the owner
+props specified by <code>shouldMapOrKeys</code> changes. This helps ensure that expensive
+computations inside <code>createProps()</code> are only executed when necessary.
+Instead of an array of prop keys, the first parameter can also be a function
+that returns a boolean, given the current props and the next props. This allows
+you to customize when <code>createProps()</code> should be called.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>shouldMapOrKeys</code> <em>(Function|String|String[])</em>:</li>
+<li><code>createProps</code> <em>(Function)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="modifier">const</span>&#xA0;withEmptyProp&#xA0;=&#xA0;<span class="name">withPropsOnChange</span>(<span class="string">&apos;count&apos;</span><span class="delimiter">,</span>&#xA0;({count})&#xA0;<span class="type">=&gt;</span>&#xA0;({empty:&#xA0;count&#xA0;===&#xA0;<span class="numeric">0</span>}));</pre></div>
+
+</div>
+<div>
+<h3 id="withreducerstatename-dispatchname-reducer-initialstate"><code>withReducer(stateName, dispatchName, reducer, initialState)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withReducer.js#L46">&#x24C8;</a></p>
+<p>Similar to <code>withState()</code>, but state updates are applied using a reducer function.
+A reducer is a function that receives a state and an action, and returns a new state.
+Passes two additional props to the base component: a state value, and a
+dispatch method. The dispatch method sends an action to the reducer, and
+the new state is applied.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>stateName</code> <em>(String)</em>:</li>
+<li><code>dispatchName</code> <em>(String)</em>:</li>
+<li><code>reducer</code> <em>(Function)</em>:</li>
+<li><code>initialState</code> <em>(*)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;counterReducer&#xA0;=&#xA0;(count<span class="delimiter">,</span>&#xA0;action)&#xA0;<span class="type">=&gt;</span>&#xA0;{</div><div>&#xA0;&#xA0;switch&#xA0;(action<span class="delimiter">.</span><span class="support">type</span>)&#xA0;{</div><div>&#xA0;&#xA0;case&#xA0;INCREMENT:</div><div>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;count&#xA0;+&#xA0;<span class="numeric">1</span></div><div>&#xA0;&#xA0;case&#xA0;DECREMENT:</div><div>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;count&#xA0;-&#xA0;<span class="numeric">1</span></div><div>&#xA0;&#xA0;default:</div><div>&#xA0;&#xA0;&#xA0;&#xA0;return&#xA0;count</div><div>&#xA0;&#xA0;}</div><div>}</div><div>&#xA0;</div><div><span class="modifier">const</span>&#xA0;enhance&#xA0;=&#xA0;<span class="name">withReducer</span>(<span class="string">&apos;counter&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;dispatch&apos;</span><span class="delimiter">,</span>&#xA0;counterReducer<span class="delimiter">,</span>&#xA0;<span class="numeric">0</span>)</div><div><span class="modifier">const</span>&#xA0;Counter&#xA0;=&#xA0;<span class="name">enhance</span>(({&#xA0;counter<span class="delimiter">,</span>&#xA0;dispatch&#xA0;})&#xA0;<span class="type">=&gt;</span></div><div>&#xA0;&#xA0;&lt;div&gt;</div><div>&#xA0;&#xA0;&#xA0;&#xA0;Count:&#xA0;{counter}</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&lt;button&#xA0;onClick={()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">dispatch</span>({&#xA0;type:&#xA0;INCREMENT&#xA0;})}&gt;Increment&lt;/button&gt;</div><div>&#xA0;&#xA0;&#xA0;&#xA0;&lt;button&#xA0;onClick={()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">dispatch</span>({&#xA0;type:&#xA0;DECREMENT&#xA0;})}&gt;Decrement&lt;/button&gt;</div><div>&#xA0;&#xA0;&lt;/div&gt;</div><div>)</div></pre></div>
+
+</div>
+<div>
+<h3 id="withstatestatename-stateupdatername-initialstate"><code>withState(stateName, stateUpdaterName, initialState)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/withState.js#L43">&#x24C8;</a></p>
+<p>Passes two additional props to the base component: a state value, and a function
+to update that state value. The state updater has the following signature:</p>
+<div class="highlight js"><pre><div>stateUpdater&lt;T&gt;((prevValue:&#xA0;T)&#xA0;<span class="type">=&gt;</span>&#xA0;T):&#xA0;void</div><div><span class="name">stateUpdater</span>(newValue:&#xA0;any):&#xA0;void</div></pre></div>
+<p>The first form accepts a function which maps the previous state value to a new
+state value. You&apos;ll likely want to use this state updater along with <code>withHandlers()</code>
+or <code>withProps()</code> to create specific updater functions. For example, to create an
+HoC that adds basic counting functionality to a component:</p>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;addCounting&#xA0;=&#xA0;<span class="name">compose</span>(&#xA0;<span class="name">withState</span>(<span class="string">&apos;counter&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;setCounter&apos;</span><span class="delimiter">,</span>&#xA0;<span class="string">`0`</span>)<span class="delimiter">,</span>&#xA0;<span class="name">withProps</span>(({&#xA0;setCounter&#xA0;})&#xA0;<span class="type">=&gt;</span>&#xA0;*({&#xA0;<span class="name">increment</span>:&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">setCounter</span>(n&#xA0;<span class="type">=&gt;</span>&#xA0;n&#xA0;+&#xA0;<span class="string">`1`</span>)<span class="delimiter">,</span>&#xA0;<span class="name">decrement</span>:&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">setCounter</span>(n&#xA0;<span class="type">=&gt;</span>&#xA0;n&#xA0;-&#xA0;<span class="string">`1`</span>)<span class="delimiter">,</span>&#xA0;<span class="name">reset</span>:&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">setCounter</span>(<span class="numeric">0</span>)&#xA0;}))*</div><div>)</div></pre></div>
+<p>The second form accepts a single value, which is used as the new state.
+An initial state value is required. It can be either the state value itself,
+or a function that returns an initial state given the initial props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>stateName</code> <em>(String)</em>:</li>
+<li><code>stateUpdaterName</code> <em>(String)</em>:</li>
+<li><code>initialState</code> <em>(*|Function)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+
+</div>
+<div>
+<h3 id="wrapdisplaynamecomponent-wrappername"><code>wrapDisplayName(component, wrapperName)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/wrapDisplayName.js#L19">&#x24C8;</a></p>
+<p>Returns a wrapped version of a React component&apos;s display name. For instance,
+if the display name of <code>component</code> is <code>&apos;Post&apos;</code>, and <code>wrapperName</code> is <code>&apos;mapProps&apos;</code>,
+the return value is <code>&apos;mapProps(Post)&apos;</code>. Most Recompose higher-order components
+use <code>wrapDisplayName()</code>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>component</code> <em>(ReactClass|ReactFunctionalComponent)</em>: Component</li>
+<li><code>wrapperName</code> <em>(String)</em>: Wrapper name</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(String)</em>: Returns a wrapped displayName of the component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="comment">//&#xA0;Create&#xA0;a&#xA0;hoc&#xA0;that&#xA0;will&#xA0;log&#xA0;when&#xA0;a&#xA0;component&#xA0;will&#xA0;mount</span></div><div><span class="name">wrapDisplayName</span>(<span class="support">Button</span><span class="delimiter">,</span>&#xA0;<span class="string">&apos;wrap&apos;</span>);&#xA0;<span class="comment">//&#xA0;will&#xA0;return&#xA0;wrap(Button)</span></div></pre></div>
+
+</div>
+</div>
+<div>
+<h2><code>&#x201C;Utilities&#x201D; Methods</code></h2>
+<div>
+<h3 id="componentfrompropprop"><code>componentFromProp(prop)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/componentFromProp.js#L21">&#x24C8;</a></p>
+<p>Creates a component that accepts a component as a prop and renders it
+with the remaining props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>prop</code> <em>(String)</em>: The prop to render as Component.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(ReactFunctionalComponent)</em>: Returns a Component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;enhance&#xA0;=&#xA0;<span class="name">defaultProps</span>({component:&#xA0;<span class="string">&apos;button&apos;</span>});</div><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;<span class="name">enhance</span>(<span class="name">componentFromProp</span>(<span class="string">&apos;component&apos;</span>));</div><div>&#xA0;</div><div>&lt;<span class="support">Button</span>&#xA0;foo=<span class="string">&quot;bar&quot;</span>&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;renders&#xA0;&lt;button&#xA0;foo=&quot;bar&quot;&#xA0;/&gt;</span></div><div>&lt;<span class="support">Button</span>&#xA0;component=<span class="string">&quot;a&quot;</span>&#xA0;foo=<span class="string">&quot;bar&quot;</span>&#xA0;/&gt;&#xA0;&#xA0;<span class="comment">//&#xA0;renders&#xA0;&lt;a&#xA0;foo=&quot;bar&quot;&#xA0;/&gt;</span></div><div>&lt;<span class="support">Button</span>&#xA0;component={<span class="support">Link</span>}&#xA0;foo=<span class="string">&quot;bar&quot;</span>&#xA0;/&gt;&#xA0;&#xA0;<span class="comment">//&#xA0;renders&#xA0;&lt;Link&#xA0;foo=&quot;bar&quot;&#xA0;/&gt;</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="composefuncs"><code>compose([funcs])</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/compose.js#L17">&#x24C8;</a></p>
+<p>This method is similar to lodash <code>flowRight</code>. It permits to easily compose
+several high order components.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>[funcs]</code> <em>(...Function)</em>: The functions to invoke.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(Function)</em>: Returns the new composite function.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;enhance&#xA0;=&#xA0;<span class="name">compose</span>(pure<span class="delimiter">,</span>&#xA0;<span class="name">withProps</span>({foo:&#xA0;<span class="string">&apos;bar&apos;</span>}));</div><div><span class="modifier">const</span>&#xA0;Component&#xA0;=&#xA0;<span class="name">enhance</span>(MyComponent);</div></pre></div>
+
+</div>
+<div>
+<h3 id="createeagerelementtype-props-children"><code>createEagerElement(type, [props], [children])</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/createEagerElement.js#L23">&#x24C8;</a></p>
+<p>React elements are lazily evaluated. But when a higher-order component
+renders a functional component, the laziness doesn&apos;t have any real benefit.
+createEagerElement() is a replacement for React.createElement() that checks
+if the given component is referentially transparent. If so, rather than
+returning a React element, it calls the functional component with the given
+props and returns its output.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>type</code> <em>(ReactClass|ReactFunctionalComponent|String)</em>: The type of component to render.</li>
+<li><code>[props]</code> <em>(Object)</em>: The props of the component.</li>
+<li><code>[children]</code> <em>(ReactNode)</em>: The children of the component.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(ReactElement)</em>: Returns a element.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">createEagerElement</span>(<span class="string">&apos;div&apos;</span><span class="delimiter">,</span>&#xA0;{className:&#xA0;<span class="string">&apos;foo&apos;</span>});</pre></div>
+
+</div>
+<div>
+<h3 id="createeagerfactorytype"><code>createEagerFactory(type)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/createEagerFactory.js#L19">&#x24C8;</a></p>
+<p>The factory form of <code>createEagerElement()</code>.
+Given a component, it returns a <a href="https://facebook.github.io/react/docs/react-api.html#createfactory">factory</a>.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>type</code> <em>(ReactClass|ReactFunctionalComponent|String)</em>: The type of component to render.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(Function): Returns a function that take two arguments (props, children)</em> and create
+an element of the given type.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;div&#xA0;=&#xA0;<span class="name">createFactory</span>(<span class="string">&apos;div&apos;</span>);</div><div><span class="name">div</span>({className:&#xA0;<span class="string">&apos;foo&apos;</span>});</div></pre></div>
+
+</div>
+<div>
+<h3 id="createeventhandler"><code>createEventHandler()</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/createEventHandler.js#L36">&#x24C8;</a></p>
+<p>Returns an object with properties handler and stream. stream is an observable
+sequence, and handler is a function that pushes new values onto the sequence.
+Useful for creating event handlers like onClick.</p>
+<h4>Returns</h4>
+<p><em>(Object)</em>: eventHandler</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="modifier">const</span>&#xA0;{handler<span class="delimiter">,</span>&#xA0;stream}&#xA0;=&#xA0;<span class="name">createEventHandler</span>();</pre></div>
+
+</div>
+<div>
+<h3 id="createhelperhoc-helpername-noargsfalse"><code>createHelper(hoc, helperName, [noArgs=false])</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/createHelper.js#L22">&#x24C8;</a></p>
+<p>Utility method that gives to higher-order components a comprehensive display name.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>hoc</code> <em>(HigherOrderComponent)</em>: Higher-order component to wrap.</li>
+<li><code>helperName</code> <em>(String)</em>: Name used to create displayName.</li>
+<li><code>[noArgs=false]</code> <em>(Boolean)</em>: Indicate if the higher-order component has some arguments.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: Returns a wrapped hoc.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;pluckOnChangeTargetValue&#xA0;=&#xA0;<span class="name">createHelper</span>(</div><div>&#xA0;&#xA0;<span class="name">withHandlers</span>({</div><div>&#xA0;&#xA0;&#xA0;&#xA0;<span class="name">onChange</span>:&#xA0;({onChange})&#xA0;<span class="type">=&gt;</span>&#xA0;({target:&#xA0;{value}})&#xA0;<span class="type">=&gt;</span>&#xA0;<span class="name">onChange</span>(value)<span class="delimiter">,</span></div><div>&#xA0;&#xA0;})<span class="delimiter">,</span></div><div>&#xA0;&#xA0;<span class="string">&apos;pluckOnChangeTargetValue&apos;</span><span class="delimiter">,</span></div><div>);</div><div>&#xA0;</div><div><span class="modifier">const</span>&#xA0;Input&#xA0;=&#xA0;<span class="name">pluckOnChangeTargetValue</span>(<span class="string">&apos;input&apos;</span>);</div><div>&lt;Input&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;Will&#xA0;have&#xA0;&quot;pluckOnChangeTargetValue(input)&quot;&#xA0;as&#xA0;displayName</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="createsinkcallback"><code>createSink(callback)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/createSink.js#L18">&#x24C8;</a></p>
+<p>Creates a component that renders nothing <em>(null)</em> but calls a callback when
+receiving new props.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>callback</code> <em>(Function)</em>: Function called when new props are received.</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(ReactClass)</em>: Returns a ReactClass.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;LocationUpdater&#xA0;=&#xA0;<span class="name">createSink</span>(({hash})&#xA0;<span class="type">=&gt;</span>&#xA0;{</div><div>&#xA0;&#xA0;<span class="support">window</span><span class="delimiter">.</span><span class="support">location</span><span class="delimiter">.</span><span class="support">hash</span>&#xA0;=&#xA0;hash;</div><div>});</div><div>&lt;LocationUpdater&#xA0;hash=<span class="string">&quot;foo&quot;</span>&#xA0;/&gt;&#xA0;<span class="comment">//&#xA0;Will&#xA0;add&#xA0;&quot;#foo&quot;&#xA0;in&#xA0;the&#xA0;url</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="getdisplaynamecomponent"><code>getDisplayName(component)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/getDisplayName.js#L15">&#x24C8;</a></p>
+<p>Returns the display name of a React component. Falls back to &apos;Component&apos;.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>component</code> <em>(ReactClass|ReactFunctionalComponent)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(String)</em>: Returns the display name of the provided component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;MyButton&#xA0;=&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;&lt;button&#xA0;/&gt;;</div><div>MyButton<span class="delimiter">.</span>displayName&#xA0;=&#xA0;<span class="string">&apos;MyButton&apos;</span>;</div><div>&#xA0;</div><div><span class="name">getDisplayName</span>(MyComponent);&#xA0;<span class="comment">//&#xA0;Will&#xA0;return&#xA0;&quot;MyButton&quot;</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="hoiststaticshoc"><code>hoistStatics(hoc)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/hoistStatics.js#L21">&#x24C8;</a></p>
+<p>Augments a higher-order component so that when used, it copies non-react
+static properties from the base component to the new component. This is
+helpful when using Recompose with libraries like Relay.
+Note that this only hoists non-react statics. The following static properties
+will not be hoisted: childContextTypes, contextTypes, defaultProps, displayName,
+getDefaultProps, mixins, propTypes, and type. The following native static methods
+will also be ignored: name, length, prototype, caller, arguments, and arity</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>hoc</code> <em>(HigherOrderComponent)</em>:</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(HigherOrderComponent)</em>: A function that takes a component and returns a new component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">hoistStatics</span>(<span class="name">withProps</span>({foo:&#xA0;<span class="string">&apos;bar&apos;</span>}));</pre></div>
+
+</div>
+<div>
+<h3 id="identityvalue"><code>identity(value)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/identity.js#L13">&#x24C8;</a></p>
+<p>This method is similar to lodash <code>identity</code>. It returns the first argument it receives.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>value</code> <em>(*)</em>: Any value</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(*)</em>: Returns <code>value</code></p>
+<h4>Example</h4>
+<div class="highlight js"><pre><span class="name">identity</span>(Component)&#xA0;===&#xA0;Component</pre></div>
+
+</div>
+<div>
+<h3 id="isclasscomponentvalue"><code>isClassComponent(value)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/isClassComponent.js#L18">&#x24C8;</a></p>
+<p>Returns true if the given value is a React component class.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>value</code> <em>(*)</em>: Any value</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(Boolean)</em>: Returns true if the given value is a React component class.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Nothing&#xA0;=&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;null;</div><div><span class="modifier">const</span>&#xA0;Nothing2&#xA0;=&#xA0;<span class="type">class</span>&#xA0;<span class="modifier">extends</span>&#xA0;Component&#xA0;{&#xA0;<span class="method"><span class="name">render</span>()</span>&#xA0;{&#xA0;return&#xA0;null;&#xA0;}&#xA0;};</div><div><span class="modifier">const</span>&#xA0;Nothing3&#xA0;=&#xA0;React<span class="delimiter method">.</span><span class="name">createClass</span>({&#xA0;<span class="method"><span class="name">render</span>()</span>&#xA0;{&#xA0;return&#xA0;null;&#xA0;}&#xA0;});</div><div><span class="name">isClassComponent</span>(Nothing);&#xA0;<span class="comment">//&#xA0;false</span></div><div><span class="name">isClassComponent</span>(Nothing2);&#xA0;<span class="comment">//&#xA0;true</span></div><div><span class="name">isClassComponent</span>(Nothing3);&#xA0;<span class="comment">//&#xA0;true</span></div></pre></div>
+
+</div>
+<div>
+<h3 id="isreferentiallytransparentfunctioncomponentvalue"><code>isReferentiallyTransparentFunctionComponent(value)</code></h3>
+<p><a href="https://github.com/neoziro/recompact/blob/v2.3.2/src/isReferentiallyTransparentFunctionComponent.js#L20">&#x24C8;</a></p>
+<p>Returns true if the given value is a referentially transparent function component.
+A referentially transparent function component is a component without any other
+thing expect taking some props and returning a component.
+This method is useful to apply some optimization.</p>
+<h4>Arguments</h4>
+<ol>
+<li><code>value</code> <em>(*)</em>: Any value</li>
+</ol>
+<h4>Returns</h4>
+<p><em>(Boolean)</em>: Returns true if the given value is a referentially
+transparent function component.</p>
+<h4>Example</h4>
+<div class="highlight js"><pre><div><span class="modifier">const</span>&#xA0;Button&#xA0;=&#xA0;()&#xA0;<span class="type">=&gt;</span>&#xA0;&lt;button&#xA0;/&gt;;</div><div><span class="name">isReferentiallyTransparentFunctionComponent</span>(<span class="support">Button</span>);&#xA0;<span class="comment">//&#xA0;true</span></div></pre></div>
+
+</div>
+</div>
+</div>
+    </div>
+    <script>
+      const toc = document.querySelector('.toc-container')
+
+      toc.addEventListener('click', () => {
+        if (window.innerWidth < 768) toc.style.display = 'none'
+      })
+
+      document.querySelector('.mobile-menu').addEventListener('click', (event) => {
+        event.preventDefault()
+        toc.style.display = toc.style.display === 'block' ? 'none' : 'block'
+      })
+    </script>
+  </body>
+</html>
