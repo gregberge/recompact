@@ -13,17 +13,54 @@ To install the stable version:
 yarn add recompact
 ```
 
-To import the entire core set of functionality:
+and to use it in your code:
 
 ```js
 import recompact from 'recompact'
 ```
 
-To import only what you need (this is useful for size-sensitive bundling):
+## Optimizing bundle size
 
-```js
-import mapProps from 'recompact/mapProps'
+### [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash)
+
+The best way to reduce build size is to use [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash):
+
+**.babelrc**
+
+```json
+{
+  "plugins": [
+    ["lodash", { "id": "recompact" }],
+  ]
+}
 ```
+
+Transforms
+```js
+import recompact from 'recompact'
+import { pure, withProps } from 'recompact/withProps'
+
+const enhance = recompact.compose(
+  withProps({ className: 'beautiful' }),
+  pure,
+)
+```
+
+roughly to
+```js
+import _compose from 'recompact/compose'
+import _pure from 'recompact/pure'
+import _withProps from 'recompact/withProps'
+
+const enhance = _compose(
+  _withProps({ className: 'beautiful' }),
+  _pure,
+)
+```
+
+### Tree shaking
+
+Since [tree shaking isn't ready yet to reduce build size efficiently](https://advancedweb.hu/2017/02/07/treeshaking/), it is not supported in recompact.
 
 ## [Documentation](https://github.com/neoziro/recompact/tree/master/docs)
 

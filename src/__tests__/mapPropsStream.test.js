@@ -79,7 +79,7 @@ describe('mapPropsStream', () => {
   it('does not render the base component before props are emitted', () => {
     const trigger$ = new Subject()
     const EnhancedDummy = compose(
-      mapPropsStream(props$ => props$::combineLatest(trigger$, props => props)),
+      mapPropsStream(props$ => combineLatest.call(props$, trigger$, props => props)),
       countRenders,
     )(Dummy)
 

@@ -1,10 +1,5 @@
 import React from 'react'
-import setDisplayName from '../src/setDisplayName'
-import compose from '../src/compose'
-import pure from '../src/pure'
-import withState from '../src/withState'
-import renameProp from '../src/renameProp'
-import withHandlers from '../src/withHandlers'
+import { setDisplayName, compose, pure, withState, renameProp, withHandlers } from '../src'
 
 export default compose(
   setDisplayName('RecompactCounter'),
