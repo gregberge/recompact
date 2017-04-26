@@ -1,4 +1,4 @@
-# Recompact
+![Recompact](https://neoziro.github.io/recompact/recompact-logo.png)
 
 [![Build Status](https://travis-ci.org/neoziro/recompact.svg?branch=master)](https://travis-ci.org/neoziro/recompact)
 [![codecov](https://codecov.io/gh/neoziro/recompact/branch/master/graph/badge.svg)](https://codecov.io/gh/neoziro/recompact)
@@ -62,7 +62,7 @@ const enhance = _compose(
 
 Since [tree shaking isn't ready yet to reduce build size efficiently](https://advancedweb.hu/2017/02/07/treeshaking/), it is not supported in recompact.
 
-## [Documentation](https://github.com/neoziro/recompact/tree/master/docs)
+## [Documentation](https://neoziro.github.io/recompact/)
 
 ## [Benchmarks](https://github.com/neoziro/recompact/tree/master/src/__benchmarks__)
 
