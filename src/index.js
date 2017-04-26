@@ -1,151 +1,48 @@
-import branch from './branch'
-import connectObs from './connectObs'
-import componentFromProp from './componentFromProp'
-import componentFromStream from './componentFromStream'
-import compose from './compose'
-import createEagerElement from './createEagerElement'
-import createEagerFactory from './createEagerFactory'
-import createEventHandler from './createEventHandler'
-import createHelper from './createHelper'
-import createSink from './createSink'
-import debug from './debug'
-import defaultProps from './defaultProps'
-import flattenProp from './flattenProp'
-import getContext from './getContext'
-import getDisplayName from './getDisplayName'
-import hoistStatics from './hoistStatics'
-import identity from './identity'
-import isClassComponent from './isClassComponent'
-import isReferentiallyTransparentFunctionComponent
-  from './isReferentiallyTransparentFunctionComponent'
-import lifecycle from './lifecycle'
-import mapProps from './mapProps'
-import mapPropsStream from './mapPropsStream'
-import nest from './nest'
-import omitProps from './omitProps'
-import onlyUpdateForKeys from './onlyUpdateForKeys'
-import onlyUpdateForPropTypes from './onlyUpdateForPropTypes'
-import pickProps from './pickProps'
-import pure from './pure'
-import renameProp from './renameProp'
-import renameProps from './renameProps'
-import renderComponent from './renderComponent'
-import renderNothing from './renderNothing'
-import setConfig from './setConfig'
-import setDisplayName from './setDisplayName'
-import setObservableConfig from './setObservableConfig'
-import setPropTypes from './setPropTypes'
-import setStatic from './setStatic'
-import shallowEqual from './shallowEqual'
-import shouldUpdate from './shouldUpdate'
-import toClass from './toClass'
-import withContext from './withContext'
-import withHandlers from './withHandlers'
-import withObs from './withObs'
-import withProps from './withProps'
-import withPropsOnChange from './withPropsOnChange'
-import withReducer from './withReducer'
-import withState from './withState'
-import wrapDisplayName from './wrapDisplayName'
-
-export {
-  branch,
-  connectObs,
-  componentFromProp,
-  componentFromStream,
-  compose,
-  createEagerElement,
-  createEagerFactory,
-  createEventHandler,
-  createHelper,
-  createSink,
-  debug,
-  defaultProps,
-  flattenProp,
-  getContext,
-  getDisplayName,
-  hoistStatics,
-  identity,
-  isClassComponent,
-  isReferentiallyTransparentFunctionComponent,
-  lifecycle,
-  mapProps,
-  mapPropsStream,
-  nest,
-  omitProps,
-  onlyUpdateForKeys,
-  onlyUpdateForPropTypes,
-  pickProps,
-  pure,
-  renameProp,
-  renameProps,
-  renderComponent,
-  renderNothing,
-  setConfig,
-  setDisplayName,
-  setObservableConfig,
-  setPropTypes,
-  setStatic,
-  shallowEqual,
-  shouldUpdate,
-  toClass,
-  withContext,
-  withHandlers,
-  withObs,
-  withProps,
-  withPropsOnChange,
-  withReducer,
-  withState,
-  wrapDisplayName,
-}
-
-export default {
-  branch,
-  connectObs,
-  componentFromProp,
-  componentFromStream,
-  compose,
-  createEagerElement,
-  createEagerFactory,
-  createEventHandler,
-  createHelper,
-  createSink,
-  debug,
-  defaultProps,
-  flattenProp,
-  getContext,
-  getDisplayName,
-  hoistStatics,
-  identity,
-  isClassComponent,
-  isReferentiallyTransparentFunctionComponent,
-  lifecycle,
-  mapProps,
-  mapPropsStream,
-  nest,
-  omitProps,
-  onlyUpdateForKeys,
-  onlyUpdateForPropTypes,
-  pickProps,
-  pure,
-  renameProp,
-  renameProps,
-  renderComponent,
-  renderNothing,
-  setConfig,
-  setDisplayName,
-  setPropTypes,
-  setObservableConfig,
-  setStatic,
-  shallowEqual,
-  shouldUpdate,
-  toClass,
-  withContext,
-  withHandlers,
-  withObs,
-  withProps,
-  withPropsOnChange,
-  withReducer,
-  withState,
-  wrapDisplayName,
-}
+export { default as branch } from './branch'
+export { default as connectObs } from './connectObs'
+export { default as componentFromProp } from './componentFromProp'
+export { default as componentFromStream } from './componentFromStream'
+export { default as compose } from './compose'
+export { default as createEagerElement } from './createEagerElement'
+export { default as createEagerFactory } from './createEagerFactory'
+export { default as createEventHandler } from './createEventHandler'
+export { default as createHelper } from './createHelper'
+export { default as createSink } from './createSink'
+export { default as debug } from './debug'
+export { default as defaultProps } from './defaultProps'
+export { default as flattenProp } from './flattenProp'
+export { default as getContext } from './getContext'
+export { default as getDisplayName } from './getDisplayName'
+export { default as hoistStatics } from './hoistStatics'
+export { default as identity } from './identity'
+export { default as isClassComponent } from './isClassComponent'
+export { default as isReferentiallyTransparentFunctionComponent } from './isReferentiallyTransparentFunctionComponent'
+export { default as lifecycle } from './lifecycle'
+export { default as mapProps } from './mapProps'
+export { default as mapPropsStream } from './mapPropsStream'
+export { default as nest } from './nest'
+export { default as omitProps } from './omitProps'
+export { default as onlyUpdateForKeys } from './onlyUpdateForKeys'
+export { default as onlyUpdateForPropTypes } from './onlyUpdateForPropTypes'
+export { default as pickProps } from './pickProps'
+export { default as pure } from './pure'
+export { default as renameProp } from './renameProp'
+export { default as renameProps } from './renameProps'
+export { default as renderComponent } from './renderComponent'
+export { default as renderNothing } from './renderNothing'
+export { default as setConfig } from './setConfig'
+export { default as setDisplayName } from './setDisplayName'
+export { default as setObservableConfig } from './setObservableConfig'
+export { default as setPropTypes } from './setPropTypes'
+export { default as setStatic } from './setStatic'
+export { default as shallowEqual } from './shallowEqual'
+export { default as shouldUpdate } from './shouldUpdate'
+export { default as toClass } from './toClass'
+export { default as withContext } from './withContext'
+export { default as withHandlers } from './withHandlers'
+export { default as withObs } from './withObs'
+export { default as withProps } from './withProps'
+export { default as withPropsOnChange } from './withPropsOnChange'
+export { default as withReducer } from './withReducer'
+export { default as withState } from './withState'
+export { default as wrapDisplayName } from './wrapDisplayName'

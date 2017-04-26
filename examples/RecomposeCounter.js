@@ -1,10 +1,5 @@
 import React from 'react'
-import setDisplayName from 'recompose/setDisplayName'
-import compose from 'recompose/compose'
-import pure from 'recompose/pure'
-import withState from 'recompose/withState'
-import renameProp from 'recompose/renameProp'
-import withHandlers from 'recompose/withHandlers'
+import { setDisplayName, compose, pure, withState, renameProp, withHandlers } from 'recompose'
 
 export default compose(
   setDisplayName('RecomposeCounter'),

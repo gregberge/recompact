@@ -78,7 +78,7 @@ const connectObs = obsMapper => withObs((observables) => {
       if (key.match(/^on[A-Z]/)) {
         const observable = obsMap[key]
         checkObserver(observable, key)
-        obsProps[key] = ::observable.next
+        obsProps[key] = observable.next.bind(observable)
       } else {
         const observable = obsConfig.toESObservable(obsMap[key])
         checkObservable(observable, key)

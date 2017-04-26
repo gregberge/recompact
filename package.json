@@ -2,7 +2,7 @@
   "name": "recompact",
   "version": "2.3.2",
   "description": "A set of React high order components based on Rx.",
-  "main": "index.js",
+  "main": "recompact.js",
   "repository": {
     "url": "git@github.com:neoziro/recompact.git",
     "type": "git"
@@ -11,7 +11,7 @@
     "build": "yarn build:doc && yarn build:lib",
     "build:doc": "NODE_ENV=production babel-node ./scripts/build-doc",
     "build:lib": "rm -rf lib/ && NODE_ENV=production babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json && rm -rf lib/__benchmarks__",
-    "examples": "webpack-dev-server",
+    "examples": "webpack-dev-server --config examples/webpack.config.babel.js",
     "release": "mversion `conventional-recommended-bump -p angular` -m",
     "test": "eslint . && jest --runInBand --coverage && codecov"
   },
@@ -47,11 +47,11 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^19.0.0",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "benchmark": "^2.1.4",
     "codecov": "^2.1.0",
     "conventional-github-releaser": "^1.1.3",
