@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="docs">
+  <head>
+    <meta charset="utf-8">
+    <title>Recompact documentation</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-section logo-section">
+          <div class="logo"><a href="/" title="Recompact">Recompact</a></div>
+        </div>
+        <div class="header-section mobile-menu">
+          <a href="#">Menu</a>
+        </div>
+      </div>
+    </header>
+    <div class="doc-main">
+      <%- body %>
+    </div>
+    <script>
+      const toc = document.querySelector('.toc-container')
+
+      toc.addEventListener('click', () => {
+        if (window.innerWidth < 768) toc.style.display = 'none'
+      })
+
+      document.querySelector('.mobile-menu').addEventListener('click', (event) => {
+        event.preventDefault()
+        toc.style.display = toc.style.display === 'block' ? 'none' : 'block'
+      })
+    </script>
+  </body>
+</html>
