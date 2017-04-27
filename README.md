@@ -1,4 +1,4 @@
-![Recompact](https://neoziro.github.io/recompact/recompact-logo.png)
+<img alt="Recompact" src="https://neoziro.github.io/recompact/recompact-logo.png" height="100">
 
 [![Build Status](https://travis-ci.org/neoziro/recompact.svg?branch=master)](https://travis-ci.org/neoziro/recompact)
 [![codecov](https://codecov.io/gh/neoziro/recompact/branch/master/graph/badge.svg)](https://codecov.io/gh/neoziro/recompact)
