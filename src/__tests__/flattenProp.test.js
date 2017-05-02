@@ -1,11 +1,16 @@
 import React from 'react'
+import warning from 'warning'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
 import { compose, flattenProp, pure } from '../'
 
+jest.mock('warning')
+
 describe('flattenProp', () => {
   it('should flatten an object prop and spreads it into the top-level props object', () => {
     const Counter = flattenProp('state')(Dummy)
+
+    expect(warning).toHaveBeenCalledWith(true, '`flattenProp` is deprecated, please use `flattenProps` instead.')
 
     const wrapper = shallow(
       <Counter pass="through" state={{ counter: 1 }} />,

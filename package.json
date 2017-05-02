@@ -43,7 +43,8 @@
     "hoist-non-react-statics": "^1.2.0",
     "object.omit": "^2.0.1",
     "object.pick": "^1.2.0",
-    "symbol-observable": "^1.0.4"
+    "symbol-observable": "^1.0.4",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
