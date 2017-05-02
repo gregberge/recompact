@@ -1,12 +1,13 @@
-import jsdom from 'jsdom'
+import { JSDOM } from 'jsdom'
 
-global.document = jsdom.jsdom('')
-global.window = global.document.defaultView
-Object.keys(global.document.defaultView).forEach((property) => {
+const jsdom = new JSDOM('', {
+  userAgent: 'node.js',
+})
+global.document = jsdom.document
+global.window = jsdom.window
+
+Object.keys(global.window).forEach((property) => {
   if (typeof global[property] === 'undefined') {
-    global[property] = global.document.defaultView[property]
+    global[property] = global.window[property]
   }
 })
-
-global.navigator = { userAgent: 'node.js' }
-global.phantom = {}
