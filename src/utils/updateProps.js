@@ -2,15 +2,35 @@ import createObservable from './createObservable'
 import createHOCFromMapper from './createHOCFromMapper'
 import { config as obsConfig } from '../setObservableConfig'
 
-const updateProps = subscriber =>
+const updateProps = subscribe =>
   createHOCFromMapper((props$, obs) => [
-    createObservable(observer =>
+    createObservable((observer) => {
+      let subscriber = subscribe((value) => { observer.next(value) })
+      if (typeof subscriber === 'function') {
+        subscriber = { next: subscriber }
+      }
       obsConfig.toESObservable(props$).subscribe({
-        next: subscriber((value) => { observer.next(value) }),
-        error: typeof observer.error === 'function' ? (error) => { observer.error(error) } : undefined,
-        complete: typeof observer.complete === 'function' ? (value) => { observer.complete(value) } : undefined,
-      }),
-    ),
+        next: subscriber.next,
+        error(error) {
+          if (typeof subscriber.error === 'function') {
+            subscriber(error)
+          }
+
+          if (typeof observer.error === 'function') {
+            observer.error(error)
+          }
+        },
+        complete(value) {
+          if (typeof subscriber.error === 'function') {
+            subscriber(value)
+          }
+
+          if (typeof observer.error === 'function') {
+            observer.error(value)
+          }
+        },
+      })
+    }),
     obs,
   ])
 
