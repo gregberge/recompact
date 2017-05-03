@@ -23,7 +23,7 @@ import recompact from 'recompact'
 
 ### [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash)
 
-The best way to reduce build size is to use [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash):
+The best way to reduce build size is to use [babel-plugin-lodash](https://github.com/lodash/babel-plugin-lodash). It can be used with other libraries than lodash, just like this:
 
 **.babelrc**
 
@@ -38,7 +38,7 @@ The best way to reduce build size is to use [babel-plugin-lodash](https://github
 Transforms
 ```js
 import recompact from 'recompact'
-import { pure, withProps } from 'recompact/withProps'
+import { pure, withProps } from 'recompact'
 
 const enhance = recompact.compose(
   withProps({ className: 'beautiful' }),
