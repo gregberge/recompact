@@ -20,7 +20,7 @@ export default {
               'transform-object-rest-spread',
             ],
             presets: [
-              ['latest', { es2015: { loose: true, modules: false } }],
+              ['env', { loose: true, modules: false }],
               'react',
             ],
           },
