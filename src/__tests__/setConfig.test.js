@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { mount } from 'enzyme'
@@ -15,7 +16,7 @@ describe('setConfig', () => {
       class extends Component {
         static contextTypes = {
           myObsKey: PropTypes.object,
-        };
+        }
 
         render() {
           spy(this.context)
