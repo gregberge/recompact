@@ -53,7 +53,7 @@ test('toClass passes context and props correctly', () => {
   class Provider extends React.Component {
     static propTypes = {
       children: PropTypes.node,
-    };
+    }
 
     render() {
       return this.props.children
@@ -61,12 +61,8 @@ test('toClass passes context and props correctly', () => {
   }
 
   Provider = compose(
-    withContext(
-      { store: PropTypes.object },
-      props => ({ store: props.store }),
-    ),
+    withContext({ store: PropTypes.object }, props => ({ store: props.store })),
   )(Provider)
-
 
   const StatelessComponent = (props, context) =>
     <Dummy props={props} context={context} />

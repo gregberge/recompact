@@ -50,7 +50,7 @@ describe('withObs', () => {
 
     const Component = compose(
       withObs(() => ({
-        props$: Rx.Observable.create((observer) => {
+        props$: Rx.Observable.create(observer => {
           count += 1
           observer.next({})
         }),
@@ -74,7 +74,9 @@ describe('withObs', () => {
     )('div')
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('withObs(withObs(withObs(div)))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withObs(withObs(withObs(div)))',
+    )
     expect(wrapper.equals(<div />)).toBeTruthy()
   })
 })

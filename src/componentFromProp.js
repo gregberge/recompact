@@ -18,7 +18,7 @@ import createEagerElement from './createEagerElement'
  * <Button component="a" foo="bar" />  // renders <a foo="bar" />
  * <Button component={Link} foo="bar" />  // renders <Link foo="bar" />
  */
-const componentFromProp = (propName) => {
+const componentFromProp = propName => {
   const Component = props =>
     createEagerElement(props[propName], omit(props, [propName]))
 

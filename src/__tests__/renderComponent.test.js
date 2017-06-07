@@ -1,6 +1,13 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { compose, branch, renderComponent, setDisplayName, toClass, withState } from '../'
+import {
+  compose,
+  branch,
+  renderComponent,
+  setDisplayName,
+  toClass,
+  withState,
+} from '../'
 
 describe('renderComponent', () => {
   it('always renders the given component', () => {

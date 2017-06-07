@@ -15,9 +15,12 @@ import mapProps from './mapProps'
  * const Button = flattenProp('props')('button');
  * <Button props={{type: 'submit'}} /> // will render <button type="submit" />
  */
-const flattenProp = (propName) => {
+const flattenProp = propName => {
   if (process.env.NODE_ENV !== 'production') {
-    warning(true, '`flattenProp` is deprecated, please use `flattenProps` instead.')
+    warning(
+      true,
+      '`flattenProp` is deprecated, please use `flattenProps` instead.',
+    )
   }
 
   return mapProps(props => ({

@@ -22,13 +22,12 @@ describe('pickProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(
-      pickProps('foo'),
-      pure,
-    )(Dummy)
+    const Component = compose(pickProps('foo'), pure)(Dummy)
 
     const wrapper = shallow(<Component foo="bar" bar="foo" x="y" />)
-    expect(wrapper.instance().constructor.displayName).toBe('pickProps(pure(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'pickProps(pure(Dummy))',
+    )
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy()
   })
 })

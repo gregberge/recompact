@@ -1,5 +1,4 @@
 import React from 'react'
-import sinon from 'sinon'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
 import { withHandlers } from '../'
@@ -21,13 +20,13 @@ describe('withHandlers', () => {
   })
 
   it('caches handlers properly', () => {
-    const handlerCreationSpy = sinon.spy()
-    const handlerCallSpy = sinon.spy()
+    const handlerCreationSpy = jest.fn()
+    const handlerCallSpy = jest.fn()
 
     const enhance = withHandlers({
-      handler: (props) => {
+      handler: props => {
         handlerCreationSpy(props)
-        return (val) => {
+        return val => {
           handlerCallSpy(val)
         }
       },
@@ -38,29 +37,29 @@ describe('withHandlers', () => {
     const handler = wrapper.prop('handler')
 
     // Don't create handler until it is called.
-    expect(handlerCreationSpy.callCount).toEqual(0)
-    expect(handlerCallSpy.callCount).toEqual(0)
+    expect(handlerCreationSpy).toHaveBeenCalledTimes(0)
+    expect(handlerCallSpy).toHaveBeenCalledTimes(0)
 
     handler(1)
-    expect(handlerCreationSpy.callCount).toEqual(1)
-    expect(handlerCreationSpy.args[0]).toEqual([{ foo: 'bar' }])
-    expect(handlerCallSpy.callCount).toEqual(1)
-    expect(handlerCallSpy.args[0]).toEqual([1])
+    expect(handlerCreationSpy).toHaveBeenCalledTimes(1)
+    expect(handlerCreationSpy).toHaveBeenCalledWith({ foo: 'bar' })
+    expect(handlerCallSpy).toHaveBeenCalledTimes(1)
+    expect(handlerCallSpy).toHaveBeenCalledWith(1)
 
     // Props haven't changed; should use cached handler.
     handler(2)
-    expect(handlerCreationSpy.callCount).toEqual(1)
-    expect(handlerCallSpy.callCount).toEqual(2)
-    expect(handlerCallSpy.args[1]).toEqual([2])
+    expect(handlerCreationSpy).toHaveBeenCalledTimes(1)
+    expect(handlerCallSpy).toHaveBeenCalledTimes(2)
+    expect(handlerCallSpy.mock.calls[1]).toEqual([2])
 
     wrapper.setProps({ foo: 'baz' })
     handler(3)
 
     // Props did change; handler should be recreated.
-    expect(handlerCreationSpy.callCount).toEqual(2)
-    expect(handlerCreationSpy.args[1]).toEqual([{ foo: 'baz' }])
-    expect(handlerCallSpy.callCount).toEqual(3)
-    expect(handlerCallSpy.args[2]).toEqual([3])
+    expect(handlerCreationSpy).toHaveBeenCalledTimes(2)
+    expect(handlerCreationSpy.mock.calls[1]).toEqual([{ foo: 'baz' }])
+    expect(handlerCallSpy).toHaveBeenCalledTimes(3)
+    expect(handlerCallSpy.mock.calls[2]).toEqual([3])
   })
 
   it('throws if handler is not a higher-order function', () => {
@@ -75,9 +74,10 @@ describe('withHandlers', () => {
     const wrapper = shallow(<EnhancedDummy />)
     expect(() => wrapper.prop('foo').call()).toThrowError()
 
-    expect(console.error).toBeCalledWith( // eslint-disable-line no-console
+    expect(console.error).toBeCalledWith(
+      // eslint-disable-line no-console
       'withHandlers(): Expected a map of higher-order functions. ' +
-      'Refer to the docs for more info.',
+        'Refer to the docs for more info.',
     )
 
     console.error = error
@@ -85,7 +85,7 @@ describe('withHandlers', () => {
   })
 
   it('allows handers to be a factory', () => {
-    const enhance = withHandlers((initialProps) => {
+    const enhance = withHandlers(initialProps => {
       let cache
 
       return {

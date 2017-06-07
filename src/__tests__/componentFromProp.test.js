@@ -8,12 +8,9 @@ describe('componentFromProp', () => {
     const Container = componentFromProp('component')
     expect(Container.displayName).toBe('componentFromProp(component)')
 
-    const Component = ({ pass }) =>
-      <div>Pass: {pass}</div>
+    const Component = ({ pass }) => <div>Pass: {pass}</div>
 
-    const wrapper = mount(
-      <Container component={Component} pass="through" />,
-    )
+    const wrapper = mount(<Container component={Component} pass="through" />)
     const div = wrapper.find('div')
     expect(div.text()).toBe('Pass: through')
   })

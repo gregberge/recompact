@@ -6,7 +6,7 @@ const jsdom = new JSDOM('', {
 global.document = jsdom.document
 global.window = jsdom.window
 
-Object.keys(global.window).forEach((property) => {
+Object.keys(global.window).forEach(property => {
   if (typeof global[property] === 'undefined') {
     global[property] = global.window[property]
   }

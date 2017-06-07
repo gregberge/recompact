@@ -15,13 +15,12 @@ describe('renameProp', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(
-      renameProp('foo', 'bar'),
-      pure,
-    )(Dummy)
+    const Component = compose(renameProp('foo', 'bar'), pure)(Dummy)
 
     const wrapper = shallow(<Component foo="foo" />)
-    expect(wrapper.instance().constructor.displayName).toBe('renameProp(pure(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'renameProp(pure(Dummy))',
+    )
     expect(wrapper.equals(<Dummy bar="foo" />)).toBeTruthy()
   })
 })

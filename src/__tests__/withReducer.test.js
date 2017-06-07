@@ -8,19 +8,11 @@ const SET_COUNTER = 'SET_COUNTER'
 test('adds a stateful value and a function for updating it', () => {
   const initialState = { counter: 0 }
 
-  const reducer = (state, action) => (
-    action.type === SET_COUNTER
-      ? { counter: action.payload }
-      : state
-  )
+  const reducer = (state, action) =>
+    action.type === SET_COUNTER ? { counter: action.payload } : state
 
   const Counter = compose(
-    withReducer(
-      'state',
-      'dispatch',
-      reducer,
-      initialState,
-    ),
+    withReducer('state', 'dispatch', reducer, initialState),
     flattenProp('state'),
   )(Dummy)
 
@@ -36,19 +28,11 @@ test('adds a stateful value and a function for updating it', () => {
 test('calls initialState when it is a function', () => {
   const initialState = ({ initialCount }) => ({ counter: initialCount })
 
-  const reducer = (state, action) => (
-    action.type === SET_COUNTER
-      ? { counter: action.payload }
-      : state
-  )
+  const reducer = (state, action) =>
+    action.type === SET_COUNTER ? { counter: action.payload } : state
 
   const Counter = compose(
-    withReducer(
-      'state',
-      'dispatch',
-      reducer,
-      initialState,
-    ),
+    withReducer('state', 'dispatch', reducer, initialState),
     flattenProp('state'),
   )(Dummy)
 
@@ -60,18 +44,11 @@ test('calls initialState when it is a function', () => {
 test('receives state from reducer when initialState is not provided', () => {
   const initialState = { counter: 0 }
 
-  const reducer = (state = initialState, action) => (
-    action.type === SET_COUNTER
-      ? { counter: action.payload }
-      : state
-  )
+  const reducer = (state = initialState, action) =>
+    action.type === SET_COUNTER ? { counter: action.payload } : state
 
   const Counter = compose(
-    withReducer(
-      'state',
-      'dispatch',
-      reducer,
-    ),
+    withReducer('state', 'dispatch', reducer),
     flattenProp('state'),
   )(Dummy)
 

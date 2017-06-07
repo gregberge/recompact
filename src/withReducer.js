@@ -44,7 +44,7 @@ export const INIT = createSymbol('INIT')
  * )
  */
 const withReducer = (stateName, dispatchName, reducer, initialState) =>
-  updateProps((next) => {
+  updateProps(next => {
     let initialized
     let state
     let props
@@ -62,7 +62,7 @@ const withReducer = (stateName, dispatchName, reducer, initialState) =>
       })
     }
 
-    return (nextProps) => {
+    return nextProps => {
       props = nextProps
 
       if (!initialized) {

@@ -23,8 +23,7 @@ const renderComponent = Component => () => {
     /* eslint-disable global-require */
     const wrapDisplayName = require('./wrapDisplayName').default
     /* eslint-enable global-require */
-    RenderComponent.displayName =
-      wrapDisplayName(Component, 'renderComponent')
+    RenderComponent.displayName = wrapDisplayName(Component, 'renderComponent')
   }
   return RenderComponent
 }

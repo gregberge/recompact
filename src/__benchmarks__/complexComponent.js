@@ -52,7 +52,6 @@ function cleanup() {
   ReactDOM.unmountComponentAtNode(container)
 }
 
-
 const Recompacted = createComponent(recompact)
 const Recomposed = createComponent(recompose)
 const Reassembled = createComponent(reassemble)
@@ -61,62 +60,70 @@ let count
 
 series([
   () => new Promise(resolve => setTimeout(resolve, 1000)),
-  () => runBenchmark([
-    {
-      description: '❤️  recompact',
-      run() {
-        render(<Recompacted />)
-        cleanup()
-      },
-    },
-    {
-      description: '💙  recompose',
-      run() {
-        render(<Recomposed />)
-        cleanup()
-      },
-    },
-    {
-      description: '💚  reassemble',
-      run() {
-        render(<Reassembled />)
-        cleanup()
-      },
-    },
-  ], '[mount]'),
-  () => runBenchmark([
-    {
-      description: '❤️  recompact',
-      onStart() {
-        cleanup()
-        render(<Recompacted />)
-        count = 0
-      },
-      run() {
-        Recompacted.setProps({ foo: count++ })
-      },
-    },
-    {
-      description: '💙  recompose',
-      onStart() {
-        cleanup()
-        render(<Recomposed />)
-        count = 0
-      },
-      run() {
-        Recomposed.setProps({ foo: count++ })
-      },
-    },
-    {
-      description: '💚  reassembled',
-      onStart() {
-        cleanup()
-        render(<Reassembled />)
-        count = 0
-      },
-      run() {
-        Reassembled.setProps({ foo: count++ })
-      },
-    },
-  ], '[setProps]'),
+  () =>
+    runBenchmark(
+      [
+        {
+          description: '❤️  recompact',
+          run() {
+            render(<Recompacted />)
+            cleanup()
+          },
+        },
+        {
+          description: '💙  recompose',
+          run() {
+            render(<Recomposed />)
+            cleanup()
+          },
+        },
+        {
+          description: '💚  reassemble',
+          run() {
+            render(<Reassembled />)
+            cleanup()
+          },
+        },
+      ],
+      '[mount]',
+    ),
+  () =>
+    runBenchmark(
+      [
+        {
+          description: '❤️  recompact',
+          onStart() {
+            cleanup()
+            render(<Recompacted />)
+            count = 0
+          },
+          run() {
+            Recompacted.setProps({ foo: count++ })
+          },
+        },
+        {
+          description: '💙  recompose',
+          onStart() {
+            cleanup()
+            render(<Recomposed />)
+            count = 0
+          },
+          run() {
+            Recomposed.setProps({ foo: count++ })
+          },
+        },
+        {
+          description: '💚  reassembled',
+          onStart() {
+            cleanup()
+            render(<Reassembled />)
+            count = 0
+          },
+          run() {
+            Reassembled.setProps({ foo: count++ })
+          },
+        },
+      ],
+      '[setProps]',
+    ),
 ])

@@ -17,10 +17,10 @@ import createEagerFactory from './createEagerFactory'
  * // Provide window in the context, useful for testing
  * const withWindow = withContext({window: PropTypes.object.isRequired}, () => {window})
  */
-const withContext = (childContextTypes, getChildContext) => (BaseComponent) => {
+const withContext = (childContextTypes, getChildContext) => BaseComponent => {
   const factory = createEagerFactory(BaseComponent)
   class WithContext extends Component {
-    getChildContext = () => getChildContext(this.props);
+    getChildContext = () => getChildContext(this.props)
 
     render() {
       return factory(this.props)

@@ -47,43 +47,49 @@ const mapValues = (obj, fn) =>
  *   </form>
  * )
  */
-const withHandlers = handlerFactories => updateProps((next) => {
-  let cachedHandlers
-  let handlers
-  let props
+const withHandlers = handlerFactories =>
+  updateProps(next => {
+    let cachedHandlers
+    let handlers
+    let props
 
-  const createHandlers = initialProps =>
-    mapValues(
-      typeof handlerFactories === 'function' ? handlerFactories(initialProps) : handlerFactories,
-      (createHandler, handlerName) => (...args) => {
-        const cachedHandler = cachedHandlers[handlerName]
-        if (cachedHandler) {
-          return cachedHandler(...args)
-        }
+    const createHandlers = initialProps =>
+      mapValues(
+        typeof handlerFactories === 'function'
+          ? handlerFactories(initialProps)
+          : handlerFactories,
+        (createHandler, handlerName) => (...args) => {
+          const cachedHandler = cachedHandlers[handlerName]
+          if (cachedHandler) {
+            return cachedHandler(...args)
+          }
 
-        const handler = createHandler(props)
-        cachedHandlers[handlerName] = handler
+          const handler = createHandler(props)
+          cachedHandlers[handlerName] = handler
 
-        if (
-          process.env.NODE_ENV !== 'production' &&
-          typeof handler !== 'function'
-        ) {
-          console.error( // eslint-disable-line no-console
-            'withHandlers(): Expected a map of higher-order functions. ' +
-            'Refer to the docs for more info.',
-          )
-        }
+          /* eslint-disable no-console */
+          if (
+            process.env.NODE_ENV !== 'production' &&
+            typeof handler !== 'function'
+          ) {
+            console.error(
+              // eslint-disable-line no-console
+              'withHandlers(): Expected a map of higher-order functions. ' +
+                'Refer to the docs for more info.',
+            )
+          }
+          /* eslint-enable no-console */
 
-        return handler(...args)
-      },
-    )
+          return handler(...args)
+        },
+      )
 
-  return (nextProps) => {
-    handlers = handlers || createHandlers(nextProps)
-    cachedHandlers = {}
-    props = nextProps
-    next({ ...nextProps, ...handlers })
-  }
-})
+    return nextProps => {
+      handlers = handlers || createHandlers(nextProps)
+      cachedHandlers = {}
+      props = nextProps
+      next({ ...nextProps, ...handlers })
+    }
+  })
 
 export default createHelper(withHandlers, 'withHandlers')

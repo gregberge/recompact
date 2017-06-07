@@ -21,12 +21,13 @@ import createHelper from './createHelper'
  *   )
  * }))
  */
-const withObs = obsMapper => createHOCFromMapper((props$, obs) => {
-  const sharedProps$ = shareObservable(props$)
-  const nextObs = callOrUse(obsMapper, { ...obs, props$: sharedProps$ })
-  const { props$: nextProps$ = props$ } = nextObs
-  delete nextObs.props$
-  return [nextProps$, { ...obs, ...nextObs }]
-})
+const withObs = obsMapper =>
+  createHOCFromMapper((props$, obs) => {
+    const sharedProps$ = shareObservable(props$)
+    const nextObs = callOrUse(obsMapper, { ...obs, props$: sharedProps$ })
+    const { props$: nextProps$ = props$ } = nextObs
+    delete nextObs.props$
+    return [nextProps$, { ...obs, ...nextObs }]
+  })
 
 export default createHelper(withObs, 'withObs')

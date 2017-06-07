@@ -37,13 +37,12 @@ describe('defaultProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(
-      defaultProps({ bar: 'xi' }),
-      pure,
-    )(Dummy)
+    const Component = compose(defaultProps({ bar: 'xi' }), pure)(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('defaultProps(pure(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'defaultProps(pure(Dummy))',
+    )
     expect(wrapper.equals(<Dummy bar="xi" />)).toBeTruthy()
   })
 })

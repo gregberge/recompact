@@ -22,13 +22,12 @@ describe('omitProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(
-      omitProps('foo'),
-      pure,
-    )(Dummy)
+    const Component = compose(omitProps('foo'), pure)(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('omitProps(pure(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'omitProps(pure(Dummy))',
+    )
     expect(wrapper.equals(<Dummy />)).toBeTruthy()
   })
 })

@@ -17,7 +17,9 @@ export { default as getDisplayName } from './getDisplayName'
 export { default as hoistStatics } from './hoistStatics'
 export { default as identity } from './identity'
 export { default as isClassComponent } from './isClassComponent'
-export { default as isReferentiallyTransparentFunctionComponent } from './isReferentiallyTransparentFunctionComponent'
+export {
+  default as isReferentiallyTransparentFunctionComponent,
+} from './isReferentiallyTransparentFunctionComponent'
 export { default as lifecycle } from './lifecycle'
 export { default as mapProps } from './mapProps'
 export { default as mapPropsStream } from './mapPropsStream'

@@ -17,7 +17,7 @@ import isClassComponent from './isClassComponent'
  * <Component ref="foo" /> // A ref can be used because Component is a class
  */
 
-const toClass = (BaseComponent) => {
+const toClass = BaseComponent => {
   if (isClassComponent(BaseComponent)) {
     return BaseComponent
   }

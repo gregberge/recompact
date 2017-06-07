@@ -34,7 +34,9 @@ describe('shouldUpdate', () => {
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('shouldUpdate(shouldUpdate(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'shouldUpdate(shouldUpdate(Dummy))',
+    )
     expect(wrapper.equals(<Dummy />)).toBeTruthy()
   })
 })

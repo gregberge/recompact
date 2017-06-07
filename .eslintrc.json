@@ -1,10 +1,11 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb"],
+  "extends": ["airbnb", "prettier"],
   "rules": {
     "semi": ["error", "never"],
     "react/require-default-props": "off",
     "react/jsx-filename-extension": ["error", {"extensions": [".js"]}],
+    "react/jsx-wrap-multilines": "off",
     "import/no-extraneous-dependencies": "off"
   }
 }

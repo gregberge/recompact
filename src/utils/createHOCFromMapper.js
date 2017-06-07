@@ -15,32 +15,39 @@ const createComponentFromMappers = (mappers, childFactory) => {
   const CONTEXT_TYPES = { [OBSERVABLES]: observablePropType }
 
   return class extends Component {
-    static [MAPPERS_INFO] = { mappers, childFactory };
-    static contextTypes = CONTEXT_TYPES;
-    static childContextTypes = CONTEXT_TYPES;
+    static [MAPPERS_INFO] = { mappers, childFactory }
+    static contextTypes = CONTEXT_TYPES
+    static childContextTypes = CONTEXT_TYPES
 
-    props$ = createBehaviorSubject(this.props);
+    props$ = createBehaviorSubject(this.props)
 
     componentWillMount() {
       let childProps$ = this.props$
       let childObservables = this.context[OBSERVABLES]
       for (let i = 0; i < mappers.length; i += 1) {
-        ([childProps$, childObservables] = mappers[i](childProps$, childObservables))
+        ;[childProps$, childObservables] = mappers[i](
+          childProps$,
+          childObservables,
+        )
       }
 
-      this.childPropsSubscription = obsConfig.toESObservable(childProps$).subscribe({
-        next: (childProps) => {
-          if (!this.state && !this.mounted) {
-            this.state = { childProps }
-          } else {
-            this.setState({ childProps })
-          }
-        },
-        error: (error) => {
-          asyncThrow(error)
-          this.setState({ childProps: this.state ? this.state.childProps : {} })
-        },
-      })
+      this.childPropsSubscription = obsConfig
+        .toESObservable(childProps$)
+        .subscribe({
+          next: childProps => {
+            if (!this.state && !this.mounted) {
+              this.state = { childProps }
+            } else {
+              this.setState({ childProps })
+            }
+          },
+          error: error => {
+            asyncThrow(error)
+            this.setState({
+              childProps: this.state ? this.state.childProps : {},
+            })
+          },
+        })
 
       this.childContext = { [OBSERVABLES]: childObservables }
     }
@@ -62,8 +69,9 @@ const createComponentFromMappers = (mappers, childFactory) => {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      return nextState && (
-        !this.state || this.state.childProps !== nextState.childProps
+      return (
+        nextState &&
+        (!this.state || this.state.childProps !== nextState.childProps)
       )
     }
 
@@ -80,7 +88,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
 export const isMapperComponent = BaseComponent =>
   typeof BaseComponent === 'function' && BaseComponent[MAPPERS_INFO]
 
-export default mapper => (BaseComponent) => {
+export default mapper => BaseComponent => {
   if (isMapperComponent(BaseComponent)) {
     return createComponentFromMappers(
       [mapper, ...BaseComponent[MAPPERS_INFO].mappers],
@@ -88,8 +96,5 @@ export default mapper => (BaseComponent) => {
     )
   }
 
-  return createComponentFromMappers(
-    [mapper],
-    createEagerFactory(BaseComponent),
-  )
+  return createComponentFromMappers([mapper], createEagerFactory(BaseComponent))
 }

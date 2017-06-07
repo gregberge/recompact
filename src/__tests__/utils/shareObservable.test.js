@@ -5,7 +5,7 @@ describe('shareObservable', () => {
   it('should share observable', () => {
     let count = 0
 
-    const observable = createObservable((observer) => {
+    const observable = createObservable(observer => {
       count += 1
       observer.next(count)
       return { unsubscribe: jest.fn() }
@@ -48,7 +48,7 @@ describe('shareObservable', () => {
 
   it('should forward complete', () => {
     let observer
-    const observable = createObservable((_observer) => {
+    const observable = createObservable(_observer => {
       observer = _observer
       return { unsubscribe: jest.fn() }
     })
@@ -67,7 +67,7 @@ describe('shareObservable', () => {
 
   it('should forward error', () => {
     let observer
-    const observable = createObservable((_observer) => {
+    const observable = createObservable(_observer => {
       observer = _observer
       return { unsubscribe: jest.fn() }
     })

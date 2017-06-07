@@ -2,7 +2,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, onlyUpdateForPropTypes, setPropTypes, withProps, withState } from '../'
+import {
+  compose,
+  onlyUpdateForPropTypes,
+  setPropTypes,
+  withProps,
+  withState,
+} from '../'
 
 describe('onlyUpdateForPropTypes', () => {
   it('only updates for props specified in propTypes', () => {
@@ -37,8 +43,9 @@ describe('onlyUpdateForPropTypes', () => {
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName)
-      .toBe('withProps(onlyUpdateForPropTypes(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withProps(onlyUpdateForPropTypes(Dummy))',
+    )
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy()
   })
 })

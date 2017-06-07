@@ -18,7 +18,7 @@ import hoistNonReactStatics from 'hoist-non-react-statics'
  *
  * hoistStatics(withProps({foo: 'bar'}));
  */
-const hoistStatics = hoc => (BaseComponent) => {
+const hoistStatics = hoc => BaseComponent => {
   const NewComponent = hoc(BaseComponent)
   hoistNonReactStatics(NewComponent, BaseComponent)
   return NewComponent
