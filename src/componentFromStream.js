@@ -4,18 +4,18 @@ import { config as globalConfig } from './setObservableConfig'
 
 export const componentFromStreamWithConfig = config => propsToVdom =>
   class ComponentFromStream extends Component {
-    state = { vdom: null };
+    state = { vdom: null }
 
     // Stream of props
     props$ = createBehaviorSubject(this.props)
 
     // Stream of vdom
-    vdom$ = config.toESObservable(propsToVdom(this.props$));
+    vdom$ = config.toESObservable(propsToVdom(this.props$))
 
     componentWillMount() {
       // Subscribe to child prop changes so we know when to re-render
       this.subscription = this.vdom$.subscribe({
-        next: (vdom) => {
+        next: vdom => {
           this.setState({ vdom })
         },
       })

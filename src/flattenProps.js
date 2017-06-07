@@ -15,12 +15,16 @@ import mapProps from './mapProps'
  * // Will render <button type="submit" className="btn" />
  * <Button a={{type: 'submit'}} b={{className: 'btn'}} />
  */
-const flattenProps = paths => mapProps((props) => {
-  if (typeof paths === 'string') {
-    return { ...props, ...props[paths] }
-  }
+const flattenProps = paths =>
+  mapProps(props => {
+    if (typeof paths === 'string') {
+      return { ...props, ...props[paths] }
+    }
 
-  return paths.reduce((nextProps, path) => ({ ...nextProps, ...props[path] }), props)
-})
+    return paths.reduce(
+      (nextProps, path) => ({ ...nextProps, ...props[path] }),
+      props,
+    )
+  })
 
 export default createHelper(flattenProps, 'flattenProps')

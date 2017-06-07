@@ -2,7 +2,13 @@ import React from 'react'
 import Rx from 'rxjs'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { connectObs, compose, mapProps, setObservableConfig, withObs } from '../'
+import {
+  connectObs,
+  compose,
+  mapProps,
+  setObservableConfig,
+  withObs,
+} from '../'
 import rxjsObservableConfig from '../rxjsObservableConfig'
 
 describe('connectObs', () => {
@@ -92,7 +98,7 @@ describe('connectObs', () => {
         bar: bar$,
         dar: dar$,
       })),
-      mapProps((props) => {
+      mapProps(props => {
         spy(props)
         return props
       }),
@@ -114,7 +120,7 @@ describe('connectObs', () => {
       connectObs(({ foo$ }) => ({
         foo: foo$,
       })),
-      mapProps((props) => {
+      mapProps(props => {
         spy(props)
         return props
       }),
@@ -132,7 +138,9 @@ describe('connectObs', () => {
     )('div')
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('withObs(connectObs(div))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withObs(connectObs(div))',
+    )
     expect(wrapper.equals(<div className="foo" />)).toBeTruthy()
   })
 })

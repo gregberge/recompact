@@ -3,9 +3,13 @@
 import { isMapperComponent as isCompacted } from './createHOCFromMapper'
 
 const compactable = Symbol('compactable')
-const isCompactable = Component => typeof Component === 'function' && Component[compactable]
+const isCompactable = Component =>
+  typeof Component === 'function' && Component[compactable]
 
-export default (createCompactableComponent, createComponent) => (BaseComponent) => {
+export default (
+  createCompactableComponent,
+  createComponent,
+) => BaseComponent => {
   if (isCompactable(BaseComponent)) {
     BaseComponent = BaseComponent[compactable]
   }

@@ -18,14 +18,16 @@ describe('nest', () => {
       </Nest>,
     )
 
-    expect(wrapper.equals(
-      <A pass="through">
-        <B pass="through">
-          <C pass="through">
-            Child
-          </C>
-        </B>
-      </A>,
-    )).toBeTruthy()
+    expect(
+      wrapper.equals(
+        <A pass="through">
+          <B pass="through">
+            <C pass="through">
+              Child
+            </C>
+          </B>
+        </A>,
+      ),
+    ).toBeTruthy()
   })
 })

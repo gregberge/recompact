@@ -17,10 +17,7 @@ import createEagerFactory from './createEagerFactory'
 const nest = (...components) => {
   const factories = components.map(createEagerFactory)
   const Nest = ({ ...props, children }) =>
-    factories.reduceRight(
-      (child, factory) => factory(props, child),
-      children,
-    )
+    factories.reduceRight((child, factory) => factory(props, child), children)
 
   if (process.env.NODE_ENV !== 'production') {
     /* eslint-disable global-require */

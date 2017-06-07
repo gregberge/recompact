@@ -1,6 +1,5 @@
 import createEagerElementUtil from './utils/createEagerElementUtil'
-import isReferentiallyTransparentFunctionComponent
-  from './isReferentiallyTransparentFunctionComponent'
+import isReferentiallyTransparentFunctionComponent from './isReferentiallyTransparentFunctionComponent'
 
 /**
  * The factory form of `createEagerElement()`.
@@ -16,10 +15,18 @@ import isReferentiallyTransparentFunctionComponent
  * const div = createFactory('div');
  * div({className: 'foo'});
  */
-const createEagerFactory = (type) => {
-  const isReferentiallyTransparent = isReferentiallyTransparentFunctionComponent(type)
+const createEagerFactory = type => {
+  const isReferentiallyTransparent = isReferentiallyTransparentFunctionComponent(
+    type,
+  )
   return (props, children) =>
-    createEagerElementUtil(false, isReferentiallyTransparent, type, props, children)
+    createEagerElementUtil(
+      false,
+      isReferentiallyTransparent,
+      type,
+      props,
+      children,
+    )
 }
 
 export default createEagerFactory

@@ -21,11 +21,11 @@ import identity from './identity'
  * // Add the logic or rendering nothing if the prop `count` equals to `0`.
  * branch(({count}) => count === 0, renderNothing)(MyComponent);
  */
-const branch = (test, left, right = identity) => (BaseComponent) => {
+const branch = (test, left, right = identity) => BaseComponent => {
   let leftFactory
   let rightFactory
 
-  return (props) => {
+  return props => {
     if (test(props)) {
       leftFactory = leftFactory || createEagerFactory(left(BaseComponent))
       return leftFactory(props)

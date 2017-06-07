@@ -20,10 +20,10 @@ import getDisplayName from './getDisplayName'
  *   recompact.debug(),
  * )('input')
  */
-const debug = (label, selector = x => x) => (BaseComponent) => {
+const debug = (label, selector = x => x) => BaseComponent => {
   const factory = createEagerFactory(BaseComponent)
   label = label || getDisplayName(BaseComponent)
-  return (props) => {
+  return props => {
     console.log(label, selector(props))
     return factory(props)
   }

@@ -20,7 +20,7 @@ describe('componentFromStream', () => {
 
   it('should unsubscribe from stream before unmounting', () => {
     let subscriptions = 0
-    const vdom$ = new Observable((observer) => {
+    const vdom$ = new Observable(observer => {
       subscriptions += 1
       observer.next(<div />)
       return {
@@ -48,10 +48,7 @@ describe('componentFromStream', () => {
   it('should handle multiple observers of props stream', () => {
     const Div = componentFromStream(props$ =>
       // Adds three observers to props stream
-      props$.combineLatest(
-        props$, props$,
-        props1 => <div {...props1} />,
-      ),
+      props$.combineLatest(props$, props$, props1 => <div {...props1} />),
     )
 
     const wrapper = mount(<Div value={1} />)
@@ -65,20 +62,19 @@ describe('componentFromStream', () => {
   it('should complete props stream before unmounting', () => {
     let counter = 0
 
-    const Div = componentFromStream((props$) => {
-      const first$ = props$
-        .first()
-        .do(() => { counter += 1 })
+    const Div = componentFromStream(props$ => {
+      const first$ = props$.first().do(() => {
+        counter += 1
+      })
 
       const last$ = props$
         .last()
-        .do(() => { counter -= 1 })
+        .do(() => {
+          counter -= 1
+        })
         .startWith(null)
 
-      return props$.combineLatest(
-        first$, last$,
-        props => <div {...props} />,
-      )
+      return props$.combineLatest(first$, last$, props => <div {...props} />)
     })
 
     const wrapper = mount(<Div />)

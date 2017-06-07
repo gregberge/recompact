@@ -31,19 +31,18 @@ const createHelper = (
     /* eslint-enable global-require */
 
     if (noArgs) {
-      return (BaseComponent) => {
+      return BaseComponent => {
         const Component = hoc(BaseComponent)
         Component.displayName = wrapDisplayName(BaseComponent, helperName)
         return Component
       }
     }
 
-    return (...args) =>
-      (BaseComponent) => {
-        const Component = hoc(...args)(BaseComponent)
-        Component.displayName = wrapDisplayName(BaseComponent, helperName)
-        return Component
-      }
+    return (...args) => BaseComponent => {
+      const Component = hoc(...args)(BaseComponent)
+      Component.displayName = wrapDisplayName(BaseComponent, helperName)
+      return Component
+    }
   }
 
   return hoc

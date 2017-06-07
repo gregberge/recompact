@@ -16,24 +16,25 @@ import createCompactableHOC from './utils/createCompactableHOC'
  * const Button = defaultProps({type: 'button'})('button');
  * <Button /> // will render <button type="button" />
  */
-const defaultProps = defaultProps => createCompactableHOC(
-  mapProps((props) => {
-    const newProps = {}
-    const propKeys = Object.keys(defaultProps)
-    for (let i = 0; i < propKeys.length; i += 1) {
-      const propKey = propKeys[i]
-      if (props[propKey] === undefined) {
-        newProps[propKey] = defaultProps[propKey]
+const defaultProps = defaultProps =>
+  createCompactableHOC(
+    mapProps(props => {
+      const newProps = {}
+      const propKeys = Object.keys(defaultProps)
+      for (let i = 0; i < propKeys.length; i += 1) {
+        const propKey = propKeys[i]
+        if (props[propKey] === undefined) {
+          newProps[propKey] = defaultProps[propKey]
+        }
       }
-    }
-    return { ...props, ...newProps }
-  }),
-  (BaseComponent) => {
-    const factory = createEagerFactory(BaseComponent)
-    const DefaultProps = ownerProps => factory(ownerProps)
-    DefaultProps.defaultProps = defaultProps
-    return DefaultProps
-  },
-)
+      return { ...props, ...newProps }
+    }),
+    BaseComponent => {
+      const factory = createEagerFactory(BaseComponent)
+      const DefaultProps = ownerProps => factory(ownerProps)
+      DefaultProps.defaultProps = defaultProps
+      return DefaultProps
+    },
+  )
 
 export default createHelper(defaultProps, 'defaultProps')

@@ -1,7 +1,13 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, flattenProp, withProps, withPropsOnChange, withState } from '../'
+import {
+  compose,
+  flattenProp,
+  withProps,
+  withPropsOnChange,
+  withState,
+} from '../'
 
 describe('withPropsOnChange', () => {
   it('should map subset of owner props to child props', () => {
@@ -9,16 +15,13 @@ describe('withPropsOnChange', () => {
     const StringConcat = compose(
       withState('strings', 'updateStrings', { a: 'a', b: 'b', c: 'c' }),
       flattenProp('strings'),
-      withPropsOnChange(
-        ['a', 'b'],
-        ({ a, b, ...props }) => {
-          mapSpy()
-          return {
-            ...props,
-            foobar: a + b,
-          }
-        },
-      ),
+      withPropsOnChange(['a', 'b'], ({ a, b, ...props }) => {
+        mapSpy()
+        return {
+          ...props,
+          foobar: a + b,
+        }
+      }),
     )(Dummy)
 
     const dummy = mount(<StringConcat />).find(Dummy)
@@ -46,7 +49,9 @@ describe('withPropsOnChange', () => {
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(withPropsOnChange(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withProps(withPropsOnChange(Dummy))',
+    )
     expect(wrapper.equals(<Dummy foo="bar" bar="bar" />)).toBeTruthy()
   })
 })

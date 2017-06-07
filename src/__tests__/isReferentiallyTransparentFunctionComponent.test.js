@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
   react/prefer-es6-class, react/forbid-prop-types */
 import React, { Component } from 'react'
 import createReactClass from 'create-react-class'
-import isReferentiallyTransparentFunctionComponent
-  from '../isReferentiallyTransparentFunctionComponent'
+import isReferentiallyTransparentFunctionComponent from '../isReferentiallyTransparentFunctionComponent'
 
 describe('isReferentiallyTransparentFunctionComponent', () => {
   it('returns false for strings', () => {

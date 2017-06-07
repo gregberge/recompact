@@ -17,12 +17,13 @@ import isClassComponent from './isClassComponent'
  * const Button = () => <button />;
  * isReferentiallyTransparentFunctionComponent(Button); // true
  */
-const isReferentiallyTransparentFunctionComponent = Component => Boolean(
-  typeof Component === 'function' &&
-  !isClassComponent(Component) &&
-  !Component.defaultProps &&
-  !Component.contextTypes &&
-  (process.env.NODE_ENV === 'production' || !Component.propTypes),
-)
+const isReferentiallyTransparentFunctionComponent = Component =>
+  Boolean(
+    typeof Component === 'function' &&
+      !isClassComponent(Component) &&
+      !Component.defaultProps &&
+      !Component.contextTypes &&
+      (process.env.NODE_ENV === 'production' || !Component.propTypes),
+  )
 
 export default isReferentiallyTransparentFunctionComponent

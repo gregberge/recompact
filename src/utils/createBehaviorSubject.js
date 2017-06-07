@@ -4,12 +4,12 @@ import createObservable from './createObservable'
 
 const noop = () => {}
 
-const createBehaviorSubject = (initial) => {
+const createBehaviorSubject = initial => {
   let last = initial
   const emitter = createChangeEmitter()
   let complete = noop
-  const observable = createObservable((observer) => {
-    const unsubscribe = emitter.listen((value) => {
+  const observable = createObservable(observer => {
+    const unsubscribe = emitter.listen(value => {
       last = value
       observer.next(value)
     })
@@ -18,7 +18,9 @@ const createBehaviorSubject = (initial) => {
     return { unsubscribe }
   })
   observable.next = emitter.emit
-  observable.complete = () => { complete() }
+  observable.complete = () => {
+    complete()
+  }
   return observable
 }
 

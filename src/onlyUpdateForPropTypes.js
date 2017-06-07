@@ -19,7 +19,7 @@ import createHelper from './createHelper'
  * Button.propTypes = {className: PropTypes.string};
  * const EnhancedButton = onlyUpdateForPropTypes(Button);
  */
-const onlyUpdateForPropTypes = (BaseComponent) => {
+const onlyUpdateForPropTypes = BaseComponent => {
   const { propTypes } = BaseComponent
 
   if (process.env.NODE_ENV !== 'production') {
@@ -30,8 +30,8 @@ const onlyUpdateForPropTypes = (BaseComponent) => {
       /* eslint-disable */
       console.error(
         'A component without any `propTypes` was passed to ' +
-        '`onlyUpdateForPropTypes()`. Check the implementation of the ' +
-        `component with display name "${getDisplayName(BaseComponent)}".`
+          '`onlyUpdateForPropTypes()`. Check the implementation of the ' +
+          `component with display name "${getDisplayName(BaseComponent)}".`,
       )
       /* eslint-enable */
     }
@@ -40,4 +40,9 @@ const onlyUpdateForPropTypes = (BaseComponent) => {
   return onlyUpdateForKeys(Object.keys(propTypes || {}))(BaseComponent)
 }
 
-export default createHelper(onlyUpdateForPropTypes, 'onlyUpdateForPropTypes', true, true)
+export default createHelper(
+  onlyUpdateForPropTypes,
+  'onlyUpdateForPropTypes',
+  true,
+  true,
+)

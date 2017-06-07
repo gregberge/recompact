@@ -7,19 +7,20 @@ import { compose, getContext } from '../'
 describe('getContext', () => {
   it('should get context and put it in props', () => {
     const DummyFoo = compose(
-      BaseComponent => class extends Component {
-        static childContextTypes = {
-          foo: PropTypes.string.isRequired,
-        };
+      BaseComponent =>
+        class extends Component {
+          static childContextTypes = {
+            foo: PropTypes.string.isRequired,
+          }
 
-        getChildContext() {
-          return { foo: 'bar' }
-        }
+          getChildContext() {
+            return { foo: 'bar' }
+          }
 
-        render() {
-          return <BaseComponent {...this.props} />
-        }
-      },
+          render() {
+            return <BaseComponent {...this.props} />
+          }
+        },
       getContext({ foo: PropTypes.string.isRequired }),
     )(Dummy)
 

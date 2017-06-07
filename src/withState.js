@@ -41,7 +41,7 @@ import updateProps from './utils/updateProps'
  * @returns {HigherOrderComponent} A function that takes a component and returns a new component.
  */
 const withState = (stateName, stateUpdaterName, initialState) =>
-  updateProps((next) => {
+  updateProps(next => {
     let props
     let state
 
@@ -50,7 +50,7 @@ const withState = (stateName, stateUpdaterName, initialState) =>
         /* eslint-disable no-console */
         console.error(
           "Warning: withState(): the state updater's callback is not supported." +
-          'See https://github.com/neoziro/recompact/issues/59 for more details.',
+            'See https://github.com/neoziro/recompact/issues/59 for more details.',
         )
         /* eslint-enable no-console */
       }
@@ -62,7 +62,7 @@ const withState = (stateName, stateUpdaterName, initialState) =>
       })
     }
 
-    return (nextProps) => {
+    return nextProps => {
       if (!props) state = callOrUse(initialState, nextProps)
       props = nextProps
       next({

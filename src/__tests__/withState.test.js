@@ -46,15 +46,13 @@ describe('withState', () => {
   it('is merged with other HOCs', () => {
     const Component = compose(
       withProps({ initialCounter: 1 }),
-      withState(
-        'counter',
-        'updateCounter',
-        props => props.initialCounter,
-      ),
+      withState('counter', 'updateCounter', props => props.initialCounter),
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(withState(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withProps(withState(Dummy))',
+    )
     expect(wrapper.prop('counter')).toBe(1)
     expect(wrapper.prop('initialCounter')).toBe(1)
   })

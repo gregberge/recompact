@@ -26,7 +26,10 @@ describe('debug', () => {
 
     shallow(<Component />).find(Dummy)
     expect(console.log).toHaveBeenCalledTimes(2)
-    expect(console.log.mock.calls[0]).toEqual(['withProps(Component)', { a: 'b' }])
+    expect(console.log.mock.calls[0]).toEqual([
+      'withProps(Component)',
+      { a: 'b' },
+    ])
     expect(console.log.mock.calls[1]).toEqual(['Dummy', { a: 'b', c: 'd' }])
   })
 })

@@ -1,5 +1,2 @@
-export default name => (
-  typeof Symbol === 'function'
-    ? Symbol(name)
-    : `@@recompact/${name}`
-)
+export default name =>
+  typeof Symbol === 'function' ? Symbol(name) : `@@recompact/${name}`

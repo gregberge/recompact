@@ -1,16 +1,16 @@
 /* eslint-disable import/prefer-default-export */
 import createObservable from './createObservable'
 
-const shareObservable = (observable) => {
+const shareObservable = observable => {
   const observers = []
   let emitted = false
   let lastValue
   let subscription = null
 
-  return createObservable((observer) => {
+  return createObservable(observer => {
     if (!subscription) {
       subscription = observable.subscribe({
-        next: (value) => {
+        next: value => {
           emitted = true
           lastValue = value
           observers.forEach(o => o.next(value))

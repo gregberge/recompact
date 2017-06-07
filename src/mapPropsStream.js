@@ -15,8 +15,7 @@ import createHelper from './createHelper'
  * // Delay rendering of 1s
  * const delayRendering = mapPropsStream(props$ => props$.delay(1000));
  */
-const mapPropsStream = propsStreamMapper => createHOCFromMapper((props$, obs) =>
-  [propsStreamMapper(props$), obs],
-)
+const mapPropsStream = propsStreamMapper =>
+  createHOCFromMapper((props$, obs) => [propsStreamMapper(props$), obs])
 
 export default createHelper(mapPropsStream, 'mapPropsStream')

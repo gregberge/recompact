@@ -10,6 +10,8 @@ describe('wrapDisplayName', () => {
       }
     }
 
-    expect(wrapDisplayName(SomeComponent, 'someHoC')).toBe('someHoC(SomeComponent)')
+    expect(wrapDisplayName(SomeComponent, 'someHoC')).toBe(
+      'someHoC(SomeComponent)',
+    )
   })
 })

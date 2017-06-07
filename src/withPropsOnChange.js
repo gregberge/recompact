@@ -27,17 +27,18 @@ import updateProps from './utils/updateProps'
 const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
   const shouldMap = typeof shouldMapOrKeys === 'function'
     ? shouldMapOrKeys
-    : (props, nextProps) => !shallowEqual(
-        pick(props, shouldMapOrKeys),
-        pick(nextProps, shouldMapOrKeys),
-      )
+    : (props, nextProps) =>
+        !shallowEqual(
+          pick(props, shouldMapOrKeys),
+          pick(nextProps, shouldMapOrKeys),
+        )
 
   return createCompactableHOC(
-    updateProps((next) => {
+    updateProps(next => {
       let props = {}
       let computedProps
 
-      return (nextProps) => {
+      return nextProps => {
         if (shouldMap(props, nextProps)) {
           computedProps = propsMapper(nextProps)
         }
@@ -46,11 +47,11 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => {
         next({ ...nextProps, ...computedProps })
       }
     }),
-    (BaseComponent) => {
+    BaseComponent => {
       const factory = createEagerFactory(BaseComponent)
 
       return class extends Component {
-        computedProps = propsMapper(this.props);
+        computedProps = propsMapper(this.props)
 
         componentWillReceiveProps(nextProps) {
           if (shouldMap(this.props, nextProps)) {

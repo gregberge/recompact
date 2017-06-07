@@ -12,7 +12,7 @@ let config = {
  *
  * setConfig({observablesKey: 'observables'});
  */
-const setConfig = (_config) => {
+const setConfig = _config => {
   config = _config
 }
 

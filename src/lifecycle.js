@@ -33,7 +33,7 @@ const LIFECYCLE_METHODS = [
  * // Create a hoc that will log when a component will mount
  * const logWhenMount = lifecycle({componentWillMount: () => console.log('will mount')});
  */
-const lifecycle = spec => (BaseComponent) => {
+const lifecycle = spec => BaseComponent => {
   const factory = createEagerFactory(BaseComponent)
 
   if (
@@ -43,11 +43,10 @@ const lifecycle = spec => (BaseComponent) => {
     /* eslint-disable no-console */
     console.error(
       'lifecycle() does not support the render method; its behavior is to ' +
-      'pass all props and state to the base component.',
+        'pass all props and state to the base component.',
     )
     /* eslint-enable no-console */
   }
-
 
   class Lifecycle extends Component {
     render() {
@@ -61,7 +60,9 @@ const lifecycle = spec => (BaseComponent) => {
   Object.entries(spec).forEach(([name, impl]) => {
     if (!LIFECYCLE_METHODS.includes(name)) {
       /* eslint-disable no-console */
-      console.error(`lifecycle() does not support "${name}" method, only lifecycle methods are supported.`)
+      console.error(
+        `lifecycle() does not support "${name}" method, only lifecycle methods are supported.`,
+      )
       /* eslint-enable no-console */
     } else {
       Lifecycle.prototype[name] = impl

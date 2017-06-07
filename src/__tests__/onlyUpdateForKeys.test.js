@@ -34,7 +34,9 @@ describe('onlyUpdateForKeys', () => {
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('withProps(onlyUpdateForKeys(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'withProps(onlyUpdateForKeys(Dummy))',
+    )
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy()
   })
 })

@@ -47,8 +47,8 @@ describe('mapPropsStream', () => {
   })
 
   it('should take new props from props$', () => {
-    const Div = mapPropsStream(
-      props$ => props$.map(({ strings }) => ({ className: strings.join('') })),
+    const Div = mapPropsStream(props$ =>
+      props$.map(({ strings }) => ({ className: strings.join('') })),
     )('div')
 
     shallow(<Div strings={['a', 'b', 'c']} />)
@@ -57,9 +57,11 @@ describe('mapPropsStream', () => {
   it('props$ should not throw errors', () => {
     const props$ = Rx.Observable.of({})
 
-    const Component = mapPropsStream(() => props$.map(() => {
-      throw new Error('Too bad')
-    }))(Dummy)
+    const Component = mapPropsStream(() =>
+      props$.map(() => {
+        throw new Error('Too bad')
+      }),
+    )(Dummy)
 
     const wrapper = shallow(<Component />)
     expect(wrapper.equals(<Dummy />)).toBeTruthy()
@@ -72,14 +74,18 @@ describe('mapPropsStream', () => {
     )(Dummy)
 
     const wrapper = shallow(<Component />)
-    expect(wrapper.instance().constructor.displayName).toBe('mapPropsStream(mapPropsStream(Dummy))')
+    expect(wrapper.instance().constructor.displayName).toBe(
+      'mapPropsStream(mapPropsStream(Dummy))',
+    )
     expect(wrapper.equals(<Dummy foo="bar" />)).toBeTruthy()
   })
 
   it('does not render the base component before props are emitted', () => {
     const trigger$ = new Subject()
     const EnhancedDummy = compose(
-      mapPropsStream(props$ => combineLatest.call(props$, trigger$, props => props)),
+      mapPropsStream(props$ =>
+        combineLatest.call(props$, trigger$, props => props),
+      ),
       countRenders,
     )(Dummy)
 

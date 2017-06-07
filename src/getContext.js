@@ -16,14 +16,13 @@ import createEagerFactory from './createEagerFactory'
  *   withHandlers({onClick: ({router}) => () => router.push('/')}),
  * )('button');
  */
-const getContext = contextTypes => (BaseComponent) => {
+const getContext = contextTypes => BaseComponent => {
   const factory = createEagerFactory(BaseComponent)
-  const GetContext = (ownerProps, context) => (
+  const GetContext = (ownerProps, context) =>
     factory({
       ...ownerProps,
       ...context,
     })
-  )
 
   GetContext.contextTypes = contextTypes
 

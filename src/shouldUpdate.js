@@ -18,30 +18,31 @@ import createEagerFactory from './createEagerFactory'
  * // Pure
  * shouldUpdate((props, nextProps) => shallowEqual(props, nextProps))
  */
-const shouldUpdate = test => createCompactableHOC(
-  updateProps((next) => {
-    let props
+const shouldUpdate = test =>
+  createCompactableHOC(
+    updateProps(next => {
+      let props
 
-    return (nextProps) => {
-      if (!props || test(props, nextProps)) {
-        next(nextProps)
-      }
+      return nextProps => {
+        if (!props || test(props, nextProps)) {
+          next(nextProps)
+        }
 
-      props = nextProps
-    }
-  }),
-  (BaseComponent) => {
-    const factory = createEagerFactory(BaseComponent)
-    return class extends Component {
-      shouldComponentUpdate(nextProps) {
-        return test(this.props, nextProps)
+        props = nextProps
       }
+    }),
+    BaseComponent => {
+      const factory = createEagerFactory(BaseComponent)
+      return class extends Component {
+        shouldComponentUpdate(nextProps) {
+          return test(this.props, nextProps)
+        }
 
-      render() {
-        return factory(this.props)
+        render() {
+          return factory(this.props)
+        }
       }
-    }
-  },
-)
+    },
+  )
 
 export default createHelper(shouldUpdate, 'shouldUpdate')
