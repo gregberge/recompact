@@ -3,6 +3,7 @@
   "extends": ["airbnb", "prettier"],
   "rules": {
     "semi": ["error", "never"],
+    "react/sort-comp": "off",
     "react/require-default-props": "off",
     "react/jsx-filename-extension": ["error", {"extensions": [".js"]}],
     "react/jsx-wrap-multilines": "off",

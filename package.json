@@ -13,8 +13,9 @@
     "build:lib": "rm -rf lib/ && NODE_ENV=production babel --ignore src/__tests__ src -d lib && cp package.json lib/package.json && rm -rf lib/__benchmarks__",
     "build:site": "babel-node ./scripts/build-website",
     "format": "prettier --write --no-semi --single-quote --trailing-comma all \"src/**/*.js\"",
+    "lint": "eslint --cache .",
     "release": "mversion `conventional-recommended-bump -p angular` -m",
-    "test": "eslint . && jest --runInBand --coverage && codecov"
+    "test": "yarn lint && jest --runInBand --coverage && codecov"
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",
