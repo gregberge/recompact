@@ -30,6 +30,7 @@ describe('renderComponent', () => {
     expect(wrapper.find('Dummy2').length).toBe(1)
 
     updateFlip(true)
+    wrapper.update()
     expect(wrapper.find('Dummy1').length).toBe(1)
     expect(wrapper.find('Dummy2').length).toBe(0)
   })

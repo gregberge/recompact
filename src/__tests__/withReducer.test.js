@@ -16,13 +16,14 @@ test('adds a stateful value and a function for updating it', () => {
     flattenProp('state'),
   )(Dummy)
 
-  const dummy = mount(<Counter />).find(Dummy)
-  const { dispatch } = dummy.props()
+  const wrapper = mount(<Counter />)
+  const { dispatch } = wrapper.find(Dummy).props()
 
-  expect(dummy.prop('counter')).toBe(0)
+  expect(wrapper.find(Dummy).prop('counter')).toBe(0)
 
   dispatch({ type: SET_COUNTER, payload: 18 })
-  expect(dummy.prop('counter')).toBe(18)
+  wrapper.update()
+  expect(wrapper.find(Dummy).prop('counter')).toBe(18)
 })
 
 test('calls initialState when it is a function', () => {

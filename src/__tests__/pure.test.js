@@ -12,20 +12,22 @@ describe('pure', () => {
       countRenders,
     )(Dummy)
 
-    const dummy = mount(<Todos />).find(Dummy)
-    const updateTodos = dummy.prop('updateTodos')
+    const wrapper = mount(<Todos />)
+    const updateTodos = wrapper.find(Dummy).prop('updateTodos')
 
-    expect(dummy.prop('todos')).toBe(initialTodos)
-    expect(dummy.prop('renderCount')).toBe(1)
+    expect(wrapper.find(Dummy).prop('todos')).toBe(initialTodos)
+    expect(wrapper.find(Dummy).prop('renderCount')).toBe(1)
 
     // Does not re-render
     updateTodos(initialTodos)
-    expect(dummy.prop('todos')).toBe(initialTodos)
-    expect(dummy.prop('renderCount')).toBe(1)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('todos')).toBe(initialTodos)
+    expect(wrapper.find(Dummy).prop('renderCount')).toBe(1)
 
     updateTodos(todos => todos.slice(0, -1))
-    expect(dummy.prop('todos')).toEqual(['eat', 'drink'])
-    expect(dummy.prop('renderCount')).toBe(2)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('todos')).toEqual(['eat', 'drink'])
+    expect(wrapper.find(Dummy).prop('renderCount')).toBe(2)
   })
 
   it('should add correct display name', () => {

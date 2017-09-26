@@ -24,21 +24,23 @@ describe('withPropsOnChange', () => {
       }),
     )(Dummy)
 
-    const dummy = mount(<StringConcat />).find(Dummy)
-    const { updateStrings } = dummy.props()
+    const wrapper = mount(<StringConcat />)
+    const { updateStrings } = wrapper.find(Dummy).props()
 
-    expect(dummy.prop('foobar')).toBe('ab')
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('ab')
     expect(mapSpy).toHaveBeenCalledTimes(1)
 
     // Does not re-map for non-dependent prop updates
     updateStrings(strings => ({ ...strings, c: 'baz' }))
-    expect(dummy.prop('foobar')).toBe('ab')
-    expect(dummy.prop('c')).toBe('c')
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('ab')
+    expect(wrapper.find(Dummy).prop('c')).toBe('c')
     expect(mapSpy).toHaveBeenCalledTimes(1)
 
     updateStrings(strings => ({ ...strings, a: 'foo', b: 'bar' }))
-    expect(dummy.prop('foobar')).toBe('foobar')
-    expect(dummy.prop('c')).toBe('baz')
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('foobar')
+    expect(wrapper.find(Dummy).prop('c')).toBe('baz')
     expect(mapSpy).toHaveBeenCalledTimes(2)
   })
 

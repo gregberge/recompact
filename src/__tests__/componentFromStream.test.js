@@ -14,6 +14,7 @@ describe('componentFromStream', () => {
     const wrapper = mount(<Double n={112} />)
     const div = wrapper.find('div')
     expect(div.text()).toBe('224')
+
     wrapper.setProps({ n: 358 })
     expect(div.text()).toBe('716')
   })
@@ -41,7 +42,9 @@ describe('componentFromStream', () => {
     const Div = componentFromStream(() => vdom$.mapTo(<div />))
     const wrapper = mount(<Div />)
     expect(wrapper.find('div').length).toBe(0)
+
     vdom$.next()
+    wrapper.update()
     expect(wrapper.find('div').length).toBe(1)
   })
 
@@ -52,11 +55,10 @@ describe('componentFromStream', () => {
     )
 
     const wrapper = mount(<Div value={1} />)
-    const div = wrapper.find('div')
+    expect(wrapper.find('div').prop('value')).toBe(1)
 
-    expect(div.prop('value')).toBe(1)
     wrapper.setProps({ value: 2 })
-    expect(div.prop('value')).toBe(2)
+    expect(wrapper.find('div').prop('value')).toBe(2)
   })
 
   it('should complete props stream before unmounting', () => {

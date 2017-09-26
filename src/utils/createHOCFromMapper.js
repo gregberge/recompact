@@ -35,11 +35,7 @@ const createComponentFromMappers = (mappers, childFactory) => {
         .toESObservable(childProps$)
         .subscribe({
           next: childProps => {
-            if (!this.state && !this.mounted) {
-              this.state = { childProps }
-            } else {
-              this.setState({ childProps })
-            }
+            this.setState({ childProps })
           },
           error: error => {
             asyncThrow(error)

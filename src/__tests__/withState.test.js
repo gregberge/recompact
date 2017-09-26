@@ -4,28 +4,34 @@ import { Dummy } from './utils'
 import { compose, withProps, withState } from '../'
 
 describe('withState', () => {
-  it('adds a stateful value and a function for updating it', () => {
+  it.only('adds a stateful value and a function for updating it', () => {
     const Counter = withState('counter', 'updateCounter', 0)(Dummy)
 
-    const dummy = mount(<Counter pass="through" />).find(Dummy)
-    const { updateCounter } = dummy.props()
+    const wrapper = mount(<Counter pass="through" />)
+    const { updateCounter } = wrapper.find(Dummy).props()
 
-    expect(dummy.prop('counter')).toBe(0)
-    expect(dummy.prop('pass')).toBe('through')
+    expect(wrapper.find(Dummy).prop('counter')).toBe(0)
+    expect(wrapper.find(Dummy).prop('pass')).toBe('through')
 
     updateCounter(n => n + 9)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(9)
     updateCounter(n => n * 2)
-    expect(dummy.prop('counter')).toBe(18)
-    expect(dummy.prop('pass')).toBe('through')
+    wrapper.update()
+    updateCounter(n => n * 2)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(36)
+    expect(wrapper.find(Dummy).prop('pass')).toBe('through')
   })
 
   it('accepts a non-function, which is passed directly to setState()', () => {
     const Counter = withState('counter', 'updateCounter', 0)(Dummy)
-    const dummy = mount(<Counter />).find(Dummy)
-    const { updateCounter } = dummy.props()
+    const wrapper = mount(<Counter />)
+    const { updateCounter } = wrapper.find(Dummy).props()
 
     updateCounter(18)
-    expect(dummy.prop('counter')).toBe(18)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(18)
   })
 
   it('accepts initialState as function of props', () => {
@@ -35,12 +41,13 @@ describe('withState', () => {
       props => props.initialCounter,
     )(Dummy)
 
-    const dummy = mount(<Counter initialCounter={1} />).find(Dummy)
-    const { updateCounter } = dummy.props()
+    const wrapper = mount(<Counter initialCounter={1} />)
+    const { updateCounter } = wrapper.find(Dummy).props()
 
-    expect(dummy.prop('counter')).toBe(1)
+    expect(wrapper.find(Dummy).prop('counter')).toBe(1)
     updateCounter(n => n * 3)
-    expect(dummy.prop('counter')).toBe(3)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(3)
   })
 
   it('is merged with other HOCs', () => {
