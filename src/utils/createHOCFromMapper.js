@@ -48,10 +48,6 @@ const createComponentFromMappers = (mappers, childFactory) => {
       this.childContext = { [OBSERVABLES]: childObservables }
     }
 
-    componentDidMount() {
-      this.mounted = true
-    }
-
     getChildContext() {
       return this.childContext
     }
