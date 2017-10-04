@@ -4,7 +4,7 @@ import { Dummy } from './utils'
 import { compose, withProps, withState } from '../'
 
 describe('withState', () => {
-  it.only('adds a stateful value and a function for updating it', () => {
+  it('adds a stateful value and a function for updating it', () => {
     const Counter = withState('counter', 'updateCounter', 0)(Dummy)
 
     const wrapper = mount(<Counter pass="through" />)
