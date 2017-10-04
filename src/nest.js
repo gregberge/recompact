@@ -16,7 +16,7 @@ import createEagerFactory from './createEagerFactory'
  */
 const nest = (...components) => {
   const factories = components.map(createEagerFactory)
-  const Nest = ({ ...props, children }) =>
+  const Nest = ({ children, ...props }) =>
     factories.reduceRight((child, factory) => factory(props, child), children)
 
   if (process.env.NODE_ENV !== 'production') {

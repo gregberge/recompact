@@ -41,7 +41,6 @@ describe('mapPropsStream', () => {
     expect(propsSpy).toHaveBeenLastCalledWith({ className: 'bar' })
 
     wrapper.setProps({ className: 'foo' })
-
     expect(propsSpy).toHaveBeenCalledTimes(2)
     expect(propsSpy).toHaveBeenLastCalledWith({ className: 'foo' })
   })
@@ -96,9 +95,10 @@ describe('mapPropsStream', () => {
     expect(wrapper.find(Dummy).exists()).toBeFalsy()
 
     trigger$.next(true)
+    wrapper.update()
 
     const dummy = wrapper.find(Dummy)
-    expect(dummy.exists()).toBeTruthy()
+    expect(dummy.exists()).toBe(true)
     expect(dummy.prop('renderCount')).toBe(1)
     expect(dummy.prop('foo')).toBe('bar')
   })

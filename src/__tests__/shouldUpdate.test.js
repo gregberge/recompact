@@ -13,18 +13,19 @@ describe('shouldUpdate', () => {
     expect(EnhancedDummy.displayName).toBe('shouldUpdate(countRenders(Dummy))')
 
     const wrapper = mount(<EnhancedDummy foo="bar" />)
-    const dummy = wrapper.find(Dummy)
 
     // Does not re-render.
     wrapper.setProps({ foo: 'bar' })
     wrapper.setProps({ foo: 'bar' })
-    expect(dummy.prop('foo')).toBe('bar')
-    expect(dummy.prop('renderCount')).toBe(1)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('foo')).toBe('bar')
+    expect(wrapper.find(Dummy).prop('renderCount')).toBe(1)
 
     // Re-renders.
     wrapper.setProps({ foo: 'baz' })
-    expect(dummy.prop('foo')).toBe('baz')
-    expect(dummy.prop('renderCount')).toBe(2)
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('foo')).toBe('baz')
+    expect(wrapper.find(Dummy).prop('renderCount')).toBe(2)
   })
 
   it('should be mergeable', () => {

@@ -34,7 +34,7 @@ describe('connectObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('foo')
 
     baseClassName$.next('bar')
-
+    wrapper.update()
     expect(wrapper.find('div').prop('className')).toBe('bar')
   })
 
@@ -50,7 +50,7 @@ describe('connectObs', () => {
     expect(wrapper.find('div').prop('className')).toBe('foo')
 
     baseClassName$.next('bar')
-
+    wrapper.update()
     expect(wrapper.find('div').prop('className')).toBe('bar')
   })
 
@@ -68,6 +68,7 @@ describe('connectObs', () => {
     expect(changeSpy).not.toHaveBeenCalled()
 
     wrapper.find('input').prop('onChange')('foo')
+    wrapper.update()
     expect(changeSpy).toHaveBeenCalledTimes(1)
     expect(changeSpy).toHaveBeenLastCalledWith('foo')
   })
@@ -81,7 +82,6 @@ describe('connectObs', () => {
     expect(wrapper.find(Dummy).prop('className')).toBe('bar')
 
     wrapper.setProps({ foo: 'foo' })
-
     expect(wrapper.find(Dummy).prop('className')).toBe('foo')
   })
 

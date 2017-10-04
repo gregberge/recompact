@@ -6,12 +6,16 @@ import { compose, withObs, pluckObs } from '../'
 describe('pluckObs', () => {
   it('should connect one observable to a prop without $', () => {
     const baseClassName$ = new Rx.BehaviorSubject('foo')
-    const Component = compose(withObs({ className$: baseClassName$ }), pluckObs('className$'))('div')
+    const Component = compose(
+      withObs({ className$: baseClassName$ }),
+      pluckObs('className$'),
+    )('div')
 
     const wrapper = mount(<Component />)
 
     expect(wrapper.find('div').prop('className')).toBe('foo')
     baseClassName$.next('bar')
+    wrapper.update()
     expect(wrapper.find('div').prop('className')).toBe('bar')
   })
 

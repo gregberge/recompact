@@ -19,20 +19,22 @@ describe('onlyUpdateForPropTypes', () => {
       setPropTypes({ counter: PropTypes.number }),
     )(Dummy)
 
-    const dummy = mount(<Counter />).find(Dummy)
-    const { updateCounter, updateFoobar } = dummy.props()
+    const wrapper = mount(<Counter />)
+    const { updateCounter, updateFoobar } = wrapper.find(Dummy).props()
 
-    expect(dummy.prop('counter')).toBe(0)
-    expect(dummy.prop('foobar')).toBe('foobar')
+    expect(wrapper.find(Dummy).prop('counter')).toBe(0)
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('foobar')
 
     // Does not update
     updateFoobar('barbaz')
-    expect(dummy.prop('counter')).toBe(0)
-    expect(dummy.prop('foobar')).toBe('foobar')
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(0)
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('foobar')
 
     updateCounter(42)
-    expect(dummy.prop('counter')).toBe(42)
-    expect(dummy.prop('foobar')).toBe('barbaz')
+    wrapper.update()
+    expect(wrapper.find(Dummy).prop('counter')).toBe(42)
+    expect(wrapper.find(Dummy).prop('foobar')).toBe('barbaz')
   })
 
   it('should be merged with other hoc', () => {
