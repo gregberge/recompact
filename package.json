@@ -8,16 +8,20 @@
     "type": "git"
   },
   "scripts": {
-    "build": "yarn build:doc && yarn build:site && yarn build:dist",
     "build:doc": "NODE_ENV=production babel-node ./scripts/build-doc",
     "build:dist": "./scripts/build-dist.sh",
     "build:site": "babel-node ./scripts/build-website",
     "ci": "yarn lint && yarn test --runInBand --coverage && codecov",
     "format": "prettier --write \"src/**/*.js\" \"examples/**/*.js\"",
     "lint": "eslint --cache .",
-    "prepublishOnly": "yarn build",
-    "release": "yarn build && standard-version && conventional-github-releaser -p angular",
+    "prepublishOnly": "yarn build:dist",
+    "release": "standard-version -a && conventional-github-releaser -p angular",
     "test": "jest"
+  },
+  "standard-version": {
+    "scripts": {
+      "postbump": "yarn build:doc && yarn build:site && git add -A"
+    }
   },
   "author": "Greg Bergé <neoziro@gmail.com>",
   "license": "MIT",
