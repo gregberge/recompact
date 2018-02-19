@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
 import { compose, withProps, withStateHandlers } from '../'
@@ -38,6 +39,11 @@ describe('withStateHandlers', () => {
         <p>{value}</p>
       </div>
     )
+
+    component.propTypes = {
+      value: PropTypes.string,
+      onChange: PropTypes.func,
+    }
 
     const InputComponent = withStateHandlers(
       { value: '' },
