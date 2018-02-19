@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 
 import { isMapperComponent as isCompacted } from './createHOCFromMapper'
+import createSymbol from './createSymbol'
 
-const compactable = Symbol('compactable')
+const compactable = createSymbol('compactable')
 const isCompactable = Component =>
   typeof Component === 'function' && Component[compactable]
 
