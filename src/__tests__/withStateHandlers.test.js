@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
 import { compose, withProps, withStateHandlers } from '../'
@@ -30,43 +29,6 @@ describe('withStateHandlers', () => {
     wrapper.update()
     expect(wrapper.find(Dummy).prop('counter')).toBe(20)
     expect(wrapper.find(Dummy).prop('pass')).toBe('through')
-  })
-
-  it('should persist events passed as argument', () => {
-    const component = ({ value, onChange }) => (
-      <div>
-        <input type="text" value={value} onChange={onChange} />
-        <p>{value}</p>
-      </div>
-    )
-
-    component.propTypes = {
-      value: PropTypes.string,
-      onChange: PropTypes.func,
-    }
-
-    const InputComponent = withStateHandlers(
-      { value: '' },
-      {
-        onChange: () => e => ({
-          value: e.target.value,
-        }),
-      },
-    )(component)
-
-    const wrapper = mount(<InputComponent />)
-    const input = wrapper.find('input')
-    const output = wrapper.find('p')
-
-    input.simulate('change', {
-      persist() {
-        this.target = { value: 'Yay' }
-      },
-    })
-    expect(output.text()).toBe('Yay')
-
-    input.simulate('change', { target: { value: 'empty' } })
-    expect(output.text()).toBe('empty')
   })
 
   it('accepts initialState as a function of props', () => {
