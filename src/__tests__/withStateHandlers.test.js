@@ -1,5 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
+import sinon from 'sinon'
 import { Dummy } from './utils'
 import { compose, withProps, withStateHandlers } from '../'
 
@@ -125,5 +126,37 @@ describe('withStateHandlers', () => {
     )
     expect(wrapper.prop('counter')).toBe(1)
     expect(wrapper.prop('initialCounter')).toBe(1)
+  })
+
+  it('does not rerender if state updater returns undefined', () => {
+    const component = sinon.spy(() => null)
+    component.displayName = 'component'
+
+    const Counter = withStateHandlers(
+      ({ initialCounter }) => ({
+        counter: initialCounter,
+      }),
+      {
+        updateCounter: ({ counter }) => increment =>
+          increment === 0
+            ? undefined
+            : {
+                counter: counter + increment,
+              },
+      },
+    )(component)
+
+    const initialCounter = 101
+
+    mount(<Counter initialCounter={initialCounter} />)
+    expect(component.callCount).toBe(1)
+
+    const { updateCounter } = component.firstCall.args[0]
+
+    updateCounter(1)
+    expect(component.callCount).toBe(2)
+
+    updateCounter(0)
+    expect(component.callCount).toBe(2)
   })
 })
