@@ -55,7 +55,7 @@ const withStateHandlers = (initialState, stateUpdaters) =>
         }
 
         const updatedState = handler(state, props)(mayBeEvent, ...args)
-        if (updatedState == null) return
+        if (!updatedState) return
 
         state = { ...state, ...updatedState }
         next({

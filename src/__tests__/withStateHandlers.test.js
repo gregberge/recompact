@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import sinon from 'sinon'
 import { Dummy } from './utils'
 import { compose, withProps, withStateHandlers } from '../'
 
@@ -129,7 +128,7 @@ describe('withStateHandlers', () => {
   })
 
   it('does not rerender if state updater returns undefined', () => {
-    const component = sinon.spy(() => null)
+    const component = jest.fn(() => null)
     component.displayName = 'component'
 
     const Counter = withStateHandlers(
@@ -149,14 +148,14 @@ describe('withStateHandlers', () => {
     const initialCounter = 101
 
     mount(<Counter initialCounter={initialCounter} />)
-    expect(component.callCount).toBe(1)
+    expect(component.mock.calls.length).toBe(1)
 
-    const { updateCounter } = component.firstCall.args[0]
+    const { updateCounter } = component.mock.calls[0][0]
 
     updateCounter(1)
-    expect(component.callCount).toBe(2)
+    expect(component.mock.calls.length).toBe(2)
 
     updateCounter(0)
-    expect(component.callCount).toBe(2)
+    expect(component.mock.calls.length).toBe(2)
   })
 })
