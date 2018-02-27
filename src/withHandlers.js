@@ -1,11 +1,7 @@
 import createHelper from './createHelper'
 import updateProps from './utils/updateProps'
-
-const mapValues = (obj, fn) =>
-  Object.keys(obj).reduce((result, key) => {
-    result[key] = fn(obj[key], key) // eslint-disable-line no-param-reassign
-    return result
-  }, {})
+import callOrUse from './utils/callOrUse'
+import mapValues from './utils/mapValues'
 
 /**
  * Takes an object map of handler creators or a factory function. These are
@@ -55,9 +51,7 @@ const withHandlers = handlerFactories =>
 
     const createHandlers = initialProps =>
       mapValues(
-        typeof handlerFactories === 'function'
-          ? handlerFactories(initialProps)
-          : handlerFactories,
+        callOrUse(handlerFactories, initialProps),
         (createHandler, handlerName) => (...args) => {
           const cachedHandler = cachedHandlers[handlerName]
           if (cachedHandler) {
