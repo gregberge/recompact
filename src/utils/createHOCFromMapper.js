@@ -14,7 +14,7 @@ const observablePropType = () => {}
 const allMapperComponents = new WeakMap()
 const setMapperComponent = Component => allMapperComponents.set(Component, true)
 export const isMapperComponent = BaseComponent =>
-  typeof BaseComponent === 'function' && allMapperComponents.has(BaseComponent)
+  allMapperComponents.has(BaseComponent)
 
 const createComponentFromMappers = (mappers, childFactory) => {
   const { observablesKey: OBSERVABLES } = getConfig()

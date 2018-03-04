@@ -4,8 +4,7 @@ import { isMapperComponent as isCompacted } from './createHOCFromMapper'
 import WeakMap from './WeakMap'
 
 const allCompactableComponents = new WeakMap()
-const isCompactable = Component =>
-  typeof Component === 'function' && allCompactableComponents.has(Component)
+const isCompactable = Component => allCompactableComponents.has(Component)
 const getCompactableComponent = Component =>
   allCompactableComponents.get(Component)
 const setCompactableComponent = (Component, CompactableComponent) =>

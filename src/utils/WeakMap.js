@@ -1,3 +1,9 @@
-import WeakMap from 'es6-weak-map'
+class NonTrackingDummyWeakMap {
+  get() {}
+  set() {}
+  has() {
+    return false
+  }
+}
 
-export default WeakMap
+export default WeakMap || NonTrackingDummyWeakMap
