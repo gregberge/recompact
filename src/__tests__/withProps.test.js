@@ -51,4 +51,19 @@ describe('withProps', () => {
     const wrapper = shallow(<Component />)
     expect(wrapper.prop('foo')).toBe('bar')
   })
+
+  it("doesn't compact double-surrounded HOC that hoists statics", () => {
+    const hoc = BaseComponent => props => <BaseComponent {...props} foo="bar" />
+    const StaticHoistingHOC = hoistStatics(hoc)
+
+    const Component = compose(
+      withProps({}),
+      StaticHoistingHOC,
+      withProps({}),
+      withProps({}),
+    )('div')
+
+    const wrapper = shallow(<Component />)
+    expect(wrapper.prop('foo')).toBe('bar')
+  })
 })
