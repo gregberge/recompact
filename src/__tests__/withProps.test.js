@@ -41,11 +41,8 @@ describe('withProps', () => {
   })
 
   it("doesn't compact surrounded HOC that hoists statics", () => {
-    const StaticHoistingHOC = BaseComponent => {
-      const NewComponent = props => <BaseComponent {...props} foo="bar" />
-      hoistStatics(NewComponent, BaseComponent)
-      return NewComponent
-    }
+    const hoc = BaseComponent => props => <BaseComponent {...props} foo="bar" />
+    const StaticHoistingHOC = hoistStatics(hoc)
 
     const Component = compose(withProps({}), StaticHoistingHOC, withProps({}))(
       'div',
