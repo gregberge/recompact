@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, pure, withProps } from '../'
+import { compose, pure, withProps, hoistStatics } from '../'
 
 describe('withProps', () => {
   it('should passe additional props to base component', () => {
@@ -38,5 +38,20 @@ describe('withProps', () => {
       'withProps(pure(div))',
     )
     expect(wrapper.equals(<div />)).toBeTruthy()
+  })
+
+  it("doesn't compact surrounded HOC that hoists statics", () => {
+    const StaticHoistingHOC = BaseComponent => {
+      const NewComponent = props => <BaseComponent {...props} foo="bar" />
+      hoistStatics(NewComponent, BaseComponent)
+      return NewComponent
+    }
+
+    const Component = compose(withProps({}), StaticHoistingHOC, withProps({}))(
+      'div',
+    )
+
+    const wrapper = shallow(<Component />)
+    expect(wrapper.prop('foo')).toBe('bar')
   })
 })
