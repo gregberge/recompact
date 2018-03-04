@@ -74,11 +74,9 @@ const createComponentFromMappers = (mappers, childFactory) => {
     }
 
     render() {
-      if (!this.state) {
-        return null
-      }
-
-      return this.constructor[MAPPERS_INFO].childFactory(this.state.childProps)
+      return this.state
+        ? this.constructor[MAPPERS_INFO].childFactory(this.state.childProps)
+        : null
     }
   }
 

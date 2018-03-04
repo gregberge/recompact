@@ -4,7 +4,7 @@ import shareObservable from './utils/shareObservable'
 import createHelper from './createHelper'
 
 /**
- * Takes observables from the context and special observable `props$` an map them
+ * Takes observables from the context and special observable `props$` and map them
  * to a new set of observables.
  *
  * @static

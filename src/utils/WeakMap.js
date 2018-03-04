@@ -1,8 +1,6 @@
 /* eslint-disable class-methods-use-this */
 class NonTrackingDummyWeakMap {
-  get() {
-    return this
-  }
+  get() {}
   set() {
     return this
   }
