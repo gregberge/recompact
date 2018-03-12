@@ -47,33 +47,18 @@ const withStateHandlers = (initialState, stateUpdaters) =>
     let props
     let state
 
-    const handlers = mapValues(
-      stateUpdaters,
-      handler => (mayBeEvent, ...args) => {
-        if (mayBeEvent && typeof mayBeEvent.persist === 'function') {
-          mayBeEvent.persist()
-        }
+    const handlers = mapValues(stateUpdaters, handler => (...args) => {
+      const updatedState = handler(state, props)(...args)
+      if (!updatedState) return
 
-        const updatedState = handler(state, props)(mayBeEvent, ...args)
-        if (!updatedState) return
-
-        state = { ...state, ...updatedState }
-        next({
-          ...props,
-          ...state,
-          ...handlers,
-        })
-      },
-    )
+      state = { ...state, ...updatedState }
+      next({ ...props, ...state, ...handlers })
+    })
 
     return nextProps => {
       if (!props) state = callOrUse(initialState, nextProps)
       props = nextProps
-      next({
-        ...props,
-        ...state,
-        ...handlers,
-      })
+      next({ ...props, ...state, ...handlers })
     }
   })
 
