@@ -1,25 +1,28 @@
 /* eslint-disable no-param-reassign */
 
 import { isMapperComponent as isCompacted } from './createHOCFromMapper'
-import createSymbol from './createSymbol'
+import WeakMap from './WeakMap'
 
-const compactable = createSymbol('compactable')
-const isCompactable = Component =>
-  typeof Component === 'function' && Component[compactable]
+const allCompactableComponents = new WeakMap()
+const isCompactable = Component => allCompactableComponents.has(Component)
+const getCompactableComponent = Component =>
+  allCompactableComponents.get(Component)
+const setCompactableComponent = (Component, CompactableComponent) =>
+  allCompactableComponents.set(Component, CompactableComponent)
 
 export default (
   createCompactableComponent,
   createComponent,
 ) => BaseComponent => {
   if (isCompactable(BaseComponent)) {
-    BaseComponent = BaseComponent[compactable]
+    BaseComponent = getCompactableComponent(BaseComponent)
   }
 
   const Component = createComponent(BaseComponent)
-  Component[compactable] = createCompactableComponent(BaseComponent)
+  setCompactableComponent(Component, createCompactableComponent(BaseComponent))
 
   if (isCompacted(BaseComponent)) {
-    return Component[compactable]
+    return getCompactableComponent(Component)
   }
 
   return Component

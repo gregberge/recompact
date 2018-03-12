@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-import { Component } from 'react'
+import React from 'react'
 import createBehaviorSubject from './createBehaviorSubject'
 import createSymbol from './createSymbol'
+import WeakMap from './WeakMap'
 import asyncThrow from './asyncThrow'
 import createEagerFactory from '../createEagerFactory'
 import { getConfig } from '../setConfig'
@@ -10,11 +11,16 @@ import { config as obsConfig } from '../setObservableConfig'
 const MAPPERS_INFO = createSymbol('mappersInfo')
 const observablePropType = () => {}
 
+const allMapperComponents = new WeakMap()
+const setMapperComponent = Component => allMapperComponents.set(Component, true)
+export const isMapperComponent = BaseComponent =>
+  allMapperComponents.has(BaseComponent)
+
 const createComponentFromMappers = (mappers, childFactory) => {
   const { observablesKey: OBSERVABLES } = getConfig()
   const CONTEXT_TYPES = { [OBSERVABLES]: observablePropType }
 
-  return class extends Component {
+  const Component = class extends React.Component {
     static [MAPPERS_INFO] = { mappers, childFactory }
     static contextTypes = CONTEXT_TYPES
     static childContextTypes = CONTEXT_TYPES
@@ -75,10 +81,11 @@ const createComponentFromMappers = (mappers, childFactory) => {
       return this.constructor[MAPPERS_INFO].childFactory(this.state.childProps)
     }
   }
-}
 
-export const isMapperComponent = BaseComponent =>
-  typeof BaseComponent === 'function' && BaseComponent[MAPPERS_INFO]
+  setMapperComponent(Component)
+
+  return Component
+}
 
 export default mapper => BaseComponent => {
   if (isMapperComponent(BaseComponent)) {
