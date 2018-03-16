@@ -303,7 +303,6 @@ A higher-order component that permits to hook a lifecycle method. Available meth
 * componentWillUpdate
 * componentDidUpdate
 * componentWillUnmount
-
 You should use this helper as an escape hatch, in
 case you need to access component lifecycle methods.
 
@@ -387,6 +386,7 @@ Composes components by nesting each one inside the previous.
 
 #### Example
 ```js
+// Delay rendering of 1s
 const DivButton = nest('div', 'button');
 // will render <div className="foo"><button className="foo" /></div>
 <DivButton className="foo" />
