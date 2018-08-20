@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, debug, withProps } from '../'
+import { compose, debug, withProps } from '..'
 
 describe('debug', () => {
   let consoleLog

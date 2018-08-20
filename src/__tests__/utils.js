@@ -1,5 +1,5 @@
 import React from 'react'
-import { setDisplayName, toClass } from '../'
+import { setDisplayName, toClass } from '..'
 import createHelper from '../createHelper'
 
 export const countRenders = createHelper(

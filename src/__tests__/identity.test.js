@@ -1,5 +1,5 @@
 import { Dummy } from './utils'
-import { identity } from '../'
+import { identity } from '..'
 
 describe('identity', () => {
   it('should return the same component', () => {

@@ -7,7 +7,7 @@ import {
   setDisplayName,
   toClass,
   withState,
-} from '../'
+} from '..'
 
 describe('renderComponent', () => {
   it('always renders the given component', () => {

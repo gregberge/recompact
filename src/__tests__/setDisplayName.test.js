@@ -1,5 +1,5 @@
 import React from 'react'
-import { setDisplayName } from '../'
+import { setDisplayName } from '..'
 
 describe('setDisplayName', () => {
   it('sets a static property on the base component', () => {

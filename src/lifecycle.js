@@ -15,7 +15,7 @@ const LIFECYCLE_METHODS = [
   'getSnapshotBeforeUpdate',
   'componentDidUpdate',
   'componentWillUnmount',
-  'componentDidCatch'
+  'componentDidCatch',
 ]
 
 /**

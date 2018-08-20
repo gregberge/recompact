@@ -7,7 +7,7 @@ import {
   withProps,
   withPropsOnChange,
   withState,
-} from '../'
+} from '..'
 
 describe('withPropsOnChange', () => {
   it('should map subset of owner props to child props', () => {

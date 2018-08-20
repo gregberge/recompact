@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { mount } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, toClass, withContext } from '../'
+import { compose, toClass, withContext } from '..'
 
 test('toClass returns the base component if it is already a class', () => {
   class BaseComponent extends React.Component {

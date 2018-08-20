@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, pickProps, pure } from '../'
+import { compose, pickProps, pure } from '..'
 
 describe('pickProps', () => {
   it('should take a string', () => {
@@ -22,7 +22,10 @@ describe('pickProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(pickProps('foo'), pure)(Dummy)
+    const Component = compose(
+      pickProps('foo'),
+      pure,
+    )(Dummy)
 
     const wrapper = shallow(<Component foo="bar" bar="foo" x="y" />)
     expect(wrapper.instance().constructor.displayName).toBe(

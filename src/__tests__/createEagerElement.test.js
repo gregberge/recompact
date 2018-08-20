@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { createEagerElement } from '../'
+import { createEagerElement } from '..'
 
 describe('createEagerElement', () => {
   it('should create an element', () => {

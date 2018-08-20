@@ -8,7 +8,7 @@ import {
   setPropTypes,
   withProps,
   withState,
-} from '../'
+} from '..'
 
 describe('onlyUpdateForPropTypes', () => {
   it('only updates for props specified in propTypes', () => {
