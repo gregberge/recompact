@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { branch, compose, identity, withProps, withState } from '../'
+import { branch, compose, identity, withProps, withState } from '..'
 
 describe('branch', () => {
   it('should test props and applies one of two HoCs, for true and false', () => {
@@ -15,7 +15,9 @@ describe('branch', () => {
       <div>
         <div className="isBad">{isBad ? 'true' : 'false'}</div>
         <div className="name">{name}</div>
-        <button onClick={() => updateIsBad(b => !b)}>Toggle</button>
+        <button type="button" onClick={() => updateIsBad(b => !b)}>
+          Toggle
+        </button>
       </div>
     ))
 

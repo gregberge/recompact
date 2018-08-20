@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { Dummy } from './utils'
-import { withReducer, compose, flattenProp } from '../'
+import { withReducer, compose, flattenProp } from '..'
 
 const SET_COUNTER = 'SET_COUNTER'
 

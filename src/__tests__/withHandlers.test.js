@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { withHandlers } from '../'
+import { withHandlers } from '..'
 
 describe('withHandlers', () => {
   it('passes immutable handlers', () => {

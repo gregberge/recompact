@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import Benchmark from 'benchmark'
 import * as recompose from 'recompose'
 import * as reassemble from 'reassemble'
-import * as recompact from '../'
+import * as recompact from '..'
 import './setup'
 
 const TIME_BETWEEN = 1000

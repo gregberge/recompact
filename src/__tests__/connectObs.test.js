@@ -2,13 +2,7 @@ import React from 'react'
 import Rx from 'rxjs'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import {
-  connectObs,
-  compose,
-  mapProps,
-  setObservableConfig,
-  withObs,
-} from '../'
+import { connectObs, compose, mapProps, setObservableConfig, withObs } from '..'
 import rxjsObservableConfig from '../rxjsObservableConfig'
 
 describe('connectObs', () => {

@@ -1,4 +1,4 @@
-import { createEventHandler } from '../'
+import { createEventHandler } from '..'
 
 describe('createEventHandler', () => {
   it('creates an event handler and a corresponding stream', () => {

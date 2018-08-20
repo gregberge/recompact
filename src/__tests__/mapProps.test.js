@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { compose, mapProps, pure } from '../'
+import { compose, mapProps, pure } from '..'
 
 describe('mapProps', () => {
   it('should map owner props to child props', () => {
@@ -13,7 +13,10 @@ describe('mapProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(mapProps(() => ({})), pure)('div')
+    const Component = compose(
+      mapProps(() => ({})),
+      pure,
+    )('div')
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(

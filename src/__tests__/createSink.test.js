@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { compose, createSink, mapProps, withState } from '../'
+import { compose, createSink, mapProps, withState } from '..'
 
 test('createSink creates a React component that fires a callback when receiving new props', () => {
   const spy = jest.fn()

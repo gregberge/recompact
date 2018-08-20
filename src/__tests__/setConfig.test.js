@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { mount } from 'enzyme'
 import Rx from 'rxjs'
-import { setConfig, withObs } from '../'
+import { setConfig, withObs } from '..'
 
 describe('setConfig', () => {
   it('should be possible to specify an observablesKey', () => {

@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp */
 import React from 'react'
-import { getDisplayName } from '../'
+import { getDisplayName } from '..'
 
 describe('getDisplayName', () => {
   it('gets the display name of a React component', () => {

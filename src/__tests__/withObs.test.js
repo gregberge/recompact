@@ -1,7 +1,7 @@
 import React from 'react'
 import Rx from 'rxjs'
 import { mount, shallow } from 'enzyme'
-import { compose, setObservableConfig, withObs } from '../'
+import { compose, setObservableConfig, withObs } from '..'
 import rxjsObservableConfig from '../rxjsObservableConfig'
 
 describe('withObs', () => {

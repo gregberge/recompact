@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { setStatic } from '../'
+import { setStatic } from '..'
 
 describe('setStatic', () => {
   it('sets a static property on the base component', () => {

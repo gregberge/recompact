@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { Dummy } from './utils'
-import { lifecycle } from '../'
+import { lifecycle } from '..'
 
 describe('lifecycle', () => {
   it('should be possible to specify componentWillMount', () => {

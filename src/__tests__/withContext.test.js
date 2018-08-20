@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { mount } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, getContext, mapProps, withContext } from '../'
+import { compose, getContext, mapProps, withContext } from '..'
 
 describe('withContext', () => {
   it('should add context', () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { hoistStatics, mapProps } from '../'
+import { hoistStatics, mapProps } from '..'
 
 describe('hoistStatics', () => {
   it('copies non-React static properties from base component to new component', () => {

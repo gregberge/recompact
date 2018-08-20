@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { Observable, Subject } from 'rxjs'
 import rxjsConfig from '../rxjsObservableConfig'
-import { componentFromStream, setObservableConfig } from '../'
+import { componentFromStream, setObservableConfig } from '..'
 
 setObservableConfig(rxjsConfig)
 

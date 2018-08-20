@@ -2,7 +2,7 @@ import React from 'react'
 import warning from 'warning'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, flattenProp, pure } from '../'
+import { compose, flattenProp, pure } from '..'
 
 jest.mock('warning')
 
@@ -32,7 +32,10 @@ describe('flattenProp', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(flattenProp('foo'), pure)(Dummy)
+    const Component = compose(
+      flattenProp('foo'),
+      pure,
+    )(Dummy)
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(

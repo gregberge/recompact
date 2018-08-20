@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { mount } from 'enzyme'
-import { componentFromProp } from '../'
+import { componentFromProp } from '..'
 
 describe('componentFromProp', () => {
   it('creates a component that takes a component as a prop and renders it with the rest of the props', () => {

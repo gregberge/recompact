@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, flattenProps, pure } from '../'
+import { compose, flattenProps, pure } from '..'
 
 describe('flattenProps', () => {
   it('should flatten an object prop and spread it into the top-level props object', () => {
@@ -44,7 +44,10 @@ describe('flattenProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(flattenProps('foo'), pure)(Dummy)
+    const Component = compose(
+      flattenProps('foo'),
+      pure,
+    )(Dummy)
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(

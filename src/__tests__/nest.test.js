@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { nest, setDisplayName, toClass } from '../'
+import { nest, setDisplayName, toClass } from '..'
 
 describe('nest', () => {
   it('nests components from outer to inner', () => {

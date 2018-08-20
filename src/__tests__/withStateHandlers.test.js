@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, withProps, withStateHandlers } from '../'
+import { compose, withProps, withStateHandlers } from '..'
 
 describe('withStateHandlers', () => {
   it('adds a stateful value and a function for updating it', () => {

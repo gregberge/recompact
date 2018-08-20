@@ -4,7 +4,7 @@ import { shallow, mount } from 'enzyme'
 import { Subject } from 'rxjs/Subject'
 import { combineLatest } from 'rxjs/operator/combineLatest'
 import { Dummy, countRenders } from './utils'
-import { compose, mapPropsStream, setObservableConfig } from '../'
+import { compose, mapPropsStream, setObservableConfig } from '..'
 import rxjsObservableConfig from '../rxjsObservableConfig'
 
 describe('mapPropsStream', () => {

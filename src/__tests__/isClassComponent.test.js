@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function, react/no-multi-comp, react/prefer-es6-class */
 import React, { Component } from 'react'
 import createReactClass from 'create-react-class'
-import { isClassComponent } from '../'
+import { isClassComponent } from '..'
 
 describe('isClassComponent', () => {
   it('returns false for functions', () => {

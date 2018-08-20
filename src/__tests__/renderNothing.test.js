@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { renderNothing } from '../'
+import { renderNothing } from '..'
 
 describe('renderNothing', () => {
   it('should return a component that renders null', () => {

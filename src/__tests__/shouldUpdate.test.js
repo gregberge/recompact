@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import { compose, shouldUpdate } from '../'
+import { compose, shouldUpdate } from '..'
 import { countRenders, Dummy } from './utils'
 
 describe('shouldUpdate', () => {

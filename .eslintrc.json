@@ -3,10 +3,18 @@
   "extends": ["airbnb", "prettier"],
   "rules": {
     "semi": ["error", "never"],
+    "lines-between-class-members": "off",
+
+    "react/forbid-prop-types": "off",
+    "react/forbid-foreign-prop-types": "off",
+    "react/no-access-state-in-setstate": "off",
+    "react/destructuring-assignment": "off",
     "react/sort-comp": "off",
     "react/require-default-props": "off",
-    "react/jsx-filename-extension": ["error", {"extensions": [".js"]}],
+    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
     "react/jsx-wrap-multilines": "off",
+    "react/jsx-one-expression-per-line": "off",
+
     "import/no-extraneous-dependencies": "off"
   }
 }

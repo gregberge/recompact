@@ -16,4 +16,8 @@ export default compose(
   withHandlers({
     onIncrement: ({ count, onChange }) => () => onChange(count + 1),
   }),
-)(({ onIncrement, count }) => <button onClick={onIncrement}>{count}</button>)
+)(({ onIncrement, count }) => (
+  <button type="button" onClick={onIncrement}>
+    {count}
+  </button>
+))

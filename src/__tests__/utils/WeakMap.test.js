@@ -28,9 +28,10 @@ describe('withProps using NonTrackingDummyWeakMap fallback', () => {
   })
 
   it('can coexist with other non-compacted hoc', () => {
-    const DoReMi = compose(withProps({ si: 'do' }), withProps({ la: 'fa' }))(
-      Dummy,
-    )
+    const DoReMi = compose(
+      withProps({ si: 'do' }),
+      withProps({ la: 'fa' }),
+    )(Dummy)
     expect(DoReMi.displayName).toBe('withProps(withProps(Dummy))')
 
     const dummy = shallow(<DoReMi />).find(Dummy)

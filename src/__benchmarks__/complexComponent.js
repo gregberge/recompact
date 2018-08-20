@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import * as recompose from 'recompose'
 import * as reassemble from 'reassemble'
-import * as recompact from '../'
+import * as recompact from '..'
 import { runBenchmark, series } from './utils'
 
 const createComponent = ({

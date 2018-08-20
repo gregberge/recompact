@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
-import { compose, pure, withProps, withState } from '../'
+import { compose, pure, withProps, withState } from '..'
 import { countRenders, Dummy } from './utils'
 
 describe('pure', () => {
@@ -37,7 +37,10 @@ describe('pure', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(pure, withProps({ foo: 'bar' }))(Dummy)
+    const Component = compose(
+      pure,
+      withProps({ foo: 'bar' }),
+    )(Dummy)
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(

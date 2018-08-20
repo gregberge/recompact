@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, defaultProps, pure } from '../'
+import { compose, defaultProps, pure } from '..'
 
 describe('defaultProps', () => {
   it('should pass additional props to base component', () => {
@@ -37,7 +37,10 @@ describe('defaultProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(defaultProps({ bar: 'xi' }), pure)(Dummy)
+    const Component = compose(
+      defaultProps({ bar: 'xi' }),
+      pure,
+    )(Dummy)
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(

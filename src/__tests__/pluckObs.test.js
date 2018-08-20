@@ -1,7 +1,7 @@
 import React from 'react'
 import Rx from 'rxjs'
 import { mount } from 'enzyme'
-import { compose, withObs, pluckObs } from '../'
+import { compose, withObs, pluckObs } from '..'
 
 describe('pluckObs', () => {
   it('should connect one observable to a prop without $', () => {

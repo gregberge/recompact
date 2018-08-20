@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Dummy } from './utils'
-import { compose, pure, withProps, hoistStatics } from '../'
+import { compose, pure, withProps, hoistStatics } from '..'
 
 describe('withProps', () => {
   it('should passe additional props to base component', () => {
@@ -31,7 +31,10 @@ describe('withProps', () => {
   })
 
   it('should be merged with other hoc', () => {
-    const Component = compose(withProps({}), pure)('div')
+    const Component = compose(
+      withProps({}),
+      pure,
+    )('div')
 
     const wrapper = shallow(<Component />)
     expect(wrapper.instance().constructor.displayName).toBe(
@@ -44,9 +47,11 @@ describe('withProps', () => {
     const hoc = BaseComponent => props => <BaseComponent {...props} foo="bar" />
     const StaticHoistingHOC = hoistStatics(hoc)
 
-    const Component = compose(withProps({}), StaticHoistingHOC, withProps({}))(
-      'div',
-    )
+    const Component = compose(
+      withProps({}),
+      StaticHoistingHOC,
+      withProps({}),
+    )('div')
 
     const wrapper = shallow(<Component />)
     expect(wrapper.prop('foo')).toBe('bar')
