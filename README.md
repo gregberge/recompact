@@ -5,6 +5,10 @@
 
 Recompact is a set of React higher-order components for reactive programming. It's a drop-in replacement of [Recompose](https://github.com/acdlite/recompose) with several enhancements.
 
+## State of recompact
+
+React has introduced [React hooks](https://reactjs.org/docs/hooks-intro.html): a new way to manage state and lifecycle in React. It solves most of use case that recompact was trying to solve. That's why **recompact is now deprecated and not actively maintained**. The project will remain published on npm but it does not accept new issues and it won't evolve any more. If you use it, you are encouraged to migrate to hooks, if you don't use it yet, then do not install it. If you really like it, feel free to fork it!
+
 ## Installation and Usage
 
 To install the stable version:
